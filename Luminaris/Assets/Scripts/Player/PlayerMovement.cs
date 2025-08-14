@@ -2,44 +2,92 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {
+    [Header("References")]
     public Rigidbody2D rb;
-    [Header("Movement")]
-    public float moveSpeed = 5f; // Velocidade de movimento do personagem
-    float horizontalMovement;
 
-    [Header("Jumping")]
-    public float jumpForce = 5f; // Força do pulo
+    [Header("Movement")]
+    public float moveSpeed = 3f;        // Velocidade horizontal máxima
+    private float horizontalInput;
+
+    [Header("Jump Settings")]
+    public float jumpForce = 8f;              
+    public float coyoteTime = 0.1f;            // Tempo para pular após sair do chão
+    public float jumpBufferTime = 0.1f;        // Tempo para apertar um botão, antes de tocar o chão e ainda executar o pulo
+    public float jumpCutMultiplier = 0.5f;     // Reduz altura do pulo, se soltar o botão cedo
+    public float jumpHangGravityMultiplier = 0.5f; // O player flutua no topo do pulo
+    public float jumpHangThreshold = 0.1f;     // Velocidade mínima para considerar topo do pulo
+
+    [Header("Gravity")]
+    public float gravityScale = 4f;            
+    public float fallGravityMultiplier = 2f;   // Aumenta a gravidade durante a queda
 
     [Header("Ground Check")]
-    public Transform groundCheckPos; // Posição do ponto de verificação do chão
-    public Vector2 groundCheckSize = new Vector2(0.5f, 0.05f); // Tamanho da área de verificação do chão
-    public LayerMask groundLayer; // Camada do chão
-    void Update()
-    {
-        rb.linearVelocity = new Vector2(horizontalMovement * moveSpeed, rb.linearVelocity.y); // Movimento horizontal do personagem, por meio da velocidade linear do Rigidbody2D
-    }
-    public void Move(InputAction.CallbackContext context) => horizontalMovement = context.ReadValue<Vector2>().x; // Lê o valor do movimento horizontal do InputAction e atualiza a variável horizontalMovement
+    public Transform groundCheckPos;   // Ponto para saber se o Player está no chão       
+    public Vector2 groundCheckSize = new Vector2(0.5f, 0.05f); // Tamanho da área de verificação
+    public LayerMask groundLayer;     // Camada do chão
 
-    public void Jump(InputAction.CallbackContext context)
+    private float lastOnGroundTime; // Temporizador do coyote time
+    private float lastPressedJumpTime; // Temporizador do jump buffer
+    private bool isJumpCut; // Indica se o botão de pulo foi solto cedo, para um pulo mais baixo
+
+    private void Update()
     {
-       if (isGrounded() && context.performed)
-       {
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce); // Pressionar totalmente o botão de pular
-        }
-       else if (context.canceled && rb.linearVelocity.y > 0)
-       {
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, rb.linearVelocity.y * 0.5f); // Somente um toque no botão de pular
-        }
+        if (isGrounded())  // Atualiza o coyote time se estiver no chão
+            lastOnGroundTime = coyoteTime;
+        // Atualiza os timers
+        lastOnGroundTime -= Time.deltaTime;
+        lastPressedJumpTime -= Time.deltaTime;
+        if (lastOnGroundTime > 0 && lastPressedJumpTime > 0) // Vai pular se dentro de coyote e jump buffer
+            Jump();
+        rb.linearVelocity = new Vector2(horizontalInput * moveSpeed, rb.linearVelocity.y);  // Movimento horizontal direto
     }
-    private bool isGrounded()
-    { 
-        if (Physics2D.OverlapBox(groundCheckPos.position, groundCheckSize, 0, groundLayer))
+
+    private void FixedUpdate()
+    {
+        // Gravidade adaptativa
+        if (rb.linearVelocity.y < 0) // Caindo
         {
-            return true;
+            rb.gravityScale = gravityScale * fallGravityMultiplier;
         }
-      return false;
+        else if (Mathf.Abs(rb.linearVelocity.y) < jumpHangThreshold) // Topo do pulo
+        {
+            rb.gravityScale = gravityScale * jumpHangGravityMultiplier;
+        }
+        else if (isJumpCut) // Botão solto cedo
+        {
+            rb.gravityScale = gravityScale;
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, rb.linearVelocity.y * jumpCutMultiplier);
+            isJumpCut = false;
+        }
+        else
+        {
+            rb.gravityScale = gravityScale; // Gravidade padrão
+        }
     }
-    private void OnDrawGizmosSelected() // Gizmos para checar o visual, se o personagem esta tocando o chão corretamente, apagar depois de testar
+    // Input System: movimento horizontal
+    public void Move(InputAction.CallbackContext context)
+    {
+        horizontalInput = context.ReadValue<Vector2>().x;
+    }
+    // Input System: pulo
+    public void JumpInput(InputAction.CallbackContext context)
+    {
+        if (context.performed) // Botão pressionado
+            lastPressedJumpTime = jumpBufferTime;
+        else if (context.canceled && rb.linearVelocity.y > 0)
+            isJumpCut = true;
+    }
+    private void Jump()
+    {
+        rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce); // Define a velocidade vertical
+        lastOnGroundTime = 0; // Reseta o coyote time
+        lastPressedJumpTime = 0; // Reseta o jump buffer
+    }
+    private bool isGrounded() // Verifica se está no chão
+    {
+        return Physics2D.OverlapBox(groundCheckPos.position, groundCheckSize, 0, groundLayer);
+    }
+    private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.black;
         Gizmos.DrawWireCube(groundCheckPos.position, groundCheckSize);
