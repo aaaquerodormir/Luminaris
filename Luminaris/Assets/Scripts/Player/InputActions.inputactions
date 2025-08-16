@@ -6,7 +6,7 @@
             "id": "47968a75-cb5f-4dc4-b8d5-9f3a039eb997",
             "actions": [
                 {
-                    "name": "Move",
+                    "name": "MovePlayer1",
                     "type": "Value",
                     "id": "9f755cbd-205a-459c-8ac0-9f84dcda550a",
                     "expectedControlType": "Vector2",
@@ -15,9 +15,27 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Jump",
+                    "name": "MovePlayer2",
+                    "type": "Value",
+                    "id": "afa3e061-af43-4cf9-bf9e-4674ca2f5ffb",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "JumpPlayer1",
                     "type": "Button",
                     "id": "195ee290-27ac-41d5-ace4-68f2227b746b",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "JumpPlayer2",
+                    "type": "Button",
+                    "id": "122360ad-8f1b-42f5-811b-0c55c1646d12",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -32,7 +50,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Move",
+                    "action": "MovePlayer1",
                     "isComposite": true,
                     "isPartOfComposite": false
                 },
@@ -43,18 +61,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
-                    "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "left",
-                    "id": "2e46982e-44cc-431b-9f0b-c11910bf467a",
-                    "path": "<Keyboard>/leftArrow",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Keyboard&Mouse",
-                    "action": "Move",
+                    "action": "MovePlayer1",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -65,18 +72,40 @@
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
-                    "action": "Move",
+                    "action": "MovePlayer1",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "Arrows",
+                    "id": "1ca16e49-997c-4216-97de-f1929daf9aca",
+                    "path": "Dpad",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MovePlayer2",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "left",
+                    "id": "f63fc7f4-8db8-4ce7-8002-ddeb5b39dbc6",
+                    "path": "<Keyboard>/leftArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "MovePlayer2",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
                 {
                     "name": "right",
-                    "id": "77bff152-3580-4b21-b6de-dcd0c7e41164",
+                    "id": "8adaabc4-73fb-42d8-a43e-c0d7e954da71",
                     "path": "<Keyboard>/rightArrow",
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
-                    "action": "Move",
+                    "action": "MovePlayer2",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -87,18 +116,18 @@
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
-                    "action": "Jump",
+                    "action": "JumpPlayer1",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "9aa16d24-6a44-478c-bf87-c9423c105301",
+                    "id": "04f2d73d-91f6-426e-adbb-369da8e819e5",
                     "path": "<Keyboard>/upArrow",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Jump",
+                    "action": "JumpPlayer2",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -1,0 +1,981 @@
+fileFormatVersion: 2
+guid: 5baa8112fff34f3409ff18c5bfceed66
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 9120327878231170204
+    second: Trap_Spike_0
+  - first:
+      213: 2786770492317036334
+    second: Trap_Spike_1
+  - first:
+      213: -7467406581430284751
+    second: Trap_Spike_2
+  - first:
+      213: -4002663465191383720
+    second: Trap_Spike_3
+  - first:
+      213: -2224710114893961609
+    second: Trap_Spike_4
+  - first:
+      213: -6181377176361780670
+    second: Trap_Spike_5
+  - first:
+      213: 8637509074582702177
+    second: Trap_Spike_6
+  - first:
+      213: 4137708939922759071
+    second: Trap_Spike_7
+  - first:
+      213: 2424384320115142926
+    second: Trap_Spike_8
+  - first:
+      213: -6964834906460776709
+    second: Trap_Spike_9
+  - first:
+      213: 1698778921511284237
+    second: Trap_Spike_10
+  - first:
+      213: 7362680298908870417
+    second: Trap_Spike_11
+  - first:
+      213: -915224258794815207
+    second: Trap_Spike_12
+  - first:
+      213: -6019039621559300825
+    second: Trap_Spike_13
+  - first:
+      213: -1701748951183298442
+    second: Trap_Spike_14
+  - first:
+      213: 5241705518206205142
+    second: Trap_Spike_15
+  - first:
+      213: 7808139394489366021
+    second: Trap_Spike_16
+  - first:
+      213: 8561194203572743726
+    second: Trap_Spike_17
+  - first:
+      213: -1308207682554644676
+    second: Trap_Spike_18
+  - first:
+      213: -6704808482856076623
+    second: Trap_Spike_19
+  - first:
+      213: 1016639199563654425
+    second: Trap_Spike_20
+  - first:
+      213: 8393303548832197028
+    second: Trap_Spike_21
+  - first:
+      213: 8940680583745920168
+    second: Trap_Spike_22
+  - first:
+      213: 4543860233607128267
+    second: Trap_Spike_23
+  - first:
+      213: 4948113302859757684
+    second: Trap_Spike_24
+  - first:
+      213: 7635889320672484168
+    second: Trap_Spike_25
+  - first:
+      213: 8711714543505645467
+    second: Trap_Spike_26
+  - first:
+      213: 8693428608098801920
+    second: Trap_Spike_27
+  - first:
+      213: 6397337712741850579
+    second: Trap_Spike_28
+  - first:
+      213: 2770006515157211358
+    second: Trap_Spike_29
+  - first:
+      213: -8392278405330876376
+    second: Trap_Spike_30
+  - first:
+      213: -8164638854805330812
+    second: Trap_Spike_31
+  - first:
+      213: 1790985530600441525
+    second: Trap_Spike_32
+  - first:
+      213: -3018408705971001385
+    second: Trap_Spike_33
+  - first:
+      213: -414575776356444641
+    second: Trap_Spike_34
+  - first:
+      213: 6526105933852641279
+    second: Trap_Spike_35
+  - first:
+      213: -8334681772154659098
+    second: Trap_Spike_36
+  - first:
+      213: 980712247939691755
+    second: Trap_Spike_37
+  - first:
+      213: -864482396280270406
+    second: Trap_Spike_38
+  - first:
+      213: -2866965123616525518
+    second: Trap_Spike_39
+  - first:
+      213: -1315072729375223616
+    second: Trap_Spike_40
+  - first:
+      213: 1120716516004520857
+    second: Trap_Spike_41
+  - first:
+      213: 1775995361832489310
+    second: Trap_Spike_42
+  - first:
+      213: 2735587211196906625
+    second: Trap_Spike_43
+  - first:
+      213: -6062052237201609700
+    second: Trap_Spike_44
+  - first:
+      213: -1722837119434296405
+    second: Trap_Spike_45
+  - first:
+      213: 1314900058016119077
+    second: Trap_Spike_46
+  - first:
+      213: -3259260395177664586
+    second: Trap_Spike_47
+  - first:
+      213: -549274812482226899
+    second: Trap_Spike_48
+  - first:
+      213: -5933791355630405790
+    second: Trap_Spike_49
+  - first:
+      213: -2688441088164856545
+    second: Trap_Spike_50
+  - first:
+      213: 1256850271766656596
+    second: Trap_Spike_51
+  - first:
+      213: 112483328313929918
+    second: Trap_Spike_52
+  - first:
+      213: -8644758347509496583
+    second: Trap_Spike_53
+  - first:
+      213: -3259857222193436724
+    second: Trap_Spike_54
+  - first:
+      213: 351348173381401478
+    second: Trap_Spike_55
+  - first:
+      213: 4792185672526444559
+    second: Trap_Spike_56
+  - first:
+      213: -8179506172067670974
+    second: Trap_Spike_57
+  - first:
+      213: 4837748419368830355
+    second: Trap_Spike_58
+  - first:
+      213: 4525795714633109833
+    second: Trap_Spike_59
+  - first:
+      213: 7387011668582690438
+    second: Trap_Spike_60
+  - first:
+      213: 1225888123531747257
+    second: Trap_Spike_61
+  - first:
+      213: 3693759410136954961
+    second: Trap_Spike_62
+  - first:
+      213: 2894414267469962478
+    second: Trap_Spike_63
+  - first:
+      213: 1530986263315435980
+    second: Trap_Spike_64
+  - first:
+      213: -4158636736875171662
+    second: Trap_Spike_65
+  - first:
+      213: 7459225968734320537
+    second: Trap_Spike_66
+  - first:
+      213: 9180262923457100122
+    second: Trap_Spike_67
+  - first:
+      213: -4111399581061460544
+    second: Trap_Spike_68
+  - first:
+      213: 6528361721483180477
+    second: Trap_Spike_69
+  - first:
+      213: 1665865302434012449
+    second: Trap_Spike_70
+  - first:
+      213: 2666649561424119752
+    second: Trap_Spike_71
+  - first:
+      213: -6821164073001708139
+    second: Trap_Spike_72
+  - first:
+      213: 2579362342031541982
+    second: Trap_Spike_73
+  - first:
+      213: -3492761347165240357
+    second: Trap_Spike_74
+  - first:
+      213: 825021934570567497
+    second: Trap_Spike_75
+  - first:
+      213: 3317294177855407072
+    second: Trap_Spike_76
+  - first:
+      213: -1603343816961795604
+    second: Trap_Spike_77
+  - first:
+      213: -5488308273426124077
+    second: Trap_Spike_78
+  - first:
+      213: -9024649109573650912
+    second: Trap_Spike_79
+  - first:
+      213: -6996444896334655090
+    second: Trap_Spike_80
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 16
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: EspinhoTemp_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 128
+        width: 128
+        height: 128
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: acd9ce95f4d04974b94c513ab2cd7c8c
+      internalID: -1884887263
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EspinhoTemp_1
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 128
+        width: 128
+        height: 128
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 19f24569f6eaa1c409046554e9370f0f
+      internalID: -498576308
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EspinhoTemp_2
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 128
+        width: 128
+        height: 128
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d9f9a9e7916e6844e84ed959cda2a800
+      internalID: 950718538
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EspinhoTemp_3
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 128
+        width: 128
+        height: 128
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bbac88db5e681e14ba85ccbcbe60617d
+      internalID: 2122308046
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EspinhoTemp_4
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 128
+        width: 128
+        height: 128
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6b69202abf2f6174fbb7bbcea0ec3745
+      internalID: 527795756
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EspinhoTemp_5
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 128
+        width: 128
+        height: 128
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6220f922714f72e408e65b2fac3e07ee
+      internalID: -791365589
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EspinhoTemp_6
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 128
+        width: 128
+        height: 128
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 48178cf4fdb62554e89a2ac9523e1cb7
+      internalID: 116242248
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EspinhoTemp_7
+      rect:
+        serializedVersion: 2
+        x: 896
+        y: 128
+        width: 128
+        height: 128
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2d4c72d374fd5524ca9a075e4bac312f
+      internalID: -230320171
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EspinhoTemp_8
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 128
+        width: 128
+        height: 128
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ad94c9ddc7dd8e140b2352c45a3c671e
+      internalID: -2083638453
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EspinhoTemp_9
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 128
+        width: 128
+        height: 128
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 99010b7cf32c43945a7edb593b6055ad
+      internalID: 735826840
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EspinhoTemp_10
+      rect:
+        serializedVersion: 2
+        x: 1280
+        y: 128
+        width: 128
+        height: 128
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cadf898a07a604947ba5801facc492eb
+      internalID: 201463717
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EspinhoTemp_11
+      rect:
+        serializedVersion: 2
+        x: 1408
+        y: 128
+        width: 128
+        height: 128
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b61b416b830a84d429af7b2bf0ec10e8
+      internalID: 1657910570
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EspinhoTemp_12
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 128
+        width: 128
+        height: 128
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0d653b8e0a274b946b487d8a85332db1
+      internalID: -1232744362
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EspinhoTemp_13
+      rect:
+        serializedVersion: 2
+        x: 1664
+        y: 128
+        width: 128
+        height: 128
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4ff5d19345736234cb169c07856a88de
+      internalID: 1195053828
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EspinhoTemp_14
+      rect:
+        serializedVersion: 2
+        x: 1792
+        y: 128
+        width: 128
+        height: 128
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d78346fed6495dc49ab1eba9b5ccc45b
+      internalID: -553503246
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EspinhoTemp_15
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 128
+        height: 128
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d5c7dd5acb933c44ebdb21115a9bc592
+      internalID: -1471738666
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EspinhoTemp_16
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 128
+        height: 128
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a7144e386b0e7ca419067b06bcbaad30
+      internalID: 1361020074
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EspinhoTemp_17
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 0
+        width: 128
+        height: 128
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d952074407c147d47856cf0bbf016414
+      internalID: 1677611057
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EspinhoTemp_18
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 0
+        width: 128
+        height: 128
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d711e4b83c4221c48ae9899eec987dff
+      internalID: -1044070788
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EspinhoTemp_19
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 0
+        width: 128
+        height: 128
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 583058ca1c2931641888b5cba84e00eb
+      internalID: 1834717703
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EspinhoTemp_20
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 0
+        width: 128
+        height: 128
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 08c352b8fc67b634d848dbf11ea0b5af
+      internalID: 48749911
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EspinhoTemp_21
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 0
+        width: 128
+        height: 128
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 883a6c86f58d01647a4b2e292df9d340
+      internalID: 868273326
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EspinhoTemp_22
+      rect:
+        serializedVersion: 2
+        x: 896
+        y: 0
+        width: 128
+        height: 128
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 38418523ccbfffb4fa76cf49b0f1c933
+      internalID: 461089739
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EspinhoTemp_23
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 0
+        width: 128
+        height: 128
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 62b633eb7b6240941a04c24c30ffe3b4
+      internalID: -1839900585
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EspinhoTemp_24
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 0
+        width: 128
+        height: 128
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 26c31de5a34873448a7c9a4592c26981
+      internalID: 1682637921
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EspinhoTemp_25
+      rect:
+        serializedVersion: 2
+        x: 1280
+        y: 0
+        width: 128
+        height: 128
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f06dee563a904a642b7ef5f182849deb
+      internalID: -615494270
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EspinhoTemp_26
+      rect:
+        serializedVersion: 2
+        x: 1408
+        y: 0
+        width: 128
+        height: 128
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 98d479795c24a4b4ab882558051ee03e
+      internalID: -1073487726
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: ef520bde2e961b04e90bcf9e6b715ae5
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      EspinhoTemp_0: -1884887263
+      EspinhoTemp_1: -498576308
+      EspinhoTemp_10: 201463717
+      EspinhoTemp_11: 1657910570
+      EspinhoTemp_12: -1232744362
+      EspinhoTemp_13: 1195053828
+      EspinhoTemp_14: -553503246
+      EspinhoTemp_15: -1471738666
+      EspinhoTemp_16: 1361020074
+      EspinhoTemp_17: 1677611057
+      EspinhoTemp_18: -1044070788
+      EspinhoTemp_19: 1834717703
+      EspinhoTemp_2: 950718538
+      EspinhoTemp_20: 48749911
+      EspinhoTemp_21: 868273326
+      EspinhoTemp_22: 461089739
+      EspinhoTemp_23: -1839900585
+      EspinhoTemp_24: 1682637921
+      EspinhoTemp_25: -615494270
+      EspinhoTemp_26: -1073487726
+      EspinhoTemp_3: 2122308046
+      EspinhoTemp_4: 527795756
+      EspinhoTemp_5: -791365589
+      EspinhoTemp_6: 116242248
+      EspinhoTemp_7: -230320171
+      EspinhoTemp_8: -2083638453
+      EspinhoTemp_9: 735826840
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
