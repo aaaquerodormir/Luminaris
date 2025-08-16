@@ -6847,6 +6847,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 210177128429000287, guid: 5187dc984bba9bb419818612fa764200, type: 3}
+      propertyPath: m_Size.y
+      value: 1.06884
+      objectReference: {fileID: 0}
+    - target: {fileID: 210177128429000287, guid: 5187dc984bba9bb419818612fa764200, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.034420013
+      objectReference: {fileID: 0}
     - target: {fileID: 3368453532942173862, guid: 5187dc984bba9bb419818612fa764200, type: 3}
       propertyPath: m_Name
       value: Player
@@ -6854,18 +6862,6 @@ PrefabInstance:
     - target: {fileID: 3368453532942173862, guid: 5187dc984bba9bb419818612fa764200, type: 3}
       propertyPath: m_TagString
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 6084755878845040062, guid: 5187dc984bba9bb419818612fa764200, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6084755878845040062, guid: 5187dc984bba9bb419818612fa764200, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6084755878845040062, guid: 5187dc984bba9bb419818612fa764200, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6084755878845040062, guid: 5187dc984bba9bb419818612fa764200, type: 3}
       propertyPath: m_LocalPosition.x

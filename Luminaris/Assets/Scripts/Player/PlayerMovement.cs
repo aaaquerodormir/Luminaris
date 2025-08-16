@@ -4,7 +4,7 @@ public class PlayerMovement : MonoBehaviour
 {
     [Header("References")]
     public Rigidbody2D rb;
-
+    bool isFacingRight = false; // Direção inicial do player
     [Header("Movement")]
     public float moveSpeed = 3f;        // Velocidade horizontal máxima
     private float horizontalInput;
@@ -40,6 +40,8 @@ public class PlayerMovement : MonoBehaviour
         if (lastOnGroundTime > 0 && lastPressedJumpTime > 0) // Vai pular se dentro de coyote e jump buffer
             Jump();
         rb.linearVelocity = new Vector2(horizontalInput * moveSpeed, rb.linearVelocity.y);  // Movimento horizontal direto
+
+        Flip(); // Inverte a direção do player
     }
 
     private void FixedUpdate()
@@ -87,9 +89,20 @@ public class PlayerMovement : MonoBehaviour
     {
         return Physics2D.OverlapBox(groundCheckPos.position, groundCheckSize, 0, groundLayer);
     }
+    private void Flip() // Inverte a direção do player
+    {
+        if (isFacingRight && horizontalInput < 0 || !isFacingRight && horizontalInput > 0)
+        {
+            isFacingRight = !isFacingRight;
+            Vector3 ls = transform.localScale;
+            ls.x *= -1f;
+            transform.localScale = ls;
+        }
+    }
+
     private void OnDrawGizmosSelected()
     {
-        Gizmos.color = Color.black;
+        Gizmos.color = Color.red;
         Gizmos.DrawWireCube(groundCheckPos.position, groundCheckSize);
     }
 }
