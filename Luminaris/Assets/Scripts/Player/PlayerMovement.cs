@@ -5,6 +5,13 @@ public class PlayerMovement : MonoBehaviour
     [Header("References")]
     public Rigidbody2D rb;
 
+    private bool isFacingRight = false; // Direção inicial do player
+
+    
+    [Header("Input Actions")]
+    public InputActionReference moveAction; // Referência de movimento
+    public InputActionReference jumpAction; // Referência de pulo
+
     [Header("Movement")]
     public float moveSpeed = 3f;        // Velocidade horizontal máxima
     private float horizontalInput;
@@ -32,6 +39,17 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
+        // Leitura da entrada horizontal (A/D ou Setas)
+        horizontalInput = moveAction.action.ReadValue<Vector2>().x;
+
+        // Verifica se o botão de pulo foi pressionado
+        if (jumpAction.action.WasPerformedThisFrame())
+            lastPressedJumpTime = jumpBufferTime;
+
+        // Verifica se o botão de pulo foi solto cedo
+        if (jumpAction.action.WasReleasedThisFrame() && rb.linearVelocity.y > 0)
+            isJumpCut = true;
+
         if (isGrounded())  // Atualiza o coyote time se estiver no chão
             lastOnGroundTime = coyoteTime;
         // Atualiza os timers
@@ -40,6 +58,8 @@ public class PlayerMovement : MonoBehaviour
         if (lastOnGroundTime > 0 && lastPressedJumpTime > 0) // Vai pular se dentro de coyote e jump buffer
             Jump();
         rb.linearVelocity = new Vector2(horizontalInput * moveSpeed, rb.linearVelocity.y);  // Movimento horizontal direto
+
+        Flip(); // Inverte a direção do player
     }
 
     private void FixedUpdate()
@@ -64,19 +84,6 @@ public class PlayerMovement : MonoBehaviour
             rb.gravityScale = gravityScale; // Gravidade padrão
         }
     }
-    // Input System: movimento horizontal
-    public void Move(InputAction.CallbackContext context)
-    {
-        horizontalInput = context.ReadValue<Vector2>().x;
-    }
-    // Input System: pulo
-    public void JumpInput(InputAction.CallbackContext context)
-    {
-        if (context.performed) // Botão pressionado
-            lastPressedJumpTime = jumpBufferTime;
-        else if (context.canceled && rb.linearVelocity.y > 0)
-            isJumpCut = true;
-    }
     private void Jump()
     {
         rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce); // Define a velocidade vertical
@@ -87,9 +94,20 @@ public class PlayerMovement : MonoBehaviour
     {
         return Physics2D.OverlapBox(groundCheckPos.position, groundCheckSize, 0, groundLayer);
     }
+    private void Flip() // Inverte a direção do player
+    {
+        if (isFacingRight && horizontalInput < 0 || !isFacingRight && horizontalInput > 0)
+        {
+            isFacingRight = !isFacingRight;
+            Vector3 ls = transform.localScale;
+            ls.x *= -1f;
+            transform.localScale = ls;
+        }
+    }
+
     private void OnDrawGizmosSelected()
     {
-        Gizmos.color = Color.black;
+        Gizmos.color = Color.red;
         Gizmos.DrawWireCube(groundCheckPos.position, groundCheckSize);
     }
 }
