@@ -4,38 +4,43 @@ public class MovingPlatform : MonoBehaviour
 {
     public Transform pointA;
     public Transform pointB;
-    public float moveSpeed = 2f;
+    public float moveSpeed;
+    Vector3 targetPos;
 
-    private Vector3 nextPosition;
-    void Start()
+    private void Start()
     {
-        nextPosition = pointB.position;
+        targetPos = pointB.position;
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        transform.position = Vector3.MoveTowards(transform.position, nextPosition, moveSpeed * Time.deltaTime);
-
-        if(transform.position == nextPosition)
+        if (Vector2.Distance(transform.position, pointA.position) < 0.05f)
         {
-            nextPosition = (nextPosition == pointA.position) ? pointB.position : pointA.position;
+            targetPos = pointB.position;
+        }
+
+        if (Vector2.Distance(transform.position, pointB.position)< 0.05f)
+        {
+            targetPos = pointA.position;
+        }
+
+        transform.position = Vector3.MoveTowards(transform.position, targetPos, moveSpeed * Time.deltaTime);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player")) 
+        {
+            collision.transform.parent = this.transform;
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Player")) 
+        if (collision.CompareTag("Player"))
         {
-            collision.gameObject.transform.parent = transform;
-        }
-    }
-
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            collision.gameObject.transform.parent = null;
+            collision.transform.parent = null;
         }
     }
 }
