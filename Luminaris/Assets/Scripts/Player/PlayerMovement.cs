@@ -36,17 +36,12 @@ public class PlayerMovement : MonoBehaviour
     private float lastPressedJumpTime;
     private bool isJumpCut;
 
-    private int jumpCount = 0;
-
     public bool isActive = false;
-
+    private int jumpCount = 0;
+    
     private bool waitingToEndTurn = false;
     private bool hasLandedAfterThirdJump = false;
-
-    // NOVO: flag para indicar que o player iniciou um pulo (clicou no botão)
     private bool jumpInitiated = false;
-
-    // Controle de estado no ar para detectar pouso
     private bool isInAir = false;
 
     private void Update()
@@ -75,8 +70,6 @@ public class PlayerMovement : MonoBehaviour
                 jumpCount++;
                 jumpInitiated = false; // Reseta a flag
 
-                Debug.Log($"[DEBUG] Player pousou após pulo. jumpCount = {jumpCount}");
-
                 if (jumpCount >= 3)
                 {
                     waitingToEndTurn = true;
@@ -91,7 +84,6 @@ public class PlayerMovement : MonoBehaviour
             {
                 hasLandedAfterThirdJump = true;
                 TurnControl.Instance.EndTurnIfReady();
-                Debug.Log("[DEBUG] Player pousou após 3º pulo. Finalizando turno.");
             }
             else
             {
@@ -148,8 +140,6 @@ public class PlayerMovement : MonoBehaviour
         lastOnGroundTime = 0;
         lastPressedJumpTime = 0;
         isJumpCut = false;
-
-        Debug.Log("[DEBUG] Executando Jump");
     }
 
     private bool IsGrounded()
