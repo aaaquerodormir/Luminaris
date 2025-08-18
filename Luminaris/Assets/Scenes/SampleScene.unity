@@ -119,6 +119,17 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &32226141 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2596292194444357674, guid: e87f939ef0a938a4a96c682259a642e7, type: 3}
+  m_PrefabInstance: {fileID: 1992964549}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab3d08e7ded14e04aa6543b97060c030, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &78272177
 GameObject:
   m_ObjectHideFlags: 0
@@ -208,7 +219,7 @@ GameObject:
   - component: {fileID: 341817714}
   - component: {fileID: 341817715}
   m_Layer: 0
-  m_Name: Claudio
+  m_Name: ColisorCamera2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -409,6 +420,109 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1001 &544931434
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3633859276347091179, guid: ff5113b0efa0be34eae95136e11c0619, type: 3}
+      propertyPath: m_Name
+      value: Moving Platform (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4325761613055304424, guid: ff5113b0efa0be34eae95136e11c0619, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 11.17
+      objectReference: {fileID: 0}
+    - target: {fileID: 4325761613055304424, guid: ff5113b0efa0be34eae95136e11c0619, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -4.11
+      objectReference: {fileID: 0}
+    - target: {fileID: 4325761613055304424, guid: ff5113b0efa0be34eae95136e11c0619, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.06981174
+      objectReference: {fileID: 0}
+    - target: {fileID: 4325761613055304424, guid: ff5113b0efa0be34eae95136e11c0619, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4325761613055304424, guid: ff5113b0efa0be34eae95136e11c0619, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4325761613055304424, guid: ff5113b0efa0be34eae95136e11c0619, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4325761613055304424, guid: ff5113b0efa0be34eae95136e11c0619, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4325761613055304424, guid: ff5113b0efa0be34eae95136e11c0619, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4325761613055304424, guid: ff5113b0efa0be34eae95136e11c0619, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4325761613055304424, guid: ff5113b0efa0be34eae95136e11c0619, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ff5113b0efa0be34eae95136e11c0619, type: 3}
+--- !u!1 &554373782
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 554373784}
+  - component: {fileID: 554373783}
+  m_Layer: 0
+  m_Name: ControleDeTurno
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &554373783
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 554373782}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2be08a6f7c819f346984075cbb25ed7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player1: {fileID: 853078784}
+  player2: {fileID: 32226141}
+--- !u!4 &554373784
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 554373782}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &619394800
 GameObject:
   m_ObjectHideFlags: 0
@@ -1029,6 +1143,17 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &853078784 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2596292194444357674, guid: 5187dc984bba9bb419818612fa764200, type: 3}
+  m_PrefabInstance: {fileID: 440363943590938540}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab3d08e7ded14e04aa6543b97060c030, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &941450886
 GameObject:
   m_ObjectHideFlags: 0
@@ -1040,7 +1165,7 @@ GameObject:
   - component: {fileID: 941450888}
   - component: {fileID: 941450887}
   m_Layer: 0
-  m_Name: Roberto
+  m_Name: ColisorCamera1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6426,11 +6551,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1671480759182602110, guid: e87f939ef0a938a4a96c682259a642e7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.070853
+      value: 2.7943077
       objectReference: {fileID: 0}
     - target: {fileID: 1671480759182602110, guid: e87f939ef0a938a4a96c682259a642e7, type: 3}
       propertyPath: m_LocalPosition.y
       value: 5.721802
+      objectReference: {fileID: 0}
+    - target: {fileID: 2087542476539903252, guid: e87f939ef0a938a4a96c682259a642e7, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3368453532942173862, guid: e87f939ef0a938a4a96c682259a642e7, type: 3}
       propertyPath: m_Name
@@ -6639,6 +6768,14 @@ PrefabInstance:
       propertyPath: m_Offset.y
       value: -0.034420013
       objectReference: {fileID: 0}
+    - target: {fileID: 2087542476539903252, guid: 5187dc984bba9bb419818612fa764200, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2596292194444357674, guid: 5187dc984bba9bb419818612fa764200, type: 3}
+      propertyPath: coyoteTime
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 3368453532942173862, guid: 5187dc984bba9bb419818612fa764200, type: 3}
       propertyPath: m_Name
       value: Player1
@@ -6689,7 +6826,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6138671342734766176, guid: 5187dc984bba9bb419818612fa764200, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.0000038146973
+      value: 0.0000038146973
       objectReference: {fileID: 0}
     - target: {fileID: 6138671342734766176, guid: 5187dc984bba9bb419818612fa764200, type: 3}
       propertyPath: m_LocalPosition.y
@@ -6802,5 +6939,7 @@ SceneRoots:
   - {fileID: 440363943590938540}
   - {fileID: 1992964549}
   - {fileID: 4091742811338008474}
+  - {fileID: 544931434}
   - {fileID: 1973370690}
   - {fileID: 1913429608}
+  - {fileID: 554373784}
