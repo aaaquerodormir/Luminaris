@@ -6426,7 +6426,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1671480759182602110, guid: e87f939ef0a938a4a96c682259a642e7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.774911
+      value: 4.070853
       objectReference: {fileID: 0}
     - target: {fileID: 1671480759182602110, guid: e87f939ef0a938a4a96c682259a642e7, type: 3}
       propertyPath: m_LocalPosition.y
@@ -6435,6 +6435,10 @@ PrefabInstance:
     - target: {fileID: 3368453532942173862, guid: e87f939ef0a938a4a96c682259a642e7, type: 3}
       propertyPath: m_Name
       value: Player2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5620226037976883288, guid: e87f939ef0a938a4a96c682259a642e7, type: 3}
+      propertyPath: OutputChannel
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6084755878845040062, guid: e87f939ef0a938a4a96c682259a642e7, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6685,11 +6689,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6138671342734766176, guid: 5187dc984bba9bb419818612fa764200, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 15.422369
+      value: -0.0000038146973
       objectReference: {fileID: 0}
     - target: {fileID: 6138671342734766176, guid: 5187dc984bba9bb419818612fa764200, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.7657592
+      value: 3.765759
+      objectReference: {fileID: 0}
+    - target: {fileID: 6138671342734766176, guid: 5187dc984bba9bb419818612fa764200, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6138671342734766176, guid: 5187dc984bba9bb419818612fa764200, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6138671342734766176, guid: 5187dc984bba9bb419818612fa764200, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6138671342734766176, guid: 5187dc984bba9bb419818612fa764200, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7077229418032609283, guid: 5187dc984bba9bb419818612fa764200, type: 3}
       propertyPath: m_Constraints
@@ -6703,6 +6723,10 @@ PrefabInstance:
       propertyPath: BoundingShape2D
       value: 
       objectReference: {fileID: 941450887}
+    - target: {fileID: 8182390127729014804, guid: 5187dc984bba9bb419818612fa764200, type: 3}
+      propertyPath: ChannelMask
+      value: 65531
+      objectReference: {fileID: 0}
     - target: {fileID: 8313839992976062262, guid: 5187dc984bba9bb419818612fa764200, type: 3}
       propertyPath: m_ActionEvents.Array.data[11].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: JumpInput
