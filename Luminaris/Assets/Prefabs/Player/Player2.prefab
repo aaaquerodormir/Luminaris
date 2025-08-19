@@ -415,10 +415,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 7077229418032609283}
-  isActive: 0
   moveAction: {fileID: -276721333342118783, guid: 03f621bcf66b04046a24ebfccf5c71b6, type: 3}
   jumpAction: {fileID: 3130247826693790656, guid: 03f621bcf66b04046a24ebfccf5c71b6, type: 3}
   moveSpeed: 3
+  horizontalInput: 0
   jumpForce: 5
   coyoteTime: 0.1
   jumpBufferTime: 0.1
@@ -432,6 +432,7 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
+  isActive: 0
 --- !u!50 &7077229418032609283
 Rigidbody2D:
   serializedVersion: 5
@@ -455,7 +456,7 @@ Rigidbody2D:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_Interpolate: 2
+  m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4

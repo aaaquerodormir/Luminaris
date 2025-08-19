@@ -13,7 +13,7 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Movement")]
     public float moveSpeed = 3f;
-    private float horizontalInput;
+    public float horizontalInput;
 
     [Header("Jump Settings")]
     public float jumpForce = 8f;
@@ -142,7 +142,7 @@ public class PlayerMovement : MonoBehaviour
         isJumpCut = false;
     }
 
-    private bool IsGrounded()
+    public bool IsGrounded()
     {
         return Physics2D.OverlapBox(groundCheckPos.position, groundCheckSize, 0, groundLayer);
     }
