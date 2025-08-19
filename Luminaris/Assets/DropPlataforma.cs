@@ -12,8 +12,8 @@ public class DropPlataforma : MonoBehaviour
     // Update is called once per frame
     private void SetPlayerOnPlatform(Collision2D other, bool value)
     {
-        var player = other.gameObject.GetComponent<Player>();
-        if (player != null)
+        //var player = other.gameObject.GetComponent<Player>();
+        //if (player != null)
         {
             _playerOnPlatform = value;
         }
