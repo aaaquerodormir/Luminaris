@@ -5,96 +5,149 @@ public class PlayerMovement : MonoBehaviour
     [Header("References")]
     public Rigidbody2D rb;
 
-    private bool isFacingRight = false; // Direção inicial do player
+    private bool isFacingRight = false;
 
-    
     [Header("Input Actions")]
-    public InputActionReference moveAction; // Referência de movimento
-    public InputActionReference jumpAction; // Referência de pulo
+    public InputActionReference moveAction;
+    public InputActionReference jumpAction;
 
     [Header("Movement")]
-    public float moveSpeed = 3f;        // Velocidade horizontal máxima
+    public float moveSpeed = 3f;
     private float horizontalInput;
 
     [Header("Jump Settings")]
-    public float jumpForce = 8f;              
-    public float coyoteTime = 0.1f;            // Tempo para pular após sair do chão
-    public float jumpBufferTime = 0.1f;        // Tempo para apertar um botão, antes de tocar o chão e ainda executar o pulo
-    public float jumpCutMultiplier = 0.5f;     // Reduz altura do pulo, se soltar o botão cedo
-    public float jumpHangGravityMultiplier = 0.5f; // O player flutua no topo do pulo
-    public float jumpHangThreshold = 0.1f;     // Velocidade mínima para considerar topo do pulo
+    public float jumpForce = 8f;
+    public float coyoteTime = 0.1f;
+    public float jumpBufferTime = 0.1f;
+    public float jumpCutMultiplier = 0.5f;
+    public float jumpHangGravityMultiplier = 0.5f;
+    public float jumpHangThreshold = 0.1f;
 
     [Header("Gravity")]
-    public float gravityScale = 4f;            
-    public float fallGravityMultiplier = 2f;   // Aumenta a gravidade durante a queda
+    public float gravityScale = 4f;
+    public float fallGravityMultiplier = 2f;
 
     [Header("Ground Check")]
-    public Transform groundCheckPos;   // Ponto para saber se o Player está no chão       
-    public Vector2 groundCheckSize = new Vector2(0.5f, 0.05f); // Tamanho da área de verificação
-    public LayerMask groundLayer;     // Camada do chão
+    public Transform groundCheckPos;
+    public Vector2 groundCheckSize = new Vector2(0.5f, 0.05f);
+    public LayerMask groundLayer;
 
-    private float lastOnGroundTime; // Temporizador do coyote time
-    private float lastPressedJumpTime; // Temporizador do jump buffer
-    private bool isJumpCut; // Indica se o botão de pulo foi solto cedo, para um pulo mais baixo
+    private float lastOnGroundTime;
+    private float lastPressedJumpTime;
+    private bool isJumpCut;
+
+    public bool isActive = false;
+    private int jumpCount = 0;
+    
+    private bool waitingToEndTurn = false;
+    private bool hasLandedAfterThirdJump = false;
+    private bool jumpInitiated = false;
+    private bool isInAir = false;
 
     private void Update()
     {
-        // Leitura da entrada horizontal (A/D ou Setas)
+        if (!isActive)
+            return;
+
         horizontalInput = moveAction.action.ReadValue<Vector2>().x;
 
-        // Verifica se o botão de pulo foi pressionado
-        if (jumpAction.action.WasPerformedThisFrame())
-            lastPressedJumpTime = jumpBufferTime;
+        bool grounded = IsGrounded();
 
-        // Verifica se o botão de pulo foi solto cedo
+        // Detecta saída do chão
+        if (!grounded && !isInAir)
+        {
+            isInAir = true;
+        }
+
+        // Detecta pouso no chão
+        if (grounded && isInAir)
+        {
+            isInAir = false;
+
+            // Incrementa jumpCount somente se um pulo foi iniciado antes
+            if (jumpInitiated)
+            {
+                jumpCount++;
+                jumpInitiated = false; // Reseta a flag
+
+                if (jumpCount >= 3)
+                {
+                    waitingToEndTurn = true;
+                    hasLandedAfterThirdJump = false;
+                }
+            }
+        }
+
+        if (waitingToEndTurn)
+        {
+            if (grounded && !hasLandedAfterThirdJump)
+            {
+                hasLandedAfterThirdJump = true;
+                TurnControl.Instance.EndTurnIfReady();
+            }
+            else
+            {
+                rb.linearVelocity = new Vector2(horizontalInput * moveSpeed, rb.linearVelocity.y);
+            }
+            return;
+        }
+
+        // Quando o botão de pulo for apertado, marca que iniciou um pulo, mas não incrementa jumpCount aqui
+        if (jumpAction.action.WasPerformedThisFrame() && jumpCount < 3 && !waitingToEndTurn)
+        {
+            lastPressedJumpTime = jumpBufferTime;
+            jumpInitiated = true; // sinaliza que o jogador quer pular
+        }
+
         if (jumpAction.action.WasReleasedThisFrame() && rb.linearVelocity.y > 0)
             isJumpCut = true;
 
-        if (isGrounded())  // Atualiza o coyote time se estiver no chão
+        if (grounded)
             lastOnGroundTime = coyoteTime;
-        // Atualiza os timers
+
         lastOnGroundTime -= Time.deltaTime;
         lastPressedJumpTime -= Time.deltaTime;
-        if (lastOnGroundTime > 0 && lastPressedJumpTime > 0) // Vai pular se dentro de coyote e jump buffer
-            Jump();
-        rb.linearVelocity = new Vector2(horizontalInput * moveSpeed, rb.linearVelocity.y);  // Movimento horizontal direto
 
-        Flip(); // Inverte a direção do player
+        if (lastOnGroundTime > 0 && lastPressedJumpTime > 0 && jumpCount < 3 && !waitingToEndTurn)
+            Jump();
+
+        if (!waitingToEndTurn || (waitingToEndTurn && !hasLandedAfterThirdJump))
+            rb.linearVelocity = new Vector2(horizontalInput * moveSpeed, rb.linearVelocity.y);
+
+        Flip();
     }
 
     private void FixedUpdate()
     {
-        // Gravidade adaptativa
-        if (rb.linearVelocity.y < 0) // Caindo
-        {
+        if (rb.linearVelocity.y < 0)
             rb.gravityScale = gravityScale * fallGravityMultiplier;
-        }
-        else if (Mathf.Abs(rb.linearVelocity.y) < jumpHangThreshold) // Topo do pulo
-        {
+        else if (Mathf.Abs(rb.linearVelocity.y) < jumpHangThreshold)
             rb.gravityScale = gravityScale * jumpHangGravityMultiplier;
-        }
-        else if (isJumpCut) // Botão solto cedo
+        else if (isJumpCut)
         {
             rb.gravityScale = gravityScale;
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, rb.linearVelocity.y * jumpCutMultiplier);
             isJumpCut = false;
         }
         else
-        {
-            rb.gravityScale = gravityScale; // Gravidade padrão
-        }
+            rb.gravityScale = gravityScale;
     }
+
     private void Jump()
     {
-        rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce); // Define a velocidade vertical
-        lastOnGroundTime = 0; // Reseta o coyote time
-        lastPressedJumpTime = 0; // Reseta o jump buffer
+        rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
+
+        lastOnGroundTime = 0;
+        lastPressedJumpTime = 0;
+        isJumpCut = false;
     }
-    private bool isGrounded() // Verifica se está no chão
+
+    private bool IsGrounded()
     {
         return Physics2D.OverlapBox(groundCheckPos.position, groundCheckSize, 0, groundLayer);
     }
-    private void Flip() // Inverte a direção do player
+
+    private void Flip()
     {
         if (isFacingRight && horizontalInput < 0 || !isFacingRight && horizontalInput > 0)
         {
@@ -103,6 +156,23 @@ public class PlayerMovement : MonoBehaviour
             ls.x *= -1f;
             transform.localScale = ls;
         }
+    }
+
+    public void StartTurn()
+    {
+        isActive = true;
+        jumpCount = 0;
+        waitingToEndTurn = false;
+        hasLandedAfterThirdJump = false;
+        jumpInitiated = false;
+        isInAir = false;
+    }
+
+    public void EndTurn()
+    {
+        isActive = false;
+        horizontalInput = 0f;
+        rb.linearVelocity = new Vector2(0f, rb.linearVelocity.y);
     }
 
     private void OnDrawGizmosSelected()

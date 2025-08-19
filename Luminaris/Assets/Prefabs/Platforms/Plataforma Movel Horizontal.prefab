@@ -40,7 +40,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4325761613055304424}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Plataforma Movel Horizontal
   m_TagString: Platform
   m_Icon: {fileID: 0}
