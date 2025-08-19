@@ -6816,6 +6816,10 @@ PrefabInstance:
       value: -0.034420013
       objectReference: {fileID: 0}
     - target: {fileID: 728962970084804015, guid: 5187dc984bba9bb419818612fa764200, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 728962970084804015, guid: 5187dc984bba9bb419818612fa764200, type: 3}
       propertyPath: mysticTrail
       value: 
       objectReference: {fileID: 0}
@@ -6905,6 +6909,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6138671342734766176, guid: 5187dc984bba9bb419818612fa764200, type: 3}
       propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7077229418032609283, guid: 5187dc984bba9bb419818612fa764200, type: 3}
+      propertyPath: m_Interpolate
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7403759037331043676, guid: 5187dc984bba9bb419818612fa764200, type: 3}

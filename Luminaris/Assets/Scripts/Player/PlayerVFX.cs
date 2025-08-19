@@ -10,7 +10,7 @@ public class VisualEffects : MonoBehaviour
 
     private void Start()
     {
-        mysticTrail = Instantiate(mysticTrailPrefab,transform.position,Quaternion.identity);
+        mysticTrail = Instantiate(mysticTrailPrefab, transform.position, Quaternion.identity);
         mysticTrail.transform.SetParent(transform);
     }
 
@@ -19,7 +19,7 @@ public class VisualEffects : MonoBehaviour
         if (pm.horizontalInput == 0 || mysticTrail == null)
             return;
 
-       
+
 
         // Verifica se o player está se movendo (horizontalInput != 0) ou está no ar
         bool isMoving = Mathf.Abs(pm.horizontalInput) > 0.1f;
