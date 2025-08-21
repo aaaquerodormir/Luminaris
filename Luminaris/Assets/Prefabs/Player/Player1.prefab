@@ -162,6 +162,7 @@ GameObject:
   - component: {fileID: 2442291273396667845}
   - component: {fileID: 6179877032678947836}
   - component: {fileID: 728962970084804015}
+  - component: {fileID: 255631456070546370}
   m_Layer: 0
   m_Name: Player1
   m_TagString: Player
@@ -391,6 +392,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pm: {fileID: 2596292194444357674}
   mysticTrailPrefab: {fileID: 0}
+--- !u!114 &255631456070546370
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3368453532942173862}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77a046ed66fd03540ac072e52246eb64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movementScript: {fileID: 2596292194444357674}
 --- !u!1 &6241849955727619075
 GameObject:
   m_ObjectHideFlags: 0
@@ -420,7 +434,7 @@ Transform:
   m_GameObject: {fileID: 6241849955727619075}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 3.765759, z: -10}
+  m_LocalPosition: {x: 0.0000019073486, y: 3.765759, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

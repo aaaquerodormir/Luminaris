@@ -1,16 +1,21 @@
 using UnityEngine;
+using System;
 
 public class TurnControl : MonoBehaviour
 {
     public static TurnControl Instance;
 
-    public PlayerMovement player1;
-    public PlayerMovement player2;
+    [SerializeField] private PlayerMovement player1;
+    [SerializeField] private PlayerMovement player2;
 
     private PlayerMovement currentPlayer;
 
+    // Evento global para sinalizar fim de turno
+    public static event Action OnTurnEnded;
+
     private void Awake()
     {
+        // Singleton para acesso fácil
         if (Instance == null)
             Instance = this;
         else
@@ -19,6 +24,7 @@ public class TurnControl : MonoBehaviour
 
     private void Start()
     {
+        // Começa sempre com player1
         currentPlayer = player1;
         player1.StartTurn();
         player2.EndTurn();
@@ -39,5 +45,8 @@ public class TurnControl : MonoBehaviour
             currentPlayer = player1;
             player1.StartTurn();
         }
+
+        // Dispara evento global
+        OnTurnEnded?.Invoke();
     }
 }
