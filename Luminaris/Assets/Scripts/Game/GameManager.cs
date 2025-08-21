@@ -8,14 +8,20 @@ public class GameManager : MonoBehaviour
     [SerializeField] private PlayerRespawn player1;
     [SerializeField] private PlayerRespawn player2;
 
+    [Header("Lava")]
+    [SerializeField] private LavaRise lava; // referência para resetar lava
+
+    [Header("Controle de Turnos")]
+    [SerializeField] private TurnControl turnControl; // referência para resetar turnos
+
     [Header("UI")]
-    [SerializeField] private GameObject gameOverUI;
+    [SerializeField] private GameObject gameOverUI; // painel de Game Over
 
     private bool isGameOver = false;
 
     private void Awake()
     {
-        // Garante que só exista um GameManager (Singleton)
+        // Singleton para garantir que só exista 1 GameManager
         if (Instance == null)
             Instance = this;
         else
@@ -38,7 +44,7 @@ public class GameManager : MonoBehaviour
 
     private void HandleTurnEnd()
     {
-        // Aqui pode ser usada lógica extra (ex: acelerar lava, somar pontos, etc.)
+        // Aqui pode ser adicionada lógica extra (ex: acelerar lava com o tempo)
         Debug.Log("Turno finalizado!");
     }
 
@@ -48,7 +54,7 @@ public class GameManager : MonoBehaviour
 
         isGameOver = true;
 
-        // Mostra tela de Game Over e pausa o jogo
+        // Ativa tela de Game Over e pausa o jogo
         gameOverUI.SetActive(true);
         Time.timeScale = 0f;
     }
@@ -59,9 +65,15 @@ public class GameManager : MonoBehaviour
         gameOverUI.SetActive(false);
         Time.timeScale = 1f;
 
-        // Restaura jogadores
+        // Reseta jogadores
         player1.Respawn();
         player2.Respawn();
+
+        // Reseta lava
+        lava.ResetLava();
+
+        // Reseta turnos
+        turnControl.ResetTurns();
 
         isGameOver = false;
     }

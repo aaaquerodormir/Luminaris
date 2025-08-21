@@ -3,17 +3,17 @@ using System;
 
 public class PlayerRespawn : MonoBehaviour
 {
-    // Evento estático para notificar quando um jogador morrer
+    // Evento estático para notificar quando um jogador morreu
     public static event Action OnPlayerDied;
 
     [SerializeField] private PlayerMovement movementScript;
 
-    private Vector3 respawnPoint; // Ponto atual de respawn do jogador
-    private bool isDead = false;  // Flag para evitar mortes repetidas
+    private Vector3 respawnPoint; // ponto salvo para respawn
+    private bool isDead = false;  // flag de morte para evitar múltiplas execuções
 
     void Start()
     {
-        // Define o ponto inicial de respawn como a posição inicial
+        // O ponto inicial de respawn é a posição inicial do jogador
         respawnPoint = transform.position;
     }
 
@@ -24,7 +24,7 @@ public class PlayerRespawn : MonoBehaviour
         {
             Die();
         }
-        // Se tocar em um checkpoint → salva novo ponto de respawn
+        // Se tocar em checkpoint → atualiza posição de respawn
         else if (collision.CompareTag("Checkpoint"))
         {
             respawnPoint = collision.transform.position;
@@ -36,19 +36,22 @@ public class PlayerRespawn : MonoBehaviour
         if (isDead) return;
         isDead = true;
 
-        // Finaliza o turno ao morrer
+        // Desativa movimentação do jogador
         movementScript.EndTurn();
 
-        // Dispara evento para o GameManager reagir
+        // 🔥 Força fim de turno se um jogador morrer
+        TurnControl.Instance.EndTurnIfReady();
+
+        // Notifica o GameManager
         OnPlayerDied?.Invoke();
     }
 
     public void Respawn()
     {
-        // Reposiciona no último checkpoint
+        // Reposiciona no último checkpoint salvo
         transform.position = respawnPoint;
 
-        // Reativa o jogador
+        // Reativa movimentação
         movementScript.StartTurn();
         isDead = false;
     }

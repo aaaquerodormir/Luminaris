@@ -1,12 +1,10 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class LavaRise : MonoBehaviour
 {
-    [Header("Velocidade Base da Lava")]
-    [SerializeField] private float baseSpeed = 1f;
-
-    [Header("Multiplicador Din�mico")]
-    [SerializeField] private float speedMultiplier = 1f;
+    [Header("Velocidade da Lava")]
+    [SerializeField] private float baseSpeed = 0.5f; // velocidade base lenta
+    [SerializeField] private float speedMultiplier = 1f; // multiplicador dinâmico
 
     [Header("Jogadores")]
     [SerializeField] private Transform player1;
@@ -14,35 +12,41 @@ public class LavaRise : MonoBehaviour
 
     [Header("Acompanhamento")]
     [SerializeField] private float maxPlayerHeightOffset = 5f;
+    // quanto a lava pode ficar atrás do jogador mais alto (se quiser limitar)
+
+    private Vector3 startPos; // posição inicial da lava
+
+    private void Start()
+    {
+        // Salva posição inicial para reset
+        startPos = transform.position;
+    }
+
+    // Reseta lava para posição inicial
+    public void ResetLava()
+    {
+        transform.position = startPos;
+    }
 
     private void Update()
     {
-        if (player1 == null || player2 == null)
-        {
-            Debug.LogWarning("Player references not set in LavaRise script.");
-            return; // Evita erros se os jogadores n�o estiverem atribu�dos
-        }
+        if (player1 == null || player2 == null) return;
 
-        // Calcula a altura mais alta entre os dois jogadores
+        // Calcula altura do jogador mais alto
         float highestY = Mathf.Max(player1.position.y, player2.position.y);
 
-        // Define a altura alvo que a lava deve alcan�ar (um pouco abaixo do jogador mais alto)
+        // Define altura de referência (pode ser usado para limitar diferença)
         float targetY = highestY - maxPlayerHeightOffset;
 
-        // S� sobe se a lava estiver abaixo do alvo
+        // Lava sobe sempre, lentamente
+        float dynamicSpeed = baseSpeed * speedMultiplier;
+        transform.position += Vector3.up * dynamicSpeed * Time.deltaTime;
+
+        // Se quiser impedir que a lava fique muito distante do jogador mais alto
+        // pode limitar altura mínima com base no targetY
         if (transform.position.y < targetY)
         {
-            // Calcula a velocidade din�mica (base vezes multiplicador)
-            float dynamicSpeed = baseSpeed * speedMultiplier;
-
-            // Move a lava para cima suavemente
-            transform.position += Vector3.up * dynamicSpeed * Time.deltaTime;
-
-            // Evita ultrapassar o targetY
-            if (transform.position.y > targetY)
-            {
-                transform.position = new Vector3(transform.position.x, targetY, transform.position.z);
-            }
+            transform.position = new Vector3(transform.position.x, targetY, transform.position.z);
         }
     }
 }

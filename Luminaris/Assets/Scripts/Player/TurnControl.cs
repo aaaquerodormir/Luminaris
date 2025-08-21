@@ -10,7 +10,7 @@ public class TurnControl : MonoBehaviour
 
     private PlayerMovement currentPlayer;
 
-    // Evento global para sinalizar fim de turno
+    // Evento global para sinalizar quando um turno acaba
     public static event Action OnTurnEnded;
 
     private void Awake()
@@ -24,13 +24,19 @@ public class TurnControl : MonoBehaviour
 
     private void Start()
     {
-        // Começa sempre com player1
+        // Começa sempre com o Player1 ativo
+        ResetTurns();
+    }
+
+    // Reseta estado do sistema de turnos
+    public void ResetTurns()
+    {
         currentPlayer = player1;
         player1.StartTurn();
         player2.EndTurn();
     }
 
-    // Chamado quando um jogador terminou seus 3 pulos e aterrissou
+    // Chamado quando jogador termina seus 3 pulos + aterrissagem
     public void EndTurnIfReady()
     {
         if (currentPlayer == player1)
@@ -46,7 +52,7 @@ public class TurnControl : MonoBehaviour
             player1.StartTurn();
         }
 
-        // Dispara evento global
+        // Dispara evento global para outros scripts ouvirem
         OnTurnEnded?.Invoke();
     }
 }

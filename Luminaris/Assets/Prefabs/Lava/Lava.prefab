@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6026193992787492838}
   - component: {fileID: 3976489692297875688}
   - component: {fileID: 5993898991970484524}
+  - component: {fileID: 484595702623161494}
   m_Layer: 0
   m_Name: Lava
   m_TagString: Lava
@@ -101,11 +102,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20d49b92de9e26c40b41d832c50fd18b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseSpeed: 1
+  baseSpeed: 0.1
   speedMultiplier: 1
   player1: {fileID: 6084755878845040062, guid: 5187dc984bba9bb419818612fa764200, type: 3}
   player2: {fileID: 6084755878845040062, guid: e87f939ef0a938a4a96c682259a642e7, type: 3}
-  maxPlayerHeightOffset: 5
+  maxPlayerHeightOffset: 2
 --- !u!61 &5993898991970484524
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -152,3 +153,30 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!50 &484595702623161494
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9209720596456441839}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
