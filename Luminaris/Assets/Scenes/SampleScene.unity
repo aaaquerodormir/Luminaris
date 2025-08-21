@@ -3135,6 +3135,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "Painel de Confirma\xE7\xE3o"
       objectReference: {fileID: 0}
+    - target: {fileID: 3842398754403673871, guid: dda4d77b178710841969f90c666a8179, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
