@@ -11,6 +11,11 @@ public class PlataformaEspinhos : MonoBehaviour
         {
             HandlePlayerBounce(collision.gameObject);
         }
+        var respawn = collision.GetComponent<PlayerRespawn>();
+        if (respawn != null)
+        {
+            respawn.Die();
+        }
     }
 
     private void HandlePlayerBounce(GameObject player)
