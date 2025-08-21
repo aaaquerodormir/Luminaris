@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private PlayerRespawn player2;
 
     [Header("Lava")]
-    //[SerializeField] private LavaRise lava; // referência para resetar lava
+    [SerializeField] private LavaRise lava; // referência para resetar lava
 
     [Header("Controle de Turnos")]
     [SerializeField] private TurnControl turnControl; // referência para resetar turnos
