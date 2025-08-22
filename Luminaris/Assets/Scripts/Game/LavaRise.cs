@@ -14,6 +14,10 @@ public class LavaRise : MonoBehaviour
     [SerializeField] private float maxPlayerHeightOffset = 5f;
     // quanto a lava pode ficar atrás do jogador mais alto (se quiser limitar)
 
+    private float speedModifier = 1f;
+    private int turnsLeft = 0;
+
+
     private Vector3 startPos; // posição inicial da lava
 
     private void Start()
@@ -39,7 +43,7 @@ public class LavaRise : MonoBehaviour
         float targetY = highestY - maxPlayerHeightOffset;
 
         //Lava sobe sempre, lentamente
-        float dynamicSpeed = baseSpeed * speedMultiplier;
+        float dynamicSpeed = baseSpeed * speedMultiplier * speedModifier;
         transform.position += Vector3.up * dynamicSpeed * Time.deltaTime;
 
         //Se quiser impedir que a lava fique muito distante do jogador mais alto
@@ -47,6 +51,25 @@ public class LavaRise : MonoBehaviour
         if (transform.position.y < targetY)
         {
             transform.position = new Vector3(transform.position.x, targetY, transform.position.z);
+        }
+    }
+    public void AddSpeedModifier(float modifier, int durationTurns)
+    {
+        speedModifier = modifier;
+        turnsLeft = durationTurns;
+        Debug.Log($" Lava modificada! Novo multiplicador: {speedModifier}, duração: {turnsLeft} turnos");
+    }
+
+    public void ConsumeTurn()
+    {
+        if (turnsLeft > 0)
+        {
+            turnsLeft--;
+            if (turnsLeft <= 0)
+            {
+                speedModifier = 1f;
+                Debug.Log(" Lava voltou à velocidade normal");
+            }
         }
     }
 }

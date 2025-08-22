@@ -63,7 +63,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        if (!isActive) return; // 🔒 só o player ativo pode processar input
+        if (!isActive) return; //  só o player ativo pode processar input
 
         horizontalInput = moveAction.action.ReadValue<Vector2>().x;
         bool grounded = IsGrounded();
@@ -77,9 +77,20 @@ public class PlayerMovement : MonoBehaviour
         {
             isInAir = false;
 
-            // ⚠️ Removido o jumpCount++ daqui para não contar duas vezes
+            //  Removido o jumpCount++ daqui para não contar duas vezes
+            //if (jumpInitiated)
+            //    jumpInitiated = false;
             if (jumpInitiated)
+            {
                 jumpInitiated = false;
+
+                // 🔥 Só marca fim de turno depois de aterrissar e já ter usado todos os pulos
+                if (jumpCount >= MaxJumps)
+                {
+                    waitingToEndTurn = true;
+                    hasLandedAfterMaxJump = false;
+                }
+            }
         }
 
         // Encerramento de turno
@@ -159,14 +170,21 @@ public class PlayerMovement : MonoBehaviour
         lastOnGroundTime = 0;
         lastPressedJumpTime = 0;
 
-        jumpCount++; // ✅ agora só conta pulo aqui
+        jumpCount++;
 
-        // Se já atingiu o limite → prepara para encerrar turno
-        if (jumpCount >= MaxJumps)
-        {
-            waitingToEndTurn = true;
-            hasLandedAfterMaxJump = false;
-        }
+
+        //rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
+        //lastOnGroundTime = 0;
+        //lastPressedJumpTime = 0;
+
+        //jumpCount++; // ✅ agora só conta pulo aqui
+
+        //// Se já atingiu o limite → prepara para encerrar turno
+        //if (jumpCount >= MaxJumps)
+        //{
+        //    waitingToEndTurn = true;
+        //    hasLandedAfterMaxJump = false;
+        //}
 
     }
 

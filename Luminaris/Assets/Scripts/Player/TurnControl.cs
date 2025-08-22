@@ -52,6 +52,9 @@ public class TurnControl : MonoBehaviour
             player1.StartTurn();
         }
 
+        // Lava também consome turnos
+        FindObjectOfType<LavaRise>()?.ConsumeTurn();
+
         // Dispara evento global para outros scripts ouvirem
         OnTurnEnded?.Invoke();
     }

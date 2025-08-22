@@ -2,16 +2,16 @@ using UnityEngine;
 
 public class PowerUpColetavel : MonoBehaviour
 {
-    [SerializeField] private JumpPowerUp powerUp;
+    [SerializeField] private PowerUpModificador powerModificador;
+    [SerializeField] private GameObject target; // pode ser Player ou Lava
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-        var player = col.GetComponent<PlayerMovement>();
-        if (player != null)
-        {
-            powerUp.Apply(player.gameObject);
-            Debug.Log("Power-up de pulo coletado!");
-            Destroy(gameObject);
-        }
+        if (powerModificador == null || target == null) return;
+
+        powerModificador.Activate(target);
+        Debug.Log($" PowerUp {powerModificador.name} ativado em {target.name}");
+
+        Destroy(gameObject);
     }
 }
