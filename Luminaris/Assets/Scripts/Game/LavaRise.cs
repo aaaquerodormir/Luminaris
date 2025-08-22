@@ -18,11 +18,11 @@ public class LavaRise : MonoBehaviour
 
     private void Start()
     {
-        // Salva posição inicial para reset
-        startPos = transform.position;
+        //Salva posição inicial para reset
+       startPos = transform.position;
     }
 
-    // Reseta lava para posição inicial
+    //Reseta lava para posição inicial
     public void ResetLava()
     {
         transform.position = startPos;
@@ -32,18 +32,18 @@ public class LavaRise : MonoBehaviour
     {
         if (player1 == null || player2 == null) return;
 
-        // Calcula altura do jogador mais alto
+        //Calcula altura do jogador mais alto
         float highestY = Mathf.Max(player1.position.y, player2.position.y);
 
-        // Define altura de referência (pode ser usado para limitar diferença)
+        //Define altura de referência(pode ser usado para limitar diferença)
         float targetY = highestY - maxPlayerHeightOffset;
 
-        // Lava sobe sempre, lentamente
+        //Lava sobe sempre, lentamente
         float dynamicSpeed = baseSpeed * speedMultiplier;
         transform.position += Vector3.up * dynamicSpeed * Time.deltaTime;
 
-        // Se quiser impedir que a lava fique muito distante do jogador mais alto
-        // pode limitar altura mínima com base no targetY
+        //Se quiser impedir que a lava fique muito distante do jogador mais alto
+         //pode limitar altura mínima com base no targetY
         if (transform.position.y < targetY)
         {
             transform.position = new Vector3(transform.position.x, targetY, transform.position.z);

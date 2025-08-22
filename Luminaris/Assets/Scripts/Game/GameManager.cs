@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject gameOverUI; // painel de Game Over
 
     private bool isGameOver = false;
-
+    public bool gameOverAtivo => isGameOver;
     private void Awake()
     {
         // Singleton para garantir que só exista 1 GameManager
@@ -70,7 +70,7 @@ public class GameManager : MonoBehaviour
         player2.Respawn();
 
         // Reseta lava
-        lava.ResetLava();
+        //lava.ResetLava();
 
         // Reseta turnos
         turnControl.ResetTurns();
