@@ -30,6 +30,9 @@ public class LavaRise : MonoBehaviour
     public void ResetLava()
     {
         transform.position = startPos;
+        speedModifier = 1f;
+        turnsLeft = 0;
+        //transform.position = startPos;
     }
 
     private void Update()

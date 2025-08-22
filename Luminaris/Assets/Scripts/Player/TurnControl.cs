@@ -10,6 +10,9 @@ public class TurnControl : MonoBehaviour
 
     private PlayerMovement currentPlayer;
 
+    // Referência para a Lava
+    private LavaRise lava;
+
     // Evento global para sinalizar quando um turno acaba
     public static event Action OnTurnEnded;
 
@@ -24,6 +27,7 @@ public class TurnControl : MonoBehaviour
 
     private void Start()
     {
+        lava = GameObject.FindWithTag("Lava")?.GetComponent<LavaRise>();
         // Começa sempre com o Player1 ativo
         ResetTurns();
     }
@@ -34,6 +38,8 @@ public class TurnControl : MonoBehaviour
         currentPlayer = player1;
         player1.StartTurn();
         player2.EndTurn();
+
+        lava?.ResetLava();
     }
 
     // Chamado quando jogador termina seus 3 pulos + aterrissagem
@@ -52,10 +58,9 @@ public class TurnControl : MonoBehaviour
             player1.StartTurn();
         }
 
-        // Lava também consome turnos
-        FindObjectOfType<LavaRise>()?.ConsumeTurn();
+        
+        lava?.ConsumeTurn();
 
-        // Dispara evento global para outros scripts ouvirem
         OnTurnEnded?.Invoke();
     }
 }

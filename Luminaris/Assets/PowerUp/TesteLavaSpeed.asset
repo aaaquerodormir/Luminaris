@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 456bdcdd7a4a43144a54e163bb6f7e72, type: 3}
   m_Name: TesteLavaSpeed
   m_EditorClassIdentifier: 
-  durationTurns: 1
-  speedModifier: 0.5
+  durationTurns: 2
+  newMultiplier: 5
