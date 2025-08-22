@@ -2,11 +2,10 @@ using UnityEngine;
 
 public abstract class PowerUpModificador : ScriptableObject
 {
-    [SerializeField] protected int durationTurns = 1; // duração em turnos
+    [SerializeField] protected int durationTurns = 1;
 
-    // Ativa o efeito do PowerUp no target (Player ou Lava, por exemplo)
+    public int DurationTurns => durationTurns;
+
     public abstract void Activate(GameObject target);
-
-    // Desativa (se necessário) — alguns PowerUps podem não precisar
     public abstract void Deactivate(GameObject target);
 }

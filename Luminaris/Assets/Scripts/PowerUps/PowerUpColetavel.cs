@@ -1,16 +1,23 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PowerUpColetavel : MonoBehaviour
 {
     [SerializeField] private PowerUpModificador powerModificador;
-    [SerializeField] private GameObject target; // pode ser Player ou Lava
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-        if (powerModificador == null || target == null) return;
+        if (powerModificador == null) return;
 
-        powerModificador.Activate(target);
-        Debug.Log($" PowerUp {powerModificador.name} ativado em {target.name}");
+        // Se for PowerUp de pulo → aplica no jogador que encostou
+        if (powerModificador is JumpPowerUp)
+        {
+            powerModificador.Activate(col.gameObject);
+        }
+        else
+        {
+            // Caso contrário (ex: Lava) → ativa sem precisar do jogador
+            powerModificador.Activate(null);
+        }
 
         Destroy(gameObject);
     }
