@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Collections.Generic;
 public class PlayerMovement : MonoBehaviour
 {
     [Header("References")]
@@ -16,6 +17,7 @@ public class PlayerMovement : MonoBehaviour
     public float horizontalInput;
 
     [Header("Jump Settings")]
+    [SerializeField] private int baseMaxJumps = 3; // adicionei baseMaxJumps
     [SerializeField] private float jumpForce = 8f;
     [SerializeField] private float coyoteTime = 0.1f; // tempo extra após sair da plataforma
     [SerializeField] private float jumpBufferTime = 0.1f; // tempo para "guardar" o pulo antes de tocar o chão
@@ -41,15 +43,28 @@ public class PlayerMovement : MonoBehaviour
 
     // Controle de turnos
     private bool waitingToEndTurn = false;
-    private bool hasLandedAfterThirdJump = false;
+    private bool hasLandedAfterMaxJump = false;
     private bool jumpInitiated = false;
     private bool isInAir = false;
 
+    // Lista de power ups ativos
+    private List<(int extraJumps, int turnsLeft)> activeJumpPowerUps = new();
+
+    public int MaxJumps
+    {
+        get
+        {
+            int total = baseMaxJumps;
+            foreach (var power in activeJumpPowerUps)
+                total += power.extraJumps;
+            return total;
+        }
+    }
+
     private void Update()
     {
-        if (!isActive) return;
+        if (!isActive) return; // 🔒 só o player ativo pode processar input
 
-        // Lê input horizontal
         horizontalInput = moveAction.action.ReadValue<Vector2>().x;
         bool grounded = IsGrounded();
 
@@ -62,26 +77,17 @@ public class PlayerMovement : MonoBehaviour
         {
             isInAir = false;
 
+            // ⚠️ Removido o jumpCount++ daqui para não contar duas vezes
             if (jumpInitiated)
-            {
-                jumpCount++;
                 jumpInitiated = false;
-
-                // Se fez 3 pulos → marca para encerrar turno
-                if (jumpCount >= 3)
-                {
-                    waitingToEndTurn = true;
-                    hasLandedAfterThirdJump = false;
-                }
-            }
         }
 
         // Encerramento de turno
         if (waitingToEndTurn)
         {
-            if (grounded && !hasLandedAfterThirdJump)
+            if (grounded && !hasLandedAfterMaxJump)
             {
-                hasLandedAfterThirdJump = true;
+                hasLandedAfterMaxJump = true;
                 TurnControl.Instance.EndTurnIfReady();
             }
             else
@@ -91,30 +97,30 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
 
-        // Jump Buffer → registra intenção de pulo
-        if (jumpAction.action.WasPerformedThisFrame() && jumpCount < 3 && !waitingToEndTurn)
+        // Jump Buffer
+        if (jumpAction.action.WasPerformedThisFrame() && jumpCount < MaxJumps && !waitingToEndTurn)
         {
             lastPressedJumpTime = jumpBufferTime;
             jumpInitiated = true;
         }
 
-        // Jump Cut → corta altura se soltar botão antes do ápice
+        // Jump Cut
         if (jumpAction.action.WasReleasedThisFrame() && rb.linearVelocity.y > 0)
             isJumpCut = true;
 
-        // Coyote Time → ainda permite pulo logo após sair da borda
+        // Coyote Time
         if (grounded)
             lastOnGroundTime = coyoteTime;
 
         lastOnGroundTime -= Time.deltaTime;
         lastPressedJumpTime -= Time.deltaTime;
 
-        // Executa pulo se dentro das janelas de buffer e coyote
-        if (lastOnGroundTime > 0 && lastPressedJumpTime > 0 && jumpCount < 3 && !waitingToEndTurn)
+        // Executa pulo
+        if (lastOnGroundTime > 0 && lastPressedJumpTime > 0 && jumpCount < MaxJumps && !waitingToEndTurn)
             Jump();
 
-        // Movimento horizontal normal
-        if (!waitingToEndTurn || (waitingToEndTurn && !hasLandedAfterThirdJump))
+        // Movimento horizontal
+        if (!waitingToEndTurn || (waitingToEndTurn && !hasLandedAfterMaxJump))
             rb.linearVelocity = new Vector2(horizontalInput * moveSpeed, rb.linearVelocity.y);
 
         Flip();
@@ -150,12 +156,29 @@ public class PlayerMovement : MonoBehaviour
     private void Jump()
     {
         rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
-
-        // Reseta variáveis de controle
         lastOnGroundTime = 0;
         lastPressedJumpTime = 0;
-        isJumpCut = false;
+
+        jumpCount++; // ✅ agora só conta pulo aqui
+
+        // Se já atingiu o limite → prepara para encerrar turno
+        if (jumpCount >= MaxJumps)
+        {
+            waitingToEndTurn = true;
+            hasLandedAfterMaxJump = false;
+        }
+
     }
+
+    //private void Jump()
+    //{
+    //    rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
+
+    //    // Reseta variáveis de controle
+    //    lastOnGroundTime = 0;
+    //    lastPressedJumpTime = 0;
+    //    isJumpCut = false;
+    //}
 
     public bool IsGrounded()
     {
@@ -175,25 +198,52 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    //public void StartTurn()
+    //{
+    //    // Reseta variáveis ao iniciar turno
+    //    isActive = true;
+    //    jumpCount = 0;
+    //    waitingToEndTurn = false;
+    //    hasLandedAfterThirdJump = false;
+    //    jumpInitiated = false;
+    //    isInAir = false;
+    //}
+
     public void StartTurn()
     {
-        // Reseta variáveis ao iniciar turno
         isActive = true;
         jumpCount = 0;
         waitingToEndTurn = false;
-        hasLandedAfterThirdJump = false;
+        hasLandedAfterMaxJump = false;
         jumpInitiated = false;
         isInAir = false;
+
+        // Consome turnos dos power ups
+        for (int i = activeJumpPowerUps.Count - 1; i >= 0; i--)
+        {
+            var p = activeJumpPowerUps[i];
+            p.turnsLeft--;
+            if (p.turnsLeft <= 0)
+                activeJumpPowerUps.RemoveAt(i);
+            else
+                activeJumpPowerUps[i] = p;
+        }
+
+        Debug.Log($"{gameObject.name} começou o turno com {MaxJumps} pulos.");
     }
 
     public void EndTurn()
     {
         // Desativa controle do jogador
         isActive = false;
-        horizontalInput = 0f;
+        //horizontalInput = 0f;
         rb.linearVelocity = new Vector2(0f, rb.linearVelocity.y);
     }
 
+    public void AddJumpPowerUp(int extraJumps, int duration)
+    {
+        activeJumpPowerUps.Add((extraJumps, duration));
+    }
     private void OnDrawGizmosSelected()
     {
         // Gizmo para debug da área de detecção do chão

@@ -2,16 +2,16 @@ using UnityEngine;
 
 public class PowerUpColetavel : MonoBehaviour
 {
-    void OnTriggerEnter2D(Collider2D col)
-    {
-        ActivatePowerUp();
-    }
+    [SerializeField] private JumpPowerUp powerUp;
 
-    void ActivatePowerUp()
+    private void OnTriggerEnter2D(Collider2D col)
     {
-        // Implementar efeito do power-up aqui
-        Debug.Log("Power-up ativado!");
-        // Destrói o power-up após ser coletado
-        Destroy(gameObject);
+        var player = col.GetComponent<PlayerMovement>();
+        if (player != null)
+        {
+            powerUp.Apply(player.gameObject);
+            Debug.Log("Power-up de pulo coletado!");
+            Destroy(gameObject);
+        }
     }
 }
