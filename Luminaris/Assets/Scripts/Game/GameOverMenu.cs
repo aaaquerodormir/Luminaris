@@ -5,29 +5,30 @@ public class GameOverMenu : MonoBehaviour
 {
     [SerializeField] private GameManager gameManager;
     [SerializeField] private string mainMenuScene = "MainMenu";
-    [SerializeField] private GameObject confirmacaoPanel;
+    [SerializeField] private GameObject confirmationUI;
 
-    private System.Action acaoConfirmada;
+    private System.Action confirmedAction;
 
-    public void TentarNovamente()
+    public void TryAgain()
     {
-        gameManager.TentarNovamente();
+        // Botão "Tentar Novamente"
+        gameManager.TryAgain();
     }
 
-    public void VoltarMenuPrincipal()
+    public void ReturnToMainMenu()
     {
-        // Mostra o painel de confirmação antes de sair
-        AbrirConfirmacao(() =>
+        // Mostra confirmação antes de voltar ao menu
+        OpenConfirmation(() =>
         {
             Time.timeScale = 1f;
             SceneManager.LoadScene(mainMenuScene);
         });
     }
 
-    public void SairDoJogo()
+    public void QuitGame()
     {
-        // Mostra o painel de confirmação antes de sair
-        AbrirConfirmacao(() =>
+        // Mostra confirmação antes de sair
+        OpenConfirmation(() =>
         {
 #if UNITY_EDITOR
             UnityEditor.EditorApplication.isPlaying = false;
@@ -37,21 +38,21 @@ public class GameOverMenu : MonoBehaviour
         });
     }
 
-    private void AbrirConfirmacao(System.Action acao)
+    private void OpenConfirmation(System.Action action)
     {
-        confirmacaoPanel.SetActive(true);
-        acaoConfirmada = acao;
+        confirmationUI.SetActive(true);
+        confirmedAction = action;
     }
 
-    public void Confirmar()
+    public void Confirm()
     {
-        confirmacaoPanel.SetActive(false);
-        acaoConfirmada?.Invoke();
+        confirmationUI.SetActive(false);
+        confirmedAction?.Invoke();
     }
 
-    public void Cancelar()
+    public void Cancel()
     {
-        confirmacaoPanel.SetActive(false);
-        acaoConfirmada = null;
+        confirmationUI.SetActive(false);
+        confirmedAction = null;
     }
 }

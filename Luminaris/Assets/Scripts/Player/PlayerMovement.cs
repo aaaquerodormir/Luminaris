@@ -63,7 +63,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        if (!isActive) return; // 🔒 só o player ativo pode processar input
+        if (!isActive) return; // só o player ativo pode processar input
 
         horizontalInput = moveAction.action.ReadValue<Vector2>().x;
         bool grounded = IsGrounded();
@@ -77,22 +77,43 @@ public class PlayerMovement : MonoBehaviour
         {
             isInAir = false;
 
-            // ⚠️ Removido o jumpCount++ daqui para não contar duas vezes
             if (jumpInitiated)
+            {
                 jumpInitiated = false;
+
+                // 🔥 Se já usou todos os pulos, marca para encerrar
+                if (jumpCount >= MaxJumps)
+                {
+                    waitingToEndTurn = true;
+
+                    // Se já está no chão ao pousar → troca de turno imediatamente
+                    if (!hasLandedAfterMaxJump)
+                    {
+                        hasLandedAfterMaxJump = true;
+                        TurnControl.Instance.EndTurnIfReady();
+                    }
+                }
+            }
         }
 
-        // Encerramento de turno
+        // Encerramento de turno (segurança extra caso já estivesse no chão)
         if (waitingToEndTurn)
         {
             if (grounded && !hasLandedAfterMaxJump)
             {
                 hasLandedAfterMaxJump = true;
+                rb.linearVelocity = Vector2.zero; // 🔥 trava o movimento imediatamente
                 TurnControl.Instance.EndTurnIfReady();
+            }
+            else if (!grounded && !hasLandedAfterMaxJump)
+            {
+                // ainda deixa mexer no ar mesmo no último pulo
+                rb.linearVelocity = new Vector2(horizontalInput * moveSpeed, rb.linearVelocity.y);
             }
             else
             {
-                rb.linearVelocity = new Vector2(horizontalInput * moveSpeed, rb.linearVelocity.y);
+                // já pousou, não mexe mais
+                rb.linearVelocity = new Vector2(0f, rb.linearVelocity.y);
             }
             return;
         }
@@ -119,7 +140,7 @@ public class PlayerMovement : MonoBehaviour
         if (lastOnGroundTime > 0 && lastPressedJumpTime > 0 && jumpCount < MaxJumps && !waitingToEndTurn)
             Jump();
 
-        // Movimento horizontal
+        // Movimento horizontal normal
         if (!waitingToEndTurn || (waitingToEndTurn && !hasLandedAfterMaxJump))
             rb.linearVelocity = new Vector2(horizontalInput * moveSpeed, rb.linearVelocity.y);
 
@@ -160,25 +181,7 @@ public class PlayerMovement : MonoBehaviour
         lastPressedJumpTime = 0;
 
         jumpCount++; // ✅ agora só conta pulo aqui
-
-        // Se já atingiu o limite → prepara para encerrar turno
-        if (jumpCount >= MaxJumps)
-        {
-            waitingToEndTurn = true;
-            hasLandedAfterMaxJump = false;
-        }
-
     }
-
-    //private void Jump()
-    //{
-    //    rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
-
-    //    // Reseta variáveis de controle
-    //    lastOnGroundTime = 0;
-    //    lastPressedJumpTime = 0;
-    //    isJumpCut = false;
-    //}
 
     public bool IsGrounded()
     {
@@ -198,19 +201,9 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    //public void StartTurn()
-    //{
-    //    // Reseta variáveis ao iniciar turno
-    //    isActive = true;
-    //    jumpCount = 0;
-    //    waitingToEndTurn = false;
-    //    hasLandedAfterThirdJump = false;
-    //    jumpInitiated = false;
-    //    isInAir = false;
-    //}
-
     public void StartTurn()
     {
+        // Reseta variáveis ao iniciar turno
         isActive = true;
         jumpCount = 0;
         waitingToEndTurn = false;
@@ -236,7 +229,6 @@ public class PlayerMovement : MonoBehaviour
     {
         // Desativa controle do jogador
         isActive = false;
-        //horizontalInput = 0f;
         rb.linearVelocity = new Vector2(0f, rb.linearVelocity.y);
     }
 
@@ -244,6 +236,7 @@ public class PlayerMovement : MonoBehaviour
     {
         activeJumpPowerUps.Add((extraJumps, duration));
     }
+
     private void OnDrawGizmosSelected()
     {
         // Gizmo para debug da área de detecção do chão

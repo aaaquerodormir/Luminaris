@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1184877703159799833}
   - component: {fileID: 6439115748960710005}
-  - component: {fileID: 8664671085059449159}
   - component: {fileID: 8312480430499578227}
+  - component: {fileID: -258644934399997119}
   m_Layer: 0
   m_Name: PowerUpPulo
   m_TagString: Untagged
@@ -89,19 +89,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &8664671085059449159
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3537007080289609497}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 634c7d14c21117e47892cb2938826340, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  powerUp: {fileID: 11400000, guid: 0bb82da0db5e7a14aa32b9d1decc96c5, type: 2}
 --- !u!61 &8312480430499578227
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -148,3 +135,16 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &-258644934399997119
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3537007080289609497}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 634c7d14c21117e47892cb2938826340, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  powerModificador: {fileID: 11400000, guid: 0bb82da0db5e7a14aa32b9d1decc96c5, type: 2}
