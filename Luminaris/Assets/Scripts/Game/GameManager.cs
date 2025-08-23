@@ -9,57 +9,59 @@ public class GameManager : MonoBehaviour
     [SerializeField] private PlayerRespawn player2;
 
     [Header("Lava")]
-    [SerializeField] private LavaRise lava; // referência para resetar lava
+    [SerializeField] private LavaRise lava;
 
     [Header("Controle de Turnos")]
-    [SerializeField] private TurnControl turnControl; // referência para resetar turnos
+    [SerializeField] private TurnControl turnControl;
 
     [Header("UI")]
-    [SerializeField] private GameObject gameOverUI; // painel de Game Over
+    [SerializeField] private GameObject gameOverUI;
+    [SerializeField] private PauseMenu pauseMenu; // referência direta ao pause
 
     private bool isGameOver = false;
-    public bool gameOverAtivo => isGameOver;
+    public bool IsGameOverActive => isGameOver;
+
     private void Awake()
     {
         // Singleton para garantir que só exista 1 GameManager
-        if (Instance == null)
-            Instance = this;
-        else
-            Destroy(gameObject);
+        if (Instance == null) Instance = this;
+        else Destroy(gameObject);
     }
 
     private void OnEnable()
     {
-        // Escuta eventos de morte de jogador e fim de turno
+        // Escuta eventos
         PlayerRespawn.OnPlayerDied += ShowGameOver;
         TurnControl.OnTurnEnded += HandleTurnEnd;
     }
 
     private void OnDisable()
     {
-        // Remove inscrições de eventos
+        // Remove eventos
         PlayerRespawn.OnPlayerDied -= ShowGameOver;
         TurnControl.OnTurnEnded -= HandleTurnEnd;
     }
 
     private void HandleTurnEnd()
     {
-        // Aqui pode ser adicionada lógica extra (ex: acelerar lava com o tempo)
         Debug.Log("Turno finalizado!");
     }
 
     public void ShowGameOver()
     {
         if (isGameOver) return;
-
         isGameOver = true;
+
+        // Força desligar o pause inteiro
+        if (pauseMenu != null)
+            pauseMenu.gameObject.SetActive(false);
 
         // Ativa tela de Game Over e pausa o jogo
         gameOverUI.SetActive(true);
         Time.timeScale = 0f;
     }
 
-    public void TentarNovamente()
+    public void TryAgain()
     {
         // Fecha tela de Game Over e retoma tempo
         gameOverUI.SetActive(false);
@@ -70,7 +72,7 @@ public class GameManager : MonoBehaviour
         player2.Respawn();
 
         // Reseta lava
-        //lava.ResetLava();
+        lava.ResetLava();
 
         // Reseta turnos
         turnControl.ResetTurns();

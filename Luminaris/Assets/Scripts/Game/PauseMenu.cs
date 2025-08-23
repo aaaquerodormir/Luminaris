@@ -3,44 +3,64 @@ using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
-    [SerializeField] private GameObject pauseUI;
-    [SerializeField] private GameObject opcoesUI;
+    [Header("Referências de UI")]
+    [SerializeField] private GameObject pauseUI;   // Painel do pause
+    [SerializeField] private GameObject optionsUI; // Subpainel de opções
 
-    private bool jogoPausado = false;
+    private bool isPaused = false;
 
-    void Update()
+    private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) && !GameManager.Instance.gameOverAtivo)
+        // Só permite pausar se não estiver em Game Over
+        if (Input.GetKeyDown(KeyCode.Escape) && !GameManager.Instance.IsGameOverActive)
         {
-            if (jogoPausado) Continuar();
-            else Pausar();
+            if (isPaused) Resume();
+            else Pause();
         }
     }
 
-    public void Pausar()
+    public void Pause()
     {
+        if (GameManager.Instance.IsGameOverActive) return; //  trava pause durante Game Over
+
         pauseUI.SetActive(true);
-        opcoesUI.SetActive(false);
+        if (optionsUI != null) optionsUI.SetActive(false);
+
         Time.timeScale = 0f;
-        jogoPausado = true;
+        isPaused = true;
     }
 
-    public void Continuar()
+    public void Resume()
     {
         pauseUI.SetActive(false);
+        if (optionsUI != null) optionsUI.SetActive(false);
+
         Time.timeScale = 1f;
-        jogoPausado = false;
+        isPaused = false;
     }
 
-    public void AbrirOpcoes()
+    public void OpenOptions()
     {
-        pauseUI.SetActive(false);
-        opcoesUI.SetActive(true);
+        if (optionsUI != null) optionsUI.SetActive(true);
     }
 
-    public void VoltarAoMenu()
+    public void CloseOptions()
+    {
+        if (optionsUI != null) optionsUI.SetActive(false);
+    }
+
+    public void ReturnToMenu()
     {
         Time.timeScale = 1f;
         SceneManager.LoadScene("MainMenu");
+    }
+
+    public void QuitGame()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
     }
 }
