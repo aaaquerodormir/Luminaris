@@ -18,13 +18,22 @@ public class LavaRise : MonoBehaviour
     private int turnsLeft = 0;
 
 
-    private Vector3 startPos; // posição inicial da lava
+    [SerializeField] private Vector3 startPos;
 
-    private void Start()
+    private void Awake()
     {
-        //Salva posição inicial para reset
-       startPos = transform.position;
+        // Se não setar manualmente no Inspector, pega a posição atual da cena
+        if (startPos == Vector3.zero)
+            startPos = transform.position;
     }
+
+    //private void Start()
+    //{
+    //    //Mudança: salvar a posição inicial e forçar a lava a começar exatamente dali
+
+    //    startPos = transform.position;
+    //    transform.position = startPos;
+    //}
 
     //Reseta lava para posição inicial
     public void ResetLava()

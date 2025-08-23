@@ -81,27 +81,39 @@ public class PlayerMovement : MonoBehaviour
             {
                 jumpInitiated = false;
 
-                // 🔥 Só marca fim de turno depois de aterrissar e já ter usado todos os pulos
+                // 🔥 Se já usou todos os pulos, marca para encerrar
                 if (jumpCount >= MaxJumps)
                 {
                     waitingToEndTurn = true;
-                    hasLandedAfterMaxJump = false;
+
+                    // Se já está no chão ao pousar → troca de turno imediatamente
+                    if (!hasLandedAfterMaxJump)
+                    {
+                        hasLandedAfterMaxJump = true;
+                        TurnControl.Instance.EndTurnIfReady();
+                    }
                 }
             }
         }
 
-        // Encerramento de turno
+        // Encerramento de turno (segurança extra caso já estivesse no chão)
         if (waitingToEndTurn)
         {
             if (grounded && !hasLandedAfterMaxJump)
             {
                 hasLandedAfterMaxJump = true;
+                rb.linearVelocity = Vector2.zero; // 🔥 trava o movimento imediatamente
                 TurnControl.Instance.EndTurnIfReady();
             }
-            else
+            else if (!grounded && !hasLandedAfterMaxJump)
             {
                 // ainda deixa mexer no ar mesmo no último pulo
                 rb.linearVelocity = new Vector2(horizontalInput * moveSpeed, rb.linearVelocity.y);
+            }
+            else
+            {
+                // já pousou, não mexe mais
+                rb.linearVelocity = new Vector2(0f, rb.linearVelocity.y);
             }
             return;
         }
