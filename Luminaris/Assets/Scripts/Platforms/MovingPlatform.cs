@@ -1,18 +1,23 @@
 using UnityEngine;
 
-public class MovingPlatform : MonoBehaviour
+public class MovingPlatform : MonoBehaviour, IResettable
 {
     public Transform pointA;
     public Transform pointB;
     public float moveSpeed;
-    Vector3 targetPos;
+
+    private Vector3 targetPos;
+    private Vector3 startPos;
 
     private void Start()
     {
+        startPos = transform.position;
         targetPos = pointB.position;
+
+        // Registra no GameManager
+        GameManager.Instance.RegisterResettable(this);
     }
 
-    // Update is called once per frame
     private void Update()
     {
         if (Vector2.Distance(transform.position, pointA.position) < 0.05f)
@@ -20,7 +25,7 @@ public class MovingPlatform : MonoBehaviour
             targetPos = pointB.position;
         }
 
-        if (Vector2.Distance(transform.position, pointB.position)< 0.05f)
+        if (Vector2.Distance(transform.position, pointB.position) < 0.05f)
         {
             targetPos = pointA.position;
         }
@@ -30,7 +35,7 @@ public class MovingPlatform : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player")) 
+        if (collision.CompareTag("Player"))
         {
             collision.transform.parent = this.transform;
         }
@@ -42,5 +47,12 @@ public class MovingPlatform : MonoBehaviour
         {
             collision.transform.parent = null;
         }
+    }
+
+    // Reset da plataforma
+    public void ResetState()
+    {
+        transform.position = startPos;
+        targetPos = pointB.position;
     }
 }

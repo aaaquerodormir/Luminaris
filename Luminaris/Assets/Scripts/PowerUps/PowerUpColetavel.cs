@@ -1,24 +1,34 @@
 ﻿using UnityEngine;
 
-public class PowerUpColetavel : MonoBehaviour
+public class PowerUpColetavel : MonoBehaviour, IResettable
 {
     [SerializeField] private PowerUpModificador powerModificador;
 
+    private Vector3 startPos;
+    private bool collected = false;
+
+    private void Start()
+    {
+        startPos = transform.position;
+
+        GameManager.Instance.RegisterResettable(this);  // Registra no GameManager para ser resetado
+    }
+
     private void OnTriggerEnter2D(Collider2D col)
     {
-        if (powerModificador == null) return;
-
-        // Se for PowerUp de pulo → aplica no jogador que encostou
-        if (powerModificador is JumpPowerUp)
+        if (col.CompareTag("Player") && powerModificador != null && !collected)
         {
             powerModificador.Activate(col.gameObject);
+            collected = true;
+            gameObject.SetActive(false);
         }
-        else
-        {
-            // Caso contrário (ex: Lava) → ativa sem precisar do jogador
-            powerModificador.Activate(null);
-        }
+    }
 
-        Destroy(gameObject);
+    // Restaura o estado inicial
+    public void ResetState()
+    {
+        collected = false;
+        transform.position = startPos;
+        gameObject.SetActive(true);
     }
 }
