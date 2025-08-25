@@ -61,7 +61,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -72,10 +72,10 @@ TextureImporter:
   compressionQuality: 50
   spriteMode: 2
   spriteExtrude: 1
-  spriteMeshType: 1
+  spriteMeshType: 0
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 16
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -96,10 +96,10 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
+    maxTextureSize: 256
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -140,10 +140,10 @@ TextureImporter:
       name: Luna_Pulando_Sheet_0
       rect:
         serializedVersion: 2
-        x: 1
+        x: 0
         y: 0
-        width: 18
-        height: 18
+        width: 19
+        height: 19
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -162,9 +162,9 @@ TextureImporter:
       name: Luna_Pulando_Sheet_1
       rect:
         serializedVersion: 2
-        x: 20
+        x: 19
         y: 0
-        width: 18
+        width: 19
         height: 19
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -294,10 +294,10 @@ TextureImporter:
       name: Luna_Pulando_Sheet_7
       rect:
         serializedVersion: 2
-        x: 134
+        x: 133
         y: 0
-        width: 18
-        height: 18
+        width: 19
+        height: 19
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -316,10 +316,10 @@ TextureImporter:
       name: Luna_Pulando_Sheet_8
       rect:
         serializedVersion: 2
-        x: 153
+        x: 152
         y: 0
-        width: 18
-        height: 18
+        width: 19
+        height: 19
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -338,7 +338,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: a48489210f9ceda4491ca91fe7ad436f
     internalID: 0
     vertices: []
     indices: 
@@ -347,7 +347,16 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Luna_Pulando_Sheet_0: 1944651592413551173
+      Luna_Pulando_Sheet_1: -2167266757916568340
+      Luna_Pulando_Sheet_2: 4232934354881892148
+      Luna_Pulando_Sheet_3: 505286164742010484
+      Luna_Pulando_Sheet_4: 1413148548859231431
+      Luna_Pulando_Sheet_5: -7445670748406066987
+      Luna_Pulando_Sheet_6: -1966594224801708836
+      Luna_Pulando_Sheet_7: 6196310675129731248
+      Luna_Pulando_Sheet_8: 4895916242353721892
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
