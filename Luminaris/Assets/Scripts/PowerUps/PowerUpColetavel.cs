@@ -23,6 +23,7 @@ public class PowerUpColetavel : MonoBehaviour, IResettable
             collected = true;
             GameObject temp=Instantiate(feedBackTextualPrefab, gameObject.transform);
             temp.transform.SetParent(null);
+            Destroy(temp, 1.5f);
             gameObject.SetActive(false);
         }
     }
