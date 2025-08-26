@@ -2,6 +2,7 @@
 
 public class PowerUpColetavel : MonoBehaviour, IResettable
 {
+    [SerializeField] GameObject feedBackTextualPrefab;
     [SerializeField] private PowerUpModificador powerModificador;
 
     private Vector3 startPos;
@@ -20,6 +21,8 @@ public class PowerUpColetavel : MonoBehaviour, IResettable
         {
             powerModificador.Activate(col.gameObject);
             collected = true;
+            GameObject temp=Instantiate(feedBackTextualPrefab, gameObject.transform);
+            temp.transform.SetParent(null);
             gameObject.SetActive(false);
         }
     }
