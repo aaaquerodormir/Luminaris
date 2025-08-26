@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 public class GameOverMenu : MonoBehaviour
 {
     [SerializeField] private GameManager gameManager;
-    [SerializeField] private string mainMenuScene = "MainMenu";
+    [SerializeField] private string mainMenuScene = "Menu";
     [SerializeField] private GameObject confirmationUI;
 
     private System.Action confirmedAction;
