@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6134236273318429275}
   - component: {fileID: 907524868098628533}
   m_Layer: 0
-  m_Name: P_StarLuma
+  m_Name: P_StarLuna
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4780,7 +4780,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: ecdd71c0eb4746b4b9171c08a1085e4c, type: 2}
+  - {fileID: 2100000, guid: 7a4f436024d7ee548b4a0075106eeaa4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
