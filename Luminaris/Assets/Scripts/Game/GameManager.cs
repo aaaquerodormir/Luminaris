@@ -84,6 +84,10 @@ public class GameManager : MonoBehaviour
         // Reseta objetos registrados
         session.ResetSession();
 
+        // Reativa o PauseMenu para voltar a funcionar normalmente
+        if (pauseMenu != null)
+            pauseMenu.gameObject.SetActive(true);
+
         isGameOver = false;
     }
 }

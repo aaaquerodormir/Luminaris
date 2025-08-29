@@ -7,7 +7,8 @@ public class JumpPowerUp : PowerUpModificador
 
     public override void Activate(GameObject target)
     {
-        var player = target.GetComponent<PlayerMovement>();
+        PlayerMovement player = target.GetComponent<PlayerMovement>();
+
         if (player != null)
         {
             player.AddJumpPowerUp(extraJumps, durationTurns);
