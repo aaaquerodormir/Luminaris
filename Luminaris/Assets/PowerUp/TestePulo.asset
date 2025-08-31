@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c88749ed310ccae4bb16f47ce4346486, type: 3}
   m_Name: TestePulo
   m_EditorClassIdentifier: 
-  durationTurns: 2
-  extraJumps: 999
+  durationTurns: 1
+  extraJumps: 5

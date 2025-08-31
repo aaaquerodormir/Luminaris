@@ -3,60 +3,44 @@ using System.Collections;
 
 public class PlataformaEspinhos : MonoBehaviour
 {
-    public int damage = 1;
-    public float animationInterval = 2f; // pausa
+    [SerializeField] private int damage = 1;
+    [SerializeField] private float cycleInterval = 2f; // Tempo total do ciclo (animação + pausa)
+    [SerializeField] private float initialDelay = 0f;  // Pausa inicial para desincronizar
+
     private Animator animator;
 
     private void Start()
     {
         animator = GetComponent<Animator>();
-        StartCoroutine(PlayAnimationWithPauseLoop());
+        StartCoroutine(AnimationLoop());
     }
 
-    private IEnumerator PlayAnimationWithPauseLoop()
+    private IEnumerator AnimationLoop()
     {
+        if (initialDelay > 0f)
+            yield return new WaitForSeconds(initialDelay);
+
         while (true)
         {
-            animator.Play("Espinhos", 0, 0f); // Toca a animacao do inicio
-            yield return new WaitForSeconds(GetAnimationClipLength("Espinhos"));
-            yield return new WaitForSeconds(animationInterval); // Espera entre as anima��es
+            animator.Play("Espinhos", 0, 0f); 
+            yield return new WaitForSeconds(cycleInterval);
         }
-    }
-
-    private float GetAnimationClipLength(string clipName)
-    {
-        foreach (var clip in animator.runtimeAnimatorController.animationClips)
-        {
-            if (clip.name == clipName)
-            {
-                return clip.length;
-            }
-        }
-
-        Debug.LogWarning("Animation clip not found: " + clipName);
-        return 1f;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
-        {
+        if (collision.CompareTag("Player"))
             HandlePlayerBounce(collision.gameObject);
-        }
 
         var respawn = collision.GetComponent<PlayerRespawn>();
         if (respawn != null)
-        {
             respawn.Die();
-        }
     }
 
     private void HandlePlayerBounce(GameObject player)
     {
-        Rigidbody2D rb = player.GetComponent<Rigidbody2D>();
+        var rb = player.GetComponent<Rigidbody2D>();
         if (rb)
-        {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0f);
-        }
     }
 }
