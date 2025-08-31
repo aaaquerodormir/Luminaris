@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: TestePulo
   m_EditorClassIdentifier: 
   durationTurns: 2
-  extraJumps: 2
+  extraJumps: 999
