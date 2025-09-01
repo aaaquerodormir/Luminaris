@@ -3,7 +3,6 @@ using System.Collections;
 
 public class PlataformaEspinhos : MonoBehaviour
 {
-    [SerializeField] private int damage = 1;
     [SerializeField] private float cycleInterval = 2f; // Tempo total do ciclo (animação + pausa)
     [SerializeField] private float initialDelay = 0f;  // Pausa inicial para desincronizar
 

@@ -175,7 +175,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a222129dafa93c649a314e9f11eb42c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fallWait: 0.2
+  fallWait: 0.4
   respawnWait: 1.5
   invisibleWait: 0.3
   shakeDuration: 0.3

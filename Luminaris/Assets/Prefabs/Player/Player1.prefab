@@ -131,7 +131,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3839698034830718357
 Transform:
   m_ObjectHideFlags: 0
@@ -163,6 +163,7 @@ GameObject:
   - component: {fileID: 6179877032678947836}
   - component: {fileID: 728962970084804015}
   - component: {fileID: 255631456070546370}
+  - component: {fileID: 5422800433239754117}
   m_Layer: 0
   m_Name: Player1
   m_TagString: Player
@@ -232,8 +233,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 7f82990d4ad142c4f8086bf7415b4451, type: 3}
+  m_SortingOrder: 1
+  m_Sprite: {fileID: -7592784740955137085, guid: c8b59cfbe66e4c44da9748c457038c81, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -257,12 +258,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 7077229418032609283}
+  anim: {fileID: 5422800433239754117}
   moveAction: {fileID: -3754844944467460052, guid: 03f621bcf66b04046a24ebfccf5c71b6, type: 3}
   jumpAction: {fileID: 6508505653016678817, guid: 03f621bcf66b04046a24ebfccf5c71b6, type: 3}
   moveSpeed: 3
   horizontalInput: 0
   baseMaxJumps: 3
-  jumpForce: 5
+  jumpForce: 7.5
   coyoteTime: 0.1
   jumpBufferTime: 0.1
   jumpCutMultiplier: 0.5
@@ -341,7 +343,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1.125}
+    oldSize: {x: 1.1875, y: 1.1875}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -386,13 +388,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3368453532942173862}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4ecb0615f8e1536458b3247c2896a87d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   pm: {fileID: 2596292194444357674}
-  mysticTrailPrefab: {fileID: 0}
+  mysticTrailPrefab: {fileID: 6134236273318429275, guid: 61f8cc856722649429fbdfe041684236, type: 3}
 --- !u!114 &255631456070546370
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -407,6 +409,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementScript: {fileID: 2596292194444357674}
   feedBackTextualPrefab: {fileID: 7496298807150771853, guid: fd9b552954abb39499bceec3cad7a964, type: 3}
+--- !u!95 &5422800433239754117
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3368453532942173862}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ad4e9b3ec0bfca44595c49893aa17388, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &6241849955727619075
 GameObject:
   m_ObjectHideFlags: 0
@@ -435,7 +459,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6241849955727619075}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -562,7 +586,7 @@ MonoBehaviour:
   IgnoreTimeScale: 0
   WorldUpOverride: {fileID: 0}
   ChannelMask: 65531
-  UpdateMethod: 2
+  UpdateMethod: 0
   BlendUpdateMethod: 1
   LensModeOverride:
     Enabled: 0
