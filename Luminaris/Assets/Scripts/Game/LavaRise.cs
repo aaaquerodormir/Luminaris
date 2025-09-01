@@ -10,36 +10,39 @@ public class LavaRise : MonoBehaviour
     [SerializeField] private Transform player1;
     [SerializeField] private Transform player2;
 
-    [SerializeField] private Vector3 startPos;
-
     private float speedModifier = 1f;
     private int turnsLeft = 0;
 
-    private void Awake()
-    {
-        if (startPos == Vector3.zero)
-            startPos = transform.position;
-    }
+    private float safeZoneHeight = -Mathf.Infinity;
 
-    private void Start()
+    public void SetSafeZone(float height)
     {
-        startPos = transform.position;
-        transform.position = startPos;
-    }
-
-    public void ResetLava()
-    {
-        transform.position = startPos;
-        speedModifier = 1f;
-        turnsLeft = 0;
+        safeZoneHeight = height;
     }
 
     private void Update()
     {
         if (player1 == null || player2 == null) return;
 
+        // Lava sobe continuamente
         float dynamicSpeed = baseSpeed * speedMultiplier * speedModifier;
         transform.position += Vector3.up * dynamicSpeed * Time.deltaTime;
+    }
+
+    public void ResetLava(Checkpoint checkpoint)
+    {
+        safeZoneHeight = checkpoint.LavaSafeHeight;
+        transform.position = new Vector3(transform.position.x, safeZoneHeight, transform.position.z);
+
+        speedModifier = 1f;
+        turnsLeft = 0;
+    }
+
+    public void ResetLavaState()
+    {
+        safeZoneHeight = -Mathf.Infinity;
+        speedModifier = 1f;
+        turnsLeft = 0;
     }
 
     public void AddSpeedModifier(float modifier, int durationTurns)

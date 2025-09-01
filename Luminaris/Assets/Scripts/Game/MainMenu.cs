@@ -7,20 +7,35 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private GameObject painelPrincipal;
     [SerializeField] private GameObject painelOpcoes;
     [SerializeField] private GameObject painelCreditos;
+    [SerializeField] private GameObject botaoContinuar; // botão "Continuar"
 
     [Header("Configurações")]
     [SerializeField] private string gameSceneName = "Game"; // Nome da cena do jogo
 
     private void Start()
     {
-        // Sempre começa mostrando o menu principal
         MostrarPainelPrincipal();
+
+        // Só habilita o botão Continuar se existir save
+        if (botaoContinuar != null)
+            botaoContinuar.SetActive(SaveSystem.HasSave());
     }
 
-    public void Jogar()
+    public void NovoJogo()
     {
+        // Apaga save e começa do zero
+        SaveSystem.DeleteSave();
         Time.timeScale = 1f;
         SceneManager.LoadScene(gameSceneName);
+    }
+
+    public void ContinuarJogo()
+    {
+        if (SaveSystem.HasSave())
+        {
+            Time.timeScale = 1f;
+            SceneManager.LoadScene(gameSceneName);
+        }
     }
 
     public void AbrirOpcoes()
