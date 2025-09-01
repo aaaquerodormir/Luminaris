@@ -7,6 +7,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Rigidbody2D rb;
 
     private bool isFacingRight = false;
+    public Animator anim;
 
     [Header("Input Actions")]
     [SerializeField] private InputActionReference moveAction;
@@ -145,6 +146,7 @@ public class PlayerMovement : MonoBehaviour
             rb.linearVelocity = new Vector2(horizontalInput * moveSpeed, rb.linearVelocity.y);
 
         Flip();
+        handleAnimations();
     }
 
     private void FixedUpdate()
@@ -187,6 +189,11 @@ public class PlayerMovement : MonoBehaviour
     {
         // Checa colisão no chão
         return Physics2D.OverlapBox(groundCheckPos.position, groundCheckSize, 0, groundLayer);
+    }
+    void handleAnimations()
+    {
+        anim.SetBool("isIdle", Mathf.Abs(horizontalInput) < .1f && IsGrounded());
+        anim.SetBool("isWalking", Mathf.Abs(horizontalInput) >= .1f && IsGrounded());
     }
 
     private void Flip()
