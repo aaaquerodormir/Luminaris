@@ -10,6 +10,20 @@ public class Checkpoint : MonoBehaviour
     public Vector3 RespawnPosition => respawnPoint.position;
     public float LavaSafeHeight => respawnPoint.position.y - lavaOffset;
 
+    private bool activated = false;
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (activated) return;
+
+        if (other.CompareTag("Player"))
+        {
+            activated = true;
+            GameManager.Instance.ReachCheckpoint(transform);
+            Debug.Log($"Checkpoint {checkpointIndex} ativado por {other.name}");
+        }
+    }
+
     private void OnDrawGizmos()
     {
         if (respawnPoint == null) return;

@@ -14,34 +14,33 @@ public class LavaRise : MonoBehaviour
     private int turnsLeft = 0;
 
     private float safeZoneHeight = -Mathf.Infinity;
-    private bool inSafeZone = false;
 
     public void SetSafeZone(float height)
     {
         safeZoneHeight = height;
-        transform.position = new Vector3(transform.position.x, height, transform.position.z);
-        inSafeZone = true;
     }
 
     private void Update()
     {
         if (player1 == null || player2 == null) return;
 
-        if (inSafeZone)
-        {
-            if (player1.position.y > safeZoneHeight && player2.position.y > safeZoneHeight)
-                inSafeZone = false;
-            return;
-        }
-
+        // Lava sobe continuamente
         float dynamicSpeed = baseSpeed * speedMultiplier * speedModifier;
         transform.position += Vector3.up * dynamicSpeed * Time.deltaTime;
     }
 
-    public void ResetLava()
+    public void ResetLava(Checkpoint checkpoint)
+    {
+        safeZoneHeight = checkpoint.LavaSafeHeight;
+        transform.position = new Vector3(transform.position.x, safeZoneHeight, transform.position.z);
+
+        speedModifier = 1f;
+        turnsLeft = 0;
+    }
+
+    public void ResetLavaState()
     {
         safeZoneHeight = -Mathf.Infinity;
-        inSafeZone = false;
         speedModifier = 1f;
         turnsLeft = 0;
     }

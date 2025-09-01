@@ -31,8 +31,13 @@ public static class SaveSystem
         else
         {
             Debug.LogWarning("Nenhum save encontrado!");
-            return new SaveData();
+            return null;
         }
+    }
+
+    public static bool HasSave()
+    {
+        return File.Exists(savePath);
     }
 
     public static void DeleteSave()
@@ -41,3 +46,4 @@ public static class SaveSystem
             File.Delete(savePath);
     }
 }
+

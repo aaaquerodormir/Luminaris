@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
     public bool IsGameOverActive => isGameOver;
 
     private GameSession session;
+    private Checkpoint lastCheckpoint;
 
     private void Awake()
     {
@@ -72,7 +73,10 @@ public class GameManager : MonoBehaviour
 
         player1.Respawn();
         player2.Respawn();
-        lava.ResetLava();
+
+        if (lastCheckpoint != null)
+            lava.ResetLava(lastCheckpoint);
+
         turnControl.ResetTurns();
         session.ResetSession();
 
@@ -85,11 +89,12 @@ public class GameManager : MonoBehaviour
     public void ReachCheckpoint(Transform checkpointTransform)
     {
         var checkpoint = checkpointTransform.GetComponent<Checkpoint>();
+        lastCheckpoint = checkpoint;
 
         SaveData data = new SaveData
         {
             checkpointIndex = checkpoint.Index,
-            difficulty = SelectedDifficulty // assumindo que já está no seu GameManager
+            difficulty = SelectedDifficulty
         };
         SaveSystem.SaveGame(data);
 
@@ -97,7 +102,6 @@ public class GameManager : MonoBehaviour
         Debug.Log("Progresso salvo no checkpoint " + checkpoint.Index);
     }
 
-    // Se quiser armazenar dificuldade no GameManager
     public GameManager.Difficulty SelectedDifficulty { get; private set; } = Difficulty.Normal;
     public enum Difficulty { Easy, Normal, Hard }
 

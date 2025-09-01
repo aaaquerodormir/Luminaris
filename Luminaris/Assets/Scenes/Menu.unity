@@ -737,6 +737,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 977637306}
     m_Modifications:
+    - target: {fileID: 866289512141175806, guid: 7420f4d3b562e874b9c4b6c388bcb9dc, type: 3}
+      propertyPath: m_text
+      value: Novo Jogo
+      objectReference: {fileID: 0}
     - target: {fileID: 1073691232679174906, guid: 7420f4d3b562e874b9c4b6c388bcb9dc, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -745,7 +749,19 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 587904851}
+    - target: {fileID: 4821602255071259079, guid: 7420f4d3b562e874b9c4b6c388bcb9dc, type: 3}
+      propertyPath: m_Name
+      value: Novo Jogo
+      objectReference: {fileID: 0}
+    - target: {fileID: 5169262192957974091, guid: 7420f4d3b562e874b9c4b6c388bcb9dc, type: 3}
+      propertyPath: m_Name
+      value: Novo Jogo
+      objectReference: {fileID: 0}
     - target: {fileID: 6844281606652446234, guid: 7420f4d3b562e874b9c4b6c388bcb9dc, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 587904851}
+    - target: {fileID: 6850336156657746738, guid: 7420f4d3b562e874b9c4b6c388bcb9dc, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 587904851}
