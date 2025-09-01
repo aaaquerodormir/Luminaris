@@ -192,8 +192,13 @@ public class PlayerMovement : MonoBehaviour
     }
     void handleAnimations()
     {
-        anim.SetBool("isIdle", Mathf.Abs(horizontalInput) < .1f && IsGrounded());
-        anim.SetBool("isWalking", Mathf.Abs(horizontalInput) >= .1f && IsGrounded());
+        anim.SetBool("isJumping", rb.linearVelocity.y > .1f);
+        anim.SetBool("IsGrounded", IsGrounded()); 
+
+        anim.SetFloat("yVelocity", rb.linearVelocity.y);
+
+        anim.SetBool("isIdle", Mathf.Abs(horizontalInput) < .1f && IsGrounded());   
+        anim.SetBool("isWalking", Mathf.Abs(horizontalInput) >= .1f && IsGrounded()); 
     }
 
     private void Flip()
@@ -237,6 +242,10 @@ public class PlayerMovement : MonoBehaviour
         // Desativa controle do jogador
         isActive = false;
         rb.linearVelocity = new Vector2(0f, rb.linearVelocity.y);
+        anim.SetBool("isJumping", false);
+        anim.SetBool("isWalking", false);
+        anim.SetBool("isIdle", true);
+        anim.SetBool("IsGrounded", true);
     }
 
     public void AddJumpPowerUp(int extraJumps, int duration)
