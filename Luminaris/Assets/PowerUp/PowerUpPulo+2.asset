@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c88749ed310ccae4bb16f47ce4346486, type: 3}
-  m_Name: TestePulo
+  m_Name: PowerUpPulo+2
   m_EditorClassIdentifier: 
-  durationTurns: 2
-  extraJumps: 2
+  durationTurns: 1
+  extraJumps: 5

@@ -21,7 +21,8 @@ public class GameManager : MonoBehaviour
     private bool isGameOver = false;
     public bool IsGameOverActive => isGameOver;
 
-    private GameSession session; // lógica central de reset
+    private GameSession session;
+    private Checkpoint lastCheckpoint;
 
     private void Awake()
     {
@@ -48,7 +49,6 @@ public class GameManager : MonoBehaviour
         Debug.Log("Turno finalizado!");
     }
 
-    // Usado pelos objetos para se registrarem no reset
     public void RegisterResettable(IResettable obj)
     {
         session.RegisterResettable(obj);
@@ -71,23 +71,42 @@ public class GameManager : MonoBehaviour
         gameOverUI.SetActive(false);
         Time.timeScale = 1f;
 
-        // Reseta jogadores
         player1.Respawn();
         player2.Respawn();
 
-        // Reseta lava
-        lava.ResetLava();
+        if (lastCheckpoint != null)
+            lava.ResetLava(lastCheckpoint);
 
-        // Reseta turnos
         turnControl.ResetTurns();
-
-        // Reseta objetos registrados
         session.ResetSession();
 
-        // Reativa o PauseMenu para voltar a funcionar normalmente
         if (pauseMenu != null)
             pauseMenu.gameObject.SetActive(true);
 
         isGameOver = false;
+    }
+
+    public void ReachCheckpoint(Transform checkpointTransform)
+    {
+        var checkpoint = checkpointTransform.GetComponent<Checkpoint>();
+        lastCheckpoint = checkpoint;
+
+        SaveData data = new SaveData
+        {
+            checkpointIndex = checkpoint.Index,
+            difficulty = SelectedDifficulty
+        };
+        SaveSystem.SaveGame(data);
+
+        lava.SetSafeZone(checkpoint.LavaSafeHeight);
+        Debug.Log("Progresso salvo no checkpoint " + checkpoint.Index);
+    }
+
+    public GameManager.Difficulty SelectedDifficulty { get; private set; } = Difficulty.Normal;
+    public enum Difficulty { Easy, Normal, Hard }
+
+    public void SetDifficulty(int index)
+    {
+        SelectedDifficulty = (Difficulty)index;
     }
 }

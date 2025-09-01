@@ -7,6 +7,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Rigidbody2D rb;
 
     private bool isFacingRight = false;
+    public Animator anim;
 
     [Header("Input Actions")]
     [SerializeField] private InputActionReference moveAction;
@@ -145,6 +146,7 @@ public class PlayerMovement : MonoBehaviour
             rb.linearVelocity = new Vector2(horizontalInput * moveSpeed, rb.linearVelocity.y);
 
         Flip();
+        handleAnimations();
     }
 
     private void FixedUpdate()
@@ -188,6 +190,16 @@ public class PlayerMovement : MonoBehaviour
         // Checa colisão no chão
         return Physics2D.OverlapBox(groundCheckPos.position, groundCheckSize, 0, groundLayer);
     }
+    void handleAnimations()
+    {
+        anim.SetBool("isJumping", rb.linearVelocity.y > .1f);
+        anim.SetBool("IsGrounded", IsGrounded()); 
+
+        anim.SetFloat("yVelocity", rb.linearVelocity.y);
+
+        anim.SetBool("isIdle", Mathf.Abs(horizontalInput) < .1f && IsGrounded());   
+        anim.SetBool("isWalking", Mathf.Abs(horizontalInput) >= .1f && IsGrounded()); 
+    }
 
     private void Flip()
     {
@@ -230,6 +242,10 @@ public class PlayerMovement : MonoBehaviour
         // Desativa controle do jogador
         isActive = false;
         rb.linearVelocity = new Vector2(0f, rb.linearVelocity.y);
+        anim.SetBool("isJumping", false);
+        anim.SetBool("isWalking", false);
+        anim.SetBool("isIdle", true);
+        anim.SetBool("IsGrounded", true);
     }
 
     public void AddJumpPowerUp(int extraJumps, int duration)

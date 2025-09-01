@@ -3,27 +3,37 @@ using UnityEngine;
 
 public class PlataformaInstavel : MonoBehaviour, IResettable
 {
-    public float fallwait = 2f;      // tempo antes da queda
-    public float destoryWait = 1f;   // tempo antes de destruir (não usado mais)
+    [SerializeField] private float fallWait = 2f;
+    [SerializeField] private float respawnWait = 2f;
+    [SerializeField] private float invisibleWait = 1f;
 
-    private bool isfalling;
+    [Header("Shake Settings")]
+    [SerializeField] private float shakeDuration = 0.3f;
+    [SerializeField] private float shakeMagnitude = 0.05f;
+    [SerializeField] private float shakeFrequency = 40f; // velocidade da tremidinha
+
+    private bool isFalling;
     private Rigidbody2D rb;
+    private Collider2D col;
+    private SpriteRenderer sr;
     private Vector3 startPos;
     private Quaternion startRot;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        col = GetComponent<Collider2D>();
+        sr = GetComponent<SpriteRenderer>();
+
         startPos = transform.position;
         startRot = transform.rotation;
 
-        // Registra no GameManager
         GameManager.Instance.RegisterResettable(this);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (!isfalling && collision.gameObject.CompareTag("Player"))
+        if (!isFalling && collision.gameObject.CompareTag("Player"))
         {
             StartCoroutine(Fall());
         }
@@ -31,18 +41,51 @@ public class PlataformaInstavel : MonoBehaviour, IResettable
 
     private IEnumerator Fall()
     {
-        isfalling = true;
-        yield return new WaitForSeconds(fallwait);
+        isFalling = true;
 
-        // Faz a plataforma cair
+        // Tremidinha antes da queda
+        yield return StartCoroutine(Shake(shakeDuration, shakeMagnitude, shakeFrequency));
+
+        yield return new WaitForSeconds(fallWait);
+
         rb.bodyType = RigidbodyType2D.Dynamic;
+
+        // Desliga o collider quando começa a cair
+        col.enabled = false;
+
+        yield return new WaitForSeconds(respawnWait);
+
+        // Some visualmente
+        sr.enabled = false;
+
+        yield return new WaitForSeconds(invisibleWait);
+
+        ResetState();
     }
 
-    // Reset da plataforma para o estado inicial
+    private IEnumerator Shake(float duration, float magnitude, float frequency)
+    {
+        Vector3 originalPos = transform.localPosition;
+        float elapsed = 0f;
+
+        while (elapsed < duration)
+        {
+            float x = Mathf.Sin(elapsed * frequency) * magnitude;
+            float y = Mathf.Cos(elapsed * (frequency * 0.5f)) * magnitude * 0.5f;
+
+            transform.localPosition = originalPos + new Vector3(x, y, 0f);
+
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        transform.localPosition = originalPos;
+    }
+
     public void ResetState()
     {
         StopAllCoroutines();
-        isfalling = false;
+        isFalling = false;
 
         rb.bodyType = RigidbodyType2D.Kinematic;
         rb.linearVelocity = Vector2.zero;
@@ -51,6 +94,8 @@ public class PlataformaInstavel : MonoBehaviour, IResettable
         transform.position = startPos;
         transform.rotation = startRot;
 
-        gameObject.SetActive(true);
+        // Reativa tudo
+        col.enabled = true;
+        sr.enabled = true;
     }
 }

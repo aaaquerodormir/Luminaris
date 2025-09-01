@@ -1,0 +1,520 @@
+fileFormatVersion: 2
+guid: 28a75daf035bd9e47b3df29313a709ee
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -8059403302831849701
+    second: EspinhosPlataforma_Sheet_0
+  - first:
+      213: -780682141671565420
+    second: EspinhosPlataforma_Sheet_1
+  - first:
+      213: 6389764516634779522
+    second: EspinhosPlataforma_Sheet_2
+  - first:
+      213: -998115116717754633
+    second: EspinhosPlataforma_Sheet_3
+  - first:
+      213: -8709643148349066321
+    second: EspinhosPlataforma_Sheet_4
+  - first:
+      213: 1572521330556608011
+    second: EspinhosPlataforma_Sheet_5
+  - first:
+      213: 7961281582556524315
+    second: EspinhosPlataforma_Sheet_6
+  - first:
+      213: 6143987372184132455
+    second: EspinhosPlataforma_Sheet_7
+  - first:
+      213: -5249955275535185045
+    second: EspinhosPlataforma_Sheet_8
+  - first:
+      213: -61092054353288659
+    second: EspinhosPlataforma_Sheet_9
+  - first:
+      213: 6410963523307849353
+    second: EspinhosPlataforma_Sheet_10
+  - first:
+      213: -9138755981134338289
+    second: EspinhosPlataforma_Sheet_11
+  - first:
+      213: 5878011455725404321
+    second: EspinhosPlataforma_Sheet_12
+  - first:
+      213: 1749979529716422458
+    second: EspinhosPlataforma_Sheet_13
+  - first:
+      213: 5716118630817236794
+    second: EspinhosPlataforma_Sheet_14
+  - first:
+      213: 7122613114469408065
+    second: EspinhosPlataforma_Sheet_15
+  - first:
+      213: 9014429365835030653
+    second: EspinhosPlataforma_Sheet_16
+  - first:
+      213: -1919610076031945467
+    second: EspinhosPlataforma_Sheet_17
+  - first:
+      213: 1952868311149713259
+    second: EspinhosPlataforma_Sheet_18
+  - first:
+      213: 5042668937191028502
+    second: EspinhosPlataforma_Sheet_19
+  - first:
+      213: -3113483399060838758
+    second: EspinhosPlataforma_Sheet_20
+  - first:
+      213: -6266115685489379278
+    second: EspinhosPlataforma_Sheet_21
+  - first:
+      213: 7016774845496440923
+    second: EspinhosPlataforma_Sheet_22
+  - first:
+      213: -7983436704844868912
+    second: EspinhosPlataforma_Sheet_23
+  - first:
+      213: -7004766376726697082
+    second: EspinhosPlataforma_Sheet_24
+  - first:
+      213: 8995343301531580748
+    second: EspinhosPlataforma_Sheet_25
+  - first:
+      213: 7274945973639798296
+    second: EspinhosPlataforma_Sheet_26
+  - first:
+      213: 293343080276770741
+    second: EspinhosPlataforma_Sheet_27
+  - first:
+      213: -7628401046471132908
+    second: EspinhosPlataforma_Sheet_28
+  - first:
+      213: 6524233385071560459
+    second: EspinhosPlataforma_Sheet_29
+  - first:
+      213: -2949208542478064490
+    second: EspinhosPlataforma_Sheet_30
+  - first:
+      213: -6335160220412663547
+    second: EspinhosPlataforma_Sheet_31
+  - first:
+      213: 3082855841471960146
+    second: EspinhosPlataforma_Sheet_32
+  - first:
+      213: 2857916107368956139
+    second: EspinhosPlataforma_Sheet_33
+  - first:
+      213: 8036673138172898185
+    second: EspinhosPlataforma_Sheet_34
+  - first:
+      213: 1284798417902524461
+    second: EspinhosPlataforma_Sheet_35
+  - first:
+      213: 2801348547763081148
+    second: EspinhosPlataforma_Sheet_36
+  - first:
+      213: 3876304386493480396
+    second: EspinhosPlataforma_Sheet_37
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 0
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 16
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 512
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: EspinhosPlataforma_Sheet_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 23
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0657403191d98d048ae862c40e328cc9
+      internalID: -8059403302831849701
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EspinhosPlataforma_Sheet_1
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 0
+        width: 23
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 81a0d38501082d2429323ed09ff7dded
+      internalID: -780682141671565420
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EspinhosPlataforma_Sheet_2
+      rect:
+        serializedVersion: 2
+        x: 46
+        y: 0
+        width: 23
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1886237ea45ae354fa48976cb83efba3
+      internalID: 6389764516634779522
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EspinhosPlataforma_Sheet_3
+      rect:
+        serializedVersion: 2
+        x: 69
+        y: 0
+        width: 23
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e8ca13e61f188404a85027fef84d396e
+      internalID: -998115116717754633
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EspinhosPlataforma_Sheet_4
+      rect:
+        serializedVersion: 2
+        x: 92
+        y: 0
+        width: 23
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 15e9abf446d2a1745a4a106a852424f6
+      internalID: -8709643148349066321
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EspinhosPlataforma_Sheet_5
+      rect:
+        serializedVersion: 2
+        x: 115
+        y: 0
+        width: 23
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c55a451c2d3e2b5418a054ae5c9fd95d
+      internalID: 1572521330556608011
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EspinhosPlataforma_Sheet_6
+      rect:
+        serializedVersion: 2
+        x: 138
+        y: 0
+        width: 23
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 995a302cbc7852f4bb6a86ebfd624553
+      internalID: 7961281582556524315
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EspinhosPlataforma_Sheet_7
+      rect:
+        serializedVersion: 2
+        x: 161
+        y: 0
+        width: 23
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 89d9e1376c51e624792a1bd7118c47bd
+      internalID: 6143987372184132455
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EspinhosPlataforma_Sheet_8
+      rect:
+        serializedVersion: 2
+        x: 184
+        y: 0
+        width: 23
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 591edfdfead6add47a316cfc35b753c2
+      internalID: -5249955275535185045
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EspinhosPlataforma_Sheet_9
+      rect:
+        serializedVersion: 2
+        x: 207
+        y: 0
+        width: 23
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aac650850d81866468cf89bdae1502de
+      internalID: -61092054353288659
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EspinhosPlataforma_Sheet_10
+      rect:
+        serializedVersion: 2
+        x: 230
+        y: 0
+        width: 23
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 27c5facf12638dd4b89debcf47401fcf
+      internalID: 6410963523307849353
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EspinhosPlataforma_Sheet_11
+      rect:
+        serializedVersion: 2
+        x: 253
+        y: 0
+        width: 23
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 155d52f102eac2e48994783cd27ed6c4
+      internalID: -9138755981134338289
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: b8ae3256748d823439e138be485221a7
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      EspinhosPlataforma_Sheet_0: -8059403302831849701
+      EspinhosPlataforma_Sheet_1: -780682141671565420
+      EspinhosPlataforma_Sheet_10: 6410963523307849353
+      EspinhosPlataforma_Sheet_11: -9138755981134338289
+      EspinhosPlataforma_Sheet_2: 6389764516634779522
+      EspinhosPlataforma_Sheet_3: -998115116717754633
+      EspinhosPlataforma_Sheet_4: -8709643148349066321
+      EspinhosPlataforma_Sheet_5: 1572521330556608011
+      EspinhosPlataforma_Sheet_6: 7961281582556524315
+      EspinhosPlataforma_Sheet_7: 6143987372184132455
+      EspinhosPlataforma_Sheet_8: -5249955275535185045
+      EspinhosPlataforma_Sheet_9: -61092054353288659
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
