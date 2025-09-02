@@ -41,6 +41,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: "Part\xEDcula"
+    uniqueID: 3310167237
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
