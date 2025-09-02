@@ -48,12 +48,18 @@ public class MenuNavigation : MonoBehaviour
 
     public void OnButtonExit(int buttonIndex)
     {
-        // Só desativa se o botão que perdeu hover for o mesmo que estava selecionado
         if (currentIndex == buttonIndex)
         {
             currentIndex = -1;
             starIndicator.SetActive(false);
             EventSystem.current.SetSelectedGameObject(null);
         }
+    }
+
+    public void OnButtonClick()
+    {
+        starIndicator.SetActive(false);
+        currentIndex = -1;
+        EventSystem.current.SetSelectedGameObject(null);
     }
 }
