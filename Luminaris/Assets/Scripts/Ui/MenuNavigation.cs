@@ -4,45 +4,56 @@ using UnityEngine.EventSystems;
 
 public class MenuNavigation : MonoBehaviour
 {
-    [SerializeField] private GameObject starIndicator; // Sua seta
-    [SerializeField] private Button[] buttons;         // Lista dos botões
+    [SerializeField] private GameObject starIndicator;
+    [SerializeField] private Button[] buttons;
     [SerializeField] private Vector3 offset = new Vector3(-50, 0, 0);
 
-    private int currentIndex = 0;
+    private int currentIndex = -1;
 
     void Start()
     {
-        UpdateIndicatorPosition();
+        starIndicator.SetActive(false);
     }
 
     void Update()
     {
-        // Navegação simples com setas do teclado para testar
         if (Input.GetKeyDown(KeyCode.DownArrow))
         {
-            currentIndex = (currentIndex + 1) % buttons.Length;
-            UpdateIndicatorPosition();
-            EventSystem.current.SetSelectedGameObject(buttons[currentIndex].gameObject);
+            currentIndex = (currentIndex + 1 + buttons.Length) % buttons.Length;
+            ShowIndicator();
         }
         else if (Input.GetKeyDown(KeyCode.UpArrow))
         {
             currentIndex = (currentIndex - 1 + buttons.Length) % buttons.Length;
-            UpdateIndicatorPosition();
-            EventSystem.current.SetSelectedGameObject(buttons[currentIndex].gameObject);
+            ShowIndicator();
         }
     }
 
-    public void UpdateIndicatorPosition()
+    private void ShowIndicator()
     {
-        // Move a seta para a posição do botão atual + offset
-        starIndicator.transform.position = (Vector3)buttons[currentIndex].transform.position + offset;
-        starIndicator.SetActive(true);
+        if (currentIndex < 0 || currentIndex >= buttons.Length) return;
+
+        starIndicator.transform.position = buttons[currentIndex].transform.position + offset;
+        if (!starIndicator.activeSelf)
+            starIndicator.SetActive(true);
+
+        EventSystem.current.SetSelectedGameObject(buttons[currentIndex].gameObject);
     }
 
-    // Caso queira detectar o mouse passando por cima dos botões
     public void OnButtonHover(int buttonIndex)
     {
         currentIndex = buttonIndex;
-        UpdateIndicatorPosition();
+        ShowIndicator();
+    }
+
+    public void OnButtonExit(int buttonIndex)
+    {
+        // Só desativa se o botão que perdeu hover for o mesmo que estava selecionado
+        if (currentIndex == buttonIndex)
+        {
+            currentIndex = -1;
+            starIndicator.SetActive(false);
+            EventSystem.current.SetSelectedGameObject(null);
+        }
     }
 }

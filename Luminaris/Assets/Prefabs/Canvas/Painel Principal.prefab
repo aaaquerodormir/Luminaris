@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3065868023312154158}
   - component: {fileID: 6850336156657746738}
   - component: {fileID: 5735847955487263847}
+  - component: {fileID: 7432807270045144953}
   m_Layer: 5
   m_Name: Continuar
   m_TagString: Untagged
@@ -118,6 +119,51 @@ MonoBehaviour:
   buttonText: {fileID: 2895136574381923053}
   normalColor: {r: 0.47058824, g: 0.8, b: 0.7254902, a: 1}
   highlightedColor: {r: 0.95686275, g: 0.8352941, b: 0.39607844, a: 1}
+--- !u!114 &7432807270045144953
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2662863587228071339}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: MenuNavigation, Assembly-CSharp
+          m_MethodName: OnButtonHover
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: MenuNavigation, Assembly-CSharp
+          m_MethodName: OnButtonExit
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &2890734277684988025
 GameObject:
   m_ObjectHideFlags: 0
@@ -578,6 +624,7 @@ GameObject:
   - component: {fileID: 7678247114861113622}
   - component: {fileID: 1554499143982484825}
   - component: {fileID: 3808623531981822049}
+  - component: {fileID: 6125114597776557240}
   m_Layer: 5
   m_Name: Jogar
   m_TagString: Untagged
@@ -684,6 +731,51 @@ MonoBehaviour:
   buttonText: {fileID: 866289512141175806}
   normalColor: {r: 0.47058824, g: 0.8, b: 0.7254902, a: 1}
   highlightedColor: {r: 0.95686275, g: 0.8352941, b: 0.39607844, a: 1}
+--- !u!114 &6125114597776557240
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4821602255071259079}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: MenuNavigation, Assembly-CSharp
+          m_MethodName: OnButtonHover
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 1
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: MenuNavigation, Assembly-CSharp
+          m_MethodName: OnButtonExit
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 1
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &5169262192957974091
 GameObject:
   m_ObjectHideFlags: 0
@@ -832,6 +924,7 @@ GameObject:
   - component: {fileID: 736117993604724060}
   - component: {fileID: 7368001574600675364}
   - component: {fileID: 3701026733209645114}
+  - component: {fileID: 8824525765290878763}
   m_Layer: 5
   m_Name: Sair
   m_TagString: Untagged
@@ -938,6 +1031,51 @@ MonoBehaviour:
   buttonText: {fileID: 4984228587612209664}
   normalColor: {r: 0.47058824, g: 0.8, b: 0.7254902, a: 1}
   highlightedColor: {r: 0.95686275, g: 0.8352941, b: 0.39607844, a: 1}
+--- !u!114 &8824525765290878763
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6034037070727031306}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: MenuNavigation, Assembly-CSharp
+          m_MethodName: OnButtonHover
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 4
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: MenuNavigation, Assembly-CSharp
+          m_MethodName: OnButtonExit
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 4
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &7199099480976045362
 GameObject:
   m_ObjectHideFlags: 0
@@ -950,6 +1088,7 @@ GameObject:
   - component: {fileID: 6298702271258668194}
   - component: {fileID: 6844281606652446234}
   - component: {fileID: 2337359530787374880}
+  - component: {fileID: 7819221252153173324}
   m_Layer: 5
   m_Name: "Cr\xE9ditos"
   m_TagString: Untagged
@@ -1056,6 +1195,51 @@ MonoBehaviour:
   buttonText: {fileID: 3454989718098084079}
   normalColor: {r: 0.47058824, g: 0.8, b: 0.7254902, a: 1}
   highlightedColor: {r: 0.95686275, g: 0.8352941, b: 0.39607844, a: 1}
+--- !u!114 &7819221252153173324
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7199099480976045362}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: MenuNavigation, Assembly-CSharp
+          m_MethodName: OnButtonHover
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 3
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: MenuNavigation, Assembly-CSharp
+          m_MethodName: OnButtonExit
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 3
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &7559557133240394890
 GameObject:
   m_ObjectHideFlags: 0
@@ -1068,6 +1252,7 @@ GameObject:
   - component: {fileID: 4519496354390437524}
   - component: {fileID: 1073691232679174906}
   - component: {fileID: 7204101506742697738}
+  - component: {fileID: 4641067247877524875}
   m_Layer: 5
   m_Name: "Op\xE7\xF5es"
   m_TagString: Untagged
@@ -1174,6 +1359,51 @@ MonoBehaviour:
   buttonText: {fileID: 5472201403708092875}
   normalColor: {r: 0.47058824, g: 0.8, b: 0.7254902, a: 1}
   highlightedColor: {r: 0.95686275, g: 0.8352941, b: 0.39607844, a: 1}
+--- !u!114 &4641067247877524875
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7559557133240394890}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: MenuNavigation, Assembly-CSharp
+          m_MethodName: OnButtonHover
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 2
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: MenuNavigation, Assembly-CSharp
+          m_MethodName: OnButtonExit
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 2
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &8784856070479869218
 GameObject:
   m_ObjectHideFlags: 0
