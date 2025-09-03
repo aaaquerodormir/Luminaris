@@ -305,5 +305,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fb82d626655a0841a7bb92b93fcda74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 1
-  animationInterval: 1
+  cycleInterval: 2
+  initialDelay: 0

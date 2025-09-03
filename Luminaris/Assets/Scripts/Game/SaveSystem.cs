@@ -4,8 +4,14 @@ using System.IO;
 [System.Serializable]
 public class SaveData
 {
+    // Progresso do jogo
     public int checkpointIndex;
     public GameManager.Difficulty difficulty;
+
+    // Configurações de opções
+    public int resolucaoIndex;
+    public bool fullscreen;
+    public float volume;
 }
 
 public static class SaveSystem
@@ -31,7 +37,7 @@ public static class SaveSystem
         else
         {
             Debug.LogWarning("Nenhum save encontrado!");
-            return null;
+            return new SaveData(); // Retorna um novo para evitar null
         }
     }
 
@@ -46,4 +52,3 @@ public static class SaveSystem
             File.Delete(savePath);
     }
 }
-
