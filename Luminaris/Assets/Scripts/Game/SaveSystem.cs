@@ -5,13 +5,13 @@ using System.IO;
 public class SaveData
 {
     // Progresso do jogo
-    public int checkpointIndex;
-    public GameManager.Difficulty difficulty;
+    public int checkpointIndex = 0;
+    public GameManager.Difficulty difficulty = GameManager.Difficulty.Normal;
 
-    // Configurações de opções
-    public int resolucaoIndex;
-    public bool fullscreen;
-    public float volume;
+    // Configurações
+    public int resolucaoIndex = -1; // -1 = ainda não escolhido
+    public bool fullscreen = true;
+    public float volume = 0.5f;
 }
 
 public static class SaveSystem
