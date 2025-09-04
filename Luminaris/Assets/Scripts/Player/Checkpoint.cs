@@ -14,9 +14,15 @@ public class Checkpoint : MonoBehaviour
 
     public bool TryActivate()
     {
-        if (activated) return false; // já foi ativado antes
+        if (activated) return false; // já foi ativado
         activated = true;
-        return true; // primeira vez que ativa
+        return true; // primeira vez
+    }
+
+    // usado pelo GameLoader para marcar checkpoints já alcançados
+    public void PreActivate()
+    {
+        activated = true;
     }
 
     private void OnDrawGizmos()
