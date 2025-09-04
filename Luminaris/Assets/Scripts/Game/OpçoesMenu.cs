@@ -29,7 +29,7 @@ public class OpcoesMenu : MonoBehaviour
 
     private void InicializarVolume()
     {
-        float volume = saveData.volume;
+        float volume = saveData != null ? saveData.volume : 0.5f;
         volumeSlider.value = volume;
         DefinirVolume(volume);
         volumeSlider.onValueChanged.AddListener(DefinirVolume);
@@ -37,7 +37,8 @@ public class OpcoesMenu : MonoBehaviour
 
     private void InicializarFullscreen()
     {
-        fullscreenToggle.isOn = saveData.fullscreen;
+        bool fullscreen = saveData != null ? saveData.fullscreen : true;
+        fullscreenToggle.isOn = fullscreen;
         fullscreenToggle.onValueChanged.AddListener(DefinirFullscreen);
     }
 
@@ -105,6 +106,8 @@ public class OpcoesMenu : MonoBehaviour
 
     private void AplicarConfiguracoesSalvas()
     {
+        if (saveData == null) return;
+
         int resolucaoIndex = saveData.resolucaoIndex >= 0 ? saveData.resolucaoIndex : resolucaoAtualIndex;
         bool fullscreen = saveData.fullscreen;
 
@@ -121,6 +124,7 @@ public class OpcoesMenu : MonoBehaviour
     {
         audioMixer.SetFloat("MasterVolume", Mathf.Log10(Mathf.Clamp(volume, 0.0001f, 1f)) * 20f);
 
+        if (saveData == null) saveData = new SaveData();
         saveData.volume = volume;
         SaveSystem.SaveGame(saveData);
     }
@@ -130,6 +134,7 @@ public class OpcoesMenu : MonoBehaviour
         bool fullscreen = fullscreenToggle.isOn;
         AplicarResolucao(index, fullscreen);
 
+        if (saveData == null) saveData = new SaveData();
         saveData.resolucaoIndex = index;
         SaveSystem.SaveGame(saveData);
     }
@@ -139,6 +144,7 @@ public class OpcoesMenu : MonoBehaviour
         int index = resolucaoDropdown.value;
         AplicarResolucao(index, fullscreen);
 
+        if (saveData == null) saveData = new SaveData();
         saveData.fullscreen = fullscreen;
         SaveSystem.SaveGame(saveData);
     }

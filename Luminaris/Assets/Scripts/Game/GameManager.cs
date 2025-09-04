@@ -93,20 +93,11 @@ public class GameManager : MonoBehaviour
 
         SaveData data = new SaveData
         {
-            checkpointIndex = checkpoint.Index,
-            difficulty = SelectedDifficulty
+            checkpointIndex = checkpoint.Index
         };
         SaveSystem.SaveGame(data);
 
         lava.SetSafeZone(checkpoint.LavaSafeHeight);
         Debug.Log("Progresso salvo no checkpoint " + checkpoint.Index);
-    }
-
-    public GameManager.Difficulty SelectedDifficulty { get; private set; } = Difficulty.Normal;
-    public enum Difficulty { Easy, Normal, Hard }
-
-    public void SetDifficulty(int index)
-    {
-        SelectedDifficulty = (Difficulty)index;
     }
 }

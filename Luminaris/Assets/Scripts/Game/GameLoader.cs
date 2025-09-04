@@ -12,11 +12,13 @@ public class GameLoader : MonoBehaviour
     {
         SaveData data = SaveSystem.LoadGame();
 
-        if (data != null)
+        if (data != null && data.checkpointIndex >= 0)
         {
-            GameManager.Instance.SetDifficulty((int)data.difficulty);
-
-            int checkpointIndex = Mathf.Clamp(data.checkpointIndex, 0, Mathf.Min(checkpointsPlayer1.Length, checkpointsPlayer2.Length) - 1);
+            int checkpointIndex = Mathf.Clamp(
+                data.checkpointIndex,
+                0,
+                Mathf.Min(checkpointsPlayer1.Length, checkpointsPlayer2.Length) - 1
+            );
 
             player1.position = checkpointsPlayer1[checkpointIndex].RespawnPosition;
             player2.position = checkpointsPlayer2[checkpointIndex].RespawnPosition;
@@ -27,8 +29,6 @@ public class GameLoader : MonoBehaviour
             );
 
             lava.SetSafeZone(safeZone);
-
-            // Mover fisicamente a lava para a altura do checkpoint
             lava.transform.position = new Vector3(
                 lava.transform.position.x,
                 safeZone,
@@ -39,7 +39,7 @@ public class GameLoader : MonoBehaviour
         }
         else
         {
-            // Novo jogo
+            // Novo jogo ou sem checkpoint alcançado ainda
             player1.position = checkpointsPlayer1[0].RespawnPosition;
             player2.position = checkpointsPlayer2[0].RespawnPosition;
 
@@ -49,8 +49,6 @@ public class GameLoader : MonoBehaviour
             );
 
             lava.SetSafeZone(safeZone);
-
-            //  Também reposicionar lava no novo jogo
             lava.transform.position = new Vector3(
                 lava.transform.position.x,
                 safeZone,
@@ -60,6 +58,4 @@ public class GameLoader : MonoBehaviour
             Debug.Log("Novo jogo iniciado no checkpoint 0");
         }
     }
-
-
 }
