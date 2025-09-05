@@ -21,7 +21,7 @@ public class PauseMenu : MonoBehaviour
 
     public void Pause()
     {
-        if (GameManager.Instance.IsGameOverActive) return; //  trava pause durante Game Over
+        if (GameManager.Instance.IsGameOverActive) return; // trava pause durante Game Over
 
         pauseUI.SetActive(true);
         if (optionsUI != null) optionsUI.SetActive(false);
@@ -42,11 +42,13 @@ public class PauseMenu : MonoBehaviour
     public void OpenOptions()
     {
         if (optionsUI != null) optionsUI.SetActive(true);
+        if (pauseUI != null) pauseUI.SetActive(false);
     }
 
     public void CloseOptions()
     {
         if (optionsUI != null) optionsUI.SetActive(false);
+        if (pauseUI != null) pauseUI.SetActive(true);
     }
 
     public void ReturnToMenu()
