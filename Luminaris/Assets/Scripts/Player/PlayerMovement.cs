@@ -1,12 +1,11 @@
 ﻿using UnityEngine;
 using UnityEngine.InputSystem;
-using System.Collections.Generic;
+
 public class PlayerMovement : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private Rigidbody2D rb;
-
-    private bool isFacingRight = false;
+    [SerializeField] private PlayerMovementUI playerUI; // referência para controle de pulos
     public Animator anim;
 
     [Header("Input Actions")]
@@ -17,8 +16,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float moveSpeed = 3f;
     public float horizontalInput;
 
-    [Header("Jump Settings")]
-    [SerializeField] private int baseMaxJumps = 3; // adicionei baseMaxJumps
+    [Header("Jump Physics")]
     [SerializeField] private float jumpForce = 8f;
     [SerializeField] private float coyoteTime = 0.1f; // tempo extra após sair da plataforma
     [SerializeField] private float jumpBufferTime = 0.1f; // tempo para "guardar" o pulo antes de tocar o chão
@@ -38,29 +36,15 @@ public class PlayerMovement : MonoBehaviour
     private float lastOnGroundTime;     // tempo desde que saiu do chão (para coyote time)
     private float lastPressedJumpTime;  // tempo desde que apertou pulo (para jump buffer)
     private bool isJumpCut;             // flag para cortar altura do pulo
+    private bool isFacingRight = false;
 
     public bool isActive = false;
-    private int jumpCount = 0;
 
     // Controle de turnos
     private bool waitingToEndTurn = false;
     private bool hasLandedAfterMaxJump = false;
     private bool jumpInitiated = false;
     private bool isInAir = false;
-
-    // Lista de power ups ativos
-    private List<(int extraJumps, int turnsLeft)> activeJumpPowerUps = new();
-
-    public int MaxJumps
-    {
-        get
-        {
-            int total = baseMaxJumps;
-            foreach (var power in activeJumpPowerUps)
-                total += power.extraJumps;
-            return total;
-        }
-    }
 
     private void Update()
     {
@@ -82,8 +66,8 @@ public class PlayerMovement : MonoBehaviour
             {
                 jumpInitiated = false;
 
-                // 🔥 Se já usou todos os pulos, marca para encerrar
-                if (jumpCount >= MaxJumps)
+                // Se já usou todos os pulos, marca para encerrar
+                if (playerUI.JumpsUsed >= playerUI.MaxJumps)
                 {
                     waitingToEndTurn = true;
 
@@ -103,7 +87,7 @@ public class PlayerMovement : MonoBehaviour
             if (grounded && !hasLandedAfterMaxJump)
             {
                 hasLandedAfterMaxJump = true;
-                rb.linearVelocity = Vector2.zero; // 🔥 trava o movimento imediatamente
+                rb.linearVelocity = Vector2.zero; // trava o movimento imediatamente
                 TurnControl.Instance.EndTurnIfReady();
             }
             else if (!grounded && !hasLandedAfterMaxJump)
@@ -120,7 +104,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         // Jump Buffer
-        if (jumpAction.action.WasPerformedThisFrame() && jumpCount < MaxJumps && !waitingToEndTurn)
+        if (jumpAction.action.WasPerformedThisFrame() && playerUI.JumpsUsed < playerUI.MaxJumps && !waitingToEndTurn)
         {
             lastPressedJumpTime = jumpBufferTime;
             jumpInitiated = true;
@@ -138,7 +122,7 @@ public class PlayerMovement : MonoBehaviour
         lastPressedJumpTime -= Time.deltaTime;
 
         // Executa pulo
-        if (lastOnGroundTime > 0 && lastPressedJumpTime > 0 && jumpCount < MaxJumps && !waitingToEndTurn)
+        if (lastOnGroundTime > 0 && lastPressedJumpTime > 0 && playerUI.JumpsUsed < playerUI.MaxJumps && !waitingToEndTurn)
             Jump();
 
         // Movimento horizontal normal
@@ -146,7 +130,7 @@ public class PlayerMovement : MonoBehaviour
             rb.linearVelocity = new Vector2(horizontalInput * moveSpeed, rb.linearVelocity.y);
 
         Flip();
-        handleAnimations();
+        HandleAnimations();
     }
 
     private void FixedUpdate()
@@ -182,7 +166,8 @@ public class PlayerMovement : MonoBehaviour
         lastOnGroundTime = 0;
         lastPressedJumpTime = 0;
 
-        jumpCount++; // ✅ agora só conta pulo aqui
+        // Aqui delegamos a contagem para o PlayerMovementUI
+        playerUI.ConsumeJump();
     }
 
     public bool IsGrounded()
@@ -190,15 +175,14 @@ public class PlayerMovement : MonoBehaviour
         // Checa colisão no chão
         return Physics2D.OverlapBox(groundCheckPos.position, groundCheckSize, 0, groundLayer);
     }
-    void handleAnimations()
+
+    private void HandleAnimations()
     {
         anim.SetBool("isJumping", rb.linearVelocity.y > .1f);
-        anim.SetBool("IsGrounded", IsGrounded()); 
-
+        anim.SetBool("IsGrounded", IsGrounded());
         anim.SetFloat("yVelocity", rb.linearVelocity.y);
-
-        anim.SetBool("isIdle", Mathf.Abs(horizontalInput) < .1f && IsGrounded());   
-        anim.SetBool("isWalking", Mathf.Abs(horizontalInput) >= .1f && IsGrounded()); 
+        anim.SetBool("isIdle", Mathf.Abs(horizontalInput) < .1f && IsGrounded());
+        anim.SetBool("isWalking", Mathf.Abs(horizontalInput) >= .1f && IsGrounded());
     }
 
     private void Flip()
@@ -217,24 +201,13 @@ public class PlayerMovement : MonoBehaviour
     {
         // Reseta variáveis ao iniciar turno
         isActive = true;
-        jumpCount = 0;
         waitingToEndTurn = false;
         hasLandedAfterMaxJump = false;
         jumpInitiated = false;
         isInAir = false;
 
-        // Consome turnos dos power ups
-        for (int i = activeJumpPowerUps.Count - 1; i >= 0; i--)
-        {
-            var p = activeJumpPowerUps[i];
-            p.turnsLeft--;
-            if (p.turnsLeft <= 0)
-                activeJumpPowerUps.RemoveAt(i);
-            else
-                activeJumpPowerUps[i] = p;
-        }
-
-        Debug.Log($"{gameObject.name} começou o turno com {MaxJumps} pulos.");
+        // Consome turnos dos power ups e reseta contagem no UI
+        playerUI.StartTurn();
     }
 
     public void EndTurn()
@@ -246,11 +219,14 @@ public class PlayerMovement : MonoBehaviour
         anim.SetBool("isWalking", false);
         anim.SetBool("isIdle", true);
         anim.SetBool("IsGrounded", true);
+
+        playerUI.EndTurn();
     }
 
     public void AddJumpPowerUp(int extraJumps, int duration)
     {
-        activeJumpPowerUps.Add((extraJumps, duration));
+        // Adiciona powerup no sistema de UI
+        playerUI.AddJumpPowerUp(extraJumps, duration);
     }
 
     private void OnDrawGizmosSelected()

@@ -1,28 +1,27 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using System.Collections.Generic;
 
 public class JumpHUD : MonoBehaviour
 {
-    //[Header("References")]
-    // [SerializeField] private PlayerMovement player;
-    //  [SerializeField] private Transform container;
-    // [SerializeField] private GameObject jumpIconPrefab;
-    //[SerializeField] private TextMeshProUGUI jumpText;
+    [Header("References")]
+    [SerializeField] private PlayerMovementUI player;    // Player dono do HUD
+    [SerializeField] private Image jumpIcon;             // Ícone que troca sprite
+    [SerializeField] private TextMeshProUGUI jumpText;   // Texto "03x"
 
-    private readonly List<Image> icons = new();
+    [Header("Sprites por cor (0=até 3, 1=4, 2=5+)")]
+    [SerializeField] private Sprite[] sprites;           // Array de 3 sprites (da cor do player)
 
     private void OnEnable()
     {
         TurnControl.OnTurnEnded += RefreshHUD;
-        //     player.OnJumpsChanged += RefreshHUD;
+        player.OnJumpsChanged += RefreshHUD;
     }
 
     private void OnDisable()
     {
         TurnControl.OnTurnEnded -= RefreshHUD;
-        // player.OnJumpsChanged -= RefreshHUD;
+        player.OnJumpsChanged -= RefreshHUD;
     }
 
     private void Start()
@@ -32,20 +31,21 @@ public class JumpHUD : MonoBehaviour
 
     private void RefreshHUD()
     {
-        foreach (var icon in icons)
-            Destroy(icon.gameObject);
-        icons.Clear();
+        int remainingJumps = player.MaxJumps - player.JumpsUsed;
 
-        // for (int i = 0; i < player.MaxJumps; i++)
+        // Escolhe o sprite com base na quantidade de pulos
+        if (sprites != null && sprites.Length >= 3)
         {
-            //   var iconObj = Instantiate(jumpIconPrefab, container);
-            //  var img = iconObj.GetComponent<Image>();
-            //  img.color = i < player.JumpsUsed ? Color.gray : Color.white;
-            // icons.Add(img);
+            if (remainingJumps <= 3)
+                jumpIcon.sprite = sprites[0];
+            else if (remainingJumps == 4)
+                jumpIcon.sprite = sprites[1];
+            else
+                jumpIcon.sprite = sprites[2];
         }
 
-        // if (jumpText != null)
-        // jumpText.text = $"{player.MaxJumps - player.JumpsUsed:00}x";
+        // Atualiza texto
+        if (jumpText != null)
+            jumpText.text = $"{remainingJumps:00}x";
     }
 }
-//*
