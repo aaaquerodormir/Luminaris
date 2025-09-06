@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: PowerUpPulo+2
   m_EditorClassIdentifier: 
   durationTurns: 1
-  extraJumps: 5
+  extraJumps: 2
