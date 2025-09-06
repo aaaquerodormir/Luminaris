@@ -10,7 +10,7 @@ public class PlataformaInstavel : MonoBehaviour, IResettable
     [Header("Shake Settings")]
     [SerializeField] private float shakeDuration = 0.3f;
     [SerializeField] private float shakeMagnitude = 0.05f;
-    [SerializeField] private float shakeFrequency = 40f; // velocidade da tremidinha
+    [SerializeField] private float shakeFrequency = 40f;
 
     private bool isFalling;
     private Rigidbody2D rb;
@@ -35,31 +35,31 @@ public class PlataformaInstavel : MonoBehaviour, IResettable
     {
         if (!isFalling && collision.gameObject.CompareTag("Player"))
         {
-            StartCoroutine(Fall());
+            foreach (ContactPoint2D contact in collision.contacts)
+            {
+                // Apenas ativa se o Player encostou por cima
+                if (contact.normal.y < -0.5f)
+                {
+                    StartCoroutine(Fall());
+                    break;
+                }
+            }
         }
     }
 
     private IEnumerator Fall()
     {
         isFalling = true;
-
-        // Tremidinha antes da queda
         yield return StartCoroutine(Shake(shakeDuration, shakeMagnitude, shakeFrequency));
-
         yield return new WaitForSeconds(fallWait);
 
         rb.bodyType = RigidbodyType2D.Dynamic;
-
-        // Desliga o collider quando começa a cair
         col.enabled = false;
 
         yield return new WaitForSeconds(respawnWait);
-
-        // Some visualmente
         sr.enabled = false;
 
         yield return new WaitForSeconds(invisibleWait);
-
         ResetState();
     }
 
@@ -94,7 +94,6 @@ public class PlataformaInstavel : MonoBehaviour, IResettable
         transform.position = startPos;
         transform.rotation = startRot;
 
-        // Reativa tudo
         col.enabled = true;
         sr.enabled = true;
     }
