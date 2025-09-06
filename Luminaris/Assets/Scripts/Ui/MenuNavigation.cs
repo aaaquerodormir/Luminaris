@@ -6,7 +6,7 @@ public class MenuNavigation : MonoBehaviour
 {
     [SerializeField] private GameObject starIndicator;
     [SerializeField] private Button[] buttons;
-    [SerializeField] private Vector3 offset = new Vector3(-50, 0, 0);
+    [SerializeField] private Vector2 offset = new Vector2(-50, 0);
 
     private int currentIndex = -1;
 
@@ -33,7 +33,11 @@ public class MenuNavigation : MonoBehaviour
     {
         if (currentIndex < 0 || currentIndex >= buttons.Length) return;
 
-        starIndicator.transform.position = buttons[currentIndex].transform.position + offset;
+        RectTransform starRect = starIndicator.GetComponent<RectTransform>();
+        RectTransform buttonRect = buttons[currentIndex].GetComponent<RectTransform>();
+
+        starRect.anchoredPosition = buttonRect.anchoredPosition + offset;
+
         if (!starIndicator.activeSelf)
             starIndicator.SetActive(true);
 

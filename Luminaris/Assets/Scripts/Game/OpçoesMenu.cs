@@ -19,7 +19,6 @@ public class OpcoesMenu : MonoBehaviour
 
     private void Start()
     {
-        // Carrega save existente ou cria um novo
         saveData = SaveSystem.HasSave() ? SaveSystem.LoadGame() : new SaveData();
 
         InicializarVolume();
@@ -30,7 +29,7 @@ public class OpcoesMenu : MonoBehaviour
 
     private void InicializarVolume()
     {
-        float volume = saveData.volume > 0 ? saveData.volume : 0.5f;
+        float volume = saveData != null ? saveData.volume : 0.5f;
         volumeSlider.value = volume;
         DefinirVolume(volume);
         volumeSlider.onValueChanged.AddListener(DefinirVolume);
@@ -38,7 +37,8 @@ public class OpcoesMenu : MonoBehaviour
 
     private void InicializarFullscreen()
     {
-        fullscreenToggle.isOn = saveData.fullscreen;
+        bool fullscreen = saveData != null ? saveData.fullscreen : true;
+        fullscreenToggle.isOn = fullscreen;
         fullscreenToggle.onValueChanged.AddListener(DefinirFullscreen);
     }
 
@@ -69,7 +69,6 @@ public class OpcoesMenu : MonoBehaviour
             opcoes.Add($"{r.width} x {r.height}");
         }
 
-        // Ordena do maior para o menor
         resolucoesFiltradas.Sort((a, b) => b.width.CompareTo(a.width));
         opcoes.Sort((a, b) =>
         {
@@ -78,7 +77,6 @@ public class OpcoesMenu : MonoBehaviour
             return bw.CompareTo(aw);
         });
 
-        // Move resolução nativa para o topo
         for (int i = 0; i < resolucoesFiltradas.Count; i++)
         {
             if (resolucoesFiltradas[i].width == atual.width &&
@@ -108,7 +106,9 @@ public class OpcoesMenu : MonoBehaviour
 
     private void AplicarConfiguracoesSalvas()
     {
-        int resolucaoIndex = saveData.resolucaoIndex > 0 ? saveData.resolucaoIndex : resolucaoAtualIndex;
+        if (saveData == null) return;
+
+        int resolucaoIndex = saveData.resolucaoIndex >= 0 ? saveData.resolucaoIndex : resolucaoAtualIndex;
         bool fullscreen = saveData.fullscreen;
 
         resolucaoIndex = Mathf.Clamp(resolucaoIndex, 0, resolucoesFiltradas.Count - 1);
@@ -124,6 +124,7 @@ public class OpcoesMenu : MonoBehaviour
     {
         audioMixer.SetFloat("MasterVolume", Mathf.Log10(Mathf.Clamp(volume, 0.0001f, 1f)) * 20f);
 
+        if (saveData == null) saveData = new SaveData();
         saveData.volume = volume;
         SaveSystem.SaveGame(saveData);
     }
@@ -133,6 +134,7 @@ public class OpcoesMenu : MonoBehaviour
         bool fullscreen = fullscreenToggle.isOn;
         AplicarResolucao(index, fullscreen);
 
+        if (saveData == null) saveData = new SaveData();
         saveData.resolucaoIndex = index;
         SaveSystem.SaveGame(saveData);
     }
@@ -142,6 +144,7 @@ public class OpcoesMenu : MonoBehaviour
         int index = resolucaoDropdown.value;
         AplicarResolucao(index, fullscreen);
 
+        if (saveData == null) saveData = new SaveData();
         saveData.fullscreen = fullscreen;
         SaveSystem.SaveGame(saveData);
     }
@@ -152,5 +155,7 @@ public class OpcoesMenu : MonoBehaviour
 
         Resolution res = resolucoesFiltradas[index];
         Screen.SetResolution(res.width, res.height, fullscreen);
+
+        Debug.Log($"Aplicando resolução {res.width}x{res.height}, Fullscreen={fullscreen}, Index={index}");
     }
 }

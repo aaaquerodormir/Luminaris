@@ -5,13 +5,12 @@ using System.IO;
 public class SaveData
 {
     // Progresso do jogo
-    public int checkpointIndex;
-    public GameManager.Difficulty difficulty;
+    public int checkpointIndex = -1; // -1 = nenhum checkpoint alcançado ainda
 
-    // Configurações de opções
-    public int resolucaoIndex;
-    public bool fullscreen;
-    public float volume;
+    // Configurações
+    public int resolucaoIndex = -1;
+    public bool fullscreen = true;
+    public float volume = 0.5f;
 }
 
 public static class SaveSystem
@@ -37,7 +36,7 @@ public static class SaveSystem
         else
         {
             Debug.LogWarning("Nenhum save encontrado!");
-            return new SaveData(); // Retorna um novo para evitar null
+            return null; // agora diferenciado
         }
     }
 

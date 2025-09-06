@@ -25,15 +25,23 @@ public class PlayerRespawn : MonoBehaviour
         }
         else if (collision.CompareTag("Checkpoint"))
         {
-            if (collision.transform != lastCheckpoint)
+            var checkpoint = collision.GetComponent<Checkpoint>();
+            if (checkpoint != null && collision.transform != lastCheckpoint)
             {
                 lastCheckpoint = collision.transform;
-                respawnPoint = collision.transform.position;
+                respawnPoint = checkpoint.RespawnPosition;
 
-                // notifica o GameManager
-                GameManager.Instance.ReachCheckpoint(collision.transform);
-
-                ShowFeedback("Checkpoint salvo!", collision.transform.position + Vector3.up * 1.25f);
+                // Só mostra feedback se for a primeira vez que ativa este checkpoint
+                if (checkpoint.TryActivate())
+                {
+                    GameManager.Instance.ReachCheckpoint(collision.transform);
+                    ShowFeedback("Checkpoint salvo!", collision.transform.position + Vector3.up * 1.25f);
+                }
+                else
+                {
+                    // ainda atualiza o save, mas sem feedback
+                    GameManager.Instance.ReachCheckpoint(collision.transform);
+                }
             }
         }
     }
