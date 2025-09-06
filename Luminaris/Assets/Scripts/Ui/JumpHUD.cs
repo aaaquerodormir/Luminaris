@@ -46,6 +46,6 @@ public class JumpHUD : MonoBehaviour
 
         // Atualiza texto
         if (jumpText != null)
-            jumpText.text = $"{remainingJumps:00}x";
+            jumpText.text = $"{remainingJumps:00}";
     }
 }
