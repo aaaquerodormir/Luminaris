@@ -5,12 +5,12 @@ using TMPro;
 public class JumpHUD : MonoBehaviour
 {
     [Header("References")]
-    [SerializeField] private PlayerMovementUI player;    // Player dono do HUD
-    [SerializeField] private Image jumpIcon;             // Ícone que troca sprite
-    [SerializeField] private TextMeshProUGUI jumpText;   // Texto "03x"
+    [SerializeField] private PlayerMovementUI player;
+    [SerializeField] private Image jumpIcon;
+    [SerializeField] private TextMeshProUGUI jumpText;
 
     [Header("Sprites por cor (0=até 3, 1=4, 2=5+)")]
-    [SerializeField] private Sprite[] sprites;           // Array de 3 sprites (da cor do player)
+    [SerializeField] private Sprite[] sprites;
 
     private void OnEnable()
     {
@@ -33,7 +33,6 @@ public class JumpHUD : MonoBehaviour
     {
         int remainingJumps = player.MaxJumps - player.JumpsUsed;
 
-        // Escolhe o sprite com base na quantidade de pulos
         if (sprites != null && sprites.Length >= 3)
         {
             if (remainingJumps <= 3)
@@ -44,7 +43,6 @@ public class JumpHUD : MonoBehaviour
                 jumpIcon.sprite = sprites[2];
         }
 
-        // Atualiza texto
         if (jumpText != null)
             jumpText.text = $"{remainingJumps:00}";
     }

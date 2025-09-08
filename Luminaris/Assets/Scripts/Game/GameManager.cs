@@ -4,6 +4,9 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
+    public static event System.Action OnGameOver;
+    public static event System.Action OnTryAgain;
+
     [Header("Jogadores")]
     [SerializeField] private PlayerRespawn player1;
     [SerializeField] private PlayerRespawn player2;
@@ -17,6 +20,7 @@ public class GameManager : MonoBehaviour
     [Header("UI")]
     [SerializeField] private GameObject gameOverUI;
     [SerializeField] private PauseMenu pauseMenu;
+    [SerializeField] private GameObject hudContainer; // <- HUD de pulos (HUDContainer)
 
     private bool isGameOver = false;
     public bool IsGameOverActive => isGameOver;
@@ -62,8 +66,13 @@ public class GameManager : MonoBehaviour
         if (pauseMenu != null)
             pauseMenu.gameObject.SetActive(false);
 
+        if (hudContainer != null)
+            hudContainer.SetActive(false); // esconde HUD de pulo
+
         gameOverUI.SetActive(true);
         Time.timeScale = 0f;
+
+        OnGameOver?.Invoke();
     }
 
     public void TryAgain()
@@ -83,7 +92,12 @@ public class GameManager : MonoBehaviour
         if (pauseMenu != null)
             pauseMenu.gameObject.SetActive(true);
 
+        if (hudContainer != null)
+            hudContainer.SetActive(true); // mostra HUD de pulo de novo
+
         isGameOver = false;
+
+        OnTryAgain?.Invoke();
     }
 
     public void ReachCheckpoint(Transform checkpointTransform)
