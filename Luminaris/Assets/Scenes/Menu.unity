@@ -1080,6 +1080,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Novo Jogo
       objectReference: {fileID: 0}
+    - target: {fileID: 5378829092105113866, guid: 7420f4d3b562e874b9c4b6c388bcb9dc, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 956.78
+      objectReference: {fileID: 0}
+    - target: {fileID: 5378829092105113866, guid: 7420f4d3b562e874b9c4b6c388bcb9dc, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -339
+      objectReference: {fileID: 0}
+    - target: {fileID: 5378829092105113866, guid: 7420f4d3b562e874b9c4b6c388bcb9dc, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 253
+      objectReference: {fileID: 0}
     - target: {fileID: 5394641904195311575, guid: 7420f4d3b562e874b9c4b6c388bcb9dc, type: 3}
       propertyPath: m_Color.a
       value: 0
