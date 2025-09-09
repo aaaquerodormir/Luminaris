@@ -787,7 +787,8 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6380886061975201575, guid: a08461e232a02e7448f4ac44016f5664, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -971,6 +972,10 @@ PrefabInstance:
     - target: {fileID: 193571001025227362, guid: 7420f4d3b562e874b9c4b6c388bcb9dc, type: 3}
       propertyPath: m_Color.a
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 218142558177955734, guid: 7420f4d3b562e874b9c4b6c388bcb9dc, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 702309183332201570, guid: 7420f4d3b562e874b9c4b6c388bcb9dc, type: 3}
       propertyPath: m_IsActive
@@ -1492,6 +1497,10 @@ PrefabInstance:
       propertyPath: starIndicator
       value: 
       objectReference: {fileID: 1800671210}
+    - target: {fileID: 8294027581011283298, guid: 97cf8a6776e21814dabe2423f8b9b8c5, type: 3}
+      propertyPath: buttons.Array.size
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 8294027581011283298, guid: 97cf8a6776e21814dabe2423f8b9b8c5, type: 3}
       propertyPath: 'buttons.Array.data[0]'
       value: 
