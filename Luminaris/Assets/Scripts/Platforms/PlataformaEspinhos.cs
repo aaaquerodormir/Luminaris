@@ -21,25 +21,27 @@ public class PlataformaEspinhos : MonoBehaviour
 
         while (true)
         {
-            animator.Play("Espinhos", 0, 0f); 
+            animator.Play("Espinhos", 0, 0f);
             yield return new WaitForSeconds(cycleInterval);
         }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
-            HandlePlayerBounce(collision.gameObject);
+        if (!collision.CompareTag("Player")) return;
 
-        var respawn = collision.GetComponent<PlayerRespawn>();
+        var respawn = collision.GetComponentInParent<PlayerRespawn>();
         if (respawn != null)
+        {
             respawn.Die();
+        }
+
+        HandlePlayerBounce(collision.attachedRigidbody);
     }
 
-    private void HandlePlayerBounce(GameObject player)
+    private void HandlePlayerBounce(Rigidbody2D rb)
     {
-        var rb = player.GetComponent<Rigidbody2D>();
-        if (rb)
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0f);
+        if (rb == null) return;
+        rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0f);
     }
 }
