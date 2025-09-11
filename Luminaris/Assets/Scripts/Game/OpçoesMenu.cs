@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Audio;
+using TMPro;
 using UnityEngine.UI;
 using System.Collections.Generic;
 
@@ -7,7 +8,7 @@ public class OpcoesMenu : MonoBehaviour
 {
     [Header("Referências")]
     [SerializeField] private AudioMixer audioMixer;
-    [SerializeField] private Dropdown resolucaoDropdown;
+    [SerializeField] private TMP_Dropdown resolucaoDropdown; 
     [SerializeField] private Toggle fullscreenToggle;
     [SerializeField] private Slider volumeSlider;
 
@@ -100,7 +101,14 @@ public class OpcoesMenu : MonoBehaviour
         resolucoesFiltradas = resolucoesFiltradas.GetRange(0, limite);
         opcoes = opcoes.GetRange(0, limite);
 
-        resolucaoDropdown.AddOptions(opcoes);
+        // Converter string para TMP_Dropdown.OptionData
+        List<TMP_Dropdown.OptionData> dadosTMP = new List<TMP_Dropdown.OptionData>();
+        foreach (string opcao in opcoes)
+        {
+            dadosTMP.Add(new TMP_Dropdown.OptionData(opcao));
+        }
+
+        resolucaoDropdown.AddOptions(dadosTMP);
         resolucaoDropdown.onValueChanged.AddListener(DefinirResolucao);
     }
 

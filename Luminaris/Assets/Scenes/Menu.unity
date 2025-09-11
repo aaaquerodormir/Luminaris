@@ -139,17 +139,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 9083603308487999928, guid: 7420f4d3b562e874b9c4b6c388bcb9dc, type: 3}
   m_PrefabInstance: {fileID: 3526500057711286557}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &307041806 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4105854418596344819, guid: a08461e232a02e7448f4ac44016f5664, type: 3}
-  m_PrefabInstance: {fileID: 339685189959201113}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d0b652f32a2cc243917e4028fa0f046, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &318498475 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2662863587228071339, guid: 7420f4d3b562e874b9c4b6c388bcb9dc, type: 3}
@@ -759,11 +748,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4105854418596344819, guid: a08461e232a02e7448f4ac44016f5664, type: 3}
+    - target: {fileID: 4517567216565396755, guid: a08461e232a02e7448f4ac44016f5664, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 857258257}
-    - target: {fileID: 4517567216565396755, guid: a08461e232a02e7448f4ac44016f5664, type: 3}
+    - target: {fileID: 4645948840392616265, guid: a08461e232a02e7448f4ac44016f5664, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 857258257}
@@ -771,13 +760,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: "Painel Op\xE7\xF5es"
       objectReference: {fileID: 0}
-    - target: {fileID: 4845624101754285313, guid: a08461e232a02e7448f4ac44016f5664, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5638080027909417678, guid: a08461e232a02e7448f4ac44016f5664, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8054105045516055400, guid: a08461e232a02e7448f4ac44016f5664, type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -785,14 +770,32 @@ PrefabInstance:
       objectReference: {fileID: 857258257}
     - target: {fileID: 8511013871255517744, guid: a08461e232a02e7448f4ac44016f5664, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 6380886061975201575, guid: a08461e232a02e7448f4ac44016f5664, type: 3}
+    - target: {fileID: 8511013871255517744, guid: a08461e232a02e7448f4ac44016f5664, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 5.4309998
+      objectReference: {fileID: 0}
+    - target: {fileID: 8511013871255517744, guid: a08461e232a02e7448f4ac44016f5664, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 1.6000004
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a08461e232a02e7448f4ac44016f5664, type: 3}
+--- !u!114 &339685189959201114 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4645948840392616265, guid: a08461e232a02e7448f4ac44016f5664, type: 3}
+  m_PrefabInstance: {fileID: 339685189959201113}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b743370ac3e4ec2a1668f5455a8ef8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &445046221303845429
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1387,7 +1390,7 @@ PrefabInstance:
     - target: {fileID: 2471122444185659000, guid: b39db2187d04b664d9abae39c0fff020, type: 3}
       propertyPath: resolucaoDropdown
       value: 
-      objectReference: {fileID: 307041806}
+      objectReference: {fileID: 339685189959201114}
     - target: {fileID: 4957624059019388747, guid: b39db2187d04b664d9abae39c0fff020, type: 3}
       propertyPath: m_Name
       value: "Op\xE7\xF5esManager"
