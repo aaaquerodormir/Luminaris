@@ -760,9 +760,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: "Painel Op\xE7\xF5es"
       objectReference: {fileID: 0}
+    - target: {fileID: 4845624101754285313, guid: a08461e232a02e7448f4ac44016f5664, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5638080027909417678, guid: a08461e232a02e7448f4ac44016f5664, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8054105045516055400, guid: a08461e232a02e7448f4ac44016f5664, type: 3}
       propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -770,7 +774,7 @@ PrefabInstance:
       objectReference: {fileID: 857258257}
     - target: {fileID: 8511013871255517744, guid: a08461e232a02e7448f4ac44016f5664, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8511013871255517744, guid: a08461e232a02e7448f4ac44016f5664, type: 3}
       propertyPath: m_AnchoredPosition.x
