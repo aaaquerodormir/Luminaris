@@ -6,31 +6,51 @@ public class Checkpoint : MonoBehaviour
     [SerializeField] private Transform respawnPoint;
     [SerializeField] private float lavaOffset = 3f;
 
+    [Header("Visual")]
+    [SerializeField] private SpriteRenderer spriteRenderer; // sprite apagado
+    [SerializeField] private Sprite offSprite;
+    [SerializeField] private Animator animator; // animação de ativado
+
     public int Index => checkpointIndex;
     public Vector3 RespawnPosition => respawnPoint.position;
     public float LavaSafeHeight => respawnPoint.position.y - lavaOffset;
 
     private bool activated = false;
 
-    public bool TryActivate()
+    private void Awake()
     {
-        if (activated) return false; // já foi ativado
-        activated = true;
-        return true; // primeira vez
+        if (spriteRenderer == null) spriteRenderer = GetComponent<SpriteRenderer>();
+        if (animator == null) animator = GetComponent<Animator>();
+
+        // começa apagado
+        spriteRenderer.sprite = offSprite;
+        animator.enabled = false;
     }
 
-    // usado pelo GameLoader para marcar checkpoints já alcançados
+    public bool TryActivate()
+    {
+        if (activated) return false;
+
+        activated = true;
+        ActivateVisuals();
+        return true;
+    }
+
     public void PreActivate()
     {
         activated = true;
+        ActivateVisuals();
+    }
+
+    private void ActivateVisuals()
+    {
+        spriteRenderer.sprite = null; // remove sprite estático
+        animator.enabled = true;      // ativa animação
     }
 
     private void OnDrawGizmos()
     {
         if (respawnPoint == null) return;
-
-        Gizmos.color = Color.green;
-        Gizmos.DrawSphere(respawnPoint.position, 0.3f);
 
         Vector3 lavaPos = new Vector3(respawnPoint.position.x, LavaSafeHeight, respawnPoint.position.z);
         Gizmos.color = Color.red;
