@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5350998812318820397}
   - component: {fileID: 6167879189234692719}
   - component: {fileID: -7161934168130111072}
+  - component: {fileID: 3652438435397072687}
   m_Layer: 0
   m_Name: PowerUpLava
   m_TagString: Untagged
@@ -77,8 +78,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 6139950087774908092, guid: 4f0d6b3303171a04d84bd62c9cd8715e, type: 3}
+  m_SortingOrder: 1
+  m_Sprite: {fileID: -3642613268980390408, guid: 4f0d6b3303171a04d84bd62c9cd8715e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -150,3 +151,25 @@ MonoBehaviour:
   feedBackTextualPrefab: {fileID: 7496298807150771853, guid: 5b226fd8c9b73ca4194a89e7d0d70219, type: 3}
   powerModificador: {fileID: 11400000, guid: 5c663b5d052230444bb73600f135cc50, type: 2}
   mensagemFeedback: PowerUp
+--- !u!95 &3652438435397072687
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6028353623979869689}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d1af009aafd526c4f8f9d2b6c80c52ae, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
