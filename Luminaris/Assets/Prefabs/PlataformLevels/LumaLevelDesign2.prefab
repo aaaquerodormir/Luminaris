@@ -3173,7 +3173,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5481432957659375188, guid: 0fc98b9c392aff84e96210463e7b0d33, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 161.4
+      value: 161.93
       objectReference: {fileID: 0}
     - target: {fileID: 5481432957659375188, guid: 0fc98b9c392aff84e96210463e7b0d33, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4049,7 +4049,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8496219440790705810, guid: de35c4ae302314b49acc975d72d3ff2d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6.47
+      value: 6.94
       objectReference: {fileID: 0}
     - target: {fileID: 8496219440790705810, guid: de35c4ae302314b49acc975d72d3ff2d, type: 3}
       propertyPath: m_LocalPosition.y
@@ -4317,7 +4317,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5481432957659375188, guid: e3e9a3fa75ca450468d59b110c0bebac, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 79.78
+      value: 79.52
       objectReference: {fileID: 0}
     - target: {fileID: 5481432957659375188, guid: e3e9a3fa75ca450468d59b110c0bebac, type: 3}
       propertyPath: m_LocalPosition.z
@@ -6417,13 +6417,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4432233344312784900, guid: 332dcfb0fe9bcfe4f816bf7244baa961, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.64
+      objectReference: {fileID: 0}
     - target: {fileID: 6895417372502937801, guid: 332dcfb0fe9bcfe4f816bf7244baa961, type: 3}
       propertyPath: m_LocalPosition.x
       value: 4.56
       objectReference: {fileID: 0}
     - target: {fileID: 7988038428012807784, guid: 332dcfb0fe9bcfe4f816bf7244baa961, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3
+      value: -1.32
+      objectReference: {fileID: 0}
+    - target: {fileID: 8114671616256153325, guid: 332dcfb0fe9bcfe4f816bf7244baa961, type: 3}
+      propertyPath: pauseAtB
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
