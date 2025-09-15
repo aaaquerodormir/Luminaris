@@ -119,6 +119,63 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1001 &3374657
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5352994928838407836, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_Name
+      value: Plataforma Base Roxa Pequena Level 3 (15)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -18.164286
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 199.95
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
 --- !u!1 &7348001
 GameObject:
   m_ObjectHideFlags: 0
@@ -158,6 +215,177 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -30}
   m_SizeDelta: {x: 400, y: 400}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1001 &12450158
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5352994928838407836, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_Name
+      value: Plataforma Base Verde Pequena Level 3 (15)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -10.5589285
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 223.70341
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+--- !u!1001 &13321702
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5352994928838407836, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_Name
+      value: Plataforma Base Roxa Pequena Level 3 (13)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -19.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 193.09
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+--- !u!1001 &31048753
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5352994928838407836, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_Name
+      value: Plataforma Base Verde Pequena Level 3 (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -6.31
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 168.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
 --- !u!114 &32226141 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2596292194444357674, guid: e87f939ef0a938a4a96c682259a642e7, type: 3}
@@ -169,6 +397,128 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab3d08e7ded14e04aa6543b97060c030, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1001 &44421989
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1774235193786647228, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: m_Name
+      value: Plataforma Espinhos Roxa Level 3 (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5279898114109789264, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: initialDelay
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -22.020231
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 203.27475
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+--- !u!1001 &47366114
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1774235193786647228, guid: 70b82454b623b4a43ab2bc26b2f81c09, type: 3}
+      propertyPath: m_Name
+      value: Plataforma Espinhos Level 3 (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5279898114109789264, guid: 70b82454b623b4a43ab2bc26b2f81c09, type: 3}
+      propertyPath: cycleInterval
+      value: 2.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: 70b82454b623b4a43ab2bc26b2f81c09, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -10.210741
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: 70b82454b623b4a43ab2bc26b2f81c09, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 188.43713
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: 70b82454b623b4a43ab2bc26b2f81c09, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: 70b82454b623b4a43ab2bc26b2f81c09, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: 70b82454b623b4a43ab2bc26b2f81c09, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: 70b82454b623b4a43ab2bc26b2f81c09, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: 70b82454b623b4a43ab2bc26b2f81c09, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: 70b82454b623b4a43ab2bc26b2f81c09, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: 70b82454b623b4a43ab2bc26b2f81c09, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: 70b82454b623b4a43ab2bc26b2f81c09, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 70b82454b623b4a43ab2bc26b2f81c09, type: 3}
 --- !u!1 &48594242
 GameObject:
   m_ObjectHideFlags: 0
@@ -199,6 +549,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1938430804}
+  - {fileID: 92214227}
   - {fileID: 1504393120}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -238,6 +589,63 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 28}
   m_Pivot: {x: 0.5, y: 1}
+--- !u!1001 &76597123
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1774235193786647228, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: m_Name
+      value: Plataforma Espinhos Roxa Level 3 (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -13.1118765
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 225.00064
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
 --- !u!1 &78272177
 GameObject:
   m_ObjectHideFlags: 0
@@ -410,6 +818,373 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 11.937996, y: 248.01903}
   m_EdgeRadius: 0
+--- !u!1001 &90704290
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4177288088951698197, guid: bb9417e6967e4fb48a0476c417eebaef, type: 3}
+      propertyPath: m_Name
+      value: Plataforma Instavel Verde Level 3 (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4407377975143006262, guid: bb9417e6967e4fb48a0476c417eebaef, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -11.339783
+      objectReference: {fileID: 0}
+    - target: {fileID: 4407377975143006262, guid: bb9417e6967e4fb48a0476c417eebaef, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 199.19374
+      objectReference: {fileID: 0}
+    - target: {fileID: 4407377975143006262, guid: bb9417e6967e4fb48a0476c417eebaef, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4407377975143006262, guid: bb9417e6967e4fb48a0476c417eebaef, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4407377975143006262, guid: bb9417e6967e4fb48a0476c417eebaef, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4407377975143006262, guid: bb9417e6967e4fb48a0476c417eebaef, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4407377975143006262, guid: bb9417e6967e4fb48a0476c417eebaef, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4407377975143006262, guid: bb9417e6967e4fb48a0476c417eebaef, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4407377975143006262, guid: bb9417e6967e4fb48a0476c417eebaef, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4407377975143006262, guid: bb9417e6967e4fb48a0476c417eebaef, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: bb9417e6967e4fb48a0476c417eebaef, type: 3}
+--- !u!1001 &91337684
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1774235193786647228, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: m_Name
+      value: Plataforma Espinhos Roxa Level 3 (10)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5279898114109789264, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: initialDelay
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5279898114109789264, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: cycleInterval
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -12.903326
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 231.96735
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+--- !u!1001 &92214226
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 48594243}
+    m_Modifications:
+    - target: {fileID: -258644934399997119, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: mensagemFeedback
+      value: +4 Pulos
+      objectReference: {fileID: 0}
+    - target: {fileID: -258644934399997119, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: feedbackTextPrefab
+      value: 
+      objectReference: {fileID: 2386259172372037562, guid: 9437baf268231174baab34208ea7ec15, type: 3}
+    - target: {fileID: 1184877703159799833, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -18.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1184877703159799833, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 243.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1184877703159799833, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.07321991
+      objectReference: {fileID: 0}
+    - target: {fileID: 1184877703159799833, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1184877703159799833, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1184877703159799833, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1184877703159799833, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1184877703159799833, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1184877703159799833, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1184877703159799833, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3537007080289609497, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: m_Name
+      value: PowerUpPulo (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6439115748960710005, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+--- !u!4 &92214227 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1184877703159799833, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+  m_PrefabInstance: {fileID: 92214226}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &109582715
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5352994928838407836, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_Name
+      value: Plataforma Base Roxa Pequena Level 3 (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -8.818856
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 171.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+--- !u!1001 &134886798
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5352994928838407836, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_Name
+      value: Plataforma Base Roxa Pequena Level 3 (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -6.92
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 195.21199
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+--- !u!1001 &148164771
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5352994928838407836, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_Name
+      value: Plataforma Base Verde Pequena Level 3 (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -11.36
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 175.55
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
 --- !u!1 &161180402
 GameObject:
   m_ObjectHideFlags: 0
@@ -528,6 +1303,193 @@ MonoBehaviour:
   buttonText: {fileID: 1535823280}
   normalColor: {r: 0.47058824, g: 0.8, b: 0.7254902, a: 1}
   highlightedColor: {r: 0.95686275, g: 0.8352941, b: 0.39607844, a: 1}
+--- !u!1001 &165446886
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5352994928838407836, guid: 9891b0eab5cb0b34ba84f9c45cbbf5d3, type: 3}
+      propertyPath: m_Name
+      value: Plataforma Base Verde Level 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 9891b0eab5cb0b34ba84f9c45cbbf5d3, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -18.59
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 9891b0eab5cb0b34ba84f9c45cbbf5d3, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 202.282
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 9891b0eab5cb0b34ba84f9c45cbbf5d3, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 9891b0eab5cb0b34ba84f9c45cbbf5d3, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 9891b0eab5cb0b34ba84f9c45cbbf5d3, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 9891b0eab5cb0b34ba84f9c45cbbf5d3, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 9891b0eab5cb0b34ba84f9c45cbbf5d3, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 9891b0eab5cb0b34ba84f9c45cbbf5d3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 9891b0eab5cb0b34ba84f9c45cbbf5d3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 9891b0eab5cb0b34ba84f9c45cbbf5d3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9891b0eab5cb0b34ba84f9c45cbbf5d3, type: 3}
+--- !u!1001 &205685305
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1774235193786647228, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: m_Name
+      value: Plataforma Espinhos Roxa Level 3 (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -22.214746
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 216.07721
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+--- !u!1001 &209136330
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 26235603753909661, guid: a872256f3ff005948a827f213683ce8f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.61
+      objectReference: {fileID: 0}
+    - target: {fileID: 1264328663090661213, guid: a872256f3ff005948a827f213683ce8f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.48
+      objectReference: {fileID: 0}
+    - target: {fileID: 5563878348188617050, guid: a872256f3ff005948a827f213683ce8f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -8.959621
+      objectReference: {fileID: 0}
+    - target: {fileID: 5563878348188617050, guid: a872256f3ff005948a827f213683ce8f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 226.20349
+      objectReference: {fileID: 0}
+    - target: {fileID: 5563878348188617050, guid: a872256f3ff005948a827f213683ce8f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5563878348188617050, guid: a872256f3ff005948a827f213683ce8f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5563878348188617050, guid: a872256f3ff005948a827f213683ce8f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5563878348188617050, guid: a872256f3ff005948a827f213683ce8f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5563878348188617050, guid: a872256f3ff005948a827f213683ce8f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5563878348188617050, guid: a872256f3ff005948a827f213683ce8f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5563878348188617050, guid: a872256f3ff005948a827f213683ce8f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5563878348188617050, guid: a872256f3ff005948a827f213683ce8f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8621079097315452080, guid: a872256f3ff005948a827f213683ce8f, type: 3}
+      propertyPath: pauseAtA
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8621079097315452080, guid: a872256f3ff005948a827f213683ce8f, type: 3}
+      propertyPath: pauseAtB
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9017894935116080863, guid: a872256f3ff005948a827f213683ce8f, type: 3}
+      propertyPath: m_Name
+      value: Plataforma Movel Vertical Verde Level 3
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a872256f3ff005948a827f213683ce8f, type: 3}
 --- !u!1 &213461816
 GameObject:
   m_ObjectHideFlags: 0
@@ -679,6 +1641,63 @@ MonoBehaviour:
   buttonText: {fileID: 1956773744}
   normalColor: {r: 0.47058824, g: 0.8, b: 0.7254902, a: 1}
   highlightedColor: {r: 0.95686275, g: 0.8352941, b: 0.39607844, a: 1}
+--- !u!1001 &233352492
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5352994928838407836, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_Name
+      value: Plataforma Base Verde Pequena Level 3 (10)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -10.401062
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 183.2818
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
 --- !u!1 &234788748
 GameObject:
   m_ObjectHideFlags: 0
@@ -1193,6 +2212,136 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 279157214}
   m_CullTransparentMesh: 1
+--- !u!1001 &302487778
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1774235193786647228, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: m_Name
+      value: Plataforma Espinhos Roxa Level 3 (11)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5279898114109789264, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: initialDelay
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5279898114109789264, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: cycleInterval
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -6.9634895
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 235.13123
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+--- !u!1001 &303220600
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1774235193786647228, guid: 70b82454b623b4a43ab2bc26b2f81c09, type: 3}
+      propertyPath: m_Name
+      value: Plataforma Espinhos Level 3 (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5279898114109789264, guid: 70b82454b623b4a43ab2bc26b2f81c09, type: 3}
+      propertyPath: initialDelay
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5279898114109789264, guid: 70b82454b623b4a43ab2bc26b2f81c09, type: 3}
+      propertyPath: cycleInterval
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: 70b82454b623b4a43ab2bc26b2f81c09, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -10.42
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: 70b82454b623b4a43ab2bc26b2f81c09, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 230.71
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: 70b82454b623b4a43ab2bc26b2f81c09, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: 70b82454b623b4a43ab2bc26b2f81c09, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: 70b82454b623b4a43ab2bc26b2f81c09, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: 70b82454b623b4a43ab2bc26b2f81c09, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: 70b82454b623b4a43ab2bc26b2f81c09, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: 70b82454b623b4a43ab2bc26b2f81c09, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: 70b82454b623b4a43ab2bc26b2f81c09, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: 70b82454b623b4a43ab2bc26b2f81c09, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 70b82454b623b4a43ab2bc26b2f81c09, type: 3}
 --- !u!1 &308168100
 GameObject:
   m_ObjectHideFlags: 0
@@ -1268,63 +2417,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1001 &340232852
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 5352994928838407836, guid: 8ca754aa567b0f94db82b0c1b8e4713c, type: 3}
-      propertyPath: m_Name
-      value: Plataforma Base Expandida Roxa Level 3 (2)
-      objectReference: {fileID: 0}
-    - target: {fileID: 5481432957659375188, guid: 8ca754aa567b0f94db82b0c1b8e4713c, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -14.34
-      objectReference: {fileID: 0}
-    - target: {fileID: 5481432957659375188, guid: 8ca754aa567b0f94db82b0c1b8e4713c, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 220.45935
-      objectReference: {fileID: 0}
-    - target: {fileID: 5481432957659375188, guid: 8ca754aa567b0f94db82b0c1b8e4713c, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5481432957659375188, guid: 8ca754aa567b0f94db82b0c1b8e4713c, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5481432957659375188, guid: 8ca754aa567b0f94db82b0c1b8e4713c, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5481432957659375188, guid: 8ca754aa567b0f94db82b0c1b8e4713c, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5481432957659375188, guid: 8ca754aa567b0f94db82b0c1b8e4713c, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5481432957659375188, guid: 8ca754aa567b0f94db82b0c1b8e4713c, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5481432957659375188, guid: 8ca754aa567b0f94db82b0c1b8e4713c, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5481432957659375188, guid: 8ca754aa567b0f94db82b0c1b8e4713c, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 8ca754aa567b0f94db82b0c1b8e4713c, type: 3}
 --- !u!1 &341817713
 GameObject:
   m_ObjectHideFlags: 0
@@ -1403,6 +2495,63 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 29.916626, y: 249.99039}
   m_EdgeRadius: 0
+--- !u!1001 &354545703
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5352994928838407836, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_Name
+      value: Plataforma Base Verde Pequena Level 3 (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -11.555779
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 170.33
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
 --- !u!1 &358619799
 GameObject:
   m_ObjectHideFlags: 0
@@ -1463,6 +2612,120 @@ MonoBehaviour:
   speedMultiplier: 0.2
   player1: {fileID: 440363943590938542}
   player2: {fileID: 1992964551}
+--- !u!1001 &367711024
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5352994928838407836, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_Name
+      value: Plataforma Base Verde Pequena Level 3 (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -11.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 180.84
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+--- !u!1001 &395287709
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5352994928838407836, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_Name
+      value: Plataforma Base Verde Pequena Level 3 (14)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -18.89
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 215.0561
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
 --- !u!1 &403941595
 GameObject:
   m_ObjectHideFlags: 0
@@ -1951,6 +3214,234 @@ MonoBehaviour:
   buttonText: {fileID: 485050742}
   normalColor: {r: 0.47058824, g: 0.8, b: 0.7254902, a: 1}
   highlightedColor: {r: 0.95686275, g: 0.8352941, b: 0.39607844, a: 1}
+--- !u!1001 &449985595
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1774235193786647228, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: m_Name
+      value: Plataforma Espinhos Roxa Level 3 (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -7.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 184.6037
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+--- !u!1001 &457747835
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5352994928838407836, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_Name
+      value: Plataforma Base Roxa Pequena Level 3 (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -9.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 174.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+--- !u!1001 &467905765
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5352994928838407836, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_Name
+      value: Plataforma Base Verde Pequena Level 3 (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -11.76
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 166.72511
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+--- !u!1001 &471249181
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5352994928838407836, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_Name
+      value: Plataforma Base Verde Pequena Level 3 (21)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -22.19
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 194.27
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
 --- !u!1 &485050740
 GameObject:
   m_ObjectHideFlags: 0
@@ -2547,6 +4038,63 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 596019357}
   m_CullTransparentMesh: 1
+--- !u!1001 &613485682
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5352994928838407836, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_Name
+      value: Plataforma Base Roxa Pequena Level 3 (11)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -19.990826
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 188.25092
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
 --- !u!1 &619394800
 GameObject:
   m_ObjectHideFlags: 0
@@ -2951,6 +4499,140 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7244488332135998121, guid: 7b3919cb092164441b4520eca4e81412, type: 3}
   m_PrefabInstance: {fileID: 676500946}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &689102107
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5352994928838407836, guid: aab8091adb7feb64bb9b2e546b68a5a3, type: 3}
+      propertyPath: m_Name
+      value: Plataforma Base Roxa Level 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: aab8091adb7feb64bb9b2e546b68a5a3, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -14.358482
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: aab8091adb7feb64bb9b2e546b68a5a3, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 219.29
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: aab8091adb7feb64bb9b2e546b68a5a3, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: aab8091adb7feb64bb9b2e546b68a5a3, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: aab8091adb7feb64bb9b2e546b68a5a3, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: aab8091adb7feb64bb9b2e546b68a5a3, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: aab8091adb7feb64bb9b2e546b68a5a3, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: aab8091adb7feb64bb9b2e546b68a5a3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: aab8091adb7feb64bb9b2e546b68a5a3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: aab8091adb7feb64bb9b2e546b68a5a3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: aab8091adb7feb64bb9b2e546b68a5a3, type: 3}
+--- !u!1001 &702103456
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 26235603753909661, guid: c50d86b88aa1c1b41ab691eb8ce266f3, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.21
+      objectReference: {fileID: 0}
+    - target: {fileID: 1264328663090661213, guid: c50d86b88aa1c1b41ab691eb8ce266f3, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3.92
+      objectReference: {fileID: 0}
+    - target: {fileID: 1298934790114011788, guid: c50d86b88aa1c1b41ab691eb8ce266f3, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.65
+      objectReference: {fileID: 0}
+    - target: {fileID: 5563878348188617050, guid: c50d86b88aa1c1b41ab691eb8ce266f3, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -22.00676
+      objectReference: {fileID: 0}
+    - target: {fileID: 5563878348188617050, guid: c50d86b88aa1c1b41ab691eb8ce266f3, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 208.82892
+      objectReference: {fileID: 0}
+    - target: {fileID: 5563878348188617050, guid: c50d86b88aa1c1b41ab691eb8ce266f3, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5563878348188617050, guid: c50d86b88aa1c1b41ab691eb8ce266f3, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5563878348188617050, guid: c50d86b88aa1c1b41ab691eb8ce266f3, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5563878348188617050, guid: c50d86b88aa1c1b41ab691eb8ce266f3, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5563878348188617050, guid: c50d86b88aa1c1b41ab691eb8ce266f3, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5563878348188617050, guid: c50d86b88aa1c1b41ab691eb8ce266f3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5563878348188617050, guid: c50d86b88aa1c1b41ab691eb8ce266f3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5563878348188617050, guid: c50d86b88aa1c1b41ab691eb8ce266f3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8621079097315452080, guid: c50d86b88aa1c1b41ab691eb8ce266f3, type: 3}
+      propertyPath: pauseAtA
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8621079097315452080, guid: c50d86b88aa1c1b41ab691eb8ce266f3, type: 3}
+      propertyPath: pauseAtB
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9017894935116080863, guid: c50d86b88aa1c1b41ab691eb8ce266f3, type: 3}
+      propertyPath: m_Name
+      value: Plataforma Movel Vertical Roxa Level 3
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c50d86b88aa1c1b41ab691eb8ce266f3, type: 3}
 --- !u!1 &728656586
 GameObject:
   m_ObjectHideFlags: 0
@@ -2984,6 +4666,242 @@ Transform:
   - {fileID: 526352209}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &729024830
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4177288088951698197, guid: bb9417e6967e4fb48a0476c417eebaef, type: 3}
+      propertyPath: m_Name
+      value: Plataforma Instavel Verde Level 3 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4407377975143006262, guid: bb9417e6967e4fb48a0476c417eebaef, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -10.920081
+      objectReference: {fileID: 0}
+    - target: {fileID: 4407377975143006262, guid: bb9417e6967e4fb48a0476c417eebaef, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 185.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 4407377975143006262, guid: bb9417e6967e4fb48a0476c417eebaef, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4407377975143006262, guid: bb9417e6967e4fb48a0476c417eebaef, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4407377975143006262, guid: bb9417e6967e4fb48a0476c417eebaef, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4407377975143006262, guid: bb9417e6967e4fb48a0476c417eebaef, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4407377975143006262, guid: bb9417e6967e4fb48a0476c417eebaef, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4407377975143006262, guid: bb9417e6967e4fb48a0476c417eebaef, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4407377975143006262, guid: bb9417e6967e4fb48a0476c417eebaef, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4407377975143006262, guid: bb9417e6967e4fb48a0476c417eebaef, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: bb9417e6967e4fb48a0476c417eebaef, type: 3}
+--- !u!1001 &795081502
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1774235193786647228, guid: 70b82454b623b4a43ab2bc26b2f81c09, type: 3}
+      propertyPath: m_Name
+      value: Plataforma Espinhos Level 3 (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5279898114109789264, guid: 70b82454b623b4a43ab2bc26b2f81c09, type: 3}
+      propertyPath: initialDelay
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5279898114109789264, guid: 70b82454b623b4a43ab2bc26b2f81c09, type: 3}
+      propertyPath: cycleInterval
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: 70b82454b623b4a43ab2bc26b2f81c09, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -9.810054
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: 70b82454b623b4a43ab2bc26b2f81c09, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 233.54239
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: 70b82454b623b4a43ab2bc26b2f81c09, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: 70b82454b623b4a43ab2bc26b2f81c09, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: 70b82454b623b4a43ab2bc26b2f81c09, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: 70b82454b623b4a43ab2bc26b2f81c09, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: 70b82454b623b4a43ab2bc26b2f81c09, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: 70b82454b623b4a43ab2bc26b2f81c09, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: 70b82454b623b4a43ab2bc26b2f81c09, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: 70b82454b623b4a43ab2bc26b2f81c09, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 70b82454b623b4a43ab2bc26b2f81c09, type: 3}
+--- !u!1001 &823271665
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1774235193786647228, guid: 70b82454b623b4a43ab2bc26b2f81c09, type: 3}
+      propertyPath: m_Name
+      value: Plataforma Espinhos Level 3 (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: 70b82454b623b4a43ab2bc26b2f81c09, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -18.97742
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: 70b82454b623b4a43ab2bc26b2f81c09, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 211.97583
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: 70b82454b623b4a43ab2bc26b2f81c09, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: 70b82454b623b4a43ab2bc26b2f81c09, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: 70b82454b623b4a43ab2bc26b2f81c09, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: 70b82454b623b4a43ab2bc26b2f81c09, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: 70b82454b623b4a43ab2bc26b2f81c09, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: 70b82454b623b4a43ab2bc26b2f81c09, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: 70b82454b623b4a43ab2bc26b2f81c09, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: 70b82454b623b4a43ab2bc26b2f81c09, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 70b82454b623b4a43ab2bc26b2f81c09, type: 3}
+--- !u!1001 &836497326
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5352994928838407836, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_Name
+      value: Plataforma Base Roxa Pequena Level 3 (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -8.061262
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 198.14001
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
 --- !u!114 &853078784 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2596292194444357674, guid: 5187dc984bba9bb419818612fa764200, type: 3}
@@ -3031,6 +4949,71 @@ RectTransform:
   m_AnchoredPosition: {x: -5, y: 0}
   m_SizeDelta: {x: -20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1001 &863272978
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1774235193786647228, guid: 70b82454b623b4a43ab2bc26b2f81c09, type: 3}
+      propertyPath: m_Name
+      value: Plataforma Espinhos Level 3 (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5279898114109789264, guid: 70b82454b623b4a43ab2bc26b2f81c09, type: 3}
+      propertyPath: initialDelay
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5279898114109789264, guid: 70b82454b623b4a43ab2bc26b2f81c09, type: 3}
+      propertyPath: cycleInterval
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: 70b82454b623b4a43ab2bc26b2f81c09, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -10.360397
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: 70b82454b623b4a43ab2bc26b2f81c09, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 236.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: 70b82454b623b4a43ab2bc26b2f81c09, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: 70b82454b623b4a43ab2bc26b2f81c09, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: 70b82454b623b4a43ab2bc26b2f81c09, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: 70b82454b623b4a43ab2bc26b2f81c09, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: 70b82454b623b4a43ab2bc26b2f81c09, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: 70b82454b623b4a43ab2bc26b2f81c09, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: 70b82454b623b4a43ab2bc26b2f81c09, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: 70b82454b623b4a43ab2bc26b2f81c09, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 70b82454b623b4a43ab2bc26b2f81c09, type: 3}
 --- !u!1001 &871042156
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3045,11 +5028,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5481432957659375188, guid: 8ca754aa567b0f94db82b0c1b8e4713c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -15.49154
+      value: -14.78
       objectReference: {fileID: 0}
     - target: {fileID: 5481432957659375188, guid: 8ca754aa567b0f94db82b0c1b8e4713c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 180.53096
+      value: 181.76
       objectReference: {fileID: 0}
     - target: {fileID: 5481432957659375188, guid: 8ca754aa567b0f94db82b0c1b8e4713c, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3088,6 +5071,63 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8ca754aa567b0f94db82b0c1b8e4713c, type: 3}
+--- !u!1001 &901199737
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5352994928838407836, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_Name
+      value: Plataforma Base Verde Pequena Level 3 (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -6.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 173.08
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
 --- !u!1001 &903638528
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3163,6 +5203,63 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7244488332135998121, guid: 7b3919cb092164441b4520eca4e81412, type: 3}
   m_PrefabInstance: {fileID: 903638528}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &914245698
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5352994928838407836, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_Name
+      value: Plataforma Base Verde Pequena Level 3 (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -6.28
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 178.63
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
 --- !u!1 &919075350
 GameObject:
   m_ObjectHideFlags: 0
@@ -3524,11 +5621,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -19.194044
+      value: -19.16
       objectReference: {fileID: 0}
     - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 179.74763
+      value: 180.19
       objectReference: {fileID: 0}
     - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3801,6 +5898,132 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 960946412}
   m_CullTransparentMesh: 1
+--- !u!1001 &960969053
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1774235193786647228, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: m_Name
+      value: Plataforma Espinhos Roxa Level 3 (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5279898114109789264, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: initialDelay
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -16.220118
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 213.36691
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+--- !u!1001 &970095939
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1774235193786647228, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: m_Name
+      value: Plataforma Espinhos Roxa Level 3 (12)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5279898114109789264, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: initialDelay
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5279898114109789264, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: cycleInterval
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -6.926308
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 238.30069
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
 --- !u!1 &975150182
 GameObject:
   m_ObjectHideFlags: 0
@@ -4003,6 +6226,177 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 415423409700474981, guid: 5f386589a65d21f4e967363c1a4ce260, type: 3}
   m_PrefabInstance: {fileID: 7187244594393626207}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &999830490
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5352994928838407836, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_Name
+      value: Plataforma Base Roxa Pequena Level 3 (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -8.63
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 179.72
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+--- !u!1001 &1008989401
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5352994928838407836, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_Name
+      value: Plataforma Base Roxa Pequena Level 3 (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -8.75653
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 169.26
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+--- !u!1001 &1014799696
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5352994928838407836, guid: aab8091adb7feb64bb9b2e546b68a5a3, type: 3}
+      propertyPath: m_Name
+      value: Plataforma Base Roxa Level 3 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: aab8091adb7feb64bb9b2e546b68a5a3, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -6.997642
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: aab8091adb7feb64bb9b2e546b68a5a3, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 229.69
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: aab8091adb7feb64bb9b2e546b68a5a3, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: aab8091adb7feb64bb9b2e546b68a5a3, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: aab8091adb7feb64bb9b2e546b68a5a3, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: aab8091adb7feb64bb9b2e546b68a5a3, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: aab8091adb7feb64bb9b2e546b68a5a3, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: aab8091adb7feb64bb9b2e546b68a5a3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: aab8091adb7feb64bb9b2e546b68a5a3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: aab8091adb7feb64bb9b2e546b68a5a3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: aab8091adb7feb64bb9b2e546b68a5a3, type: 3}
 --- !u!1 &1014911379
 GameObject:
   m_ObjectHideFlags: 0
@@ -4101,6 +6495,63 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 312.08484, y: 39.88562}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1001 &1030395784
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5352994928838407836, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_Name
+      value: Plataforma Base Verde Pequena Level 3 (12)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -6.51
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 203.7288
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
 --- !u!1001 &1044177229
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4162,6 +6613,120 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+--- !u!1001 &1048090922
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4177288088951698197, guid: bb9417e6967e4fb48a0476c417eebaef, type: 3}
+      propertyPath: m_Name
+      value: Plataforma Instavel Verde Level 3 (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4407377975143006262, guid: bb9417e6967e4fb48a0476c417eebaef, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -22.79
+      objectReference: {fileID: 0}
+    - target: {fileID: 4407377975143006262, guid: bb9417e6967e4fb48a0476c417eebaef, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 189.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4407377975143006262, guid: bb9417e6967e4fb48a0476c417eebaef, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4407377975143006262, guid: bb9417e6967e4fb48a0476c417eebaef, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4407377975143006262, guid: bb9417e6967e4fb48a0476c417eebaef, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4407377975143006262, guid: bb9417e6967e4fb48a0476c417eebaef, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4407377975143006262, guid: bb9417e6967e4fb48a0476c417eebaef, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4407377975143006262, guid: bb9417e6967e4fb48a0476c417eebaef, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4407377975143006262, guid: bb9417e6967e4fb48a0476c417eebaef, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4407377975143006262, guid: bb9417e6967e4fb48a0476c417eebaef, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: bb9417e6967e4fb48a0476c417eebaef, type: 3}
+--- !u!1001 &1054891485
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4177288088951698197, guid: bb9417e6967e4fb48a0476c417eebaef, type: 3}
+      propertyPath: m_Name
+      value: Plataforma Instavel Verde Level 3 (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4407377975143006262, guid: bb9417e6967e4fb48a0476c417eebaef, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -10.60522
+      objectReference: {fileID: 0}
+    - target: {fileID: 4407377975143006262, guid: bb9417e6967e4fb48a0476c417eebaef, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 196.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 4407377975143006262, guid: bb9417e6967e4fb48a0476c417eebaef, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4407377975143006262, guid: bb9417e6967e4fb48a0476c417eebaef, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4407377975143006262, guid: bb9417e6967e4fb48a0476c417eebaef, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4407377975143006262, guid: bb9417e6967e4fb48a0476c417eebaef, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4407377975143006262, guid: bb9417e6967e4fb48a0476c417eebaef, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4407377975143006262, guid: bb9417e6967e4fb48a0476c417eebaef, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4407377975143006262, guid: bb9417e6967e4fb48a0476c417eebaef, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4407377975143006262, guid: bb9417e6967e4fb48a0476c417eebaef, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: bb9417e6967e4fb48a0476c417eebaef, type: 3}
 --- !u!1001 &1083453691
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4270,6 +6835,291 @@ Transform:
   - {fileID: 1514987397}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1112826293
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4177288088951698197, guid: 3722d5e78f7511b44893da46909806e4, type: 3}
+      propertyPath: m_Name
+      value: Plataforma Instavel Roxa Level 3 (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4407377975143006262, guid: 3722d5e78f7511b44893da46909806e4, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -16.32
+      objectReference: {fileID: 0}
+    - target: {fileID: 4407377975143006262, guid: 3722d5e78f7511b44893da46909806e4, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 206.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 4407377975143006262, guid: 3722d5e78f7511b44893da46909806e4, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4407377975143006262, guid: 3722d5e78f7511b44893da46909806e4, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4407377975143006262, guid: 3722d5e78f7511b44893da46909806e4, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4407377975143006262, guid: 3722d5e78f7511b44893da46909806e4, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4407377975143006262, guid: 3722d5e78f7511b44893da46909806e4, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4407377975143006262, guid: 3722d5e78f7511b44893da46909806e4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4407377975143006262, guid: 3722d5e78f7511b44893da46909806e4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4407377975143006262, guid: 3722d5e78f7511b44893da46909806e4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3722d5e78f7511b44893da46909806e4, type: 3}
+--- !u!1001 &1113142642
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1774235193786647228, guid: 70b82454b623b4a43ab2bc26b2f81c09, type: 3}
+      propertyPath: m_Name
+      value: Plataforma Espinhos Level 3 (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: 70b82454b623b4a43ab2bc26b2f81c09, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -20.07
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: 70b82454b623b4a43ab2bc26b2f81c09, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 207.29
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: 70b82454b623b4a43ab2bc26b2f81c09, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: 70b82454b623b4a43ab2bc26b2f81c09, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: 70b82454b623b4a43ab2bc26b2f81c09, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: 70b82454b623b4a43ab2bc26b2f81c09, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: 70b82454b623b4a43ab2bc26b2f81c09, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: 70b82454b623b4a43ab2bc26b2f81c09, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: 70b82454b623b4a43ab2bc26b2f81c09, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: 70b82454b623b4a43ab2bc26b2f81c09, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 70b82454b623b4a43ab2bc26b2f81c09, type: 3}
+--- !u!1001 &1135136093
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5352994928838407836, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_Name
+      value: Plataforma Base Verde Pequena Level 3 (17)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -17.32101
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 187.26842
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+--- !u!1001 &1135479092
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5352994928838407836, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_Name
+      value: Plataforma Base Roxa Pequena Level 3 (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -20.624615
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 182.74881
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+--- !u!1001 &1144214581
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5352994928838407836, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_Name
+      value: Plataforma Base Verde Pequena Level 3 (19)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -21.48
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 199.14
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
 --- !u!1 &1145375727
 GameObject:
   m_ObjectHideFlags: 0
@@ -4363,7 +7213,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 178.75
+      value: 178.95
       objectReference: {fileID: 0}
     - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4402,6 +7252,120 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+--- !u!1001 &1189738041
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5352994928838407836, guid: 9891b0eab5cb0b34ba84f9c45cbbf5d3, type: 3}
+      propertyPath: m_Name
+      value: Plataforma Base Verde Level 3 (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 9891b0eab5cb0b34ba84f9c45cbbf5d3, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -17.883135
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 9891b0eab5cb0b34ba84f9c45cbbf5d3, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 183.09851
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 9891b0eab5cb0b34ba84f9c45cbbf5d3, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 9891b0eab5cb0b34ba84f9c45cbbf5d3, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 9891b0eab5cb0b34ba84f9c45cbbf5d3, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 9891b0eab5cb0b34ba84f9c45cbbf5d3, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 9891b0eab5cb0b34ba84f9c45cbbf5d3, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 9891b0eab5cb0b34ba84f9c45cbbf5d3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 9891b0eab5cb0b34ba84f9c45cbbf5d3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 9891b0eab5cb0b34ba84f9c45cbbf5d3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9891b0eab5cb0b34ba84f9c45cbbf5d3, type: 3}
+--- !u!1001 &1197235808
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1774235193786647228, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: m_Name
+      value: Plataforma Espinhos Roxa Level 3 (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -8.69
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 166.1719
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
 --- !u!1001 &1226865611
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4477,6 +7441,63 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7244488332135998121, guid: 7b3919cb092164441b4520eca4e81412, type: 3}
   m_PrefabInstance: {fileID: 1226865611}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1233722038
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1774235193786647228, guid: 70b82454b623b4a43ab2bc26b2f81c09, type: 3}
+      propertyPath: m_Name
+      value: Plataforma Espinhos Level 3 (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: 70b82454b623b4a43ab2bc26b2f81c09, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -9.12394
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: 70b82454b623b4a43ab2bc26b2f81c09, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 193.77718
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: 70b82454b623b4a43ab2bc26b2f81c09, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: 70b82454b623b4a43ab2bc26b2f81c09, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: 70b82454b623b4a43ab2bc26b2f81c09, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: 70b82454b623b4a43ab2bc26b2f81c09, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: 70b82454b623b4a43ab2bc26b2f81c09, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: 70b82454b623b4a43ab2bc26b2f81c09, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: 70b82454b623b4a43ab2bc26b2f81c09, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: 70b82454b623b4a43ab2bc26b2f81c09, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 70b82454b623b4a43ab2bc26b2f81c09, type: 3}
 --- !u!1 &1234050778
 GameObject:
   m_ObjectHideFlags: 0
@@ -4613,6 +7634,63 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2ea5c8ab19d997443a20797aa4a70755, type: 3}
+--- !u!1001 &1286360263
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5352994928838407836, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_Name
+      value: Plataforma Base Roxa Pequena Level 3 (12)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -19.557434
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 190.62448
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
 --- !u!1 &1292353254
 GameObject:
   m_ObjectHideFlags: 0
@@ -4749,6 +7827,63 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+--- !u!1001 &1334467381
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5352994928838407836, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_Name
+      value: Plataforma Base Verde Pequena Level 3 (20)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -16.46
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 196.64
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
 --- !u!1001 &1359379999
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4806,6 +7941,79 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 70b82454b623b4a43ab2bc26b2f81c09, type: 3}
+--- !u!1001 &1360890004
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 26235603753909661, guid: a872256f3ff005948a827f213683ce8f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.47
+      objectReference: {fileID: 0}
+    - target: {fileID: 1264328663090661213, guid: a872256f3ff005948a827f213683ce8f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3.73
+      objectReference: {fileID: 0}
+    - target: {fileID: 5563878348188617050, guid: a872256f3ff005948a827f213683ce8f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -10.322193
+      objectReference: {fileID: 0}
+    - target: {fileID: 5563878348188617050, guid: a872256f3ff005948a827f213683ce8f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 239.35847
+      objectReference: {fileID: 0}
+    - target: {fileID: 5563878348188617050, guid: a872256f3ff005948a827f213683ce8f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5563878348188617050, guid: a872256f3ff005948a827f213683ce8f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5563878348188617050, guid: a872256f3ff005948a827f213683ce8f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5563878348188617050, guid: a872256f3ff005948a827f213683ce8f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5563878348188617050, guid: a872256f3ff005948a827f213683ce8f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5563878348188617050, guid: a872256f3ff005948a827f213683ce8f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5563878348188617050, guid: a872256f3ff005948a827f213683ce8f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5563878348188617050, guid: a872256f3ff005948a827f213683ce8f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8621079097315452080, guid: a872256f3ff005948a827f213683ce8f, type: 3}
+      propertyPath: pauseAtA
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8621079097315452080, guid: a872256f3ff005948a827f213683ce8f, type: 3}
+      propertyPath: pauseAtB
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9017894935116080863, guid: a872256f3ff005948a827f213683ce8f, type: 3}
+      propertyPath: m_Name
+      value: Plataforma Movel Vertical Verde Level 3 (1)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a872256f3ff005948a827f213683ce8f, type: 3}
 --- !u!1001 &1377862225
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5033,6 +8241,63 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1393599344}
   m_CullTransparentMesh: 1
+--- !u!1001 &1401137533
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5352994928838407836, guid: 9891b0eab5cb0b34ba84f9c45cbbf5d3, type: 3}
+      propertyPath: m_Name
+      value: Plataforma Base Verde Level 3 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 9891b0eab5cb0b34ba84f9c45cbbf5d3, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -18.31676
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 9891b0eab5cb0b34ba84f9c45cbbf5d3, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 218.02557
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 9891b0eab5cb0b34ba84f9c45cbbf5d3, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 9891b0eab5cb0b34ba84f9c45cbbf5d3, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 9891b0eab5cb0b34ba84f9c45cbbf5d3, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 9891b0eab5cb0b34ba84f9c45cbbf5d3, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 9891b0eab5cb0b34ba84f9c45cbbf5d3, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 9891b0eab5cb0b34ba84f9c45cbbf5d3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 9891b0eab5cb0b34ba84f9c45cbbf5d3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 9891b0eab5cb0b34ba84f9c45cbbf5d3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9891b0eab5cb0b34ba84f9c45cbbf5d3, type: 3}
 --- !u!1001 &1441821925
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5051,7 +8316,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5481432957659375188, guid: 8ca754aa567b0f94db82b0c1b8e4713c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 240.29094
+      value: 243.23
       objectReference: {fileID: 0}
     - target: {fileID: 5481432957659375188, guid: 8ca754aa567b0f94db82b0c1b8e4713c, type: 3}
       propertyPath: m_LocalPosition.z
@@ -5090,6 +8355,63 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8ca754aa567b0f94db82b0c1b8e4713c, type: 3}
+--- !u!1001 &1492345396
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1774235193786647228, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: m_Name
+      value: Plataforma Espinhos Roxa Level 3 (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -7.2149153
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 222.27766
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
 --- !u!4 &1504393120 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6753299463268027633, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
@@ -5222,6 +8544,124 @@ Transform:
   - {fileID: 7099197466621284464}
   m_Father: {fileID: 1104012482}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1517333022
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5352994928838407836, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_Name
+      value: Plataforma Base Verde Pequena Level 3 (11)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -9.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 191.2627
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+--- !u!1001 &1529694028
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1774235193786647228, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: m_Name
+      value: Plataforma Espinhos Roxa Level 3 (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5279898114109789264, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: cycleInterval
+      value: 2.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -7.1895895
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 189.68
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: cc8a1a02b1b9b0740b5e4d886c666f35, type: 3}
 --- !u!1 &1535823278
 GameObject:
   m_ObjectHideFlags: 0
@@ -5419,6 +8859,63 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 70b82454b623b4a43ab2bc26b2f81c09, type: 3}
+--- !u!1001 &1585920822
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5352994928838407836, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_Name
+      value: Plataforma Base Verde Pequena Level 3 (18)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -17.082842
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 191.82
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
 --- !u!1001 &1599392917
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5707,6 +9204,63 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1626827938}
   m_CullTransparentMesh: 1
+--- !u!1001 &1658963110
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5352994928838407836, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_Name
+      value: Plataforma Base Verde Pequena Level 3 (13)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -18.539793
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 204.8907
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
 --- !u!1001 &1670658352
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5818,6 +9372,63 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1001 &1684896236
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5352994928838407836, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_Name
+      value: Plataforma Base Roxa Pequena Level 3 (14)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -18.78
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 197.79
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
 --- !u!1001 &1695496342
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5836,7 +9447,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5481432957659375188, guid: 8ca754aa567b0f94db82b0c1b8e4713c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 200.39336
+      value: 200.53
       objectReference: {fileID: 0}
     - target: {fileID: 5481432957659375188, guid: 8ca754aa567b0f94db82b0c1b8e4713c, type: 3}
       propertyPath: m_LocalPosition.z
@@ -5984,9 +9595,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4432233344312784900, guid: 2c43a82f1d5bde44db225393b1f6b87f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -3.5
+      objectReference: {fileID: 0}
     - target: {fileID: 6895417372502937801, guid: 2c43a82f1d5bde44db225393b1f6b87f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.71
+      value: 0.42
       objectReference: {fileID: 0}
     - target: {fileID: 7988038428012807784, guid: 2c43a82f1d5bde44db225393b1f6b87f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6005,6 +9620,63 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2c43a82f1d5bde44db225393b1f6b87f, type: 3}
+--- !u!1001 &1715604926
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4177288088951698197, guid: 3722d5e78f7511b44893da46909806e4, type: 3}
+      propertyPath: m_Name
+      value: Plataforma Instavel Roxa Level 3 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4407377975143006262, guid: 3722d5e78f7511b44893da46909806e4, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -12.62
+      objectReference: {fileID: 0}
+    - target: {fileID: 4407377975143006262, guid: 3722d5e78f7511b44893da46909806e4, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 192.3007
+      objectReference: {fileID: 0}
+    - target: {fileID: 4407377975143006262, guid: 3722d5e78f7511b44893da46909806e4, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4407377975143006262, guid: 3722d5e78f7511b44893da46909806e4, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4407377975143006262, guid: 3722d5e78f7511b44893da46909806e4, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4407377975143006262, guid: 3722d5e78f7511b44893da46909806e4, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4407377975143006262, guid: 3722d5e78f7511b44893da46909806e4, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4407377975143006262, guid: 3722d5e78f7511b44893da46909806e4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4407377975143006262, guid: 3722d5e78f7511b44893da46909806e4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4407377975143006262, guid: 3722d5e78f7511b44893da46909806e4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3722d5e78f7511b44893da46909806e4, type: 3}
 --- !u!1001 &1749934923
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6625,6 +10297,120 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7244488332135998121, guid: 7b3919cb092164441b4520eca4e81412, type: 3}
   m_PrefabInstance: {fileID: 1825978293}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1833724827
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5352994928838407836, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_Name
+      value: Plataforma Base Roxa Pequena Level 3 (10)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -19.78
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 185.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+--- !u!1001 &1843868314
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1774235193786647228, guid: 70b82454b623b4a43ab2bc26b2f81c09, type: 3}
+      propertyPath: m_Name
+      value: Plataforma Espinhos Level 3 (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: 70b82454b623b4a43ab2bc26b2f81c09, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -10.74039
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: 70b82454b623b4a43ab2bc26b2f81c09, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 220.85194
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: 70b82454b623b4a43ab2bc26b2f81c09, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: 70b82454b623b4a43ab2bc26b2f81c09, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: 70b82454b623b4a43ab2bc26b2f81c09, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: 70b82454b623b4a43ab2bc26b2f81c09, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: 70b82454b623b4a43ab2bc26b2f81c09, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: 70b82454b623b4a43ab2bc26b2f81c09, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: 70b82454b623b4a43ab2bc26b2f81c09, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8496219440790705810, guid: 70b82454b623b4a43ab2bc26b2f81c09, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 70b82454b623b4a43ab2bc26b2f81c09, type: 3}
 --- !u!1 &1849205200
 GameObject:
   m_ObjectHideFlags: 0
@@ -6743,6 +10529,63 @@ MonoBehaviour:
   buttonText: {fileID: 1626827940}
   normalColor: {r: 0.47058824, g: 0.8, b: 0.7254902, a: 1}
   highlightedColor: {r: 0.95686275, g: 0.8352941, b: 0.39607844, a: 1}
+--- !u!1001 &1869642292
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5352994928838407836, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_Name
+      value: Plataforma Base Verde Pequena Level 3 (16)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -22.717793
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 184.32
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 442a02ba04a8dd145b52402a70242504, type: 3}
 --- !u!1 &1885562395
 GameObject:
   m_ObjectHideFlags: 0
@@ -6870,6 +10713,63 @@ Transform:
   - {fileID: 341817714}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1923626112
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4177288088951698197, guid: 3722d5e78f7511b44893da46909806e4, type: 3}
+      propertyPath: m_Name
+      value: Plataforma Instavel Roxa Level 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4407377975143006262, guid: 3722d5e78f7511b44893da46909806e4, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -8.18
+      objectReference: {fileID: 0}
+    - target: {fileID: 4407377975143006262, guid: 3722d5e78f7511b44893da46909806e4, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 176.85
+      objectReference: {fileID: 0}
+    - target: {fileID: 4407377975143006262, guid: 3722d5e78f7511b44893da46909806e4, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4407377975143006262, guid: 3722d5e78f7511b44893da46909806e4, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4407377975143006262, guid: 3722d5e78f7511b44893da46909806e4, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4407377975143006262, guid: 3722d5e78f7511b44893da46909806e4, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4407377975143006262, guid: 3722d5e78f7511b44893da46909806e4, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4407377975143006262, guid: 3722d5e78f7511b44893da46909806e4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4407377975143006262, guid: 3722d5e78f7511b44893da46909806e4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4407377975143006262, guid: 3722d5e78f7511b44893da46909806e4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3722d5e78f7511b44893da46909806e4, type: 3}
 --- !u!1 &1934463304
 GameObject:
   m_ObjectHideFlags: 0
@@ -7001,6 +10901,120 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1184877703159799833, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
   m_PrefabInstance: {fileID: 632887387}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1942874334
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4177288088951698197, guid: 3722d5e78f7511b44893da46909806e4, type: 3}
+      propertyPath: m_Name
+      value: Plataforma Instavel Roxa Level 3 (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4407377975143006262, guid: 3722d5e78f7511b44893da46909806e4, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -18.97
+      objectReference: {fileID: 0}
+    - target: {fileID: 4407377975143006262, guid: 3722d5e78f7511b44893da46909806e4, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 195.24
+      objectReference: {fileID: 0}
+    - target: {fileID: 4407377975143006262, guid: 3722d5e78f7511b44893da46909806e4, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4407377975143006262, guid: 3722d5e78f7511b44893da46909806e4, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4407377975143006262, guid: 3722d5e78f7511b44893da46909806e4, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4407377975143006262, guid: 3722d5e78f7511b44893da46909806e4, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4407377975143006262, guid: 3722d5e78f7511b44893da46909806e4, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4407377975143006262, guid: 3722d5e78f7511b44893da46909806e4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4407377975143006262, guid: 3722d5e78f7511b44893da46909806e4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4407377975143006262, guid: 3722d5e78f7511b44893da46909806e4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3722d5e78f7511b44893da46909806e4, type: 3}
+--- !u!1001 &1946910203
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5352994928838407836, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_Name
+      value: Plataforma Base Roxa Pequena Level 3 (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -13.539165
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 187.13097
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4fffe93b7fdc38441968fa0373a92027, type: 3}
 --- !u!1 &1956773742
 GameObject:
   m_ObjectHideFlags: 0
@@ -7384,6 +11398,75 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6084755878845040062, guid: e87f939ef0a938a4a96c682259a642e7, type: 3}
   m_PrefabInstance: {fileID: 1992964549}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &2043474950
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3633859276347091179, guid: 2c43a82f1d5bde44db225393b1f6b87f, type: 3}
+      propertyPath: m_Name
+      value: Plataforma Movel Horizontal Roxa Level 3 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4325761613055304424, guid: 2c43a82f1d5bde44db225393b1f6b87f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -10.668919
+      objectReference: {fileID: 0}
+    - target: {fileID: 4325761613055304424, guid: 2c43a82f1d5bde44db225393b1f6b87f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 201.7892
+      objectReference: {fileID: 0}
+    - target: {fileID: 4325761613055304424, guid: 2c43a82f1d5bde44db225393b1f6b87f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4325761613055304424, guid: 2c43a82f1d5bde44db225393b1f6b87f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4325761613055304424, guid: 2c43a82f1d5bde44db225393b1f6b87f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4325761613055304424, guid: 2c43a82f1d5bde44db225393b1f6b87f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4325761613055304424, guid: 2c43a82f1d5bde44db225393b1f6b87f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4325761613055304424, guid: 2c43a82f1d5bde44db225393b1f6b87f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4325761613055304424, guid: 2c43a82f1d5bde44db225393b1f6b87f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4325761613055304424, guid: 2c43a82f1d5bde44db225393b1f6b87f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6895417372502937801, guid: 2c43a82f1d5bde44db225393b1f6b87f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2.96
+      objectReference: {fileID: 0}
+    - target: {fileID: 8114671616256153325, guid: 2c43a82f1d5bde44db225393b1f6b87f, type: 3}
+      propertyPath: pauseAtA
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8114671616256153325, guid: 2c43a82f1d5bde44db225393b1f6b87f, type: 3}
+      propertyPath: pauseAtB
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 2c43a82f1d5bde44db225393b1f6b87f, type: 3}
 --- !u!4 &2072604345 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7647553693411706489, guid: 1969f238334a59e45a9b53ff690c2d3d, type: 3}
@@ -7494,11 +11577,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6084755878845040062, guid: 5187dc984bba9bb419818612fa764200, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -15.58
+      value: -14.8
       objectReference: {fileID: 0}
     - target: {fileID: 6084755878845040062, guid: 5187dc984bba9bb419818612fa764200, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 164.64
+      value: 182.8
       objectReference: {fileID: 0}
     - target: {fileID: 6084755878845040062, guid: 5187dc984bba9bb419818612fa764200, type: 3}
       propertyPath: m_LocalPosition.z
@@ -8219,7 +12302,6 @@ SceneRoots:
   - {fileID: 1701450152}
   - {fileID: 871042156}
   - {fileID: 1695496342}
-  - {fileID: 340232852}
   - {fileID: 1441821925}
   - {fileID: 1377862225}
   - {fileID: 1572176275}
@@ -8227,3 +12309,72 @@ SceneRoots:
   - {fileID: 1749934923}
   - {fileID: 1175003750}
   - {fileID: 939550023}
+  - {fileID: 467905765}
+  - {fileID: 31048753}
+  - {fileID: 1197235808}
+  - {fileID: 354545703}
+  - {fileID: 109582715}
+  - {fileID: 901199737}
+  - {fileID: 457747835}
+  - {fileID: 1923626112}
+  - {fileID: 148164771}
+  - {fileID: 999830490}
+  - {fileID: 914245698}
+  - {fileID: 1008989401}
+  - {fileID: 367711024}
+  - {fileID: 233352492}
+  - {fileID: 449985595}
+  - {fileID: 729024830}
+  - {fileID: 1946910203}
+  - {fileID: 47366114}
+  - {fileID: 1529694028}
+  - {fileID: 1517333022}
+  - {fileID: 1715604926}
+  - {fileID: 134886798}
+  - {fileID: 1233722038}
+  - {fileID: 1054891485}
+  - {fileID: 836497326}
+  - {fileID: 90704290}
+  - {fileID: 165446886}
+  - {fileID: 44421989}
+  - {fileID: 1658963110}
+  - {fileID: 1112826293}
+  - {fileID: 1113142642}
+  - {fileID: 702103456}
+  - {fileID: 823271665}
+  - {fileID: 960969053}
+  - {fileID: 395287709}
+  - {fileID: 205685305}
+  - {fileID: 689102107}
+  - {fileID: 1401137533}
+  - {fileID: 1843868314}
+  - {fileID: 1492345396}
+  - {fileID: 12450158}
+  - {fileID: 76597123}
+  - {fileID: 209136330}
+  - {fileID: 1014799696}
+  - {fileID: 303220600}
+  - {fileID: 91337684}
+  - {fileID: 795081502}
+  - {fileID: 302487778}
+  - {fileID: 863272978}
+  - {fileID: 970095939}
+  - {fileID: 1360890004}
+  - {fileID: 1189738041}
+  - {fileID: 1135479092}
+  - {fileID: 1869642292}
+  - {fileID: 1833724827}
+  - {fileID: 1135136093}
+  - {fileID: 613485682}
+  - {fileID: 1286360263}
+  - {fileID: 1585920822}
+  - {fileID: 13321702}
+  - {fileID: 1144214581}
+  - {fileID: 1334467381}
+  - {fileID: 1942874334}
+  - {fileID: 471249181}
+  - {fileID: 1684896236}
+  - {fileID: 3374657}
+  - {fileID: 1048090922}
+  - {fileID: 2043474950}
+  - {fileID: 1030395784}
