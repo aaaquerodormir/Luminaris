@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviour
     public bool IsGameOverActive => isGameOver;
 
     private GameSession session;
-    private Checkpoint lastCheckpoint; // último checkpoint efetivamente salvo (sincronizado)
+    private Checkpoint lastCheckpoint;
 
     private void Awake()
     {
@@ -94,7 +94,7 @@ public class GameManager : MonoBehaviour
         OnTryAgain?.Invoke();
     }
 
-    // Salva/commita apenas quando ambos players têm pending no mesmo GroupId.
+    // Salva somente quando ambos alcançam o mesmo GroupId
     public void ReachCheckpoint(Transform checkpointTransform)
     {
         var cp = checkpointTransform.GetComponent<Checkpoint>();
@@ -105,21 +105,29 @@ public class GameManager : MonoBehaviour
 
         if (p1Pending != null && p2Pending != null && p1Pending.GroupId == p2Pending.GroupId)
         {
-            // commit em ambos os players (atualiza respawnPoint deles)
             player1.CommitPendingCheckpoint();
             player2.CommitPendingCheckpoint();
 
-            // salva referência do checkpoint comitado (usamos p1Pending)
             lastCheckpoint = p1Pending;
 
-            // salva apenas o GroupId
             SaveData data = new SaveData
             {
                 checkpointGroup = lastCheckpoint.GroupId
             };
+
+            // lava só guarda progresso se for group > 0
+            if (lastCheckpoint.GroupId > 0)
+            {
+                lava.SaveProgressAtCheckpoint();
+                data.lavaSavedTurns = lava.GetSavedTurns();
+            }
+            else
+            {
+                data.lavaSavedTurns = 0;
+            }
+
             SaveSystem.SaveGame(data);
 
-            // ajusta lava usando menor safe height entre os dois lados
             float safeZone = Mathf.Min(
                 player1.GetCommittedCheckpoint().LavaSafeHeight,
                 player2.GetCommittedCheckpoint().LavaSafeHeight

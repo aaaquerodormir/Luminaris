@@ -11,12 +11,12 @@ public class LavaSpeedPowerUp : PowerUpModificador
         if (lava != null)
         {
             lava.AddSpeedModifier(newMultiplier, durationTurns);
-            Debug.Log($"PowerUp de Lava ativado! Velocidade alterada para {newMultiplier} por {durationTurns} turnos");
+            Debug.Log($"[PowerUp] Lava acelerada! Multiplicador = {newMultiplier} por {durationTurns} turnos");
         }
     }
 
     public override void Deactivate(GameObject target)
     {
-        // A Lava já se auto-reseta quando turnos acabam
+        // A Lava já reseta quando os turnos acabam
     }
 }

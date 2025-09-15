@@ -13,10 +13,13 @@ public class GameLoader : MonoBehaviour
         SaveData data = SaveSystem.LoadGame();
 
         int group = 0;
+        int savedTurns = 0;
+
         if (data != null && data.checkpointGroup >= 0)
         {
             group = data.checkpointGroup;
-            Debug.Log("Jogo carregado no grupo " + group);
+            if (group > 0) savedTurns = data.lavaSavedTurns;
+            Debug.Log("Jogo carregado no grupo " + group + " com lava em " + savedTurns + " turnos");
         }
         else
         {
@@ -40,6 +43,10 @@ public class GameLoader : MonoBehaviour
             safeZone,
             lava.transform.position.z
         );
+
+        // aplica progresso da lava apenas se checkpoint > 0
+        if (group > 0) lava.LoadSavedTurns(savedTurns);
+        else lava.LoadSavedTurns(0);
 
         foreach (var c in checkpointsPlayer1)
             if (c.GroupId <= group) c.PreActivate();

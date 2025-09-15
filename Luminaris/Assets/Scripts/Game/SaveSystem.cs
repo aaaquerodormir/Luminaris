@@ -4,8 +4,11 @@ using System.IO;
 [System.Serializable]
 public class SaveData
 {
-    // Salva o último grupo sincronizado (GroupId). -1 = nenhum.
+    // Último grupo sincronizado (GroupId). -1 = nenhum.
     public int checkpointGroup = -1;
+
+    // Progresso da lava (somente salvo se checkpointGroup > 0)
+    public int lavaSavedTurns = 0;
 
     // Configurações
     public int resolucaoIndex = -1;
