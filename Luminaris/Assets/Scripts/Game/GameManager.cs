@@ -20,13 +20,13 @@ public class GameManager : MonoBehaviour
     [Header("UI")]
     [SerializeField] private GameObject gameOverUI;
     [SerializeField] private PauseMenu pauseMenu;
-    [SerializeField] private GameObject hudContainer; // <- HUD de pulos (HUDContainer)
+    [SerializeField] private GameObject hudContainer;
 
     private bool isGameOver = false;
     public bool IsGameOverActive => isGameOver;
 
     private GameSession session;
-    private Checkpoint lastCheckpoint;
+    private Checkpoint lastCheckpoint; // último checkpoint efetivamente salvo (sincronizado)
 
     private void Awake()
     {
@@ -63,11 +63,8 @@ public class GameManager : MonoBehaviour
         if (isGameOver) return;
         isGameOver = true;
 
-        if (pauseMenu != null)
-            pauseMenu.gameObject.SetActive(false);
-
-        if (hudContainer != null)
-            hudContainer.SetActive(false); // esconde HUD de pulo
+        if (pauseMenu != null) pauseMenu.gameObject.SetActive(false);
+        if (hudContainer != null) hudContainer.SetActive(false);
 
         gameOverUI.SetActive(true);
         Time.timeScale = 0f;
@@ -89,29 +86,51 @@ public class GameManager : MonoBehaviour
         turnControl.ResetTurns();
         session.ResetSession();
 
-        if (pauseMenu != null)
-            pauseMenu.gameObject.SetActive(true);
-
-        if (hudContainer != null)
-            hudContainer.SetActive(true); // mostra HUD de pulo de novo
+        if (pauseMenu != null) pauseMenu.gameObject.SetActive(true);
+        if (hudContainer != null) hudContainer.SetActive(true);
 
         isGameOver = false;
 
         OnTryAgain?.Invoke();
     }
 
+    // Salva/commita apenas quando ambos players têm pending no mesmo GroupId.
     public void ReachCheckpoint(Transform checkpointTransform)
     {
-        var checkpoint = checkpointTransform.GetComponent<Checkpoint>();
-        lastCheckpoint = checkpoint;
+        var cp = checkpointTransform.GetComponent<Checkpoint>();
+        if (cp == null) return;
 
-        SaveData data = new SaveData
+        var p1Pending = player1.GetPendingCheckpoint();
+        var p2Pending = player2.GetPendingCheckpoint();
+
+        if (p1Pending != null && p2Pending != null && p1Pending.GroupId == p2Pending.GroupId)
         {
-            checkpointIndex = checkpoint.Index
-        };
-        SaveSystem.SaveGame(data);
+            // commit em ambos os players (atualiza respawnPoint deles)
+            player1.CommitPendingCheckpoint();
+            player2.CommitPendingCheckpoint();
 
-        lava.SetSafeZone(checkpoint.LavaSafeHeight);
-        Debug.Log("Progresso salvo no checkpoint " + checkpoint.Index);
+            // salva referência do checkpoint comitado (usamos p1Pending)
+            lastCheckpoint = p1Pending;
+
+            // salva apenas o GroupId
+            SaveData data = new SaveData
+            {
+                checkpointGroup = lastCheckpoint.GroupId
+            };
+            SaveSystem.SaveGame(data);
+
+            // ajusta lava usando menor safe height entre os dois lados
+            float safeZone = Mathf.Min(
+                player1.GetCommittedCheckpoint().LavaSafeHeight,
+                player2.GetCommittedCheckpoint().LavaSafeHeight
+            );
+            lava.SetSafeZone(safeZone);
+
+            Debug.Log("Progresso salvo no grupo " + lastCheckpoint.GroupId);
+        }
+        else
+        {
+            Debug.Log("Checkpoint aguardando sincronização (grupo " + cp.GroupId + ")");
+        }
     }
 }
