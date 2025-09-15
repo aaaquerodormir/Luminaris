@@ -265,7 +265,7 @@ MonoBehaviour:
   jumpAction: {fileID: 6508505653016678817, guid: 03f621bcf66b04046a24ebfccf5c71b6, type: 3}
   moveSpeed: 3
   horizontalInput: 0
-  jumpForce: 7.5
+  jumpForce: 6.2
   coyoteTime: 0.1
   jumpBufferTime: 0.1
   jumpCutMultiplier: 0.5
@@ -274,7 +274,7 @@ MonoBehaviour:
   gravityScale: 1
   fallGravityMultiplier: 1.25
   groundCheckPos: {fileID: 3839698034830718357}
-  groundCheckSize: {x: 0.63, y: 0.02}
+  groundCheckSize: {x: 0.63, y: 0.15}
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
