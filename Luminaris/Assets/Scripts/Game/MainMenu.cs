@@ -3,27 +3,22 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
-    [Header("Referências de UI")]
     [SerializeField] private GameObject painelPrincipal;
     [SerializeField] private GameObject painelOpcoes;
     [SerializeField] private GameObject painelCreditos;
-    [SerializeField] private GameObject botaoContinuar; // botão "Continuar"
-
-    [Header("Configurações")]
-    [SerializeField] private string gameSceneName = "Game"; // Nome da cena do jogo
+    [SerializeField] private GameObject botaoContinuar;
+    [SerializeField] private string gameSceneName = "Game";
 
     private void Start()
     {
-        MostrarPainelPrincipal();
+        MostrarPrincipal();
 
-        // Só habilita o botão Continuar se existir save
         if (botaoContinuar != null)
             botaoContinuar.SetActive(SaveSystem.HasSave());
     }
 
     public void NovoJogo()
     {
-        // Apaga save e começa do zero
         SaveSystem.DeleteSave();
         Time.timeScale = 1f;
         SceneManager.LoadScene(gameSceneName);
@@ -38,25 +33,16 @@ public class MainMenu : MonoBehaviour
         }
     }
 
-    public void AbrirOpcoes()
-    {
-        painelPrincipal.SetActive(false);
-        painelCreditos.SetActive(false);
-        painelOpcoes.SetActive(true);
-    }
+    public void MostrarPrincipal() => AtivarSomente(painelPrincipal);
+    public void MostrarOpcoes() => AtivarSomente(painelOpcoes);
+    public void MostrarCreditos() => AtivarSomente(painelCreditos);
 
-    public void AbrirCreditos()
+    private void AtivarSomente(GameObject alvo)
     {
         painelPrincipal.SetActive(false);
         painelOpcoes.SetActive(false);
-        painelCreditos.SetActive(true);
-    }
-
-    public void MostrarPainelPrincipal()
-    {
-        painelOpcoes.SetActive(false);
         painelCreditos.SetActive(false);
-        painelPrincipal.SetActive(true);
+        alvo.SetActive(true);
     }
 
     public void Sair()
@@ -68,3 +54,4 @@ public class MainMenu : MonoBehaviour
 #endif
     }
 }
+    
