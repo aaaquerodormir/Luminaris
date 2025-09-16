@@ -121,7 +121,7 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 220
+        width: 219
         height: 1080
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -141,9 +141,9 @@ TextureImporter:
       name: TijolosTorre_1
       rect:
         serializedVersion: 2
-        x: 767
+        x: 768
         y: 0
-        width: 193
+        width: 192
         height: 1080
       alignment: 0
       pivot: {x: 0, y: 0}

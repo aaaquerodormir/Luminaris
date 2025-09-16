@@ -16,7 +16,7 @@ TagManager:
   - UI
   - Fundo
   - Checkpoint
-  - 
+  - Lava
   - 
   - 
   - 
@@ -46,6 +46,9 @@ TagManager:
     locked: 0
   - name: "Part\xEDcula"
     uniqueID: 3310167237
+    locked: 0
+  - name: Lava
+    uniqueID: 1824231305
     locked: 0
   - name: Default
     uniqueID: 0
