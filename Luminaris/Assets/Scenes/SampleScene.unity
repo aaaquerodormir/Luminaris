@@ -1376,7 +1376,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: e42166b0ffc5c2b4aae095beb311a8c7, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 88b7c06cbb4975b48b45614dab694434, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -2218,7 +2218,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: e42166b0ffc5c2b4aae095beb311a8c7, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 88b7c06cbb4975b48b45614dab694434, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -2446,7 +2446,7 @@ MonoBehaviour:
   m_Intensity: 1
   m_LightVolumeIntensity: 1
   m_LightVolumeEnabled: 0
-  m_ApplyToSortingLayers: 000000000b4e5948a3c641752b3c0ab1898fbb6c
+  m_ApplyToSortingLayers: 000000000b4e5948a3c641752b3c0ab1898fbb6ca57b4259
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
@@ -4346,6 +4346,14 @@ PrefabInstance:
     - target: {fileID: 3879636182437749886, guid: 528df6e56704f084c98b2cda04e3695f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4436061546226593787, guid: 528df6e56704f084c98b2cda04e3695f, type: 3}
+      propertyPath: m_SortingOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5658012010259136666, guid: 528df6e56704f084c98b2cda04e3695f, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 8444546148927441105, guid: 528df6e56704f084c98b2cda04e3695f, type: 3}
       propertyPath: m_Name
