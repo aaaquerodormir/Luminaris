@@ -12,29 +12,29 @@ public class GameLoader : MonoBehaviour
     {
         SaveData data = SaveSystem.LoadGame();
 
-        int checkpointIndex = 0; // por padrão começa do primeiro
+        int group = 0;
+        int savedTurns = 0;
 
-        if (data != null && data.checkpointIndex >= 0)
+        if (data != null && data.checkpointGroup >= 0)
         {
-            checkpointIndex = Mathf.Clamp(
-                data.checkpointIndex,
-                0,
-                Mathf.Min(checkpointsPlayer1.Length, checkpointsPlayer2.Length) - 1
-            );
-
-            Debug.Log("Jogo carregado no checkpoint " + checkpointIndex);
+            group = data.checkpointGroup;
+            if (group > 0) savedTurns = data.lavaSavedTurns;
+            Debug.Log("Jogo carregado no grupo " + group + " com lava em " + savedTurns + " turnos");
         }
         else
         {
-            Debug.Log("Novo jogo iniciado no checkpoint 0");
+            Debug.Log("Novo jogo iniciado no grupo 0");
         }
 
-        player1.position = checkpointsPlayer1[checkpointIndex].RespawnPosition;
-        player2.position = checkpointsPlayer2[checkpointIndex].RespawnPosition;
+        Checkpoint cp1 = System.Array.Find(checkpointsPlayer1, c => c.GroupId == group);
+        Checkpoint cp2 = System.Array.Find(checkpointsPlayer2, c => c.GroupId == group);
+
+        player1.position = cp1 != null ? cp1.RespawnPosition : checkpointsPlayer1[0].RespawnPosition;
+        player2.position = cp2 != null ? cp2.RespawnPosition : checkpointsPlayer2[0].RespawnPosition;
 
         float safeZone = Mathf.Min(
-            checkpointsPlayer1[checkpointIndex].LavaSafeHeight,
-            checkpointsPlayer2[checkpointIndex].LavaSafeHeight
+            cp1 != null ? cp1.LavaSafeHeight : checkpointsPlayer1[0].LavaSafeHeight,
+            cp2 != null ? cp2.LavaSafeHeight : checkpointsPlayer2[0].LavaSafeHeight
         );
 
         lava.SetSafeZone(safeZone);
@@ -44,11 +44,14 @@ public class GameLoader : MonoBehaviour
             lava.transform.position.z
         );
 
-        // Aqui marcamos os checkpoints já alcançados como ativados
-        for (int i = 0; i <= checkpointIndex; i++)
-        {
-            checkpointsPlayer1[i].PreActivate();
-            checkpointsPlayer2[i].PreActivate();
-        }
+        // aplica progresso da lava apenas se checkpoint > 0
+        if (group > 0) lava.LoadSavedTurns(savedTurns);
+        else lava.LoadSavedTurns(0);
+
+        foreach (var c in checkpointsPlayer1)
+            if (c.GroupId <= group) c.PreActivate();
+
+        foreach (var c in checkpointsPlayer2)
+            if (c.GroupId <= group) c.PreActivate();
     }
 }

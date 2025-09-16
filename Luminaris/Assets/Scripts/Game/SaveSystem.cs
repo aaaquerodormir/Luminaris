@@ -4,8 +4,11 @@ using System.IO;
 [System.Serializable]
 public class SaveData
 {
-    // Progresso do jogo
-    public int checkpointIndex = -1; // -1 = nenhum checkpoint alcançado ainda
+    // Último grupo sincronizado (GroupId). -1 = nenhum.
+    public int checkpointGroup = -1;
+
+    // Progresso da lava (somente salvo se checkpointGroup > 0)
+    public int lavaSavedTurns = 0;
 
     // Configurações
     public int resolucaoIndex = -1;
@@ -36,7 +39,7 @@ public static class SaveSystem
         else
         {
             Debug.LogWarning("Nenhum save encontrado!");
-            return null; // agora diferenciado
+            return null;
         }
     }
 

@@ -3,15 +3,17 @@ using UnityEngine;
 public class Checkpoint : MonoBehaviour
 {
     [SerializeField] private int checkpointIndex;
+    [SerializeField] private int groupId;
     [SerializeField] private Transform respawnPoint;
     [SerializeField] private float lavaOffset = 3f;
 
     [Header("Visual")]
-    [SerializeField] private SpriteRenderer spriteRenderer; // sprite apagado
+    [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private Sprite offSprite;
-    [SerializeField] private Animator animator; // animação de ativado
+    [SerializeField] private Animator animator;
 
     public int Index => checkpointIndex;
+    public int GroupId => groupId;
     public Vector3 RespawnPosition => respawnPoint.position;
     public float LavaSafeHeight => respawnPoint.position.y - lavaOffset;
 
@@ -22,15 +24,13 @@ public class Checkpoint : MonoBehaviour
         if (spriteRenderer == null) spriteRenderer = GetComponent<SpriteRenderer>();
         if (animator == null) animator = GetComponent<Animator>();
 
-        // começa apagado
         spriteRenderer.sprite = offSprite;
-        animator.enabled = false;
+        if (animator != null) animator.enabled = false;
     }
 
     public bool TryActivate()
     {
         if (activated) return false;
-
         activated = true;
         ActivateVisuals();
         return true;
@@ -44,8 +44,8 @@ public class Checkpoint : MonoBehaviour
 
     private void ActivateVisuals()
     {
-        spriteRenderer.sprite = null; // remove sprite estático
-        animator.enabled = true;      // ativa animação
+        if (spriteRenderer != null) spriteRenderer.sprite = null;
+        if (animator != null) animator.enabled = true;
     }
 
     private void OnDrawGizmos()
