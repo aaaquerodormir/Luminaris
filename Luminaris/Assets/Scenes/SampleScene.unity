@@ -5878,6 +5878,10 @@ PrefabInstance:
       propertyPath: baseSpeed
       value: 0.3
       objectReference: {fileID: 0}
+    - target: {fileID: 1426054368096727810, guid: cb8dddb605780e64595a5e54d9f57395, type: 3}
+      propertyPath: growthPerTurn
+      value: 0.01
+      objectReference: {fileID: 0}
     - target: {fileID: 2156957302413014791, guid: cb8dddb605780e64595a5e54d9f57395, type: 3}
       propertyPath: m_Layer
       value: 8
