@@ -17,8 +17,8 @@ TagManager:
   - Fundo
   - Checkpoint
   - Lava
-  - 
-  - 
+  - Player
+  - "Part\xEDcula"
   - 
   - 
   - 
@@ -41,23 +41,26 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: UI
-    uniqueID: 1728512339
-    locked: 0
-  - name: "Part\xEDcula"
-    uniqueID: 3310167237
-    locked: 0
-  - name: Lava
-    uniqueID: 1824231305
-    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Fundo
+    uniqueID: 794151059
     locked: 0
   - name: Checkpoint
     uniqueID: 1213812235
     locked: 0
   - name: Player
     uniqueID: 1967244963
+    locked: 0
+  - name: Lava
+    uniqueID: 1824231305
+    locked: 0
+  - name: "Part\xEDcula"
+    uniqueID: 3310167237
+    locked: 0
+  - name: UI
+    uniqueID: 1728512339
     locked: 0
   m_RenderingLayers:
   - Default
