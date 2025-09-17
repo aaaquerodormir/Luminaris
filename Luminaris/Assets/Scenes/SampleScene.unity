@@ -490,7 +490,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5141335279102222565, guid: b91b1f5bbe6bc744d9da576453a3d0d0, type: 3}
       propertyPath: m_Name
-      value: Plataformas (1)
+      value: Plataformas
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1956,21 +1956,9 @@ PrefabInstance:
       propertyPath: m_SortingLayer
       value: 5
       objectReference: {fileID: 0}
-    - target: {fileID: 907524868098628533, guid: 6acad03699ce41d42beccaac806a5540, type: 3}
-      propertyPath: m_SortingOrder
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 907524868098628533, guid: 6acad03699ce41d42beccaac806a5540, type: 3}
-      propertyPath: m_SortingLayerID
-      value: -984800059
-      objectReference: {fileID: 0}
     - target: {fileID: 7403925106403218174, guid: 6acad03699ce41d42beccaac806a5540, type: 3}
       propertyPath: m_Name
       value: LavaParticle
-      objectReference: {fileID: 0}
-    - target: {fileID: 7403925106403218174, guid: 6acad03699ce41d42beccaac806a5540, type: 3}
-      propertyPath: m_Layer
-      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8733693788275514091, guid: 6acad03699ce41d42beccaac806a5540, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2446,7 +2434,7 @@ MonoBehaviour:
   m_Intensity: 1
   m_LightVolumeIntensity: 1
   m_LightVolumeEnabled: 0
-  m_ApplyToSortingLayers: 000000000b4e5948a3c641752b3c0ab1898fbb6ca57b425993c8552f
+  m_ApplyToSortingLayers: 000000000b4e5948a3c641752b3c0ab1898fbb6ca57b425993c8552f955e5dbe
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
@@ -4311,6 +4299,18 @@ PrefabInstance:
       propertyPath: m_ColliderPaths.Array.size
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2555291764401291259, guid: 528df6e56704f084c98b2cda04e3695f, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2555291764401291259, guid: 528df6e56704f084c98b2cda04e3695f, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2555291764401291259, guid: 528df6e56704f084c98b2cda04e3695f, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 794151059
+      objectReference: {fileID: 0}
     - target: {fileID: 3879636182437749886, guid: 528df6e56704f084c98b2cda04e3695f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -4352,16 +4352,28 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4436061546226593787, guid: 528df6e56704f084c98b2cda04e3695f, type: 3}
+      propertyPath: m_SortingLayer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4436061546226593787, guid: 528df6e56704f084c98b2cda04e3695f, type: 3}
       propertyPath: m_SortingOrder
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 4436061546226593787, guid: 528df6e56704f084c98b2cda04e3695f, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -1101177195
+      objectReference: {fileID: 0}
     - target: {fileID: 5658012010259136666, guid: 528df6e56704f084c98b2cda04e3695f, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 7356650869500361146, guid: 528df6e56704f084c98b2cda04e3695f, type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7356650869500361146, guid: 528df6e56704f084c98b2cda04e3695f, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7476056028159412431, guid: 528df6e56704f084c98b2cda04e3695f, type: 3}
       propertyPath: m_Layer
