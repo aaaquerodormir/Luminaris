@@ -59,7 +59,7 @@ public class PlayerRespawn : MonoBehaviour
         if (pendingCheckpoint == null) return;
         committedCheckpoint = pendingCheckpoint;
         respawnPoint = committedCheckpoint.RespawnPosition;
-        ShowFeedback("Checkpoint salvo!", committedCheckpoint.transform.position + Vector3.up * 1.25f);
+        ShowFeedback("Checkpoint salvo", committedCheckpoint.transform.position + Vector3.up * 1.25f);
         pendingCheckpoint = null;
     }
 

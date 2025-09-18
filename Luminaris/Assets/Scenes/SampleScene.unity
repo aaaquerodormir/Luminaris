@@ -1960,6 +1960,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LavaParticle
       objectReference: {fileID: 0}
+    - target: {fileID: 7403925106403218174, guid: 6acad03699ce41d42beccaac806a5540, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8733693788275514091, guid: 6acad03699ce41d42beccaac806a5540, type: 3}
       propertyPath: m_LocalPosition.x
       value: -9.61
@@ -2264,7 +2268,7 @@ MonoBehaviour:
   players:
   - {fileID: 853078784}
   - {fileID: 32226141}
-  lava: {fileID: 0}
+  lava: {fileID: 1909042937}
 --- !u!4 &554373784
 Transform:
   m_ObjectHideFlags: 0
@@ -2652,12 +2656,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 635227557}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -8.417357, y: 11.437684, z: 0.07321991}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 980436439}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &647941512 stripped
 GameObject:
@@ -3664,6 +3668,7 @@ Transform:
   - {fileID: 1234050781}
   - {fileID: 270039921}
   - {fileID: 772650942}
+  - {fileID: 635227559}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &984462423 stripped
@@ -6062,6 +6067,18 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 5706882105065725809, guid: cb8dddb605780e64595a5e54d9f57395, type: 3}
+      propertyPath: m_SortingLayer
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5706882105065725809, guid: cb8dddb605780e64595a5e54d9f57395, type: 3}
+      propertyPath: m_SortingOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5706882105065725809, guid: cb8dddb605780e64595a5e54d9f57395, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 1824231305
+      objectReference: {fileID: 0}
     - target: {fileID: 5711233369138387205, guid: cb8dddb605780e64595a5e54d9f57395, type: 3}
       propertyPath: m_SortingLayer
       value: 4
@@ -6147,6 +6164,18 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7447949990457133846, guid: cb8dddb605780e64595a5e54d9f57395, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 1824231305
+      objectReference: {fileID: 0}
+    - target: {fileID: 7970881840860846243, guid: cb8dddb605780e64595a5e54d9f57395, type: 3}
+      propertyPath: m_SortingLayer
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7970881840860846243, guid: cb8dddb605780e64595a5e54d9f57395, type: 3}
+      propertyPath: m_SortingOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7970881840860846243, guid: cb8dddb605780e64595a5e54d9f57395, type: 3}
       propertyPath: m_SortingLayerID
       value: 1824231305
       objectReference: {fileID: 0}
@@ -6687,7 +6716,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7555596430964899303, guid: e87f939ef0a938a4a96c682259a642e7, type: 3}
       propertyPath: m_SortingLayer
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7555596430964899303, guid: e87f939ef0a938a4a96c682259a642e7, type: 3}
       propertyPath: m_SortingOrder
@@ -7910,7 +7939,6 @@ SceneRoots:
   - {fileID: 1921083651}
   - {fileID: 1274420467}
   - {fileID: 1044177229}
-  - {fileID: 635227559}
   - {fileID: 1319664272}
   - {fileID: 67482501}
   - {fileID: 973528171}
