@@ -897,6 +897,8 @@ MonoBehaviour:
   buttonText: {fileID: 9114164161245754112}
   normalColor: {r: 0.3882353, g: 0.08627451, b: 0.28627452, a: 1}
   highlightedColor: {r: 0.75686276, g: 0.25490198, b: 0.4, a: 1}
+  hoverSound: {fileID: 0}
+  clickSound: {fileID: 0}
 --- !u!114 &7982665126948463908
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1499,6 +1501,8 @@ MonoBehaviour:
   buttonText: {fileID: 8556019706589519039}
   normalColor: {r: 0.3882353, g: 0.08627451, b: 0.28627452, a: 1}
   highlightedColor: {r: 0.75686276, g: 0.25490198, b: 0.4, a: 1}
+  hoverSound: {fileID: 0}
+  clickSound: {fileID: 0}
 --- !u!114 &357805495468041481
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1677,6 +1681,8 @@ MonoBehaviour:
   buttonText: {fileID: 2097204465038861260}
   normalColor: {r: 0.3882353, g: 0.08627451, b: 0.28627452, a: 1}
   highlightedColor: {r: 0.75686276, g: 0.25490198, b: 0.4, a: 1}
+  hoverSound: {fileID: 0}
+  clickSound: {fileID: 0}
 --- !u!114 &7276480488455957538
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1756,7 +1762,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 79297114520770768, guid: dda4d77b178710841969f90c666a8179, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 1826.9
+      value: 1800
       objectReference: {fileID: 0}
     - target: {fileID: 79297114520770768, guid: dda4d77b178710841969f90c666a8179, type: 3}
       propertyPath: m_SizeDelta.y
