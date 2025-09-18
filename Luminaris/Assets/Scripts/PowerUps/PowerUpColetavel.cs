@@ -6,7 +6,7 @@ public class PowerUpColetavel : MonoBehaviour, IResettable
     [SerializeField] private PowerUpModificador powerModificador;
 
     [Header("Mensagem do Feedback")]
-    [SerializeField] private string mensagemFeedback = "PowerUp";
+    [SerializeField] private string mensagemFeedback = "";
 
     private Vector3 startPos;
     private bool collected = false;
@@ -25,7 +25,7 @@ public class PowerUpColetavel : MonoBehaviour, IResettable
             collected = true;
 
             // Mostra feedback acima do powerup
-            ShowFeedback(mensagemFeedback, transform.position + Vector3.up * 1.25f);
+            ShowFeedback(mensagemFeedback, transform.position + Vector3.up * 1f);
 
             gameObject.SetActive(false);
         }

@@ -3,8 +3,9 @@
 public class LavaRise : MonoBehaviour
 {
     [Header("Velocidade da Lava")]
-    [SerializeField] private float baseSpeed = 0.5f;
-    [SerializeField] private float growthPerTurn = 0.05f;
+    [SerializeField] private float baseSpeed = 0.3f; // velocidade base
+    [SerializeField] private float growthPerTurn = 0.01f; // crescimento por turno
+    [SerializeField] private float maxSpeed = 2f; // velocidade máxima
 
     [Header("Jogadores")]
     [SerializeField] private Transform player1;
@@ -13,14 +14,12 @@ public class LavaRise : MonoBehaviour
     private float speedModifier = 1f;
     private int turnsLeft = 0;
     private int totalTurns = 0;
-    private int savedTurns = 0; // salvo no checkpoint
+    private int savedTurns = 0;
 
     private float safeZoneHeight = -Mathf.Infinity;
+    private float currentSpeed;
+    private float lastSpeed;
 
-    // histórico para calcular delta por turno
-    private float lastSpeed = 0f;
-
-    // Struct retornado ao consumir um turno
     public struct LavaTurnInfo
     {
         public float currentSpeed;
@@ -37,16 +36,15 @@ public class LavaRise : MonoBehaviour
 
     private void Awake()
     {
-        // inicializa lastSpeed com o valor atual
-        lastSpeed = baseSpeed + (totalTurns * growthPerTurn);
+        currentSpeed = baseSpeed;
+        lastSpeed = currentSpeed;
     }
 
     private void Update()
     {
         if (player1 == null || player2 == null) return;
 
-        // velocidade atual aplicada ao movimento (frame)
-        float dynamicSpeed = (baseSpeed + (totalTurns * growthPerTurn)) * speedModifier;
+        float dynamicSpeed = currentSpeed * speedModifier;
         transform.position += Vector3.up * dynamicSpeed * Time.deltaTime;
     }
 
@@ -55,7 +53,6 @@ public class LavaRise : MonoBehaviour
         safeZoneHeight = height;
     }
 
-    // Reseta posição da lava e aplica o progresso salvo no checkpoint
     public void ResetLava(Checkpoint checkpoint)
     {
         safeZoneHeight = checkpoint.LavaSafeHeight;
@@ -65,8 +62,8 @@ public class LavaRise : MonoBehaviour
         turnsLeft = 0;
         totalTurns = savedTurns;
 
-        // atualiza histórico
-        lastSpeed = baseSpeed + (totalTurns * growthPerTurn);
+        currentSpeed = baseSpeed;
+        lastSpeed = currentSpeed;
     }
 
     public void ResetLavaState()
@@ -76,59 +73,61 @@ public class LavaRise : MonoBehaviour
         turnsLeft = 0;
         totalTurns = 0;
         savedTurns = 0;
-        lastSpeed = baseSpeed;
+
+        currentSpeed = baseSpeed;
+        lastSpeed = currentSpeed;
     }
 
-    // Aplica powerup (multiplicador por N turnos)
     public void AddSpeedModifier(float modifier, int durationTurns)
     {
         speedModifier = modifier;
         turnsLeft = durationTurns;
-        Debug.Log($"[Lava] PowerUp aplicado: multiplicador = {speedModifier}, duração = {turnsLeft} turnos");
     }
 
-    // Consome um turno: incrementa contador, calcula velocidade atual e delta,
-    // reduz duração do powerup e retorna informações para logging.
     public LavaTurnInfo ConsumeTurn()
     {
         totalTurns++;
 
-        float currentSpeed = (baseSpeed + (totalTurns * growthPerTurn)) * speedModifier;
-        float delta = currentSpeed - lastSpeed;
-        lastSpeed = currentSpeed;
+        float oldSpeed = currentSpeed;
+        float newSpeed = currentSpeed + growthPerTurn;
+        currentSpeed = Mathf.Min(newSpeed, maxSpeed);
 
-        Debug.Log($"[Lava] Turno {totalTurns} | Velocidade atual = {currentSpeed:F3} | Aumento neste turno = {delta:F3}");
+        float delta = currentSpeed - oldSpeed;
 
         if (turnsLeft > 0)
         {
             turnsLeft--;
-            Debug.Log($"[Lava] PowerUp ativo. Restam {turnsLeft} turnos (multiplicador {speedModifier})");
 
             if (turnsLeft <= 0)
             {
                 speedModifier = 1f;
-                Debug.Log("[Lava] PowerUp terminou. Velocidade voltou ao normal.");
             }
         }
 
-        return new LavaTurnInfo(currentSpeed, delta, totalTurns);
+        return new LavaTurnInfo(currentSpeed * speedModifier, delta, totalTurns);
     }
 
     public int GetSavedTurns() => savedTurns;
 
-    // Carrega progresso salvo ao iniciar fase/continuar
     public void LoadSavedTurns(int turns)
     {
         totalTurns = turns;
         savedTurns = turns;
-        lastSpeed = baseSpeed + (totalTurns * growthPerTurn);
-        Debug.Log($"[Lava] Carregada com {savedTurns} turnos acumulados");
+
+        currentSpeed = baseSpeed + (growthPerTurn * totalTurns);
+        currentSpeed = Mathf.Min(currentSpeed, maxSpeed);
+
+        lastSpeed = currentSpeed;
     }
 
-    // Salva progresso atual no checkpoint
     public void SaveProgressAtCheckpoint()
     {
         savedTurns = totalTurns;
-        Debug.Log($"[Lava] Progresso salvo: {savedTurns} turnos acumulados");
+    }
+
+    public void ResetSpeedAtCheckpoint()
+    {
+        currentSpeed = baseSpeed;
+        lastSpeed = currentSpeed;
     }
 }
