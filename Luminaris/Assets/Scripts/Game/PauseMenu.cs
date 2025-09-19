@@ -29,6 +29,8 @@ public class PauseMenu : MonoBehaviour
 
         Time.timeScale = 0f;
         isPaused = true;
+
+        AudioManager.Instance.PauseAllLoops();
     }
 
     public void Resume()
@@ -38,6 +40,8 @@ public class PauseMenu : MonoBehaviour
 
         Time.timeScale = 1f;
         isPaused = false;
+
+        AudioManager.Instance.ResumeAllLoops();
     }
 
     public void OpenOptions()

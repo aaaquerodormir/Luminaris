@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8733693788275514091}
   - component: {fileID: 6134236273318429275}
   - component: {fileID: 907524868098628533}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: P_LavaParticle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4798,9 +4798,9 @@ ParticleSystemRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: -984800059
+  m_SortingLayer: 5
+  m_SortingOrder: 5
   m_RenderMode: 0
   m_MeshDistribution: 0
   m_SortMode: 0

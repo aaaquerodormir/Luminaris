@@ -9,27 +9,43 @@ public class GameOverMenu : MonoBehaviour
 
     private System.Action confirmedAction;
 
+    private void OnEnable()
+    {
+        PlayerRespawn.OnPlayerDied += HandlePlayerDied;
+    }
+
+    private void OnDisable()
+    {
+        PlayerRespawn.OnPlayerDied -= HandlePlayerDied;
+    }
+
+    private void HandlePlayerDied()
+    {
+        //  pausa todos os loops (lava, etc.)
+        AudioManager.Instance.PauseAllLoops();
+    }
+
     public void TryAgain()
     {
-        // Botão "Tentar Novamente"
+        AudioManager.Instance.ResumeAllLoops(); //  retoma ao recomeçar
         gameManager.TryAgain();
     }
 
     public void ReturnToMainMenu()
     {
-        // Mostra confirmação antes de voltar ao menu
         OpenConfirmation(() =>
         {
             Time.timeScale = 1f;
+            AudioManager.Instance.ResumeAllLoops(); // garante que não fique pausado
             SceneManager.LoadScene(mainMenuScene);
         });
     }
 
     public void QuitGame()
     {
-        // Mostra confirmação antes de sair
         OpenConfirmation(() =>
         {
+            AudioManager.Instance.PauseAllLoops(); // pausa antes de sair
 #if UNITY_EDITOR
             UnityEditor.EditorApplication.isPlaying = false;
 #else

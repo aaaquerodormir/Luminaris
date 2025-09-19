@@ -19,7 +19,7 @@ TagManager:
   - Lava
   - Player
   - "Part\xEDcula"
-  - 
+  - Tijolos
   - 
   - 
   - 
@@ -58,6 +58,9 @@ TagManager:
     locked: 0
   - name: "Part\xEDcula"
     uniqueID: 3310167237
+    locked: 0
+  - name: Tijolos
+    uniqueID: 3193790101
     locked: 0
   - name: UI
     uniqueID: 1728512339

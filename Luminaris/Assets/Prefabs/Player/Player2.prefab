@@ -640,7 +640,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementScript: {fileID: 2596292194444357674}
-  feedBackTextualPrefab: {fileID: 7496298807150771853, guid: fd9b552954abb39499bceec3cad7a964, type: 3}
+  feedBackTextualPrefab: {fileID: 7496298807150771853, guid: f526604d896335d4f97cadb7371962b5, type: 3}
 --- !u!95 &3278293586265127783
 Animator:
   serializedVersion: 7

@@ -150,7 +150,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   feedBackTextualPrefab: {fileID: 7496298807150771853, guid: 5b226fd8c9b73ca4194a89e7d0d70219, type: 3}
-  powerModificador: {fileID: 11400000, guid: 0bb82da0db5e7a14aa32b9d1decc96c5, type: 2}
+  powerModificador: {fileID: 11400000, guid: b75d33bf601b33349a9b8ab94534c5f1, type: 2}
   mensagemFeedback: PowerUp
 --- !u!95 &7857985277971502548
 Animator:

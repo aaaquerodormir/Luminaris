@@ -5,7 +5,7 @@ public class PlayerMovement : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private Rigidbody2D rb;
-    [SerializeField] private PlayerMovementUI playerUI; // referência para controle de pulos
+    [SerializeField] private PlayerMovementUI playerUI;
     public Animator anim;
 
     [Header("Input Actions")]
@@ -18,40 +18,62 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Jump Physics")]
     [SerializeField] private float jumpForce = 8f;
-    [SerializeField] private float coyoteTime = 0.1f; // tempo extra após sair da plataforma
-    [SerializeField] private float jumpBufferTime = 0.1f; // tempo para "guardar" o pulo antes de tocar o chão
-    [SerializeField] private float jumpCutMultiplier = 0.5f; // corta altura do pulo ao soltar botão cedo
-    [SerializeField] private float jumpHangGravityMultiplier = 0.5f; // gravidade reduzida durante "hang time"
-    [SerializeField] private float jumpHangThreshold = 0.1f; // velocidade baixa → ativa hang time
+    [SerializeField] private float coyoteTime = 0.1f;
+    [SerializeField] private float jumpBufferTime = 0.1f;
+    [SerializeField] private float jumpCutMultiplier = 0.5f;
+    [SerializeField] private float jumpHangGravityMultiplier = 0.5f;
+    [SerializeField] private float jumpHangThreshold = 0.1f;
 
     [Header("Gravity")]
     [SerializeField] private float gravityScale = 4f;
-    [SerializeField] private float fallGravityMultiplier = 2f; // gravidade aumentada na queda
+    [SerializeField] private float fallGravityMultiplier = 2f;
 
     [Header("Ground Check")]
     [SerializeField] private Transform groundCheckPos;
     [SerializeField] private Vector2 groundCheckSize = new Vector2(0.5f, 0.05f);
     [SerializeField] private LayerMask groundLayer;
 
-    private float lastOnGroundTime;     // tempo desde que saiu do chão (para coyote time)
-    private float lastPressedJumpTime;  // tempo desde que apertou pulo (para jump buffer)
-    private bool isJumpCut;             // flag para cortar altura do pulo
-    private bool isFacingRight = false;
-
     public bool isActive = false;
 
-    // Controle de turnos
+    private float lastOnGroundTime;
+    private float lastPressedJumpTime;
+    private bool isJumpCut;
+    private bool isFacingRight = false;
+
     private bool waitingToEndTurn = false;
     private bool hasLandedAfterMaxJump = false;
     private bool jumpInitiated = false;
     private bool isInAir = false;
 
+    // Áudio
+    private AudioSource walkAudio;
+
+    private void Start()
+    {
+        // Cria um AudioSource de loop para o som de andar
+        walkAudio = AudioManager.Instance.PlayLoop("Andando", gameObject);
+        if (walkAudio != null)
+            walkAudio.Stop(); // começa parado
+    }
+
     private void Update()
     {
-        if (!isActive) return; // só o player ativo pode processar input
+        if (!isActive) return;
 
         horizontalInput = moveAction.action.ReadValue<Vector2>().x;
         bool grounded = IsGrounded();
+
+        // Controle do áudio de andar
+        if (Mathf.Abs(horizontalInput) >= 0.1f && grounded && !waitingToEndTurn)
+        {
+            if (walkAudio != null && !walkAudio.isPlaying)
+                walkAudio.Play();
+        }
+        else
+        {
+            if (walkAudio != null && walkAudio.isPlaying)
+                walkAudio.Stop();
+        }
 
         // Detecta saída do chão
         if (!grounded && !isInAir)
@@ -66,12 +88,10 @@ public class PlayerMovement : MonoBehaviour
             {
                 jumpInitiated = false;
 
-                // Se já usou todos os pulos, marca para encerrar
                 if (playerUI.JumpsUsed >= playerUI.MaxJumps)
                 {
                     waitingToEndTurn = true;
 
-                    // Se já está no chão ao pousar → troca de turno imediatamente
                     if (!hasLandedAfterMaxJump)
                     {
                         hasLandedAfterMaxJump = true;
@@ -81,23 +101,21 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        // Encerramento de turno (segurança extra caso já estivesse no chão)
+        // Encerramento de turno
         if (waitingToEndTurn)
         {
             if (grounded && !hasLandedAfterMaxJump)
             {
                 hasLandedAfterMaxJump = true;
-                rb.linearVelocity = Vector2.zero; // trava o movimento imediatamente
+                rb.linearVelocity = Vector2.zero;
                 TurnControl.Instance.EndTurnIfReady();
             }
             else if (!grounded && !hasLandedAfterMaxJump)
             {
-                // ainda deixa mexer no ar mesmo no último pulo
                 rb.linearVelocity = new Vector2(horizontalInput * moveSpeed, rb.linearVelocity.y);
             }
             else
             {
-                // já pousou, não mexe mais
                 rb.linearVelocity = new Vector2(0f, rb.linearVelocity.y);
             }
             return;
@@ -108,6 +126,9 @@ public class PlayerMovement : MonoBehaviour
         {
             lastPressedJumpTime = jumpBufferTime;
             jumpInitiated = true;
+
+            // Som de pulo
+            AudioManager.Instance.PlaySound("Pulando");
         }
 
         // Jump Cut
@@ -125,7 +146,7 @@ public class PlayerMovement : MonoBehaviour
         if (lastOnGroundTime > 0 && lastPressedJumpTime > 0 && playerUI.JumpsUsed < playerUI.MaxJumps && !waitingToEndTurn)
             Jump();
 
-        // Movimento horizontal normal
+        // Movimento horizontal
         if (!waitingToEndTurn || (waitingToEndTurn && !hasLandedAfterMaxJump))
             rb.linearVelocity = new Vector2(horizontalInput * moveSpeed, rb.linearVelocity.y);
 
@@ -135,27 +156,22 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        // Gravidade customizada
         if (rb.linearVelocity.y < 0)
         {
-            // Aumenta gravidade na queda
             rb.gravityScale = gravityScale * fallGravityMultiplier;
         }
         else if (Mathf.Abs(rb.linearVelocity.y) < jumpHangThreshold)
         {
-            // Gravidade menor no "hang time"
             rb.gravityScale = gravityScale * jumpHangGravityMultiplier;
         }
         else if (isJumpCut)
         {
-            // Corta pulo se soltar botão cedo
             rb.gravityScale = gravityScale;
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, rb.linearVelocity.y * jumpCutMultiplier);
             isJumpCut = false;
         }
         else
         {
-            // Gravidade normal
             rb.gravityScale = gravityScale;
         }
     }
@@ -165,14 +181,11 @@ public class PlayerMovement : MonoBehaviour
         rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
         lastOnGroundTime = 0;
         lastPressedJumpTime = 0;
-
-        // Aqui delegamos a contagem para o PlayerMovementUI
         playerUI.ConsumeJump();
     }
 
     public bool IsGrounded()
     {
-        // Checa colisão no chão
         return Physics2D.OverlapBox(groundCheckPos.position, groundCheckSize, 0, groundLayer);
     }
 
@@ -187,7 +200,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void Flip()
     {
-        // Vira o sprite baseado na direção do movimento
         if (isFacingRight && horizontalInput < 0 || !isFacingRight && horizontalInput > 0)
         {
             isFacingRight = !isFacingRight;
@@ -199,39 +211,35 @@ public class PlayerMovement : MonoBehaviour
 
     public void StartTurn()
     {
-        // Reseta variáveis ao iniciar turno
         isActive = true;
         waitingToEndTurn = false;
         hasLandedAfterMaxJump = false;
         jumpInitiated = false;
         isInAir = false;
-
-        // Consome turnos dos power ups e reseta contagem no UI
         playerUI.StartTurn();
     }
 
     public void EndTurn()
     {
-        // Desativa controle do jogador
         isActive = false;
         rb.linearVelocity = new Vector2(0f, rb.linearVelocity.y);
         anim.SetBool("isJumping", false);
         anim.SetBool("isWalking", false);
         anim.SetBool("isIdle", true);
         anim.SetBool("IsGrounded", true);
-
         playerUI.EndTurn();
+
+        if (walkAudio != null && walkAudio.isPlaying)
+            walkAudio.Stop();
     }
 
     public void AddJumpPowerUp(int extraJumps, int duration)
     {
-        // Adiciona powerup no sistema de UI
         playerUI.AddJumpPowerUp(extraJumps, duration);
     }
 
     private void OnDrawGizmosSelected()
     {
-        // Gizmo para debug da área de detecção do chão
         Gizmos.color = Color.red;
         Gizmos.DrawWireCube(groundCheckPos.position, groundCheckSize);
     }
