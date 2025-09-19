@@ -7431,6 +7431,10 @@ PrefabInstance:
       propertyPath: player2
       value: 
       objectReference: {fileID: 1992964551}
+    - target: {fileID: 1426054368096727810, guid: cb8dddb605780e64595a5e54d9f57395, type: 3}
+      propertyPath: growthPerTurn
+      value: 0.005
+      objectReference: {fileID: 0}
     - target: {fileID: 2127211995372366647, guid: cb8dddb605780e64595a5e54d9f57395, type: 3}
       propertyPath: m_SortingLayer
       value: 4
