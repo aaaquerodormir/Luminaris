@@ -307,3 +307,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cycleInterval: 2
   initialDelay: 0
+  detectionRadius: 4
+  playerMask:
+    serializedVersion: 2
+    m_Bits: 512

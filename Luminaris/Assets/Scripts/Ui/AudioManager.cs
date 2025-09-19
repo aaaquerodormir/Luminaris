@@ -21,6 +21,7 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioClip powerUpClip;
     [SerializeField] private AudioClip lavaClip;
     [SerializeField] private AudioClip morteClip;
+    [SerializeField] private AudioClip espinhoClip;
 
     private readonly Dictionary<string, AudioClip> clips = new();
     private readonly List<AudioSource> loopSources = new();
@@ -53,7 +54,7 @@ public class AudioManager : MonoBehaviour
         clips["PowerUp"] = powerUpClip;
         clips["Lava"] = lavaClip;
         clips["Morrendo"] = morteClip;
-
+        clips["Espinho"] = espinhoClip;
         // Escuta mudanças de cena
         SceneManager.sceneLoaded += OnSceneLoaded;
 
