@@ -3,9 +3,9 @@
 public class LavaRise : MonoBehaviour
 {
     [Header("Velocidade da Lava")]
-    [SerializeField] private float baseSpeed = 0.3f; // velocidade base
-    [SerializeField] private float growthPerTurn = 0.01f; // crescimento por turno
-    [SerializeField] private float maxSpeed = 2f; // velocidade máxima
+    [SerializeField] private float baseSpeed = 0.3f;
+    [SerializeField] private float growthPerTurn = 0.01f;
+    [SerializeField] private float maxSpeed = 2f;
 
     [Header("Jogadores")]
     [SerializeField] private Transform player1;
@@ -20,24 +20,14 @@ public class LavaRise : MonoBehaviour
     private float currentSpeed;
     private float lastSpeed;
 
-    public struct LavaTurnInfo
-    {
-        public float currentSpeed;
-        public float delta;
-        public int totalTurns;
-
-        public LavaTurnInfo(float currentSpeed, float delta, int totalTurns)
-        {
-            this.currentSpeed = currentSpeed;
-            this.delta = delta;
-            this.totalTurns = totalTurns;
-        }
-    }
+    private AudioSource lavaAudio;
 
     private void Awake()
     {
         currentSpeed = baseSpeed;
         lastSpeed = currentSpeed;
+
+        lavaAudio = AudioManager.Instance.PlayLoop("Lava", gameObject);
     }
 
     private void Update()
@@ -48,10 +38,7 @@ public class LavaRise : MonoBehaviour
         transform.position += Vector3.up * dynamicSpeed * Time.deltaTime;
     }
 
-    public void SetSafeZone(float height)
-    {
-        safeZoneHeight = height;
-    }
+    public void SetSafeZone(float height) => safeZoneHeight = height;
 
     public void ResetLava(Checkpoint checkpoint)
     {
@@ -84,10 +71,23 @@ public class LavaRise : MonoBehaviour
         turnsLeft = durationTurns;
     }
 
+    public struct LavaTurnInfo
+    {
+        public float currentSpeed;
+        public float delta;
+        public int totalTurns;
+
+        public LavaTurnInfo(float currentSpeed, float delta, int totalTurns)
+        {
+            this.currentSpeed = currentSpeed;
+            this.delta = delta;
+            this.totalTurns = totalTurns;
+        }
+    }
+
     public LavaTurnInfo ConsumeTurn()
     {
         totalTurns++;
-
         float oldSpeed = currentSpeed;
         float newSpeed = currentSpeed + growthPerTurn;
         currentSpeed = Mathf.Min(newSpeed, maxSpeed);
@@ -97,11 +97,8 @@ public class LavaRise : MonoBehaviour
         if (turnsLeft > 0)
         {
             turnsLeft--;
-
             if (turnsLeft <= 0)
-            {
                 speedModifier = 1f;
-            }
         }
 
         return new LavaTurnInfo(currentSpeed * speedModifier, delta, totalTurns);
@@ -113,17 +110,11 @@ public class LavaRise : MonoBehaviour
     {
         totalTurns = turns;
         savedTurns = turns;
-
-        currentSpeed = baseSpeed + (growthPerTurn * totalTurns);
-        currentSpeed = Mathf.Min(currentSpeed, maxSpeed);
-
+        currentSpeed = Mathf.Min(baseSpeed + (growthPerTurn * totalTurns), maxSpeed);
         lastSpeed = currentSpeed;
     }
 
-    public void SaveProgressAtCheckpoint()
-    {
-        savedTurns = totalTurns;
-    }
+    public void SaveProgressAtCheckpoint() => savedTurns = totalTurns;
 
     public void ResetSpeedAtCheckpoint()
     {

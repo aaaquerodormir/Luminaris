@@ -46,6 +46,8 @@ public class Checkpoint : MonoBehaviour
     {
         if (spriteRenderer != null) spriteRenderer.sprite = null;
         if (animator != null) animator.enabled = true;
+
+        AudioManager.Instance.PlaySound("Checkpoint");
     }
 
     private void OnDrawGizmos()
