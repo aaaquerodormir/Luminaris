@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.Audio;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class AudioManager : MonoBehaviour
 {
@@ -8,6 +9,10 @@ public class AudioManager : MonoBehaviour
 
     [Header("Configurações")]
     [SerializeField] private AudioMixerGroup masterGroup;
+
+    [Header("Músicas")]
+    [SerializeField] private AudioClip menuMusic;
+    [SerializeField] private AudioClip gameplayMusic;
 
     [Header("Clips Registrados")]
     [SerializeField] private AudioClip andandoClip;
@@ -20,6 +25,7 @@ public class AudioManager : MonoBehaviour
     private readonly Dictionary<string, AudioClip> clips = new();
     private readonly List<AudioSource> loopSources = new();
     private AudioSource uiSource;
+    private AudioSource musicSource;
 
     private void Awake()
     {
@@ -30,8 +36,16 @@ public class AudioManager : MonoBehaviour
 
         uiSource = gameObject.AddComponent<AudioSource>();
         uiSource.playOnAwake = false;
+
+        musicSource = gameObject.AddComponent<AudioSource>();
+        musicSource.loop = true;
+        musicSource.playOnAwake = false;
+
         if (masterGroup != null)
+        {
             uiSource.outputAudioMixerGroup = masterGroup;
+            musicSource.outputAudioMixerGroup = masterGroup;
+        }
 
         clips["Andando"] = andandoClip;
         clips["Pulando"] = pulandoClip;
@@ -39,16 +53,46 @@ public class AudioManager : MonoBehaviour
         clips["PowerUp"] = powerUpClip;
         clips["Lava"] = lavaClip;
         clips["Morrendo"] = morteClip;
+
+        // Escuta mudanças de cena
+        SceneManager.sceneLoaded += OnSceneLoaded;
+
+        // Volume inicial mais baixo (exemplo: -20dB)
+        if (masterGroup != null)
+            masterGroup.audioMixer.SetFloat("MasterVolume", -20f);
     }
 
-    // Sons de UI
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (scene.name == "Menu")
+            PlayMusic(menuMusic);
+        else if (scene.name == "SampleScene")
+            PlayMusic(gameplayMusic);
+    }
+
+    // ---  Música ---
+    public void PlayMusic(AudioClip clip)
+    {
+        if (clip == null) return;
+        if (musicSource.clip == clip && musicSource.isPlaying) return;
+
+        musicSource.clip = clip;
+        musicSource.Play();
+    }
+
+    public void StopMusic()
+    {
+        musicSource.Stop();
+    }
+
+    // ---  Sons de UI ---
     public void PlayUISound(AudioClip clip)
     {
         if (clip == null) return;
         uiSource.PlayOneShot(clip);
     }
 
-    // Sons rápidos
+    // ---  Sons rápidos ---
     public void PlaySound(string key)
     {
         if (!clips.ContainsKey(key) || clips[key] == null) return;
@@ -59,7 +103,7 @@ public class AudioManager : MonoBehaviour
         Destroy(source, clips[key].length);
     }
 
-    // Sons em loop
+    // --- Sons em loop ---
     public AudioSource PlayLoop(string key, GameObject target)
     {
         if (!clips.ContainsKey(key) || clips[key] == null) return null;
@@ -88,6 +132,7 @@ public class AudioManager : MonoBehaviour
             if (source != null && source.isPlaying)
                 source.Pause();
         }
+        musicSource.Pause();
     }
 
     public void ResumeAllLoops()
@@ -97,5 +142,6 @@ public class AudioManager : MonoBehaviour
             if (source != null && !source.isPlaying)
                 source.UnPause();
         }
+        musicSource.UnPause();
     }
 }

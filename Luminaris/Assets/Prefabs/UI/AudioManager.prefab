@@ -45,6 +45,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   masterGroup: {fileID: 24300002, guid: 817635c1a6d793e458d1e0b85d2f8bbd, type: 2}
+  menuMusic: {fileID: 8300000, guid: 43576fb20420d7740872d808aef4ff50, type: 3}
+  gameplayMusic: {fileID: 8300000, guid: a25e19cc70cd7fb448eaaf01d9fb1f2f, type: 3}
   andandoClip: {fileID: 8300000, guid: 845f638e4118a004d80165f767f21725, type: 3}
   pulandoClip: {fileID: 8300000, guid: 7ba21888fd0091e4db6b79acac579fb8, type: 3}
   checkpointClip: {fileID: 8300000, guid: ae8a9dda5c26eab4c88621105db86987, type: 3}
