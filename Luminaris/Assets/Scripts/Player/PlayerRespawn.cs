@@ -9,8 +9,8 @@ public class PlayerRespawn : MonoBehaviour
     [SerializeField] private GameObject feedBackTextualPrefab;
 
     private Vector3 respawnPoint;
-    private Checkpoint committedCheckpoint; // último checkpoint realmente comitado para este jogador
-    private Checkpoint pendingCheckpoint;   // último checkpoint tocado mas ainda não sincronizado
+    private Checkpoint committedCheckpoint;
+    private Checkpoint pendingCheckpoint;
     private bool isDead = false;
 
     void Start()
@@ -31,56 +31,41 @@ public class PlayerRespawn : MonoBehaviour
         var checkpoint = collision.GetComponent<Checkpoint>();
         if (checkpoint == null) return;
 
-        // se já é o mesmo pending ou já comitado, nada a fazer
         if (pendingCheckpoint == checkpoint || committedCheckpoint == checkpoint) return;
 
         pendingCheckpoint = checkpoint;
-
-        // ativa a visual do checkpoint (a persistência só ocorrerá quando ambos sincronizarem)
         checkpoint.TryActivate();
-
-        // avisa o GameManager para verificar sincronização (GameManager decide comitar)
         GameManager.Instance.ReachCheckpoint(checkpoint.transform);
     }
 
-    public Checkpoint GetPendingCheckpoint()
-    {
-        return pendingCheckpoint;
-    }
+    public Checkpoint GetPendingCheckpoint() => pendingCheckpoint;
+    public Checkpoint GetCommittedCheckpoint() => committedCheckpoint;
 
-    public Checkpoint GetCommittedCheckpoint()
-    {
-        return committedCheckpoint;
-    }
-
-    // Chamado pelo GameManager quando a sincronização do grupo é confirmada
     public void CommitPendingCheckpoint()
     {
         if (pendingCheckpoint == null) return;
         committedCheckpoint = pendingCheckpoint;
         respawnPoint = committedCheckpoint.RespawnPosition;
-        ShowFeedback("Checkpoint salvo!", committedCheckpoint.transform.position + Vector3.up * 1.25f);
+        ShowFeedback("Checkpoint salvo", committedCheckpoint.transform.position + Vector3.up * 1.25f);
         pendingCheckpoint = null;
     }
 
-    public void ClearPendingCheckpoint()
-    {
-        pendingCheckpoint = null;
-    }
+    public void ClearPendingCheckpoint() => pendingCheckpoint = null;
 
     public void Die()
     {
         if (isDead) return;
         isDead = true;
 
-        // limpa pending se morrer antes da sincronização
         ClearPendingCheckpoint();
 
-        // encerra o turno deste jogador e avisa TurnControl
         if (movementScript != null)
             movementScript.EndTurn();
 
         TurnControl.Instance.EndTurnIfReady();
+
+        // Som de morte
+        AudioManager.Instance.PlaySound("Morrendo");
 
         OnPlayerDied?.Invoke();
     }

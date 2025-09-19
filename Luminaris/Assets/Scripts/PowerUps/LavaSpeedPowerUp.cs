@@ -7,16 +7,14 @@ public class LavaSpeedPowerUp : PowerUpModificador
 
     public override void Activate(GameObject target)
     {
-        var lava = GameObject.FindWithTag("Lava")?.GetComponent<LavaRise>();
-        if (lava != null)
-        {
-            lava.AddSpeedModifier(newMultiplier, durationTurns);
-            Debug.Log($"[PowerUp] Lava acelerada! Multiplicador = {newMultiplier} por {durationTurns} turnos");
-        }
+        var lava = Object.FindFirstObjectByType<LavaRise>();
+        if (lava == null) return;
+
+        lava.AddSpeedModifier(newMultiplier, durationTurns);
     }
 
     public override void Deactivate(GameObject target)
     {
-        // A Lava já reseta quando os turnos acabam
+        // Lava já reseta sozinha quando turnsLeft <= 0
     }
 }
