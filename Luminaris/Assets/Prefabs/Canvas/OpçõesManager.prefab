@@ -45,6 +45,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioMixer: {fileID: 24100000, guid: 817635c1a6d793e458d1e0b85d2f8bbd, type: 2}
+  masterParam: MasterVolume
   resolucaoDropdown: {fileID: 0}
   fullscreenToggle: {fileID: 0}
   volumeSlider: {fileID: 0}
+  cursorPadrao: {fileID: 2800000, guid: 119f2884824c02e4ab7285ac621d0250, type: 3}
+  cursorClick: {fileID: 2800000, guid: f4755038feedd7644b9495743fcfd461, type: 3}
+  hotspot: {x: 0, y: 0}

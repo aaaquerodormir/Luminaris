@@ -14,6 +14,11 @@ public class OpcoesMenu : MonoBehaviour
     [SerializeField] private Toggle fullscreenToggle;
     [SerializeField] private Slider volumeSlider;
 
+    [Header("Cursor")]
+    [SerializeField] private Texture2D cursorPadrao;
+    [SerializeField] private Texture2D cursorClick;
+    [SerializeField] private Vector2 hotspot = Vector2.zero; // ponto ativo do cursor
+
     private Resolution[] todasResolucoes;
     private List<Resolution> resolucoesFiltradas = new();
     private int resolucaoAtualIndex;
@@ -29,6 +34,9 @@ public class OpcoesMenu : MonoBehaviour
 
     private void OnEnable()
     {
+        // Cursor padrão inicial
+        Cursor.SetCursor(cursorPadrao, hotspot, CursorMode.Auto);
+
         volumeSlider.onValueChanged.RemoveAllListeners();
         volumeSlider.onValueChanged.AddListener(DefinirVolume);
 
@@ -65,6 +73,19 @@ public class OpcoesMenu : MonoBehaviour
 
         Canvas.ForceUpdateCanvases();
         UnityEngine.UI.LayoutRebuilder.ForceRebuildLayoutImmediate(volumeSlider.GetComponent<RectTransform>());
+    }
+
+    private void Update()
+    {
+        // Troca o cursor ao clicar
+        if (Input.GetMouseButtonDown(0)) // botão esquerdo pressionado
+        {
+            Cursor.SetCursor(cursorClick, hotspot, CursorMode.Auto);
+        }
+        else if (Input.GetMouseButtonUp(0)) // botão esquerdo solto
+        {
+            Cursor.SetCursor(cursorPadrao, hotspot, CursorMode.Auto);
+        }
     }
 
     private void ApplyVolumeToMixer(float volume)
