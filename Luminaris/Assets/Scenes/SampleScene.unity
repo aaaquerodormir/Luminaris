@@ -3830,10 +3830,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3515604388928804302, guid: 0eca9f69ffa744a428a0599c8756a050, type: 3}
-      propertyPath: espinhoClip
-      value: 
-      objectReference: {fileID: 8300000, guid: 8e559b319ad88284887742a912c6fad0, type: 3}
     - target: {fileID: 7949299775778332369, guid: 0eca9f69ffa744a428a0599c8756a050, type: 3}
       propertyPath: m_Name
       value: AudioManager
