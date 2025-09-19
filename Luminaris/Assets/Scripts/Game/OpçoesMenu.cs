@@ -2,45 +2,105 @@ using UnityEngine;
 using UnityEngine.Audio;
 using TMPro;
 using UnityEngine.UI;
+using System.Collections;
 using System.Collections.Generic;
 
 public class OpcoesMenu : MonoBehaviour
 {
     [Header("Referências")]
     [SerializeField] private AudioMixer audioMixer;
-    [SerializeField] private TMP_Dropdown resolucaoDropdown; 
+    [SerializeField] private string masterParam = "MasterVolume";
+    [SerializeField] private TMP_Dropdown resolucaoDropdown;
     [SerializeField] private Toggle fullscreenToggle;
     [SerializeField] private Slider volumeSlider;
 
     private Resolution[] todasResolucoes;
-    private List<Resolution> resolucoesFiltradas = new List<Resolution>();
+    private List<Resolution> resolucoesFiltradas = new();
     private int resolucaoAtualIndex;
 
-    private SaveData saveData;
+    private const string VOLUME_KEY = "volume";
+    private const string FULLSCREEN_KEY = "fullscreen";
+    private const string RESOLUCAO_KEY = "resolucaoIndex";
 
-    private void Start()
+    private void Awake()
     {
-        saveData = SaveSystem.HasSave() ? SaveSystem.LoadGame() : new SaveData();
-
-        InicializarVolume();
         InicializarResolucoes();
-        InicializarFullscreen();
-        AplicarConfiguracoesSalvas();
     }
 
-    private void InicializarVolume()
+    private void OnEnable()
     {
-        float volume = saveData != null ? saveData.volume : 0.5f;
-        volumeSlider.value = volume;
-        DefinirVolume(volume);
+        volumeSlider.onValueChanged.RemoveAllListeners();
         volumeSlider.onValueChanged.AddListener(DefinirVolume);
+
+        fullscreenToggle.onValueChanged.RemoveAllListeners();
+        fullscreenToggle.onValueChanged.AddListener(DefinirFullscreen);
+
+        resolucaoDropdown.onValueChanged.RemoveAllListeners();
+        resolucaoDropdown.onValueChanged.AddListener(DefinirResolucao);
+
+        bool fullscreen = PlayerPrefs.GetInt(FULLSCREEN_KEY, 1) == 1;
+        fullscreenToggle.SetIsOnWithoutNotify(fullscreen);
+
+        if (resolucoesFiltradas.Count > 0)
+        {
+            int resolucaoIndex = PlayerPrefs.GetInt(RESOLUCAO_KEY, resolucaoAtualIndex);
+            resolucaoIndex = Mathf.Clamp(resolucaoIndex, 0, resolucoesFiltradas.Count - 1);
+            resolucaoDropdown.SetValueWithoutNotify(resolucaoIndex);
+            resolucaoDropdown.RefreshShownValue();
+
+            AplicarResolucao(resolucaoIndex, fullscreen);
+        }
     }
 
-    private void InicializarFullscreen()
+    private IEnumerator Start()
     {
-        bool fullscreen = saveData != null ? saveData.fullscreen : true;
-        fullscreenToggle.isOn = fullscreen;
-        fullscreenToggle.onValueChanged.AddListener(DefinirFullscreen);
+        yield return null;
+
+        volumeSlider.minValue = 0f;
+        volumeSlider.maxValue = 1f;
+
+        float volume = PlayerPrefs.GetFloat(VOLUME_KEY, 0.5f);
+        volumeSlider.SetValueWithoutNotify(volume);
+        ApplyVolumeToMixer(volume);
+
+        Canvas.ForceUpdateCanvases();
+        UnityEngine.UI.LayoutRebuilder.ForceRebuildLayoutImmediate(volumeSlider.GetComponent<RectTransform>());
+    }
+
+    private void ApplyVolumeToMixer(float volume)
+    {
+        float db = Mathf.Log10(Mathf.Clamp(volume, 0.0001f, 1f)) * 20f;
+        audioMixer.SetFloat(masterParam, db);
+    }
+
+    public void DefinirVolume(float volume)
+    {
+        ApplyVolumeToMixer(volume);
+        PlayerPrefs.SetFloat(VOLUME_KEY, volume);
+        PlayerPrefs.Save();
+    }
+
+    public void DefinirFullscreen(bool fullscreen)
+    {
+        AplicarResolucao(resolucaoDropdown.value, fullscreen);
+        PlayerPrefs.SetInt(FULLSCREEN_KEY, fullscreen ? 1 : 0);
+        PlayerPrefs.Save();
+    }
+
+    public void DefinirResolucao(int index)
+    {
+        AplicarResolucao(index, fullscreenToggle.isOn);
+        PlayerPrefs.SetInt(RESOLUCAO_KEY, index);
+        PlayerPrefs.Save();
+    }
+
+    public void DiminuirMasterDb(float deltaDb)
+    {
+        if (audioMixer.GetFloat(masterParam, out float currentDb))
+        {
+            float novoDb = currentDb - deltaDb;
+            audioMixer.SetFloat(masterParam, novoDb);
+        }
     }
 
     private void InicializarResolucoes()
@@ -49,17 +109,15 @@ public class OpcoesMenu : MonoBehaviour
         resolucaoDropdown.ClearOptions();
         resolucoesFiltradas.Clear();
 
-        HashSet<string> ids = new HashSet<string>();
-        List<string> opcoes = new List<string>();
+        HashSet<string> ids = new();
+        List<string> opcoes = new();
 
         Resolution atual = Screen.currentResolution;
         float aspectRatioAtual = (float)atual.width / atual.height;
 
-        for (int i = 0; i < todasResolucoes.Length; i++)
+        foreach (var r in todasResolucoes)
         {
-            Resolution r = todasResolucoes[i];
             float aspectRatio = (float)r.width / r.height;
-
             if (!Mathf.Approximately(aspectRatio, aspectRatioAtual)) continue;
 
             string id = $"{r.width}x{r.height}";
@@ -101,69 +159,17 @@ public class OpcoesMenu : MonoBehaviour
         resolucoesFiltradas = resolucoesFiltradas.GetRange(0, limite);
         opcoes = opcoes.GetRange(0, limite);
 
-        // Converter string para TMP_Dropdown.OptionData
-        List<TMP_Dropdown.OptionData> dadosTMP = new List<TMP_Dropdown.OptionData>();
+        List<TMP_Dropdown.OptionData> dadosTMP = new();
         foreach (string opcao in opcoes)
-        {
             dadosTMP.Add(new TMP_Dropdown.OptionData(opcao));
-        }
 
         resolucaoDropdown.AddOptions(dadosTMP);
-        resolucaoDropdown.onValueChanged.AddListener(DefinirResolucao);
-    }
-
-    private void AplicarConfiguracoesSalvas()
-    {
-        if (saveData == null) return;
-
-        int resolucaoIndex = saveData.resolucaoIndex >= 0 ? saveData.resolucaoIndex : resolucaoAtualIndex;
-        bool fullscreen = saveData.fullscreen;
-
-        resolucaoIndex = Mathf.Clamp(resolucaoIndex, 0, resolucoesFiltradas.Count - 1);
-
-        resolucaoDropdown.value = resolucaoIndex;
-        resolucaoDropdown.RefreshShownValue();
-        fullscreenToggle.isOn = fullscreen;
-
-        AplicarResolucao(resolucaoIndex, fullscreen);
-    }
-
-    public void DefinirVolume(float volume)
-    {
-        audioMixer.SetFloat("MasterVolume", Mathf.Log10(Mathf.Clamp(volume, 0.0001f, 1f)) * 20f);
-
-        if (saveData == null) saveData = new SaveData();
-        saveData.volume = volume;
-        SaveSystem.SaveGame(saveData);
-    }
-
-    public void DefinirResolucao(int index)
-    {
-        bool fullscreen = fullscreenToggle.isOn;
-        AplicarResolucao(index, fullscreen);
-
-        if (saveData == null) saveData = new SaveData();
-        saveData.resolucaoIndex = index;
-        SaveSystem.SaveGame(saveData);
-    }
-
-    public void DefinirFullscreen(bool fullscreen)
-    {
-        int index = resolucaoDropdown.value;
-        AplicarResolucao(index, fullscreen);
-
-        if (saveData == null) saveData = new SaveData();
-        saveData.fullscreen = fullscreen;
-        SaveSystem.SaveGame(saveData);
     }
 
     private void AplicarResolucao(int index, bool fullscreen)
     {
         if (index < 0 || index >= resolucoesFiltradas.Count) return;
-
         Resolution res = resolucoesFiltradas[index];
         Screen.SetResolution(res.width, res.height, fullscreen);
-
-        Debug.Log($"Aplicando resolução {res.width}x{res.height}, Fullscreen={fullscreen}, Index={index}");
     }
 }

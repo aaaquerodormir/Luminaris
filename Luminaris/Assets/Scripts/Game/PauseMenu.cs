@@ -46,8 +46,14 @@ public class PauseMenu : MonoBehaviour
 
     public void OpenOptions()
     {
-        if (optionsUI != null) optionsUI.SetActive(true);
-        if (pauseUI != null) pauseUI.SetActive(false);
+        if (optionsUI != null)
+        {
+            optionsUI.SetActive(true);
+            pauseUI.SetActive(false);
+
+            // Deixa o OpcoesMenu aplicar os valores do save via OnEnable
+            Debug.Log("[PauseMenu] Painel de opções aberto.");
+        }
     }
 
     public void CloseOptions()
