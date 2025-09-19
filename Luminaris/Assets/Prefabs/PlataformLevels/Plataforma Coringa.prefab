@@ -1,0 +1,3195 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3304990993578335396
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3066751787041081002}
+  m_Layer: 0
+  m_Name: Plataforma Coringa
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3066751787041081002
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3304990993578335396}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 17.11, y: -0.67, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 7933231031515268084}
+  - {fileID: 6070295141516883188}
+  - {fileID: 8698705492651862513}
+  - {fileID: 5288715450350636701}
+  - {fileID: 8233801398306876568}
+  - {fileID: 645322052000311398}
+  - {fileID: 5260393239751365228}
+  - {fileID: 7913970535007660606}
+  - {fileID: 7497785833119462813}
+  - {fileID: 7932055095098328268}
+  - {fileID: 7733028788838256867}
+  - {fileID: 2472243409641114006}
+  - {fileID: 1528462745069479350}
+  - {fileID: 4984139867074767416}
+  - {fileID: 5321997748284992486}
+  - {fileID: 9192011298428182988}
+  - {fileID: 2426865831940180778}
+  - {fileID: 7998788384591662970}
+  - {fileID: 7296351530818621161}
+  - {fileID: 8655876059597452147}
+  - {fileID: 1291014705318604837}
+  - {fileID: 7680326051990586799}
+  - {fileID: 5724535445468768900}
+  - {fileID: 321912603851759789}
+  - {fileID: 2449172150936168726}
+  - {fileID: 5314538505853671615}
+  - {fileID: 6918429344631087589}
+  - {fileID: 76001566416680836}
+  - {fileID: 8924488533706980257}
+  - {fileID: 5067710585752753611}
+  - {fileID: 7461783374676125}
+  - {fileID: 1668598779433197987}
+  - {fileID: 2741745510814085391}
+  - {fileID: 8187344015521660502}
+  - {fileID: 1320887733344976342}
+  - {fileID: 1108931748314498759}
+  - {fileID: 3451439217035130742}
+  - {fileID: 6873540988702068918}
+  - {fileID: 3896080776635523870}
+  - {fileID: 1435176033191118315}
+  - {fileID: 683196699275093338}
+  - {fileID: 6602163596493695285}
+  - {fileID: 6639952846225131003}
+  - {fileID: 107232690893398132}
+  - {fileID: 2418273351269926372}
+  - {fileID: 3211036653076085448}
+  - {fileID: 4894728588378600756}
+  - {fileID: 5705555555309191396}
+  - {fileID: 6173530887163012105}
+  - {fileID: 1144393072147818920}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &234119800992949936
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3066751787041081002}
+    m_Modifications:
+    - target: {fileID: 5352994928838407836, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_Name
+      value: Plataforma Coringa (48)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 5.249632
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 206.44
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+--- !u!4 &5705555555309191396 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+  m_PrefabInstance: {fileID: 234119800992949936}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &243287373673893072
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3066751787041081002}
+    m_Modifications:
+    - target: {fileID: 5352994928838407836, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_Name
+      value: Plataforma Coringa (23)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -23.39
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 212.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+--- !u!4 &5724535445468768900 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+  m_PrefabInstance: {fileID: 243287373673893072}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &365176383038092344
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3066751787041081002}
+    m_Modifications:
+    - target: {fileID: 5352994928838407836, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_Name
+      value: Plataforma Coringa (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -24.28
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 48.89
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+--- !u!4 &5260393239751365228 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+  m_PrefabInstance: {fileID: 365176383038092344}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &393146418931624137
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3066751787041081002}
+    m_Modifications:
+    - target: {fileID: 5352994928838407836, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_Name
+      value: Plataforma Coringa (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -38.83
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 20.562874
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+--- !u!4 &5288715450350636701 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+  m_PrefabInstance: {fileID: 393146418931624137}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &417285531661192626
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3066751787041081002}
+    m_Modifications:
+    - target: {fileID: 5352994928838407836, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_Name
+      value: Plataforma Coringa (15)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -23.54
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 139.04
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+--- !u!4 &5321997748284992486 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+  m_PrefabInstance: {fileID: 417285531661192626}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &419114757080809195
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3066751787041081002}
+    m_Modifications:
+    - target: {fileID: 5352994928838407836, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_Name
+      value: Plataforma Coringa (26)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -9.85
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.98
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+--- !u!4 &5314538505853671615 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+  m_PrefabInstance: {fileID: 419114757080809195}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &665071454751902828
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3066751787041081002}
+    m_Modifications:
+    - target: {fileID: 5352994928838407836, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_Name
+      value: Plataforma Coringa (14)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -33.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 122.86
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+--- !u!4 &4984139867074767416 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+  m_PrefabInstance: {fileID: 665071454751902828}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &740254819727471519
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3066751787041081002}
+    m_Modifications:
+    - target: {fileID: 5352994928838407836, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_Name
+      value: Plataforma Coringa (30)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -3.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 31.71
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+--- !u!4 &5067710585752753611 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+  m_PrefabInstance: {fileID: 740254819727471519}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1151909456014381920
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3066751787041081002}
+    m_Modifications:
+    - target: {fileID: 5352994928838407836, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_Name
+      value: Plataforma Coringa (47)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -10.16
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 214.08075
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+--- !u!4 &4894728588378600756 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+  m_PrefabInstance: {fileID: 1151909456014381920}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1167610793826460591
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3066751787041081002}
+    m_Modifications:
+    - target: {fileID: 5352994928838407836, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_Name
+      value: Plataforma Coringa (43)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -3.82
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 178.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+--- !u!4 &6639952846225131003 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+  m_PrefabInstance: {fileID: 1167610793826460591}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1401269463957599970
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3066751787041081002}
+    m_Modifications:
+    - target: {fileID: 5352994928838407836, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_Name
+      value: Plataforma Coringa (38)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 5.18
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 114.65
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+--- !u!4 &6873540988702068918 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+  m_PrefabInstance: {fileID: 1401269463957599970}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1697416103873105761
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3066751787041081002}
+    m_Modifications:
+    - target: {fileID: 5352994928838407836, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_Name
+      value: Plataforma Coringa (42)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 4.83
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 149.88
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+--- !u!4 &6602163596493695285 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+  m_PrefabInstance: {fileID: 1697416103873105761}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1742879309120623264
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3066751787041081002}
+    m_Modifications:
+    - target: {fileID: 5352994928838407836, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_Name
+      value: Plataforma Coringa (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -40.79
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.83
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+--- !u!4 &6070295141516883188 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+  m_PrefabInstance: {fileID: 1742879309120623264}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1854708551099286109
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3066751787041081002}
+    m_Modifications:
+    - target: {fileID: 5352994928838407836, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_Name
+      value: Plataforma Coringa (49)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -3.29
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 229.56
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+--- !u!4 &6173530887163012105 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+  m_PrefabInstance: {fileID: 1854708551099286109}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &2433602404209249386
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3066751787041081002}
+    m_Modifications:
+    - target: {fileID: 5352994928838407836, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_Name
+      value: Plataforma Coringa (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -39.550003
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 57.66
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+--- !u!4 &7913970535007660606 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+  m_PrefabInstance: {fileID: 2433602404209249386}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &2451546093529211544
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3066751787041081002}
+    m_Modifications:
+    - target: {fileID: 5352994928838407836, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_Name
+      value: Plataforma Coringa (10)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -23.88
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 86.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+--- !u!4 &7932055095098328268 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+  m_PrefabInstance: {fileID: 2451546093529211544}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &2452642848201581984
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3066751787041081002}
+    m_Modifications:
+    - target: {fileID: 3093241660867518641, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3093241660867518641, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_Color.g
+      value: 0.16078432
+      objectReference: {fileID: 0}
+    - target: {fileID: 3093241660867518641, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5352994928838407836, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_Name
+      value: Plataforma Coringa
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -9.78
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 16.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+--- !u!4 &7933231031515268084 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+  m_PrefabInstance: {fileID: 2452642848201581984}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &2526679454260701486
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3066751787041081002}
+    m_Modifications:
+    - target: {fileID: 5352994928838407836, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_Name
+      value: Plataforma Coringa (18)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -28.48
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 174.28
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+--- !u!4 &7998788384591662970 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+  m_PrefabInstance: {fileID: 2526679454260701486}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &2602106718711010249
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3066751787041081002}
+    m_Modifications:
+    - target: {fileID: 5352994928838407836, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_Name
+      value: Plataforma Coringa (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -24.690722
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 71.27
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+--- !u!4 &7497785833119462813 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+  m_PrefabInstance: {fileID: 2602106718711010249}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &2775354134578340859
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3066751787041081002}
+    m_Modifications:
+    - target: {fileID: 5352994928838407836, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_Name
+      value: Plataforma Coringa (22)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -39.639458
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 206.48
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+--- !u!4 &7680326051990586799 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+  m_PrefabInstance: {fileID: 2775354134578340859}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &2828483276718814903
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3066751787041081002}
+    m_Modifications:
+    - target: {fileID: 5352994928838407836, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_Name
+      value: Plataforma Coringa (11)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -40.999588
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 85.53608
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+--- !u!4 &7733028788838256867 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+  m_PrefabInstance: {fileID: 2828483276718814903}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &2976931256554858685
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3066751787041081002}
+    m_Modifications:
+    - target: {fileID: 5352994928838407836, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_Name
+      value: Plataforma Coringa (19)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -34.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 179.24
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+--- !u!4 &7296351530818621161 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+  m_PrefabInstance: {fileID: 2976931256554858685}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &3175817217207437233
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3066751787041081002}
+    m_Modifications:
+    - target: {fileID: 5352994928838407836, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_Name
+      value: Plataforma Coringa (27)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.45
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+--- !u!4 &6918429344631087589 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+  m_PrefabInstance: {fileID: 3175817217207437233}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &3711357144278730648
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3066751787041081002}
+    m_Modifications:
+    - target: {fileID: 5352994928838407836, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_Name
+      value: Plataforma Coringa (16)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -24.072819
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 149.35721
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+--- !u!4 &9192011298428182988 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+  m_PrefabInstance: {fileID: 3711357144278730648}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &3750987568703526183
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3066751787041081002}
+    m_Modifications:
+    - target: {fileID: 5352994928838407836, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_Name
+      value: Plataforma Coringa (20)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -23.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 193.39
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+--- !u!4 &8655876059597452147 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+  m_PrefabInstance: {fileID: 3750987568703526183}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &3794833220909338533
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3066751787041081002}
+    m_Modifications:
+    - target: {fileID: 5352994928838407836, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_Name
+      value: Plataforma Coringa (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -24.89
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3.31
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+--- !u!4 &8698705492651862513 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+  m_PrefabInstance: {fileID: 3794833220909338533}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &4020537105989066229
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3066751787041081002}
+    m_Modifications:
+    - target: {fileID: 5352994928838407836, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_Name
+      value: Plataforma Coringa (29)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.82
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 27.24
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+--- !u!4 &8924488533706980257 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+  m_PrefabInstance: {fileID: 4020537105989066229}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &4435689646180096002
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3066751787041081002}
+    m_Modifications:
+    - target: {fileID: 5352994928838407836, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_Name
+      value: Plataforma Coringa (34)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -9.85
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 69.31
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+--- !u!4 &8187344015521660502 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+  m_PrefabInstance: {fileID: 4435689646180096002}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &4491672695998892748
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3066751787041081002}
+    m_Modifications:
+    - target: {fileID: 5352994928838407836, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_Name
+      value: Plataforma Coringa (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -23.81
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 25.78
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+--- !u!4 &8233801398306876568 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+  m_PrefabInstance: {fileID: 4491672695998892748}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &4860019202508431507
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3066751787041081002}
+    m_Modifications:
+    - target: {fileID: 5352994928838407836, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_Name
+      value: Plataforma Coringa (36)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.88
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 94.15734
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+--- !u!4 &1108931748314498759 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+  m_PrefabInstance: {fileID: 4860019202508431507}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &4895489022999007228
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3066751787041081002}
+    m_Modifications:
+    - target: {fileID: 5352994928838407836, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_Name
+      value: Plataforma Coringa (50)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 5.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 238.06
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+--- !u!4 &1144393072147818920 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+  m_PrefabInstance: {fileID: 4895489022999007228}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &4964465179272384050
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3066751787041081002}
+    m_Modifications:
+    - target: {fileID: 5352994928838407836, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_Name
+      value: Plataforma Coringa (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -39.66
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 43.81
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+--- !u!4 &645322052000311398 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+  m_PrefabInstance: {fileID: 4964465179272384050}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &5002028024710103822
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3066751787041081002}
+    m_Modifications:
+    - target: {fileID: 5352994928838407836, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_Name
+      value: Plataforma Coringa (41)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -10.58
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 148.51
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+--- !u!4 &683196699275093338 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+  m_PrefabInstance: {fileID: 5002028024710103822}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &5216962726041601785
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3066751787041081002}
+    m_Modifications:
+    - target: {fileID: 5352994928838407836, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_Name
+      value: Plataforma Coringa (24)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -24.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 219.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+--- !u!4 &321912603851759789 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+  m_PrefabInstance: {fileID: 5216962726041601785}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &5479601226328286921
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3066751787041081002}
+    m_Modifications:
+    - target: {fileID: 5352994928838407836, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_Name
+      value: Plataforma Coringa (31)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -3.33
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 54.03
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+--- !u!4 &7461783374676125 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+  m_PrefabInstance: {fileID: 5479601226328286921}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &5557430112066228688
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3066751787041081002}
+    m_Modifications:
+    - target: {fileID: 5352994928838407836, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_Name
+      value: Plataforma Coringa (28)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.54
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 11.82
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+--- !u!4 &76001566416680836 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+  m_PrefabInstance: {fileID: 5557430112066228688}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &5579117351030572576
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3066751787041081002}
+    m_Modifications:
+    - target: {fileID: 5352994928838407836, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_Name
+      value: Plataforma Coringa (44)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 5.62
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 175.95
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+--- !u!4 &107232690893398132 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+  m_PrefabInstance: {fileID: 5579117351030572576}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &6424322192274555874
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3066751787041081002}
+    m_Modifications:
+    - target: {fileID: 5352994928838407836, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_Name
+      value: Plataforma Coringa (13)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -23.47
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 115.62
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+--- !u!4 &1528462745069479350 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+  m_PrefabInstance: {fileID: 6424322192274555874}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &6573561677586089975
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3066751787041081002}
+    m_Modifications:
+    - target: {fileID: 5352994928838407836, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_Name
+      value: Plataforma Coringa (32)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 6.21
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 43.36
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+--- !u!4 &1668598779433197987 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+  m_PrefabInstance: {fileID: 6573561677586089975}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &6772126532156905073
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3066751787041081002}
+    m_Modifications:
+    - target: {fileID: 5352994928838407836, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_Name
+      value: Plataforma Coringa (21)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -40.27
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 198.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+--- !u!4 &1291014705318604837 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+  m_PrefabInstance: {fileID: 6772126532156905073}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &6792917382883269506
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3066751787041081002}
+    m_Modifications:
+    - target: {fileID: 5352994928838407836, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_Name
+      value: Plataforma Coringa (35)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -2.96
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 87.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+--- !u!4 &1320887733344976342 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+  m_PrefabInstance: {fileID: 6792917382883269506}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &6916177471190934463
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3066751787041081002}
+    m_Modifications:
+    - target: {fileID: 5352994928838407836, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_Name
+      value: Plataforma Coringa (40)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.08
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 132.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+--- !u!4 &1435176033191118315 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+  m_PrefabInstance: {fileID: 6916177471190934463}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &6962022866271083676
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3066751787041081002}
+    m_Modifications:
+    - target: {fileID: 5352994928838407836, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_Name
+      value: Plataforma Coringa (46)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -10.51
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 198.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+--- !u!4 &3211036653076085448 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+  m_PrefabInstance: {fileID: 6962022866271083676}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &7202398839957672226
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3066751787041081002}
+    m_Modifications:
+    - target: {fileID: 5352994928838407836, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_Name
+      value: Plataforma Coringa (37)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -10.45
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 103.48
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+--- !u!4 &3451439217035130742 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+  m_PrefabInstance: {fileID: 7202398839957672226}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &7646361474268370779
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3066751787041081002}
+    m_Modifications:
+    - target: {fileID: 5352994928838407836, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_Name
+      value: Plataforma Coringa (33)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 5.775387
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 66.59423
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+--- !u!4 &2741745510814085391 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+  m_PrefabInstance: {fileID: 7646361474268370779}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &7898918984242373552
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3066751787041081002}
+    m_Modifications:
+    - target: {fileID: 5352994928838407836, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_Name
+      value: Plataforma Coringa (45)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 5.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 197.24
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+--- !u!4 &2418273351269926372 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+  m_PrefabInstance: {fileID: 7898918984242373552}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &7907199057711607166
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3066751787041081002}
+    m_Modifications:
+    - target: {fileID: 5352994928838407836, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_Name
+      value: Plataforma Coringa (17)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -40.44
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 160.09999
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+--- !u!4 &2426865831940180778 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+  m_PrefabInstance: {fileID: 7907199057711607166}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &7920920404010700610
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3066751787041081002}
+    m_Modifications:
+    - target: {fileID: 5352994928838407836, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_Name
+      value: Plataforma Coringa (25)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -40.96
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 229.47
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+--- !u!4 &2449172150936168726 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+  m_PrefabInstance: {fileID: 7920920404010700610}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &7953034183609315266
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3066751787041081002}
+    m_Modifications:
+    - target: {fileID: 5352994928838407836, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_Name
+      value: Plataforma Coringa (12)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -33.63
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 111.81
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+--- !u!4 &2472243409641114006 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+  m_PrefabInstance: {fileID: 7953034183609315266}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &8791130829040469322
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3066751787041081002}
+    m_Modifications:
+    - target: {fileID: 5352994928838407836, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_Name
+      value: Plataforma Coringa (39)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -10.23
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 132.72
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+--- !u!4 &3896080776635523870 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5481432957659375188, guid: 901e37e3c256a1a4fa00eeb399326cb9, type: 3}
+  m_PrefabInstance: {fileID: 8791130829040469322}
+  m_PrefabAsset: {fileID: 0}
