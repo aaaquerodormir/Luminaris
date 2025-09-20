@@ -106,7 +106,14 @@ public class GameManager : MonoBehaviour
         if (gameOverUI != null) gameOverUI.SetActive(false);
 
         if (victoryUI != null)
+        {
             victoryUI.SetActive(true);
+
+            // Garante que a animação continue tocando mesmo com timeScale = 0
+            Animator anim = victoryUI.GetComponent<Animator>();
+            if (anim != null)
+                anim.updateMode = AnimatorUpdateMode.UnscaledTime;
+        }
 
         Time.timeScale = 0f;
     }
