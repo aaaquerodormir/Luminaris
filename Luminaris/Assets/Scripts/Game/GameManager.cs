@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -19,6 +20,7 @@ public class GameManager : MonoBehaviour
 
     [Header("UI")]
     [SerializeField] private GameObject gameOverUI;
+    [SerializeField] private GameObject victoryUI;
     [SerializeField] private PauseMenu pauseMenu;
     [SerializeField] private GameObject hudContainer;
 
@@ -27,6 +29,9 @@ public class GameManager : MonoBehaviour
 
     private GameSession session;
     private Checkpoint lastCheckpoint;
+
+    public PlayerRespawn GetPlayer1() => player1;
+    public PlayerRespawn GetPlayer2() => player2;
 
     private void Awake()
     {
@@ -65,6 +70,7 @@ public class GameManager : MonoBehaviour
 
         if (pauseMenu != null) pauseMenu.gameObject.SetActive(false);
         if (hudContainer != null) hudContainer.SetActive(false);
+        if (victoryUI != null) victoryUI.SetActive(false);
 
         gameOverUI.SetActive(true);
         Time.timeScale = 0f;
@@ -94,7 +100,23 @@ public class GameManager : MonoBehaviour
         OnTryAgain?.Invoke();
     }
 
-    // Salva somente quando ambos alcançam o mesmo GroupId
+    public void ShowVictoryPanel()
+    {
+        if (pauseMenu != null) pauseMenu.gameObject.SetActive(false);
+        if (gameOverUI != null) gameOverUI.SetActive(false);
+
+        if (victoryUI != null)
+            victoryUI.SetActive(true);
+
+        Time.timeScale = 0f;
+    }
+
+    public void GoToMainMenu()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("MainMenu");
+    }
+
     public void ReachCheckpoint(Transform checkpointTransform)
     {
         var cp = checkpointTransform.GetComponent<Checkpoint>();
@@ -115,7 +137,6 @@ public class GameManager : MonoBehaviour
                 checkpointGroup = lastCheckpoint.GroupId
             };
 
-            // lava só guarda progresso se for group > 0
             if (lastCheckpoint.GroupId > 0)
             {
                 lava.SaveProgressAtCheckpoint();
@@ -133,12 +154,6 @@ public class GameManager : MonoBehaviour
                 player2.GetCommittedCheckpoint().LavaSafeHeight
             );
             lava.SetSafeZone(safeZone);
-
-            Debug.Log("Progresso salvo no grupo " + lastCheckpoint.GroupId);
-        }
-        else
-        {
-            Debug.Log("Checkpoint aguardando sincronização (grupo " + cp.GroupId + ")");
         }
     }
 }
