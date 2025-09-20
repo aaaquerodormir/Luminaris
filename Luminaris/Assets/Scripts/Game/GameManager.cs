@@ -62,7 +62,7 @@ public class GameManager : MonoBehaviour
 
     private void HandleTurnEnd()
     {
-        Debug.Log("Turno finalizado!");
+      
     }
 
     public void RegisterResettable(IResettable obj)
