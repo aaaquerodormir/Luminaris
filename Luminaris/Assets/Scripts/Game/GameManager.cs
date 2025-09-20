@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -23,6 +22,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject victoryUI;
     [SerializeField] private PauseMenu pauseMenu;
     [SerializeField] private GameObject hudContainer;
+
+    [Header("UI Específica")]
+    [SerializeField] private GameObject jumpCounterUI; // Contador de pulo
 
     private bool isGameOver = false;
     public bool IsGameOverActive => isGameOver;
@@ -102,26 +104,31 @@ public class GameManager : MonoBehaviour
 
     public void ShowVictoryPanel()
     {
-        if (pauseMenu != null) pauseMenu.gameObject.SetActive(false);
-        if (gameOverUI != null) gameOverUI.SetActive(false);
+        if (gameOverUI != null)
+            gameOverUI.SetActive(false);
 
         if (victoryUI != null)
         {
             victoryUI.SetActive(true);
 
-            // Garante que a animação continue tocando mesmo com timeScale = 0
+            // Garante que a animação funcione com Time.timeScale = 0
             Animator anim = victoryUI.GetComponent<Animator>();
             if (anim != null)
                 anim.updateMode = AnimatorUpdateMode.UnscaledTime;
         }
 
-        Time.timeScale = 0f;
-    }
+        if (pauseMenu != null)
+            pauseMenu.gameObject.SetActive(true); // Mantém o PauseMenu ativo para o botão funcionar
 
-    public void GoToMainMenu()
-    {
-        Time.timeScale = 1f;
-        SceneManager.LoadScene("MainMenu");
+        if (hudContainer != null)
+            hudContainer.SetActive(true);
+
+        if (jumpCounterUI != null)
+            jumpCounterUI.SetActive(false);
+
+        AudioManager.Instance.PauseAllLoops();
+
+        Time.timeScale = 0f;
     }
 
     public void ReachCheckpoint(Transform checkpointTransform)

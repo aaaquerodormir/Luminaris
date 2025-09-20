@@ -21,10 +21,11 @@ public class VictoryManager : MonoBehaviour
         foreach (var door in instance.doors)
         {
             if (door == null || !door.IsPlayerInside)
-                return; // se qualquer porta ainda não tem seu jogador, não ativa
+                return; // algum jogador ainda não chegou
         }
 
-        Debug.Log("[VictoryManager] Todos os jogadores estão nas suas portas!");
+        Debug.Log("[VictoryManager] Todos os jogadores estão nas portas!");
         GameManager.Instance.ShowVictoryPanel();
+
     }
 }
