@@ -22,8 +22,14 @@ public class GameManager : MonoBehaviour
     [SerializeField] private PauseMenu pauseMenu;
     [SerializeField] private GameObject hudContainer;
 
+    [Header("Vitória")]
+    [SerializeField] private GameObject victoryUI; // novo painel de vitória
+
     private bool isGameOver = false;
+    private bool isVictory = false;
+
     public bool IsGameOverActive => isGameOver;
+    public bool IsVictoryActive => isVictory;
 
     private GameSession session;
     private Checkpoint lastCheckpoint;
@@ -60,7 +66,7 @@ public class GameManager : MonoBehaviour
 
     public void ShowGameOver()
     {
-        if (isGameOver) return;
+        if (isGameOver || isVictory) return;
         isGameOver = true;
 
         if (pauseMenu != null) pauseMenu.gameObject.SetActive(false);
@@ -94,6 +100,20 @@ public class GameManager : MonoBehaviour
         OnTryAgain?.Invoke();
     }
 
+    public void ShowVictoryPanel()
+    {
+        if (isVictory || isGameOver) return;
+        isVictory = true;
+
+        if (pauseMenu != null) pauseMenu.gameObject.SetActive(false);
+        if (hudContainer != null) hudContainer.SetActive(false);
+
+        if (victoryUI != null)
+            victoryUI.SetActive(true);
+
+        Time.timeScale = 0f;
+    }
+
     // Salva somente quando ambos alcançam o mesmo GroupId
     public void ReachCheckpoint(Transform checkpointTransform)
     {
@@ -115,7 +135,6 @@ public class GameManager : MonoBehaviour
                 checkpointGroup = lastCheckpoint.GroupId
             };
 
-            // lava só guarda progresso se for group > 0
             if (lastCheckpoint.GroupId > 0)
             {
                 lava.SaveProgressAtCheckpoint();
