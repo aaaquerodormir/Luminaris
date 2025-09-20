@@ -19,7 +19,6 @@ public class GameLoader : MonoBehaviour
         {
             group = data.checkpointGroup;
             if (group > 0) savedTurns = data.lavaSavedTurns;
-            Debug.Log("Jogo carregado no grupo " + group + " com lava em " + savedTurns + " turnos");
         }
         else
         {

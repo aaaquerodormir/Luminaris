@@ -40,7 +40,6 @@ public class TurnControl : MonoBehaviour
             lava = byName.GetComponent<LavaRise>();
             if (lava != null)
             {
-                Debug.Log("[TurnControl] Lava encontrada por nome 'Lava'.");
                 return;
             }
         }
@@ -52,7 +51,6 @@ public class TurnControl : MonoBehaviour
             lava = byTag.GetComponent<LavaRise>();
             if (lava != null)
             {
-                Debug.Log("[TurnControl] Lava encontrada por tag 'Lava'.");
                 return;
             }
         }
@@ -61,7 +59,6 @@ public class TurnControl : MonoBehaviour
         lava = UnityEngine.Object.FindFirstObjectByType<LavaRise>();
         if (lava != null)
         {
-            Debug.Log("[TurnControl] Lava encontrada por FindFirstObjectByType.");
             return;
         }
 
@@ -69,11 +66,9 @@ public class TurnControl : MonoBehaviour
         lava = UnityEngine.Object.FindAnyObjectByType<LavaRise>();
         if (lava != null)
         {
-            Debug.Log("[TurnControl] Lava encontrada por FindAnyObjectByType.");
             return;
         }
 
-        Debug.LogWarning("[TurnControl] Lava não encontrada na cena.");
     }
 
     public void ResetTurns()
@@ -95,20 +90,9 @@ public class TurnControl : MonoBehaviour
         currentIndex = (currentIndex + 1) % players.Count;
         players[currentIndex].StartTurn();
 
-        Debug.Log("[TurnControl] Turno terminou. Atualizando lava...");
 
         if (lava == null)
             EnsureLavaReference();
-
-        if (lava == null)
-        {
-            Debug.LogWarning("[TurnControl] Lava ainda não encontrada — não foi possível atualizar velocidade.");
-        }
-        else
-        {
-            var info = lava.ConsumeTurn();
-            Debug.Log($"[TurnControl] Lava atualizada -> Turno {info.totalTurns} | Velocidade {info.currentSpeed:F3} | Aumento {info.delta:F3}");
-        }
 
         OnTurnEnded?.Invoke();
     }
