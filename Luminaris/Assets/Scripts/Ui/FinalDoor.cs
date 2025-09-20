@@ -20,7 +20,6 @@ public class FinalDoor : MonoBehaviour
         if (respawn == assignedPlayer)
         {
             playerInside = true;
-            Debug.Log($"[FinalDoor] {respawn.name} entrou na porta {name}");
             VictoryManager.CheckVictory();
         }
     }
@@ -35,7 +34,6 @@ public class FinalDoor : MonoBehaviour
         if (respawn == assignedPlayer)
         {
             playerInside = false;
-            Debug.Log($"[FinalDoor] {respawn.name} saiu da porta {name}");
         }
     }
 }

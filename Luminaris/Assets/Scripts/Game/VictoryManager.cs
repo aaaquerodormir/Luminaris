@@ -11,7 +11,6 @@ public class VictoryManager : MonoBehaviour
         else Destroy(gameObject);
 
         doors = FindObjectsByType<FinalDoor>(FindObjectsSortMode.None);
-        Debug.Log($"[VictoryManager] Portas encontradas: {doors.Length}");
     }
 
     public static void CheckVictory()
@@ -24,8 +23,16 @@ public class VictoryManager : MonoBehaviour
                 return; // algum jogador ainda não chegou
         }
 
-        Debug.Log("[VictoryManager] Todos os jogadores estão nas portas!");
         GameManager.Instance.ShowVictoryPanel();
+    }
 
+    // Método para botão Menu Principal do VictoryMenuWrapper
+    public void OnClickMenuPrincipal()
+    {
+        GameManager.Instance.OpenVictoryConfirmation(() =>
+        {
+            Time.timeScale = 1f;
+            UnityEngine.SceneManagement.SceneManager.LoadScene("Menu");
+        });
     }
 }
