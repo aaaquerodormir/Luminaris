@@ -50,6 +50,9 @@ TagManager:
   - name: Checkpoint
     uniqueID: 1213812235
     locked: 0
+  - name: Plataformas
+    uniqueID: 2203516573
+    locked: 0
   - name: Player
     uniqueID: 1967244963
     locked: 0
