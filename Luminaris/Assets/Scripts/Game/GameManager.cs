@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -19,20 +20,18 @@ public class GameManager : MonoBehaviour
 
     [Header("UI")]
     [SerializeField] private GameObject gameOverUI;
+    [SerializeField] private GameObject victoryUI;
     [SerializeField] private PauseMenu pauseMenu;
     [SerializeField] private GameObject hudContainer;
 
-    [Header("Vitória")]
-    [SerializeField] private GameObject victoryUI; // novo painel de vitória
-
     private bool isGameOver = false;
-    private bool isVictory = false;
-
     public bool IsGameOverActive => isGameOver;
-    public bool IsVictoryActive => isVictory;
 
     private GameSession session;
     private Checkpoint lastCheckpoint;
+
+    public PlayerRespawn GetPlayer1() => player1;
+    public PlayerRespawn GetPlayer2() => player2;
 
     private void Awake()
     {
@@ -66,11 +65,12 @@ public class GameManager : MonoBehaviour
 
     public void ShowGameOver()
     {
-        if (isGameOver || isVictory) return;
+        if (isGameOver) return;
         isGameOver = true;
 
         if (pauseMenu != null) pauseMenu.gameObject.SetActive(false);
         if (hudContainer != null) hudContainer.SetActive(false);
+        if (victoryUI != null) victoryUI.SetActive(false);
 
         gameOverUI.SetActive(true);
         Time.timeScale = 0f;
@@ -102,11 +102,8 @@ public class GameManager : MonoBehaviour
 
     public void ShowVictoryPanel()
     {
-        if (isVictory || isGameOver) return;
-        isVictory = true;
-
         if (pauseMenu != null) pauseMenu.gameObject.SetActive(false);
-        if (hudContainer != null) hudContainer.SetActive(false);
+        if (gameOverUI != null) gameOverUI.SetActive(false);
 
         if (victoryUI != null)
             victoryUI.SetActive(true);
@@ -114,7 +111,12 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 0f;
     }
 
-    // Salva somente quando ambos alcançam o mesmo GroupId
+    public void GoToMainMenu()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("MainMenu");
+    }
+
     public void ReachCheckpoint(Transform checkpointTransform)
     {
         var cp = checkpointTransform.GetComponent<Checkpoint>();
@@ -152,12 +154,6 @@ public class GameManager : MonoBehaviour
                 player2.GetCommittedCheckpoint().LavaSafeHeight
             );
             lava.SetSafeZone(safeZone);
-
-            Debug.Log("Progresso salvo no grupo " + lastCheckpoint.GroupId);
-        }
-        else
-        {
-            Debug.Log("Checkpoint aguardando sincronização (grupo " + cp.GroupId + ")");
         }
     }
 }

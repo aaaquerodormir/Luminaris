@@ -2,36 +2,40 @@ using UnityEngine;
 
 public class FinalDoor : MonoBehaviour
 {
-    private bool player1Inside = false;
-    private bool player2Inside = false;
+    [Header("Jogador esperado nesta porta")]
+    [SerializeField] private PlayerRespawn assignedPlayer;
+
+    private bool playerInside = false;
+
+    public bool IsPlayerInside => playerInside;
+    public PlayerRespawn AssignedPlayer => assignedPlayer;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player1"))
+        if (!collision.CompareTag("Player")) return;
+
+        var respawn = collision.GetComponentInParent<PlayerRespawn>();
+        if (respawn == null) return;
+
+        if (respawn == assignedPlayer)
         {
-            player1Inside = true;
-            CheckVictory();
-        }
-        else if (collision.CompareTag("Player2"))
-        {
-            player2Inside = true;
-            CheckVictory();
+            playerInside = true;
+            Debug.Log($"[FinalDoor] {respawn.name} entrou na porta {name}");
+            VictoryManager.CheckVictory();
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player1"))
-            player1Inside = false;
-        else if (collision.CompareTag("Player2"))
-            player2Inside = false;
-    }
+        if (!collision.CompareTag("Player")) return;
 
-    private void CheckVictory()
-    {
-        if (player1Inside && player2Inside)
+        var respawn = collision.GetComponentInParent<PlayerRespawn>();
+        if (respawn == null) return;
+
+        if (respawn == assignedPlayer)
         {
-            GameManager.Instance.ShowVictoryPanel();
+            playerInside = false;
+            Debug.Log($"[FinalDoor] {respawn.name} saiu da porta {name}");
         }
     }
 }
