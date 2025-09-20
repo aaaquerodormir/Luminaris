@@ -26377,26 +26377,26 @@ PrefabInstance:
     - target: {fileID: 181561252771975502, guid: dda4d77b178710841969f90c666a8179, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1885562399}
+      objectReference: {fileID: 490071351}
     - target: {fileID: 181561252771975502, guid: dda4d77b178710841969f90c666a8179, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Cancel
+      value: CancelVictoryAction
       objectReference: {fileID: 0}
     - target: {fileID: 181561252771975502, guid: dda4d77b178710841969f90c666a8179, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: PauseMenu, Assembly-CSharp
+      value: GameManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 376555767222596338, guid: dda4d77b178710841969f90c666a8179, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1885562399}
+      objectReference: {fileID: 490071351}
     - target: {fileID: 376555767222596338, guid: dda4d77b178710841969f90c666a8179, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Confirm
+      value: ConfirmVictoryAction
       objectReference: {fileID: 0}
     - target: {fileID: 376555767222596338, guid: dda4d77b178710841969f90c666a8179, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: PauseMenu, Assembly-CSharp
+      value: GameManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 415885022764585590, guid: dda4d77b178710841969f90c666a8179, type: 3}
       propertyPath: m_fontSize
@@ -26418,6 +26418,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -100
       objectReference: {fileID: 0}
+    - target: {fileID: 5817468658915076457, guid: dda4d77b178710841969f90c666a8179, type: 3}
+      propertyPath: clickSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 86061330351d59b42b0b919953710575, type: 3}
+    - target: {fileID: 5817468658915076457, guid: dda4d77b178710841969f90c666a8179, type: 3}
+      propertyPath: hoverSound
+      value: 
+      objectReference: {fileID: 8300000, guid: bd2561dca6152da4ab822f30fa6157ed, type: 3}
     - target: {fileID: 6387158520302491552, guid: dda4d77b178710841969f90c666a8179, type: 3}
       propertyPath: m_SizeDelta.x
       value: 500
@@ -26438,6 +26446,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -100
       objectReference: {fileID: 0}
+    - target: {fileID: 8547056461598231771, guid: dda4d77b178710841969f90c666a8179, type: 3}
+      propertyPath: clickSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 86061330351d59b42b0b919953710575, type: 3}
+    - target: {fileID: 8547056461598231771, guid: dda4d77b178710841969f90c666a8179, type: 3}
+      propertyPath: hoverSound
+      value: 
+      objectReference: {fileID: 8300000, guid: bd2561dca6152da4ab822f30fa6157ed, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -28703,9 +28719,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1885562399}
-        m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
-        m_MethodName: ReturnToMenu
+      - m_Target: {fileID: 208285165}
+        m_TargetAssemblyTypeName: VictoryManager, Assembly-CSharp
+        m_MethodName: OnClickMenuPrincipal
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
