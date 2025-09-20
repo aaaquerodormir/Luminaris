@@ -26,6 +26,15 @@ public class VictoryManager : MonoBehaviour
 
         Debug.Log("[VictoryManager] Todos os jogadores estão nas portas!");
         GameManager.Instance.ShowVictoryPanel();
+    }
 
+    // Método para botão Menu Principal do VictoryMenuWrapper
+    public void OnClickMenuPrincipal()
+    {
+        GameManager.Instance.OpenVictoryConfirmation(() =>
+        {
+            Time.timeScale = 1f;
+            UnityEngine.SceneManagement.SceneManager.LoadScene("Menu");
+        });
     }
 }

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -20,8 +21,10 @@ public class GameManager : MonoBehaviour
     [Header("UI")]
     [SerializeField] private GameObject gameOverUI;
     [SerializeField] private GameObject victoryUI;
+    [SerializeField] private GameObject victoryMenuWrapper;  // Painel extra da vitória
     [SerializeField] private PauseMenu pauseMenu;
     [SerializeField] private GameObject hudContainer;
+    [SerializeField] private GameObject confirmationUI;       // Painel de confirmação (igual PauseMenu)
 
     [Header("UI Específica")]
     [SerializeField] private GameObject jumpCounterUI; // Contador de pulo
@@ -31,6 +34,8 @@ public class GameManager : MonoBehaviour
 
     private GameSession session;
     private Checkpoint lastCheckpoint;
+
+    private System.Action confirmedAction;
 
     public PlayerRespawn GetPlayer1() => player1;
     public PlayerRespawn GetPlayer2() => player2;
@@ -73,6 +78,7 @@ public class GameManager : MonoBehaviour
         if (pauseMenu != null) pauseMenu.gameObject.SetActive(false);
         if (hudContainer != null) hudContainer.SetActive(false);
         if (victoryUI != null) victoryUI.SetActive(false);
+        if (victoryMenuWrapper != null) victoryMenuWrapper.SetActive(false);
 
         gameOverUI.SetActive(true);
         Time.timeScale = 0f;
@@ -108,14 +114,15 @@ public class GameManager : MonoBehaviour
             gameOverUI.SetActive(false);
 
         if (victoryUI != null)
-        {
             victoryUI.SetActive(true);
 
-            // Garante que a animação funcione com Time.timeScale = 0
-            Animator anim = victoryUI.GetComponent<Animator>();
-            if (anim != null)
-                anim.updateMode = AnimatorUpdateMode.UnscaledTime;
-        }
+        if (victoryMenuWrapper != null)
+            victoryMenuWrapper.SetActive(true);
+
+        // Garante que a animação funcione com Time.timeScale = 0
+        Animator anim = victoryUI != null ? victoryUI.GetComponent<Animator>() : null;
+        if (anim != null)
+            anim.updateMode = AnimatorUpdateMode.UnscaledTime;
 
         if (pauseMenu != null)
             pauseMenu.gameObject.SetActive(true); // Mantém o PauseMenu ativo para o botão funcionar
@@ -169,5 +176,32 @@ public class GameManager : MonoBehaviour
             );
             lava.SetSafeZone(safeZone);
         }
+    }
+
+    // Métodos para controlar o painel de confirmação na vitória
+
+    public void OpenVictoryConfirmation(System.Action action)
+    {
+        if (confirmationUI != null)
+        {
+            confirmationUI.SetActive(true);
+            confirmedAction = action;
+        }
+    }
+
+    public void ConfirmVictoryAction()
+    {
+        if (confirmationUI != null)
+            confirmationUI.SetActive(false);
+
+        confirmedAction?.Invoke();
+    }
+
+    public void CancelVictoryAction()
+    {
+        if (confirmationUI != null)
+            confirmationUI.SetActive(false);
+
+        confirmedAction = null;
     }
 }
