@@ -3413,7 +3413,7 @@ RectTransform:
   m_Father: {fileID: 474132045}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 5.431, y: 1.6}
   m_SizeDelta: {x: 31.683, y: 10.609}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -9608,6 +9608,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1267453307}
   - component: {fileID: 1267453308}
+  - component: {fileID: 1267453309}
   m_Layer: 5
   m_Name: Item
   m_TagString: Untagged
@@ -9685,6 +9686,23 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_IsOn: 1
+--- !u!114 &1267453309
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1267453306}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6d3cec859545d745aee2348e9d16670, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttonText: {fileID: 1359905616}
+  normalColor: {r: 0.47058824, g: 0.8, b: 0.7254902, a: 1}
+  highlightedColor: {r: 0.95686275, g: 0.8352941, b: 0.39607844, a: 1}
+  hoverSound: {fileID: 8300000, guid: bd2561dca6152da4ab822f30fa6157ed, type: 3}
+  clickSound: {fileID: 8300000, guid: 86061330351d59b42b0b919953710575, type: 3}
 --- !u!1001 &1274763598
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -23295,7 +23313,6 @@ GameObject:
   - component: {fileID: 1359905614}
   - component: {fileID: 1359905617}
   - component: {fileID: 1359905616}
-  - component: {fileID: 1359905615}
   m_Layer: 5
   m_Name: Item Label
   m_TagString: Untagged
@@ -23322,23 +23339,6 @@ RectTransform:
   m_AnchoredPosition: {x: -3.899994, y: -5.3999996}
   m_SizeDelta: {x: -30, y: -3}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1359905615
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1359905613}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a6d3cec859545d745aee2348e9d16670, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  buttonText: {fileID: 1359905616}
-  normalColor: {r: 0.47058824, g: 0.8, b: 0.7254902, a: 1}
-  highlightedColor: {r: 0.95686275, g: 0.8352941, b: 0.39607844, a: 1}
-  hoverSound: {fileID: 0}
-  clickSound: {fileID: 0}
 --- !u!114 &1359905616
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23353,7 +23353,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -23602,7 +23602,7 @@ RectTransform:
   m_Father: {fileID: 160602702}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 9.688995, y: -0.0016002655}
   m_SizeDelta: {x: 7.822, y: -15.9604}
   m_Pivot: {x: 0.5, y: 0.5}

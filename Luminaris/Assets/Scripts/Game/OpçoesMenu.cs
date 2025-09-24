@@ -34,7 +34,6 @@ public class OpcoesMenu : MonoBehaviour
 
     private void OnEnable()
     {
-        // Cursor padrão inicial
         Cursor.SetCursor(cursorPadrao, hotspot, CursorMode.Auto);
 
         volumeSlider.onValueChanged.RemoveAllListeners();
