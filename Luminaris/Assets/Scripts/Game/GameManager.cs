@@ -91,7 +91,7 @@ public class GameManager : MonoBehaviour
             // Atualiza o texto, se a referência existir
             if (turnChangeText != null)
             {
-                turnChangeText.text = $"Vez de\n{identifier.PlayerName}";
+                turnChangeText.text = $"Agora é a vez da {identifier.PlayerName}";
             }
 
             // Atualiza a imagem, se a referência e o sprite existirem
@@ -128,6 +128,7 @@ public class GameManager : MonoBehaviour
         if (victoryUI != null) victoryUI.SetActive(false);
         if (victoryMenuWrapper != null) victoryMenuWrapper.SetActive(false);
         gameOverUI.SetActive(true);
+        if (turnChangePanel != null) turnChangePanel.SetActive(false);
         Time.timeScale = 0f;
         OnGameOver?.Invoke();
     }
