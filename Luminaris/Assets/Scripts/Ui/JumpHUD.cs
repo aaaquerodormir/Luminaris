@@ -4,23 +4,25 @@ using TMPro;
 
 public class JumpHUD : MonoBehaviour
 {
-    [Header("References")]
+    [Header("Referências")]
     [SerializeField] private PlayerMovementUI player;
     [SerializeField] private Image jumpIcon;
     [SerializeField] private TextMeshProUGUI jumpText;
 
-    [Header("Sprites por cor (0=até 3, 1=4, 2=5+)")]
+    [Header("Sprites por Cor (0=até 3, 1=4, 2=5+)")]
     [SerializeField] private Sprite[] sprites;
 
     private void OnEnable()
     {
-        TurnControl.OnTurnEnded += RefreshHUD;
+        // Se inscreve no novo evento OnTurnStarted usando um método adaptador.
+        TurnControl.OnTurnStarted += OnTurnChanged;
         player.OnJumpsChanged += RefreshHUD;
     }
 
     private void OnDisable()
     {
-        TurnControl.OnTurnEnded -= RefreshHUD;
+        // Se desinscreve do evento OnTurnStarted.
+        TurnControl.OnTurnStarted -= OnTurnChanged;
         player.OnJumpsChanged -= RefreshHUD;
     }
 
@@ -29,8 +31,14 @@ public class JumpHUD : MonoBehaviour
         RefreshHUD();
     }
 
+    private void OnTurnChanged(PlayerMovement unusedPlayer)
+    {
+        RefreshHUD();
+    }
     private void RefreshHUD()
     {
+        if (player == null) return;
+
         int remainingJumps = player.MaxJumps - player.JumpsUsed;
 
         if (sprites != null && sprites.Length >= 3)
