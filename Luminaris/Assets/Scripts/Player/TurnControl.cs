@@ -9,13 +9,15 @@ public class TurnControl : MonoBehaviour
     [Header("Jogadores")]
     [SerializeField] private List<PlayerMovement> players = new();
 
+    // Propriedade pública para que outros scripts possam saber quem está jogando.
+    public PlayerMovement CurrentPlayer => players.Count > 0 ? players[currentIndex] : null;
     private int currentIndex = 0;
-    private PlayerMovement CurrentPlayer => players.Count > 0 ? players[currentIndex] : null;
 
     [Header("Referências")]
     [SerializeField] private LavaRise lava;
 
-    public static event Action OnTurnEnded;
+ 
+    public static event Action<PlayerMovement> OnTurnStarted;
 
     private void Awake()
     {
@@ -29,48 +31,6 @@ public class TurnControl : MonoBehaviour
         ResetTurns();
     }
 
-    private void EnsureLavaReference()
-    {
-        if (lava != null) return;
-
-        // 1) Procurar por nome
-        var byName = GameObject.Find("Lava");
-        if (byName != null)
-        {
-            lava = byName.GetComponent<LavaRise>();
-            if (lava != null)
-            {
-                return;
-            }
-        }
-
-        // 2) Procurar por tag
-        var byTag = GameObject.FindWithTag("Lava");
-        if (byTag != null)
-        {
-            lava = byTag.GetComponent<LavaRise>();
-            if (lava != null)
-            {
-                return;
-            }
-        }
-
-        // 3) Unity 6: procurar o primeiro objeto do tipo
-        lava = UnityEngine.Object.FindFirstObjectByType<LavaRise>();
-        if (lava != null)
-        {
-            return;
-        }
-
-        // 4) fallback: qualquer objeto do tipo
-        lava = UnityEngine.Object.FindAnyObjectByType<LavaRise>();
-        if (lava != null)
-        {
-            return;
-        }
-
-    }
-
     public void ResetTurns()
     {
         foreach (var p in players)
@@ -78,7 +38,11 @@ public class TurnControl : MonoBehaviour
 
         currentIndex = 0;
         if (players.Count > 0)
+        {
             players[currentIndex].StartTurn();
+            // Dispara o evento para o primeiro turno do jogo, informando quem começa.
+            OnTurnStarted?.Invoke(players[currentIndex]);
+        }
     }
 
     public void EndTurnIfReady()
@@ -90,10 +54,26 @@ public class TurnControl : MonoBehaviour
         currentIndex = (currentIndex + 1) % players.Count;
         players[currentIndex].StartTurn();
 
-
         if (lava == null)
             EnsureLavaReference();
 
-        OnTurnEnded?.Invoke();
+        // Dispara o evento, enviando o jogador ATUAL como informação.
+        OnTurnStarted?.Invoke(CurrentPlayer);
+    }
+
+    private void EnsureLavaReference()
+    {
+        if (lava != null) return;
+
+        var byName = GameObject.Find("Lava");
+        if (byName != null) { lava = byName.GetComponent<LavaRise>(); if (lava != null) return; }
+
+        var byTag = GameObject.FindWithTag("Lava");
+        if (byTag != null) { lava = byTag.GetComponent<LavaRise>(); if (lava != null) return; }
+
+        lava = FindFirstObjectByType<LavaRise>();
+        if (lava != null) return;
+
+        lava = FindAnyObjectByType<LavaRise>();
     }
 }
