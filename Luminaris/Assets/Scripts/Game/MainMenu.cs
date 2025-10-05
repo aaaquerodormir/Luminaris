@@ -74,24 +74,26 @@ public class MainMenu : MonoBehaviour
     }
 
     // ========= MULTIPLAYER VIA RELAY =========
-    public async void HostRelay()
+    public async void HostGame()
     {
         string joinCode = await RelayManager.Instance.CreateRelay();
-        Debug.Log($"Relay criado com código: {joinCode}");
-
-        if (joinCodeDisplay != null)
-            joinCodeDisplay.text = "Código: " + joinCode;
+        if (!string.IsNullOrEmpty(joinCode))
+        {
+            Debug.Log($"[MainMenu] Código da sala: {joinCode}");
+            if (joinCodeDisplay != null)
+                joinCodeDisplay.text = joinCode; // <-- nome atualizado
+        }
     }
 
-    public async void JoinRelay()
+    public void JoinGame()
     {
-        string code = joinCodeInput.text.Trim();
-        if (string.IsNullOrEmpty(code))
+        string joinCode = joinCodeInput.text.Trim(); // <-- nome atualizado
+        if (string.IsNullOrEmpty(joinCode))
         {
-            Debug.LogWarning("Digite um código de join válido!");
+            Debug.LogWarning("[MainMenu] Nenhum código inserido.");
             return;
         }
 
-        await RelayManager.Instance.JoinRelay(code);
+        RelayManager.Instance.JoinRelay(joinCode);
     }
 }
