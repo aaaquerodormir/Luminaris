@@ -3,6 +3,11 @@ using UnityEngine.SceneManagement;
 using Unity.Netcode;
 using Unity.Netcode.Transports.UTP;
 using UnityEngine.UI;
+using Unity.Services.Relay;
+using Unity.Services.Relay.Models;
+using Unity.Services.Core;
+using TMPro;
+using System.Threading.Tasks;
 public class MainMenu : MonoBehaviour
 {
     [Header("Paineis")]
@@ -13,18 +18,19 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private GameObject painelMultiplayer;
     //[SerializeField] private string gameSceneName = "Game";
 
+    [Header("Multiplayer UI")]
+    [SerializeField] private TMP_InputField joinCodeInput;
+    [SerializeField] private TMP_Text joinCodeDisplay;
+
     [Header("Config")]
     [SerializeField] private string gameSceneName = "SampleScene";
-    [SerializeField] private InputField ipInput;
-    [SerializeField] private ushort port = 7777;
 
     private void Start()
     {
         MostrarPrincipal();
 
-        if (botaoContinuar != null)
-            botaoContinuar.SetActive(SaveSystem.HasSave());
     }
+
 
     public void NovoJogo()
     {
@@ -67,24 +73,25 @@ public class MainMenu : MonoBehaviour
 #endif
     }
 
-    // Botões Multiplayer
-    public void HostGame()
+    // ========= MULTIPLAYER VIA RELAY =========
+    public async void HostRelay()
     {
-        NetworkManager.Singleton.StartHost();
-        NetworkManager.Singleton.SceneManager.LoadScene(gameSceneName, LoadSceneMode.Single);
+        string joinCode = await RelayManager.Instance.CreateRelay();
+        Debug.Log($"Relay criado com código: {joinCode}");
+
+        if (joinCodeDisplay != null)
+            joinCodeDisplay.text = "Código: " + joinCode;
     }
 
-    public void JoinGame()
+    public async void JoinRelay()
     {
-        var address = ipInput != null && !string.IsNullOrEmpty(ipInput.text) ? ipInput.text : "127.0.0.1";
-        var ut = NetworkManager.Singleton.GetComponent<UnityTransport>();
-        ut.SetConnectionData(address, port);
-        NetworkManager.Singleton.StartClient();
-    }
+        string code = joinCodeInput.text.Trim();
+        if (string.IsNullOrEmpty(code))
+        {
+            Debug.LogWarning("Digite um código de join válido!");
+            return;
+        }
 
-    public void VoltarDoMultiplayer()
-    {
-        MostrarPrincipal();
+        await RelayManager.Instance.JoinRelay(code);
     }
 }
-    

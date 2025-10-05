@@ -1,104 +1,68 @@
 using UnityEngine;
-using TMPro;
-using Unity.Netcode;
-using Unity.Netcode.Transports.UTP;
-using UnityEngine.SceneManagement;
+using Unity.Services.Core;
 using Unity.Services.Relay;
 using Unity.Services.Relay.Models;
+using Unity.Netcode;
+using Unity.Netcode.Transports.UTP;
 using System.Threading.Tasks;
+using Unity.Networking.Transport.Relay;
+
 
 public class RelayManager : MonoBehaviour
 {
-    [Header("UI Elements")]
-    [SerializeField] private GameObject painelMultiplayer;
-    [SerializeField] private TMP_Text codigoSalaText;
-    [SerializeField] private TMP_InputField inputJoinCode;
+    public static RelayManager Instance { get; private set; }
 
-    [Header("Game Settings")]
-    [SerializeField] private string gameSceneName = "SampleScene";
-    [SerializeField] private int maxPlayers = 2;
-
-    private void Start()
+    private void Awake()
     {
-        if (painelMultiplayer != null)
-            painelMultiplayer.SetActive(false);
-    }
-
-    public void AbrirPainel()
-    {
-        painelMultiplayer.SetActive(true);
-        codigoSalaText.text = "";
-    }
-
-    public void FecharPainel()
-    {
-        painelMultiplayer.SetActive(false);
-    }
-
-    public async void HostGame()
-    {
-        if (NetworkManager.Singleton == null)
+        if (Instance == null)
         {
-            Debug.LogError("NetworkManager não encontrado.");
-            return;
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
         }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
+    public async Task<string> CreateRelay()
+    {
         try
         {
-            Allocation alloc = await RelayService.Instance.CreateAllocationAsync(maxPlayers - 1);
-            string joinCode = await RelayService.Instance.GetJoinCodeAsync(alloc.AllocationId);
+            await UnityServices.InitializeAsync();
 
-            codigoSalaText.text = $"Código: {joinCode}";
-            GUIUtility.systemCopyBuffer = joinCode;
-            Debug.Log($"[Relay] Host criado com código: {joinCode}");
+            Allocation allocation = await RelayService.Instance.CreateAllocationAsync(2);
+            string joinCode = await RelayService.Instance.GetJoinCodeAsync(allocation.AllocationId);
 
             var transport = NetworkManager.Singleton.GetComponent<UnityTransport>();
-            transport.SetRelayServerData(
-                alloc.RelayServer.IpV4,
-                (ushort)alloc.RelayServer.Port,
-                alloc.AllocationIdBytes,
-                alloc.Key,
-                alloc.ConnectionData
-            );
+            transport.SetRelayServerData(new RelayServerData(allocation, "dtls"));
 
             NetworkManager.Singleton.StartHost();
-            NetworkManager.Singleton.SceneManager.LoadScene(gameSceneName, LoadSceneMode.Single);
+            return joinCode;
         }
         catch (RelayServiceException e)
         {
-            Debug.LogError($"[Relay] Erro ao criar Host: {e}");
+            Debug.LogError(e);
+            return null;
         }
     }
 
-    public async void JoinGame()
+    public async Task JoinRelay(string joinCode)
     {
-        string joinCode = inputJoinCode.text.Trim();
-        if (string.IsNullOrEmpty(joinCode))
-        {
-            Debug.LogWarning("Código de sala vazio!");
-            return;
-        }
-
         try
         {
+            await UnityServices.InitializeAsync();
+
             JoinAllocation joinAlloc = await RelayService.Instance.JoinAllocationAsync(joinCode);
 
             var transport = NetworkManager.Singleton.GetComponent<UnityTransport>();
-            transport.SetRelayServerData(
-                joinAlloc.RelayServer.IpV4,
-                (ushort)joinAlloc.RelayServer.Port,
-                joinAlloc.AllocationIdBytes,
-                joinAlloc.Key,
-                joinAlloc.ConnectionData,
-                joinAlloc.HostConnectionData
-            );
+            transport.SetRelayServerData(new RelayServerData(joinAlloc, "dtls"));
 
             NetworkManager.Singleton.StartClient();
-            Debug.Log("[Relay] Entrando na partida...");
         }
         catch (RelayServiceException e)
         {
-            Debug.LogError($"[Relay] Erro ao conectar: {e}");
+            Debug.LogError(e);
         }
     }
 }
