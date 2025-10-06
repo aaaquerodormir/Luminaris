@@ -3,34 +3,42 @@ using UnityEngine.SceneManagement;
 using Unity.Netcode;
 using Unity.Netcode.Transports.UTP;
 using UnityEngine.UI;
-using Unity.Services.Relay;
-using Unity.Services.Relay.Models;
-using Unity.Services.Core;
-using TMPro;
+using System.Collections;
 using System.Threading.Tasks;
+using TMPro;
+
 public class MainMenu : MonoBehaviour
 {
     [Header("Paineis")]
     [SerializeField] private GameObject painelPrincipal;
     [SerializeField] private GameObject painelOpcoes;
     [SerializeField] private GameObject painelCreditos;
-    [SerializeField] private GameObject botaoContinuar;
     [SerializeField] private GameObject painelMultiplayer;
-    //[SerializeField] private string gameSceneName = "Game";
+    //[SerializeField] private GameObject painelCodigo; // onde aparece o código do Relay
+    //[SerializeField] private Text codigoRelayText;
 
-    [Header("Multiplayer UI")]
-    [SerializeField] private TMP_InputField joinCodeInput;
-    [SerializeField] private TMP_Text joinCodeDisplay;
+    [Header("Botões")]
+    [SerializeField] private GameObject botaoContinuar;
 
-    [Header("Config")]
+    [Header("Configurações")]
     [SerializeField] private string gameSceneName = "SampleScene";
+    //[SerializeField] private InputField joinCodeInput;
+
+    [Header("Relay UI")]
+    [SerializeField] private TMP_Text relayCodeText;
+    [SerializeField] private TMP_InputField joinCodeInput;
+
+    private RelayManager relayManager;
 
     private void Start()
     {
         MostrarPrincipal();
 
-    }
+        if (botaoContinuar != null)
+            botaoContinuar.SetActive(SaveSystem.HasSave());
 
+        relayManager = FindObjectOfType<RelayManager>();
+    }
 
     public void NovoJogo()
     {
@@ -51,7 +59,6 @@ public class MainMenu : MonoBehaviour
     public void MostrarPrincipal() => AtivarSomente(painelPrincipal);
     public void MostrarOpcoes() => AtivarSomente(painelOpcoes);
     public void MostrarCreditos() => AtivarSomente(painelCreditos);
-
     public void MostrarMultiplayer() => AtivarSomente(painelMultiplayer);
 
     private void AtivarSomente(GameObject alvo)
@@ -60,7 +67,6 @@ public class MainMenu : MonoBehaviour
         painelOpcoes.SetActive(false);
         painelCreditos.SetActive(false);
         painelMultiplayer.SetActive(false);
-
         alvo.SetActive(true);
     }
 
@@ -73,27 +79,84 @@ public class MainMenu : MonoBehaviour
 #endif
     }
 
-    // ========= MULTIPLAYER VIA RELAY =========
-    public async void HostGame()
-    {
-        string joinCode = await RelayManager.Instance.CreateRelay();
-        if (!string.IsNullOrEmpty(joinCode))
-        {
-            Debug.Log($"[MainMenu] Código da sala: {joinCode}");
-            if (joinCodeDisplay != null)
-                joinCodeDisplay.text = joinCode; // <-- nome atualizado
-        }
-    }
+    // ===============================
+    // ======= MULTIPLAYER ===========
+    // ===============================
 
-    public void JoinGame()
+    public async void OnHostButtonPressed()
     {
-        string joinCode = joinCodeInput.text.Trim(); // <-- nome atualizado
-        if (string.IsNullOrEmpty(joinCode))
+        if (relayManager == null)
         {
-            Debug.LogWarning("[MainMenu] Nenhum código inserido.");
+            Debug.LogError("[MainMenu] RelayManager não encontrado na cena!");
             return;
         }
 
-        RelayManager.Instance.JoinRelay(joinCode);
+        Debug.Log("[MainMenu] Criando Relay...");
+        string joinCode = await relayManager.CreateRelay(2);
+
+        if (!string.IsNullOrEmpty(joinCode))
+        {
+            Debug.Log($"[MainMenu] Relay criado com código: {joinCode}");
+
+            if (relayCodeText != null)
+                relayCodeText.text = $"Código da Sala: {joinCode}\nAguardando jogador...";
+
+            // Espera até o segundo jogador se conectar antes de iniciar
+            StartCoroutine(WaitForPlayersAndLoadScene());
+        }
+        else
+        {
+            Debug.LogError("[MainMenu] Falha ao criar Relay!");
+        }
+    }
+
+    public async void OnJoinButtonPressed()
+    {
+        if (relayManager == null)
+        {
+            Debug.LogError("[MainMenu] RelayManager não encontrado!");
+            return;
+        }
+
+        string joinCode = joinCodeInput.text.Trim();
+
+        if (string.IsNullOrEmpty(joinCode))
+        {
+            Debug.LogWarning("[MainMenu] Nenhum código foi inserido!");
+            return;
+        }
+
+        bool success = await relayManager.JoinRelay(joinCode);
+
+        if (success)
+        {
+            Debug.Log($"[MainMenu] Entrando na sala com código {joinCode}");
+            StartCoroutine(LoadSceneAfterDelay(1f));
+        }
+        else
+        {
+            Debug.LogError("[MainMenu] Falha ao entrar na sala!");
+        }
+    }
+
+    private IEnumerator WaitForPlayersAndLoadScene()
+    {
+        // Espera até que pelo menos 2 jogadores estejam conectados (Host + Cliente)
+        while (NetworkManager.Singleton.ConnectedClients.Count < 2)
+        {
+            yield return null;
+        }
+
+        if (relayCodeText != null)
+            relayCodeText.text = "Jogador conectado! Iniciando...";
+
+        yield return new WaitForSeconds(1f);
+        NetworkManager.Singleton.SceneManager.LoadScene(gameSceneName, LoadSceneMode.Single);
+    }
+
+    private IEnumerator LoadSceneAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        NetworkManager.Singleton.SceneManager.LoadScene(gameSceneName, LoadSceneMode.Single);
     }
 }

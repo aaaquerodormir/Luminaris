@@ -11,8 +11,8 @@ using Unity.Services.Authentication;
 
 public class RelayManager : MonoBehaviour
 {
-    public static RelayManager Instance;
-    public string JoinCode { get; private set; }
+    public static RelayManager Instance { get; private set; }
+    private Task _initTask;
 
     private void Awake()
     {
@@ -21,75 +21,149 @@ public class RelayManager : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(gameObject);
         }
-        else
-        {
-            Destroy(gameObject);
-        }
+        else Destroy(gameObject);
     }
 
-    private async void Start()
+    private async Task EnsureInitialized()
     {
-        await InitializeUnityServices();
+        if (_initTask != null) { await _initTask; return; }
+
+        _initTask = InitializeAsync();
+        await _initTask;
     }
 
-    private async Task InitializeUnityServices()
+    private async Task InitializeAsync()
     {
         try
         {
+            Debug.Log("[RelayManager] Inicializando Unity Services...");
             await UnityServices.InitializeAsync();
-            Debug.Log("[RelayManager] Unity Services inicializado com sucesso!");
+            Debug.Log("[RelayManager] Unity Services inicializado.");
 
             if (!AuthenticationService.Instance.IsSignedIn)
             {
+                Debug.Log("[RelayManager] Autenticando anonimamente...");
                 await AuthenticationService.Instance.SignInAnonymouslyAsync();
-                Debug.Log("[RelayManager] Autenticado anonimamente com sucesso.");
+                Debug.Log($"[RelayManager] Autenticado. PlayerId: {AuthenticationService.Instance.PlayerId}");
+            }
+            else
+            {
+                Debug.Log("[RelayManager] Já autenticado.");
             }
         }
         catch (System.Exception e)
         {
-            Debug.LogError($"[RelayManager] Erro ao inicializar Unity Services: {e.Message}");
+            Debug.LogError($"[RelayManager] Erro na inicialização/auth: {e}");
+            throw;
         }
     }
 
-    public async Task<string> CreateRelay()
+    /// <summary>
+    /// Cria uma allocation (host). Retorna joinCode ou null em falha.
+    /// </summary>
+    public async Task<string> CreateRelay(int maxPlayers = 2)
     {
+        await EnsureInitialized();
+
+        if (NetworkManager.Singleton == null)
+        {
+            Debug.LogError("[RelayManager] NetworkManager.Singleton é null. Coloque um NetworkManager na cena (Menu).");
+            return null;
+        }
+
         try
         {
-            Debug.Log("[RelayManager] Criando Allocation...");
-            Allocation allocation = await RelayService.Instance.CreateAllocationAsync(2);
-            JoinCode = await RelayService.Instance.GetJoinCodeAsync(allocation.AllocationId);
-            Debug.Log($"[RelayManager] Relay criado com código: {JoinCode}");
+            Debug.Log("[RelayManager] Criando allocation Relay...");
+            Allocation alloc = await RelayService.Instance.CreateAllocationAsync(maxPlayers);
+            string joinCode = await RelayService.Instance.GetJoinCodeAsync(alloc.AllocationId);
+            Debug.Log($"[RelayManager] Allocation criada. joinCode={joinCode}");
 
-            UnityTransport transport = NetworkManager.Singleton.GetComponent<UnityTransport>();
-            transport.SetRelayServerData(new RelayServerData(allocation, "dtls"));
+            // Configura o UnityTransport para usar Relay.
+            var ut = NetworkManager.Singleton.GetComponent<UnityTransport>();
+            if (ut == null)
+            {
+                Debug.LogError("[RelayManager] UnityTransport não encontrado no NetworkManager.");
+                return null;
+            }
 
+            // --- USO DO OVERLOAD CLÁSSICO (mais compatível com várias versões) ---
+            // Se sua versão usa outro overload, adapte conforme a sua API.
+            ut.SetRelayServerData(
+                alloc.RelayServer.IpV4,
+                (ushort)alloc.RelayServer.Port,
+                alloc.AllocationIdBytes,
+                alloc.Key,
+                alloc.ConnectionData
+            );
+
+            Debug.Log("[RelayManager] Transport configurado para Relay. Iniciando Host...");
             NetworkManager.Singleton.StartHost();
-            Debug.Log("[RelayManager] Host iniciado com sucesso!");
-            return JoinCode;
+
+            // Opcional: LoadScene pelo NetworkManager (se quiser mudar de cena aqui)
+            // NetworkManager.Singleton.SceneManager.LoadScene("SampleScene", UnityEngine.SceneManagement.LoadSceneMode.Single);
+
+            return joinCode;
         }
-        catch (RelayServiceException e)
+        catch (RelayServiceException ex)
         {
-            Debug.LogError($"[RelayManager] Erro ao criar Relay: {e.Message}");
+            Debug.LogError($"[RelayManager] RelayServiceException: {ex.Message}");
+            return null;
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogError($"[RelayManager] Erro inesperado ao criar Relay: {ex}");
             return null;
         }
     }
 
-    public async void JoinRelay(string joinCode)
+    /// <summary>
+    /// Faz o client entrar na relay com joinCode.
+    /// </summary>
+    public async Task<bool> JoinRelay(string joinCode)
     {
+        await EnsureInitialized();
+
+        if (NetworkManager.Singleton == null)
+        {
+            Debug.LogError("[RelayManager] NetworkManager.Singleton é null. Coloque um NetworkManager na cena (Menu).");
+            return false;
+        }
+
         try
         {
-            Debug.Log($"[RelayManager] Tentando entrar com código: {joinCode}");
-            JoinAllocation joinAllocation = await RelayService.Instance.JoinAllocationAsync(joinCode);
+            Debug.Log($"[RelayManager] Solicitando join com código: {joinCode}");
+            JoinAllocation joinAlloc = await RelayService.Instance.JoinAllocationAsync(joinCode);
 
-            UnityTransport transport = NetworkManager.Singleton.GetComponent<UnityTransport>();
-            transport.SetRelayServerData(new RelayServerData(joinAllocation, "dtls"));
+            var ut = NetworkManager.Singleton.GetComponent<UnityTransport>();
+            if (ut == null)
+            {
+                Debug.LogError("[RelayManager] UnityTransport não encontrado no NetworkManager.");
+                return false;
+            }
 
+            // Overload com hostConnectionData (= joinAlloc.HostConnectionData)
+            ut.SetRelayServerData(
+                joinAlloc.RelayServer.IpV4,
+                (ushort)joinAlloc.RelayServer.Port,
+                joinAlloc.AllocationIdBytes,
+                joinAlloc.Key,
+                joinAlloc.ConnectionData,
+                joinAlloc.HostConnectionData
+            );
+
+            Debug.Log("[RelayManager] Transport configurado. Iniciando cliente...");
             NetworkManager.Singleton.StartClient();
-            Debug.Log("[RelayManager] Cliente conectado com sucesso!");
+            return true;
         }
-        catch (RelayServiceException e)
+        catch (RelayServiceException ex)
         {
-            Debug.LogError($"[RelayManager] Erro ao entrar no Relay: {e.Message}");
+            Debug.LogError($"[RelayManager] Erro ao entrar no Relay: {ex.Message}");
+            return false;
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogError($"[RelayManager] Erro inesperado ao entrar no Relay: {ex}");
+            return false;
         }
     }
 }
