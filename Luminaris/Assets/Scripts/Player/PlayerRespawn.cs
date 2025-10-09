@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System;
+//using Unity.Netcode;
 
 public class PlayerRespawn : MonoBehaviour
 {
@@ -16,12 +17,14 @@ public class PlayerRespawn : MonoBehaviour
     void Start()
     {
         respawnPoint = transform.position;
+        Debug.Log($"[PlayerRespawn] Ponto inicial de respawn definido em {respawnPoint}");
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Lava") && !isDead)
         {
+            Debug.Log("[PlayerRespawn] Jogador tocou na Lava — morrendo.");
             Die();
             return;
         }
@@ -33,6 +36,7 @@ public class PlayerRespawn : MonoBehaviour
 
         if (pendingCheckpoint == checkpoint || committedCheckpoint == checkpoint) return;
 
+        Debug.Log($"[PlayerRespawn] Novo checkpoint detectado: {checkpoint.name}");
         pendingCheckpoint = checkpoint;
         checkpoint.TryActivate();
         GameManager.Instance.ReachCheckpoint(checkpoint.transform);
@@ -47,6 +51,7 @@ public class PlayerRespawn : MonoBehaviour
         committedCheckpoint = pendingCheckpoint;
         respawnPoint = committedCheckpoint.RespawnPosition;
         ShowFeedback("Checkpoint salvo", committedCheckpoint.transform.position + Vector3.up * 1.25f);
+        Debug.Log($"[PlayerRespawn] Checkpoint confirmado: {committedCheckpoint.name}");
         pendingCheckpoint = null;
     }
 
@@ -56,25 +61,27 @@ public class PlayerRespawn : MonoBehaviour
     {
         if (isDead) return;
         isDead = true;
-
         ClearPendingCheckpoint();
+
+        Debug.Log("[PlayerRespawn] Executando sequência de morte...");
 
         if (movementScript != null)
             movementScript.EndTurn();
 
-        TurnControl.Instance.EndTurnIfReady();
+        TurnControl.Instance?.EndTurnIfReady();
 
-        // Som de morte
         AudioManager.Instance.PlaySound("Morrendo");
-
         OnPlayerDied?.Invoke();
     }
 
     public void Respawn()
     {
+        Debug.Log($"[PlayerRespawn] Respawn em {respawnPoint}");
         transform.position = respawnPoint;
+
         if (movementScript != null)
             movementScript.StartTurn();
+
         isDead = false;
     }
 

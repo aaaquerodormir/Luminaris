@@ -3,8 +3,9 @@ using UnityEngine.SceneManagement;
 using System.Collections;
 using TMPro; // Adicionado para TextMeshPro
 using UnityEngine.UI; // Adicionado para Image
+using Unity.Netcode;
 
-public class GameManager : MonoBehaviour
+public class GameManager : NetworkBehaviour
 {
     public static GameManager Instance;
 
@@ -43,69 +44,67 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject jumpCounterUI;
 
     private bool isGameOver = false;
-    public bool IsGameOverActive => isGameOver;
+    //public bool IsGameOverActive => isGameOver;
 
     private GameSession session;
     private Checkpoint lastCheckpoint;
-    private System.Action confirmedAction;
+    //private System.Action confirmedAction;
 
-    public PlayerRespawn GetPlayer1() => player1;
-    public PlayerRespawn GetPlayer2() => player2;
+    //public PlayerRespawn GetPlayer1() => player1;
+    //public PlayerRespawn GetPlayer2() => player2;
+
 
     private void Awake()
     {
         if (Instance == null) Instance = this;
         else Destroy(gameObject);
         session = new GameSession();
+        Debug.Log("[GameManager] Awake — Instância criada");
     }
 
     private void OnEnable()
     {
-        PlayerRespawn.OnPlayerDied += ShowGameOver;
-        // Se inscreve no novo evento que envia dados do jogador
+        PlayerRespawn.OnPlayerDied += HandlePlayerDeath;
         TurnControl.OnTurnStarted += HandleTurnStart;
     }
 
-
-
     private void OnDisable()
     {
-        PlayerRespawn.OnPlayerDied -= ShowGameOver;
-        // Se desinscreve do novo evento
+        PlayerRespawn.OnPlayerDied -= HandlePlayerDeath;
         TurnControl.OnTurnStarted -= HandleTurnStart;
+    }
+
+    private void HandlePlayerDeath()
+    {
+        if (!IsServer)
+        {
+            Debug.Log("[GameManager] Cliente detectou morte — ignorando");
+            return;
+        }
+
+        Debug.Log("[GameManager] Jogador morreu — executando GameOver no servidor");
+        ShowGameOverClientRpc();
     }
 
     private void HandleTurnStart(PlayerMovement newPlayer)
     {
+        Debug.Log($"[GameManager] Novo turno iniciado: {newPlayer.name}");
         StartCoroutine(ShowTurnPanelRoutine(newPlayer));
     }
 
     private IEnumerator ShowTurnPanelRoutine(PlayerMovement playerToShow)
     {
         if (turnChangePanel == null || playerToShow == null)
-            yield break; // Sai da coroutine se as referências não existirem
+            yield break;
 
-        PlayerIdentifier identifier = playerToShow.GetComponent<PlayerIdentifier>();
-        if (identifier != null)
+        PlayerIdentifier id = playerToShow.GetComponent<PlayerIdentifier>();
+        if (id != null && turnChangeText != null)
         {
-            // Atualiza o texto, se a referência existir
-            if (turnChangeText != null)
-            {
-                turnChangeText.text = $"Agora é a vez da {identifier.PlayerName}";
-            }
-
-            // Atualiza a imagem, se a referência e o sprite existirem
+            turnChangeText.text = $"Agora é a vez da {id.PlayerName}";
             if (turnChangeImage != null)
             {
-                if (identifier.PlayerSprite != null)
-                {
-                    turnChangeImage.sprite = identifier.PlayerSprite;
-                    turnChangeImage.gameObject.SetActive(true); // Garante que a imagem está ativa
-                }
-                else
-                {
-                    turnChangeImage.gameObject.SetActive(false); // Esconde o objeto da imagem se não houver sprite
-                }
+                turnChangeImage.sprite = id.PlayerSprite;
+                turnChangeImage.gameObject.SetActive(id.PlayerSprite != null);
             }
         }
 
@@ -114,112 +113,74 @@ public class GameManager : MonoBehaviour
         turnChangePanel.SetActive(false);
     }
 
-    public void RegisterResettable(IResettable obj)
+    [ClientRpc]
+    private void ShowGameOverClientRpc()
     {
-        session.RegisterResettable(obj);
-    }
+        Debug.Log("[GameManager] Exibindo GameOver em todos os clientes");
 
-    public void ShowGameOver()
-    {
         if (isGameOver) return;
         isGameOver = true;
-        if (pauseMenu != null) pauseMenu.gameObject.SetActive(false);
-        if (hudContainer != null) hudContainer.SetActive(false);
-        if (victoryUI != null) victoryUI.SetActive(false);
-        if (victoryMenuWrapper != null) victoryMenuWrapper.SetActive(false);
+
+        pauseMenu?.gameObject.SetActive(false);
+        hudContainer?.SetActive(false);
+        victoryUI?.SetActive(false);
+        victoryMenuWrapper?.SetActive(false);
         gameOverUI.SetActive(true);
-        if (turnChangePanel != null) turnChangePanel.SetActive(false);
+        turnChangePanel?.SetActive(false);
+
         Time.timeScale = 0f;
         OnGameOver?.Invoke();
     }
 
     public void TryAgain()
     {
+        Debug.Log("[GameManager] Reiniciando partida...");
+
         gameOverUI.SetActive(false);
         Time.timeScale = 1f;
+
         player1.Respawn();
         player2.Respawn();
+
         if (lastCheckpoint != null)
             lava.ResetLava(lastCheckpoint);
+
         turnControl.ResetTurns();
         session.ResetSession();
-        if (pauseMenu != null) pauseMenu.gameObject.SetActive(true);
-        if (hudContainer != null) hudContainer.SetActive(true);
+
+        pauseMenu?.gameObject.SetActive(true);
+        hudContainer?.SetActive(true);
+
         isGameOver = false;
         OnTryAgain?.Invoke();
     }
 
-    public void ShowVictoryPanel()
-    {
-        if (gameOverUI != null)
-            gameOverUI.SetActive(false);
-        if (victoryUI != null)
-            victoryUI.SetActive(true);
-        if (victoryMenuWrapper != null)
-            victoryMenuWrapper.SetActive(true);
-        Animator anim = victoryUI != null ? victoryUI.GetComponent<Animator>() : null;
-        if (anim != null)
-            anim.updateMode = AnimatorUpdateMode.UnscaledTime;
-        if (pauseMenu != null)
-            pauseMenu.gameObject.SetActive(true);
-        if (hudContainer != null)
-            hudContainer.SetActive(true);
-        if (jumpCounterUI != null)
-            jumpCounterUI.SetActive(false);
-            AudioManager.Instance.PauseAllLoops();
-        Time.timeScale = 0f;
-    }
-
     public void ReachCheckpoint(Transform checkpointTransform)
     {
+        if (!IsServer) return;
+
         var cp = checkpointTransform.GetComponent<Checkpoint>();
         if (cp == null) return;
+
+        Debug.Log("[GameManager] Checkpoint atingido — verificando progresso");
+
         var p1Pending = player1.GetPendingCheckpoint();
         var p2Pending = player2.GetPendingCheckpoint();
+
         if (p1Pending != null && p2Pending != null && p1Pending.GroupId == p2Pending.GroupId)
         {
             player1.CommitPendingCheckpoint();
             player2.CommitPendingCheckpoint();
             lastCheckpoint = p1Pending;
-            SaveData data = new SaveData { checkpointGroup = lastCheckpoint.GroupId };
-            if (lastCheckpoint.GroupId > 0)
-            {
-                lava.SaveProgressAtCheckpoint();
-                data.lavaSavedTurns = lava.GetSavedTurns();
-            }
-            else
-            {
-                data.lavaSavedTurns = 0;
-            }
-             SaveSystem.SaveGame(data);
+
+            lava.SaveProgressAtCheckpoint();
+
             float safeZone = Mathf.Min(
                 player1.GetCommittedCheckpoint().LavaSafeHeight,
                 player2.GetCommittedCheckpoint().LavaSafeHeight
             );
+
             lava.SetSafeZone(safeZone);
         }
-    }
-
-    public void OpenVictoryConfirmation(System.Action action)
-    {
-        if (confirmationUI != null)
-        {
-            confirmationUI.SetActive(true);
-            confirmedAction = action;
-        }
-    }
-
-    public void ConfirmVictoryAction()
-    {
-        if (confirmationUI != null)
-            confirmationUI.SetActive(false);
-        confirmedAction?.Invoke();
-    }
-
-    public void CancelVictoryAction()
-    {
-        if (confirmationUI != null)
-            confirmationUI.SetActive(false);
-        confirmedAction = null;
     }
 }

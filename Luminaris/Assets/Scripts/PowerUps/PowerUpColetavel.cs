@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
+using Unity.Netcode;
 
 public class PowerUpColetavel : MonoBehaviour, IResettable
 {
-    [SerializeField] GameObject feedBackTextualPrefab;
+    [SerializeField] private GameObject feedBackTextualPrefab;
     [SerializeField] private PowerUpModificador powerModificador;
 
     [Header("Mensagem do Feedback")]
@@ -15,17 +16,18 @@ public class PowerUpColetavel : MonoBehaviour, IResettable
     {
         startPos = transform.position;
         GameManager.Instance.RegisterResettable(this);
+        Debug.Log($"[PowerUpColetavel] Registrado resetável {gameObject.name}");
     }
 
     private void OnTriggerEnter2D(Collider2D col)
     {
         if (col.CompareTag("Player") && powerModificador != null && !collected)
         {
+            Debug.Log($"[PowerUpColetavel] {col.name} coletou {gameObject.name}");
             powerModificador.Activate(col.gameObject);
             collected = true;
 
             AudioManager.Instance.PlaySound("PowerUp");
-
             ShowFeedback(mensagemFeedback, transform.position + Vector3.up * 1f);
             gameObject.SetActive(false);
         }
@@ -34,7 +36,6 @@ public class PowerUpColetavel : MonoBehaviour, IResettable
     private void ShowFeedback(string mensagem, Vector3 posicao)
     {
         if (feedBackTextualPrefab == null) return;
-
         GameObject temp = Instantiate(feedBackTextualPrefab, posicao, Quaternion.identity);
         var textComp = temp.GetComponentInChildren<TMPro.TextMeshProUGUI>();
         if (textComp != null)
@@ -49,5 +50,6 @@ public class PowerUpColetavel : MonoBehaviour, IResettable
         collected = false;
         transform.position = startPos;
         gameObject.SetActive(true);
+        Debug.Log($"[PowerUpColetavel] Resetado {gameObject.name}");
     }
 }

@@ -1,22 +1,21 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using System;
 using System.Collections.Generic;
+using Unity.Netcode;
 
-public class TurnControl : MonoBehaviour
+public class TurnControl : NetworkBehaviour
 {
     public static TurnControl Instance;
 
     [Header("Jogadores")]
     [SerializeField] private List<PlayerMovement> players = new();
 
-    // Propriedade pública para que outros scripts possam saber quem está jogando.
-    public PlayerMovement CurrentPlayer => players.Count > 0 ? players[currentIndex] : null;
-    private int currentIndex = 0;
+    private NetworkVariable<int> currentIndex = new NetworkVariable<int>(
+        0,
+        NetworkVariableReadPermission.Everyone,
+        NetworkVariableWritePermission.Server
+    );
 
-    [Header("Referências")]
-    [SerializeField] private LavaRise lava;
-
- 
     public static event Action<PlayerMovement> OnTurnStarted;
 
     private void Awake()
@@ -27,53 +26,56 @@ public class TurnControl : MonoBehaviour
 
     private void Start()
     {
-        EnsureLavaReference();
-        ResetTurns();
+        if (IsServer)
+        {
+            Debug.Log("[TurnControl] Servidor inicializando turnos...");
+            ResetTurns();
+        }
+
+        currentIndex.OnValueChanged += (oldVal, newVal) =>
+        {
+            Debug.Log($"[TurnControl] currentIndex alterado {oldVal} â†’ {newVal}");
+        };
     }
 
     public void ResetTurns()
     {
-        foreach (var p in players)
-            p.EndTurn();
+        if (!IsServer) return;
+        Debug.Log("[TurnControl] Resetando turnos...");
 
-        currentIndex = 0;
+        foreach (var p in players)
+        {
+            if (p == null) continue;
+            p.EndTurn();
+        }
+
+        currentIndex.Value = 0;
+
         if (players.Count > 0)
         {
-            players[currentIndex].StartTurn();
-            // Dispara o evento para o primeiro turno do jogo, informando quem começa.
-            OnTurnStarted?.Invoke(players[currentIndex]);
+            players[currentIndex.Value].StartTurn();
+            Debug.Log($"[TurnControl] Primeiro turno: {players[currentIndex.Value].name}");
+            OnTurnStarted?.Invoke(players[currentIndex.Value]);
         }
     }
 
     public void EndTurnIfReady()
     {
+        if (!IsServer)
+        {
+            Debug.LogWarning("[TurnControl] Tentativa de encerrar turno por cliente â€” ignorada.");
+            return;
+        }
+
         if (players.Count == 0) return;
 
-        players[currentIndex].EndTurn();
+        Debug.Log($"[TurnControl] Encerrando turno do jogador {currentIndex.Value}");
+        players[currentIndex.Value].EndTurn();
 
-        currentIndex = (currentIndex + 1) % players.Count;
-        players[currentIndex].StartTurn();
+        currentIndex.Value = (currentIndex.Value + 1) % players.Count;
 
-        if (lava == null)
-            EnsureLavaReference();
-
-        // Dispara o evento, enviando o jogador ATUAL como informação.
-        OnTurnStarted?.Invoke(CurrentPlayer);
-    }
-
-    private void EnsureLavaReference()
-    {
-        if (lava != null) return;
-
-        var byName = GameObject.Find("Lava");
-        if (byName != null) { lava = byName.GetComponent<LavaRise>(); if (lava != null) return; }
-
-        var byTag = GameObject.FindWithTag("Lava");
-        if (byTag != null) { lava = byTag.GetComponent<LavaRise>(); if (lava != null) return; }
-
-        lava = FindFirstObjectByType<LavaRise>();
-        if (lava != null) return;
-
-        lava = FindAnyObjectByType<LavaRise>();
+        Debug.Log($"[TurnControl] PrÃ³ximo turno: {players[currentIndex.Value].name}");
+        players[currentIndex.Value].StartTurn();
+        OnTurnStarted?.Invoke(players[currentIndex.Value]);
     }
 }
