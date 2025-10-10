@@ -1,124 +1,50 @@
 ﻿using UnityEngine;
+using Unity.Netcode;
 
-public class LavaRise : MonoBehaviour
+public class LavaRise : NetworkBehaviour
 {
     [Header("Velocidade da Lava")]
     [SerializeField] private float baseSpeed = 0.3f;
     [SerializeField] private float growthPerTurn = 0.01f;
     [SerializeField] private float maxSpeed = 2f;
 
-    [Header("Jogadores")]
-    [SerializeField] private Transform player1;
-    [SerializeField] private Transform player2;
+    //[Header("Jogadores")]
+    //[SerializeField] private Transform player1;
+    //[SerializeField] private Transform player2;
 
-    private float speedModifier = 1f;
-    private int turnsLeft = 0;
-    private int totalTurns = 0;
-    private int savedTurns = 0;
+    //private float speedModifier = 1f;
+    //private int turnsLeft = 0;
+    //private int totalTurns = 0;
+    //private int savedTurns = 0;
 
     private float safeZoneHeight = -Mathf.Infinity;
     private float currentSpeed;
-    private float lastSpeed;
+    //private float lastSpeed;
 
     private AudioSource lavaAudio;
 
     private void Awake()
     {
         currentSpeed = baseSpeed;
-        lastSpeed = currentSpeed;
-
-        lavaAudio = AudioManager.Instance.PlayLoop("Lava", gameObject);
     }
 
     private void Update()
     {
-        if (player1 == null || player2 == null) return;
-
-        float dynamicSpeed = currentSpeed * speedModifier;
-        transform.position += Vector3.up * dynamicSpeed * Time.deltaTime;
+        if (!IsServer) return;
+        transform.position += Vector3.up * currentSpeed * Time.deltaTime;
     }
 
-    public void SetSafeZone(float height) => safeZoneHeight = height;
-
-    public void ResetLava(Checkpoint checkpoint)
+    public void SaveProgressAtCheckpoint() => Debug.Log("[LavaRise] Progresso salvo.");
+    public void ResetLava(Checkpoint cp)
     {
-        safeZoneHeight = checkpoint.LavaSafeHeight;
-        transform.position = new Vector3(transform.position.x, safeZoneHeight, transform.position.z);
-
-        speedModifier = 1f;
-        turnsLeft = 0;
-        totalTurns = savedTurns;
-
+        transform.position = new Vector3(transform.position.x, cp.LavaSafeHeight, transform.position.z);
         currentSpeed = baseSpeed;
-        lastSpeed = currentSpeed;
+        Debug.Log("[LavaRise] Resetada no checkpoint.");
     }
 
-    public void ResetLavaState()
+    public void SetSafeZone(float height)
     {
-        safeZoneHeight = -Mathf.Infinity;
-        speedModifier = 1f;
-        turnsLeft = 0;
-        totalTurns = 0;
-        savedTurns = 0;
-
-        currentSpeed = baseSpeed;
-        lastSpeed = currentSpeed;
-    }
-
-    public void AddSpeedModifier(float modifier, int durationTurns)
-    {
-        speedModifier = modifier;
-        turnsLeft = durationTurns;
-    }
-
-    public struct LavaTurnInfo
-    {
-        public float currentSpeed;
-        public float delta;
-        public int totalTurns;
-
-        public LavaTurnInfo(float currentSpeed, float delta, int totalTurns)
-        {
-            this.currentSpeed = currentSpeed;
-            this.delta = delta;
-            this.totalTurns = totalTurns;
-        }
-    }
-
-    public LavaTurnInfo ConsumeTurn()
-    {
-        totalTurns++;
-        float oldSpeed = currentSpeed;
-        float newSpeed = currentSpeed + growthPerTurn;
-        currentSpeed = Mathf.Min(newSpeed, maxSpeed);
-
-        float delta = currentSpeed - oldSpeed;
-
-        if (turnsLeft > 0)
-        {
-            turnsLeft--;
-            if (turnsLeft <= 0)
-                speedModifier = 1f;
-        }
-
-        return new LavaTurnInfo(currentSpeed * speedModifier, delta, totalTurns);
-    }
-
-    public int GetSavedTurns() => savedTurns;
-
-    public void LoadSavedTurns(int turns)
-    {
-        totalTurns = turns;
-        savedTurns = turns;
-        currentSpeed = Mathf.Min(baseSpeed + (growthPerTurn * totalTurns), maxSpeed);
-        lastSpeed = currentSpeed;
-    }
-
-    public void SaveProgressAtCheckpoint() => savedTurns = totalTurns;
-
-    public void ResetSpeedAtCheckpoint()
-    {
-        currentSpeed = baseSpeed;
-        lastSpeed = currentSpeed;
+        safeZoneHeight = height;
+        Debug.Log($"[LavaRise] SafeZone = {height}");
     }
 }

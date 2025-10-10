@@ -40,12 +40,14 @@ public class VictoryManager : NetworkBehaviour
         GameManager.Instance.ShowVictoryPanelClientRpc();
     }
 
-    public void OnClickMenuPrincipal()
-    {
-        GameManager.Instance.OpenVictoryConfirmation(() =>
-        {
-            Time.timeScale = 1f;
-            UnityEngine.SceneManagement.SceneManager.LoadScene("Menu");
-        });
-    }
+    //public void OnClickMenuPrincipal()
+    //{
+    //    //GameManager.Instance.OpenVictoryConfirmation(() =>
+    //    {
+    //        Time.timeScale = 1f;
+    //        UnityEngine.SceneManagement.SceneManager.LoadScene("Menu");
+
+    //    );
+    //    }
+    //}
 }

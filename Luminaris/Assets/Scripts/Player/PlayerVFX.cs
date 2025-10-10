@@ -14,25 +14,25 @@ public class VisualEffects : MonoBehaviour
         mysticTrail.transform.SetParent(transform);
     }
 
-    void Update()
-    {
-        if (pm.horizontalInput == 0 || mysticTrail == null)
-            return;
+    //void Update()
+    //{
+    //    if (pm.horizontalInput == 0 || mysticTrail == null)
+    //        return;
 
 
 
-        // Verifica se o player está se movendo (horizontalInput != 0) ou está no ar
-        bool isMoving = Mathf.Abs(pm.horizontalInput) > 0.1f;
+    //    // Verifica se o player está se movendo (horizontalInput != 0) ou está no ar
+    //    bool isMoving = Mathf.Abs(pm.horizontalInput) > 0.1f;
 
-        if (isMoving)
-        {
-            if (!mysticTrail.isPlaying)
-                mysticTrail.Play();
-        }
-        else
-        {
-            if (mysticTrail.isPlaying)
-                mysticTrail.Stop();
-        }
-    }
+    //    if (isMoving)
+    //    {
+    //        if (!mysticTrail.isPlaying)
+    //            mysticTrail.Play();
+    //    }
+    //    else
+    //    {
+    //        if (mysticTrail.isPlaying)
+    //            mysticTrail.Stop();
+    //    }
+    //}
 }

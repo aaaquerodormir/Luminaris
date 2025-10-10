@@ -13,7 +13,7 @@ public class PauseMenu : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) && !GameManager.Instance.IsGameOverActive)
+        //if (Input.GetKeyDown(KeyCode.Escape) && !GameManager.Instance.IsGameOverActive)
         {
             if (isPaused) Resume();
             else Pause();
@@ -22,7 +22,7 @@ public class PauseMenu : MonoBehaviour
 
     public void Pause()
     {
-        if (GameManager.Instance.IsGameOverActive) return;
+        //if (GameManager.Instance.IsGameOverActive) return;
 
         pauseUI.SetActive(true);
         if (optionsUI != null) optionsUI.SetActive(false);

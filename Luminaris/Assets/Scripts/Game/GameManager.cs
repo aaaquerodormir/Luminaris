@@ -48,7 +48,7 @@ public class GameManager : NetworkBehaviour
 
     private GameSession session;
     private Checkpoint lastCheckpoint;
-    //private System.Action confirmedAction;
+    private System.Action confirmedAction;
 
     //public PlayerRespawn GetPlayer1() => player1;
     //public PlayerRespawn GetPlayer2() => player2;
@@ -56,38 +56,84 @@ public class GameManager : NetworkBehaviour
 
     private void Awake()
     {
-        if (Instance == null) Instance = this;
-        else Destroy(gameObject);
-        session = new GameSession();
-        Debug.Log("[GameManager] Awake — Instância criada");
+        if (Instance == null)
+        {
+            Instance = this;
+            session = new GameSession();
+            Debug.Log("[GameManager] Instância criada com sucesso.");
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void OnEnable()
     {
-        PlayerRespawn.OnPlayerDied += HandlePlayerDeath;
+        PlayerRespawn.OnPlayerDied += OnAnyPlayerDeath;
         TurnControl.OnTurnStarted += HandleTurnStart;
     }
 
     private void OnDisable()
     {
-        PlayerRespawn.OnPlayerDied -= HandlePlayerDeath;
+        PlayerRespawn.OnPlayerDied -= OnAnyPlayerDeath;
         TurnControl.OnTurnStarted -= HandleTurnStart;
     }
 
-    private void HandlePlayerDeath()
+    private void Start()
+    {
+        Debug.Log($"[GameManager] Start — IsServer={IsServer}, IsClient={IsClient}, IsHost={IsHost}");
+    }
+
+    // ==========================
+    // ==== MORTE GLOBAL ========
+    // ==========================
+    private void OnAnyPlayerDeath()
     {
         if (!IsServer)
         {
-            Debug.Log("[GameManager] Cliente detectou morte — ignorando");
+            Debug.Log("[GameManager] Cliente detectou morte (ignorado, apenas o servidor executa GameOver).");
             return;
         }
 
-        Debug.Log("[GameManager] Jogador morreu — executando GameOver no servidor");
+        Debug.Log("[GameManager] Um jogador morreu — acionando GameOver para todos.");
         ShowGameOverClientRpc();
     }
 
+    [ClientRpc]
+    private void ShowGameOverClientRpc()
+    {
+        if (isGameOver) return;
+        isGameOver = true;
+
+        Debug.Log("[GameManager] Exibindo tela de Game Over em todos os clientes.");
+
+        if (pauseMenu != null) pauseMenu.gameObject.SetActive(false);
+        if (hudContainer != null) hudContainer.SetActive(false);
+        if (victoryUI != null) victoryUI.SetActive(false);
+        if (victoryMenuWrapper != null) victoryMenuWrapper.SetActive(false);
+
+        if (gameOverUI != null)
+            gameOverUI.SetActive(true);
+
+        if (turnChangePanel != null)
+            turnChangePanel.SetActive(false);
+
+        Time.timeScale = 0f;
+        OnGameOver?.Invoke();
+    }
+
+    // ==========================
+    // ==== TURNOS ============
+    // ==========================
     private void HandleTurnStart(PlayerMovement newPlayer)
     {
+        if (newPlayer == null)
+        {
+            Debug.LogWarning("[GameManager] Turno iniciado, mas PlayerMovement é nulo!");
+            return;
+        }
+
         Debug.Log($"[GameManager] Novo turno iniciado: {newPlayer.name}");
         StartCoroutine(ShowTurnPanelRoutine(newPlayer));
     }
@@ -98,9 +144,12 @@ public class GameManager : NetworkBehaviour
             yield break;
 
         PlayerIdentifier id = playerToShow.GetComponent<PlayerIdentifier>();
-        if (id != null && turnChangeText != null)
+
+        if (id != null)
         {
-            turnChangeText.text = $"Agora é a vez da {id.PlayerName}";
+            if (turnChangeText != null)
+                turnChangeText.text = $"Agora é a vez da {id.PlayerName}";
+
             if (turnChangeImage != null)
             {
                 turnChangeImage.sprite = id.PlayerSprite;
@@ -113,62 +162,29 @@ public class GameManager : NetworkBehaviour
         turnChangePanel.SetActive(false);
     }
 
-    [ClientRpc]
-    private void ShowGameOverClientRpc()
-    {
-        Debug.Log("[GameManager] Exibindo GameOver em todos os clientes");
-
-        if (isGameOver) return;
-        isGameOver = true;
-
-        pauseMenu?.gameObject.SetActive(false);
-        hudContainer?.SetActive(false);
-        victoryUI?.SetActive(false);
-        victoryMenuWrapper?.SetActive(false);
-        gameOverUI.SetActive(true);
-        turnChangePanel?.SetActive(false);
-
-        Time.timeScale = 0f;
-        OnGameOver?.Invoke();
-    }
-
-    public void TryAgain()
-    {
-        Debug.Log("[GameManager] Reiniciando partida...");
-
-        gameOverUI.SetActive(false);
-        Time.timeScale = 1f;
-
-        player1.Respawn();
-        player2.Respawn();
-
-        if (lastCheckpoint != null)
-            lava.ResetLava(lastCheckpoint);
-
-        turnControl.ResetTurns();
-        session.ResetSession();
-
-        pauseMenu?.gameObject.SetActive(true);
-        hudContainer?.SetActive(true);
-
-        isGameOver = false;
-        OnTryAgain?.Invoke();
-    }
-
+    // ==========================
+    // ==== CHECKPOINT ==========
+    // ==========================
     public void ReachCheckpoint(Transform checkpointTransform)
     {
-        if (!IsServer) return;
+        if (!IsServer)
+        {
+            Debug.Log("[GameManager] Cliente tentou registrar checkpoint (ignorado).");
+            return;
+        }
 
         var cp = checkpointTransform.GetComponent<Checkpoint>();
         if (cp == null) return;
 
-        Debug.Log("[GameManager] Checkpoint atingido — verificando progresso");
+        Debug.Log("[GameManager] Checkpoint atingido — verificando progresso global.");
 
-        var p1Pending = player1.GetPendingCheckpoint();
-        var p2Pending = player2.GetPendingCheckpoint();
+        var p1Pending = player1 != null ? player1.GetPendingCheckpoint() : null;
+        var p2Pending = player2 != null ? player2.GetPendingCheckpoint() : null;
 
         if (p1Pending != null && p2Pending != null && p1Pending.GroupId == p2Pending.GroupId)
         {
+            Debug.Log($"[GameManager] Ambos os jogadores atingiram o mesmo checkpoint {cp.GroupId}.");
+
             player1.CommitPendingCheckpoint();
             player2.CommitPendingCheckpoint();
             lastCheckpoint = p1Pending;
@@ -182,5 +198,56 @@ public class GameManager : NetworkBehaviour
 
             lava.SetSafeZone(safeZone);
         }
+    }
+
+    // ==========================
+    // ==== REINICIAR ==========
+    // ==========================
+    public void TryAgain()
+    {
+        Debug.Log("[GameManager] Reiniciando partida (TryAgain).");
+
+        if (gameOverUI != null) gameOverUI.SetActive(false);
+        Time.timeScale = 1f;
+
+        if (player1 != null) player1.Respawn();
+        if (player2 != null) player2.Respawn();
+
+        if (lastCheckpoint != null && lava != null)
+            lava.ResetLava(lastCheckpoint);
+
+        if (turnControl != null)
+            turnControl.ResetTurns();
+
+        session?.ResetSession();
+
+        if (pauseMenu != null) pauseMenu.gameObject.SetActive(true);
+        if (hudContainer != null) hudContainer.SetActive(true);
+
+        isGameOver = false;
+        OnTryAgain?.Invoke();
+    }
+
+    // ==========================
+    // ==== VITÓRIA ============
+    // ==========================
+    [ClientRpc]
+    public void ShowVictoryPanelClientRpc()
+    {
+        Debug.Log("[GameManager] Exibindo tela de vitória em todos os clientes.");
+
+        if (gameOverUI != null) gameOverUI.SetActive(false);
+        if (victoryUI != null) victoryUI.SetActive(true);
+        if (victoryMenuWrapper != null) victoryMenuWrapper.SetActive(true);
+
+        if (victoryUI != null && victoryUI.TryGetComponent(out Animator anim))
+            anim.updateMode = AnimatorUpdateMode.UnscaledTime;
+
+        if (pauseMenu != null) pauseMenu.gameObject.SetActive(true);
+        if (hudContainer != null) hudContainer.SetActive(true);
+        if (jumpCounterUI != null) jumpCounterUI.SetActive(false);
+
+        AudioManager.Instance.PauseAllLoops();
+        Time.timeScale = 0f;
     }
 }

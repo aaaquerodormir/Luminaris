@@ -18,7 +18,7 @@ public class MovingPlatform : MonoBehaviour, IResettable
         startPos = transform.position;
         targetPos = pointB.position;
 
-        GameManager.Instance.RegisterResettable(this);
+        //GameManager.Instance.RegisterResettable(this);
 
         StartCoroutine(MovePlatform());
     }

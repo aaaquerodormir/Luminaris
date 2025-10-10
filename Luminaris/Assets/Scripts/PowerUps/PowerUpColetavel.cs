@@ -15,7 +15,7 @@ public class PowerUpColetavel : MonoBehaviour, IResettable
     private void Start()
     {
         startPos = transform.position;
-        GameManager.Instance.RegisterResettable(this);
+        //GameManager.Instance.RegisterResettable(this);
         Debug.Log($"[PowerUpColetavel] Registrado resetável {gameObject.name}");
     }
 
