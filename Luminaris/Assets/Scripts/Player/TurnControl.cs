@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
 
@@ -10,9 +11,13 @@ public class TurnControl : NetworkBehaviour
     [Header("Jogadores Registrados")]
     public List<PlayerMovement> players = new List<PlayerMovement>();
 
-    private NetworkVariable<int> currentIndex = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
+    private NetworkVariable<int> currentIndex = new NetworkVariable<int>(
+        0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server
+    );
 
     public static event System.Action<PlayerMovement> OnTurnStarted;
+
+    private bool gameStarted = false;
 
     private void Awake()
     {
@@ -31,22 +36,45 @@ public class TurnControl : NetworkBehaviour
         }
     }
 
-    private IEnumerator<System.Object> WaitForPlayersAndStartTurns()
+    private IEnumerator WaitForPlayersAndStartTurns()
     {
-        // Aguarda até que ao menos dois jogadores sejam registrados
-        yield return new WaitUntil(() => players.Count >= 2);
+        // Espera até que os players existam na cena (spawnados via rede)
+        yield return new WaitForSeconds(1f);
 
-        Debug.Log($"[TurnControl] {players.Count} jogadores registrados. Iniciando turnos...");
+        while (players.Count < 2)
+        {
+            FindPlayersInScene();
+            Debug.Log($"[TurnControl] Aguardando jogadores... ({players.Count}/2)");
+            yield return new WaitForSeconds(1f);
+        }
+
+        Debug.Log($"[TurnControl] {players.Count} jogadores encontrados. Iniciando turnos...");
         ResetTurns();
+        gameStarted = true;
     }
 
     // ============================================
-    // === Registro de jogadores ==================
+    // === Procurar jogadores na cena automaticamente
+    // ============================================
+    private void FindPlayersInScene()
+    {
+        var foundPlayers = FindObjectsOfType<PlayerMovement>();
+        foreach (var p in foundPlayers)
+        {
+            if (p != null && !players.Contains(p))
+            {
+                players.Add(p);
+                Debug.Log($"[TurnControl] Player encontrado na cena e registrado automaticamente: {p.name}");
+            }
+        }
+    }
+
+    // ============================================
+    // === Registro manual via PlayerMovement ======
     // ============================================
     public void RegisterPlayer(PlayerMovement player)
     {
         if (!IsServer) return;
-
         if (player == null)
         {
             Debug.LogWarning("[TurnControl] Tentou registrar um player nulo!");
@@ -65,7 +93,7 @@ public class TurnControl : NetworkBehaviour
     }
 
     // ============================================
-    // === Controle de Turnos =====================
+    // === Controle de turnos =====================
     // ============================================
     public void ResetTurns()
     {
@@ -77,7 +105,6 @@ public class TurnControl : NetworkBehaviour
 
         Debug.Log("[TurnControl] Resetando turnos...");
 
-        // Desativa todos
         foreach (var p in players)
         {
             if (p != null)
@@ -90,7 +117,6 @@ public class TurnControl : NetworkBehaviour
             return;
         }
 
-        // Define o primeiro
         currentIndex.Value = 0;
         TriggerTurnStarted(players[currentIndex.Value]);
     }
@@ -106,7 +132,6 @@ public class TurnControl : NetworkBehaviour
         }
 
         players[currentIndex.Value].SetTurnActiveServerRpc(false);
-
         currentIndex.Value = (currentIndex.Value + 1) % players.Count;
         TriggerTurnStarted(players[currentIndex.Value]);
     }
@@ -119,9 +144,8 @@ public class TurnControl : NetworkBehaviour
             return;
         }
 
-        player.SetTurnActiveServerRpc(true);
         Debug.Log($"[TurnControl] 🔁 Novo turno iniciado — Jogador ativo: {player.name}");
-
+        player.SetTurnActiveServerRpc(true);
         OnTurnStarted?.Invoke(player);
     }
 }

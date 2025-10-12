@@ -5,7 +5,7 @@ using TMPro;
 public class JumpHUD : MonoBehaviour
 {
     [Header("Referências")]
-    [SerializeField] private PlayerMovementUI player;
+    [SerializeField] private PlayerMovementUI playerUI;
     [SerializeField] private Image jumpIcon;
     [SerializeField] private TextMeshProUGUI jumpText;
 
@@ -14,16 +14,18 @@ public class JumpHUD : MonoBehaviour
 
     private void OnEnable()
     {
-        // Se inscreve no novo evento OnTurnStarted usando um método adaptador.
+        if (playerUI != null)
+            playerUI.OnJumpsChanged += RefreshHUD;
+
         TurnControl.OnTurnStarted += OnTurnChanged;
-        player.OnJumpsChanged += RefreshHUD;
     }
 
     private void OnDisable()
     {
-        // Se desinscreve do evento OnTurnStarted.
+        if (playerUI != null)
+            playerUI.OnJumpsChanged -= RefreshHUD;
+
         TurnControl.OnTurnStarted -= OnTurnChanged;
-        player.OnJumpsChanged -= RefreshHUD;
     }
 
     private void Start()
@@ -31,27 +33,31 @@ public class JumpHUD : MonoBehaviour
         RefreshHUD();
     }
 
-    private void OnTurnChanged(PlayerMovement unusedPlayer)
+    private void OnTurnChanged(PlayerMovement player)
     {
         RefreshHUD();
     }
+
     private void RefreshHUD()
     {
-        if (player == null) return;
+        if (playerUI == null || jumpIcon == null || jumpText == null)
+            return;
 
-        int remainingJumps = player.MaxJumps - player.JumpsUsed;
+        int remaining = playerUI.RemainingJumps;
+        int max = playerUI.MaxJumps;
 
+        // Atualiza sprite conforme a quantidade de pulos
         if (sprites != null && sprites.Length >= 3)
         {
-            if (remainingJumps <= 3)
+            if (max <= 3)
                 jumpIcon.sprite = sprites[0];
-            else if (remainingJumps == 4)
+            else if (max == 4)
                 jumpIcon.sprite = sprites[1];
             else
                 jumpIcon.sprite = sprites[2];
         }
 
-        if (jumpText != null)
-            jumpText.text = $"{remainingJumps:00}";
+        // Atualiza texto
+        jumpText.text = $"{remaining:00}";
     }
 }

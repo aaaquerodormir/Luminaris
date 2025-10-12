@@ -4984,10 +4984,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  players:
-  - {fileID: 0}
-  - {fileID: 0}
-  lava: {fileID: 1909042937}
+  players: []
 --- !u!4 &554373784
 Transform:
   m_ObjectHideFlags: 0
@@ -30356,6 +30353,7 @@ MonoBehaviour:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 1510164418}
   - {fileID: 619394802}
   - {fileID: 501723275}
   - {fileID: 728656587}
@@ -30370,4 +30368,3 @@ SceneRoots:
   - {fileID: 557955296}
   - {fileID: 557701194}
   - {fileID: 396398378}
-  - {fileID: 1510164418}
