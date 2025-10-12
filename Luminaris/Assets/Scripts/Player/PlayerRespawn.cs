@@ -80,7 +80,7 @@ public class PlayerRespawn : NetworkBehaviour
         isDead = false;
 
         if (movementScript != null)
-            movementScript.StartTurn();
+            //movementScript.StartTurn();
 
         Debug.Log($"[PlayerRespawn] Cliente reposicionado para {pos}");
     }

@@ -2,12 +2,17 @@
 using UnityEngine.InputSystem;
 using Unity.Netcode;
 
+[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(NetworkObject))]
+//[RequireComponent(typeof(NetworkTransform))]
+
 public class PlayerMovement : NetworkBehaviour
 {
     [Header("References")]
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private PlayerMovementUI playerUI;
     [SerializeField] private Animator anim;
+    [SerializeField] private SpriteRenderer spriteRenderer;
 
     //[Header("Input Actions")]
     //[SerializeField] private InputActionReference moveAction;
@@ -21,133 +26,122 @@ public class PlayerMovement : NetworkBehaviour
     [SerializeField] private Transform groundCheckPos;
     [SerializeField] private Vector2 groundCheckSize = new(0.5f, 0.05f);
     [SerializeField] private LayerMask groundLayer;
+    [SerializeField] private Transform groundCheck;
 
-    private PlayerInputActions controls;
+    
     private bool isJumpPressed;
     private bool isFacingRight = true;
-    private bool isActive = false;
     private float horizontalInput;
 
     private AudioSource walkAudio;
 
+    private bool isGrounded;
+    private bool isActive = false; // 🔸 controlado pelo TurnControl
+    private float moveInput;
+
     private void Awake()
     {
-        controls = new PlayerInputActions();
+        if (rb == null) rb = GetComponent<Rigidbody2D>();
+        if (anim == null) anim = GetComponent<Animator>();
+        if (spriteRenderer == null) spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    private void OnEnable()
+    public override void OnNetworkSpawn()
     {
-        controls.Enable();
-    }
+        Debug.Log($"[PlayerMovement] Spawned — OwnerClientId={OwnerClientId}, IsOwner={IsOwner}");
 
-    private void OnDisable()
-    {
-        controls.Disable();
-    }
-
-    private void Start()
-    {
-        if (rb == null)
-            rb = GetComponent<Rigidbody2D>();
-
-        // Áudio
-        walkAudio = AudioManager.Instance.PlayLoop("Andando", gameObject);
-        if (walkAudio != null) walkAudio.Stop();
-
-        Debug.Log($"[PlayerMovement] {gameObject.name} iniciado. IsOwner={IsOwner}, IsLocalPlayer={IsLocalPlayer}");
+        if (IsServer)
+        {
+            Debug.Log($"[PlayerMovement] (Server) Registrando {OwnerClientId} no TurnControl.");
+            TurnControl.Instance?.RegisterPlayer(this);
+        }
     }
 
     private void Update()
     {
-        // Só o dono local deve enviar inputs
-        if (!IsOwner) return;
-        if (!isActive) return;
+        if (!IsOwner || !isActive) return;
 
-        Vector2 move = controls.Player.Move.ReadValue<Vector2>();
-        horizontalInput = move.x;
-        isJumpPressed = controls.Player.Jump.WasPressedThisFrame();
+        moveInput = Input.GetAxisRaw("Horizontal");
 
-        HandleMovement();
-        HandleAnimations();
+        if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            TryJump();
+        }
     }
 
-    private void HandleMovement()
+    private void FixedUpdate()
     {
-        bool grounded = IsGrounded();
+        if (!IsOwner || !isActive) return;
 
-        // Movimento horizontal
-        rb.linearVelocity = new Vector2(horizontalInput * moveSpeed, rb.linearVelocity.y);
+        Move();
+    }
 
-        // Pulo
-        if (isJumpPressed && grounded)
+    private void Move()
+    {
+        float moveVelocity = moveInput * moveSpeed;
+
+        rb.linearVelocity = new Vector2(moveVelocity, rb.linearVelocity.y);
+
+        if (moveVelocity != 0)
         {
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
-            AudioManager.Instance.PlaySound("Pulando");
+            spriteRenderer.flipX = moveVelocity < 0;
         }
 
-        // Áudio de andar
-        if (Mathf.Abs(horizontalInput) > 0.1f && grounded)
-        {
-            if (!walkAudio.isPlaying) walkAudio.Play();
-        }
-        else if (walkAudio.isPlaying)
-        {
-            walkAudio.Stop();
-        }
+        anim.SetFloat("Speed", Mathf.Abs(moveVelocity));
 
-        Flip();
+        Debug.Log($"[PlayerMovement] (ClientID={OwnerClientId}) Movendo: {moveVelocity}");
+    }
+
+    private void TryJump()
+    {
+        if (!IsGrounded()) return;
+
+        rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
+        anim.SetTrigger("Jump");
+
+        Debug.Log($"[PlayerMovement] (ClientID={OwnerClientId}) Pulou!");
     }
 
     private bool IsGrounded()
     {
-        return Physics2D.OverlapBox(groundCheckPos.position, groundCheckSize, 0f, groundLayer);
+        Collider2D hit = Physics2D.OverlapCircle(groundCheck.position, 0.15f, groundLayer);
+        isGrounded = hit != null;
+        return isGrounded;
     }
 
-    private void Flip()
+    // ==================================================
+    // ============ CONTROLE DE TURNOS ==================
+    // ==================================================
+    [ServerRpc(RequireOwnership = false)]
+    public void SetTurnActiveServerRpc(bool active)
     {
-        if (horizontalInput > 0 && !isFacingRight)
+        SetTurnActiveClientRpc(active);
+    }
+
+    [ClientRpc]
+    private void SetTurnActiveClientRpc(bool active)
+    {
+        isActive = active;
+
+        string status = active ? "ATIVO" : "INATIVO";
+        Debug.Log($"[PlayerMovement] Player {OwnerClientId} agora está {status} (éOwner={IsOwner})");
+
+        if (!active)
         {
-            isFacingRight = true;
-            Vector3 scale = transform.localScale;
-            scale.x = Mathf.Abs(scale.x);
-            transform.localScale = scale;
-        }
-        else if (horizontalInput < 0 && isFacingRight)
-        {
-            isFacingRight = false;
-            Vector3 scale = transform.localScale;
-            scale.x = -Mathf.Abs(scale.x);
-            transform.localScale = scale;
+            anim.SetFloat("Speed", 0);
         }
     }
 
-    private void HandleAnimations()
-    {
-        if (anim == null) return;
-
-        anim.SetFloat("yVelocity", rb.linearVelocity.y);
-        anim.SetBool("IsGrounded", IsGrounded());
-        anim.SetBool("isWalking", Mathf.Abs(horizontalInput) > 0.1f && IsGrounded());
-        anim.SetBool("isIdle", Mathf.Abs(horizontalInput) < 0.1f && IsGrounded());
-        anim.SetBool("isJumping", rb.linearVelocity.y > 0.1f);
-    }
-
-    public void StartTurn()
-    {
-        isActive = true;
-        Debug.Log($"[PlayerMovement] {gameObject.name} — turno iniciado");
-    }
-
-    public void EndTurn()
-    {
-        isActive = false;
-        rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
-        Debug.Log($"[PlayerMovement] {gameObject.name} — turno finalizado");
-    }
-
+    // ==================================================
+    // ============ AUXÍLIO DE DEPURAÇÃO ================
+    // ==================================================
+#if UNITY_EDITOR
     private void OnDrawGizmosSelected()
     {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(groundCheckPos.position, groundCheckSize);
+        if (groundCheck == null) return;
+
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(groundCheck.position, 0.15f);
     }
+#endif
 }
