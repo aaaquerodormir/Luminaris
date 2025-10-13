@@ -2,54 +2,77 @@
 using UnityEngine.UI;
 using TMPro;
 using Unity.Netcode;
+using System.Collections;
 
 public class JumpHUD : NetworkBehaviour
 {
     [Header("Referências")]
-    [SerializeField] private Image player1Icon;
-    [SerializeField] private PlayerMovementUI playerUI;
+    //[SerializeField] private Image player1Icon;
+    [SerializeField] private PlayerMovementUI player;
     [SerializeField] private Image jumpIcon;
     [SerializeField] private TextMeshProUGUI jumpText;
 
     [Header("Sprites por Quantidade de Pulos")]
     [SerializeField] private Sprite[] sprites;
 
-    [Header("Sincronização")]
-    [SerializeField] private bool showRemotePlayers = true;
-    // se ativado, exibe também o estado de players que não são o dono local
-
-    private PlayerMovementUI[] playerUIs;
+    private bool isLinked = false;
 
     private void Start()
     {
-        InvokeRepeating(nameof(UpdateHUD), 1f, 0.3f); // atualiza a cada 0.3s
+        StartCoroutine(WaitForPlayerReference());
     }
 
-    private void UpdateHUD()
+    private IEnumerator WaitForPlayerReference()
     {
-        if (playerUIs == null || playerUIs.Length == 0)
-            playerUIs = FindObjectsOfType<PlayerMovementUI>().OrderBy(p => p.OwnerClientId).ToArray();
-
-        if (playerUIs.Length < 2) return;
-
-        UpdateForPlayer(playerUIs[0], player1Icon, player1Text);
-        UpdateForPlayer(playerUIs[1], player2Icon, player2Text);
+        while (!isLinked)
+        {
+            TryLinkPlayer();
+            yield return new WaitForSeconds(0.5f);
+        }
     }
 
-    private void UpdateForPlayer(PlayerMovementUI ui, Image icon, TextMeshProUGUI text)
+    private void TryLinkPlayer()
     {
-        if (ui == null || icon == null || text == null) return;
+        var allPlayers = FindObjectsOfType<PlayerMovementUI>();
+        foreach (var p in allPlayers)
+        {
+            // Usa nome para vincular automaticamente
+            if (name.Contains(p.name) || (IsOwner && p.IsOwner))
+            {
+                player = p;
+                player.OnJumpsChanged += RefreshHUD;
+                RefreshHUD();
+                isLinked = true;
+                Debug.Log($"[JumpHUD] HUD {name} vinculado a {player.name}");
+                break;
+            }
+        }
+    }
 
-        int remaining = ui.RemainingJumps;
-        int max = ui.MaxJumps;
+    private void OnDestroy()
+    {
+        if (player != null)
+            player.OnJumpsChanged -= RefreshHUD;
+    }
+
+    private void RefreshHUD()
+    {
+        if (player == null || jumpIcon == null || jumpText == null)
+            return;
+
+        int remaining = player.RemainingJumps;
+        int max = player.MaxJumps;
 
         if (sprites != null && sprites.Length >= 3)
         {
-            if (remaining <= 3) icon.sprite = sprites[0];
-            else if (remaining == 4) icon.sprite = sprites[1];
-            else icon.sprite = sprites[2];
+            if (remaining <= 3)
+                jumpIcon.sprite = sprites[0];
+            else if (remaining == 4)
+                jumpIcon.sprite = sprites[1];
+            else
+                jumpIcon.sprite = sprites[2];
         }
 
-        text.text = $"{remaining:00}";
+        jumpText.text = $"{remaining:00}";
     }
 }

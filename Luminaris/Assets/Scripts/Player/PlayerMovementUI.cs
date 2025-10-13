@@ -9,72 +9,61 @@ public class PlayerMovementUI : NetworkBehaviour
     [SerializeField] private int baseMaxJumps = 3; // Pulos base por turno
 
 
-    private readonly List<(int extraJumps, int turnsLeft)> activeJumpPowerUps = new();
-
-    // 🔹 Variáveis de rede
-    private NetworkVariable<int> jumpsUsed = new(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
-    private NetworkVariable<int> extraJumps = new(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
+    private NetworkVariable<int> jumpsUsed = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
+    private NetworkVariable<int> extraJumps = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
 
     public event Action OnJumpsChanged;
 
     public int MaxJumps => baseMaxJumps + extraJumps.Value;
     public int JumpsUsed => jumpsUsed.Value;
-    public int RemainingJumps => Mathf.Max(0, MaxJumps - jumpsUsed.Value);
+    public int RemainingJumps => MaxJumps - JumpsUsed;
 
-    // ============================================================
-    // 🔹 Métodos principais
-    // ============================================================
-    [ServerRpc(RequireOwnership = false)]
-    public void ConsumeJumpServerRpc()
-    {
-        if (jumpsUsed.Value < MaxJumps)
-        {
-            jumpsUsed.Value++;
-            Debug.Log($"[{OwnerClientId}] Consumiu 1 pulo. Restando {RemainingJumps}");
-            NotifyClientsJumpUpdateClientRpc(jumpsUsed.Value, MaxJumps);
-        }
-    }
+    public bool CanJump() => RemainingJumps > 0;
 
-    [ServerRpc(RequireOwnership = false)]
-    public void ResetJumpsServerRpc()
+    public void ConsumeJump()
     {
-        jumpsUsed.Value = 0;
-        Debug.Log($"[{OwnerClientId}] Resetou pulos ({MaxJumps} disponíveis)");
-        NotifyClientsJumpUpdateClientRpc(jumpsUsed.Value, MaxJumps);
-    }
+        if (!IsServer) return;
+        if (jumpsUsed.Value >= MaxJumps) return;
 
-    [ClientRpc]
-    private void NotifyClientsJumpUpdateClientRpc(int used, int max)
-    {
+        jumpsUsed.Value++;
+        Debug.Log($"[PlayerMovementUI] {name} consumiu pulo ({RemainingJumps} restantes)");
         OnJumpsChanged?.Invoke();
-    }
-
-    [ServerRpc(RequireOwnership = false)]
-    public void AddJumpPowerUpServerRpc(int extra, int duration)
-    {
-        if (extra <= 0) return;
-
-        activeJumpPowerUps.Add((extra, duration));
-        RecalculateExtraJumps();
-        Debug.Log($"[{OwnerClientId}] Recebeu PowerUp: +{extra} pulos por {duration} turnos.");
-        NotifyClientsJumpUpdateClientRpc(jumpsUsed.Value, MaxJumps);
-    }
-
-    private void RecalculateExtraJumps()
-    {
-        int total = 0;
-        for (int i = activeJumpPowerUps.Count - 1; i >= 0; i--)
-        {
-            var power = activeJumpPowerUps[i];
-            if (power.turnsLeft <= 0) activeJumpPowerUps.RemoveAt(i);
-            else total += power.extraJumps;
-        }
-        extraJumps.Value = total;
     }
 
     public void StartTurn()
     {
-        if (IsServer)
-            ResetJumpsServerRpc();
+        if (!IsServer) return;
+
+        jumpsUsed.Value = 0;
+        Debug.Log($"[PlayerMovementUI] {name} iniciou turno. Máx = {MaxJumps}");
+        OnJumpsChanged?.Invoke();
+    }
+
+    public void EndTurn()
+    {
+        if (!IsServer) return;
+        Debug.Log($"[PlayerMovementUI] {name} terminou turno ({jumpsUsed.Value}/{MaxJumps})");
+        OnJumpsChanged?.Invoke();
+    }
+
+    public void AddExtraJumps(int amount)
+    {
+        if (!IsServer) return;
+
+        extraJumps.Value += amount;
+        Debug.Log($"[PlayerMovementUI] {name} ganhou {amount} pulos extras. Total: {MaxJumps}");
+        OnJumpsChanged?.Invoke();
+    }
+
+    private void OnEnable()
+    {
+        jumpsUsed.OnValueChanged += (_, _) => OnJumpsChanged?.Invoke();
+        extraJumps.OnValueChanged += (_, _) => OnJumpsChanged?.Invoke();
+    }
+
+    private void OnDisable()
+    {
+        jumpsUsed.OnValueChanged -= (_, _) => OnJumpsChanged?.Invoke();
+        extraJumps.OnValueChanged -= (_, _) => OnJumpsChanged?.Invoke();
     }
 }

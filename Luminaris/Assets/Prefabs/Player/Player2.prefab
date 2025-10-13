@@ -698,10 +698,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   baseMaxJumps: 3
-  JumpsUsedNet:
-    m_InternalValue: 0
-  MaxJumpsNet:
-    m_InternalValue: 3
 --- !u!114 &7481870330957928647
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -730,7 +726,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   TransitionStateInfoList: []
-  m_Animator: {fileID: 0}
+  m_Animator: {fileID: 3278293586265127783}
 --- !u!1001 &2212095288895709051
 PrefabInstance:
   m_ObjectHideFlags: 0

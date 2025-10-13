@@ -31,9 +31,10 @@ public class PlayerMovement : NetworkBehaviour
     [SerializeField] private Transform groundCheck;
 
 
-    private bool isActive = false; // controlado via RPCs
+    private bool isTurnActive;
     private float moveInput;
     private bool isFacingRight = true;
+    private bool isGrounded;
 
     private void Awake()
     {
@@ -45,109 +46,86 @@ public class PlayerMovement : NetworkBehaviour
 
     public override void OnNetworkSpawn()
     {
-        Debug.Log($"[PlayerMovement] Spawned — OwnerClientId={OwnerClientId}, IsOwner={IsOwner}");
-
         if (IsServer)
         {
-            Debug.Log($"[PlayerMovement] (Server) Registrando jogador {OwnerClientId} no TurnControl...");
             TurnControl.Instance?.RegisterPlayer(this);
         }
+
+        Debug.Log($"[PlayerMovement] Spawned — OwnerClientId={OwnerClientId}, IsOwner={IsOwner}");
     }
 
     private void Update()
     {
-        if (!IsOwner || !isActive) return;
+        if (!IsOwner || !isTurnActive) return;
 
         moveInput = Input.GetAxisRaw("Horizontal");
 
-        if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
+        if (Input.GetButtonDown("Jump") && playerUI.CanJump())
         {
-            TryJump();
+            JumpServerRpc();
         }
 
-        if (playerUI != null && playerUI.RemainingJumps <= 0)
-        {
-            Debug.Log($"[{gameObject.name}] Sem pulos restantes — encerrando turno automaticamente.");
-            EndTurnServerRpc();
-        }
+        UpdateAnimations();
     }
 
     private void FixedUpdate()
     {
-        if (!IsOwner || !isActive) return;
-        Move();
+        if (!IsOwner || !isTurnActive) return;
+
+        isGrounded = Physics2D.OverlapBox(groundCheck.position, groundCheckSize, 0f, groundLayer);
+        rb.velocity = new Vector2(moveInput * moveSpeed, rb.velocity.y);
     }
 
-    private void Move()
+    [ServerRpc]
+    private void JumpServerRpc(ServerRpcParams rpcParams = default)
     {
-        float velocityX = moveInput * moveSpeed;
-        rb.linearVelocity = new Vector2(velocityX, rb.linearVelocity.y);
+        if (playerUI == null) return;
 
-        if (Mathf.Abs(velocityX) > 0.01f)
-            spriteRenderer.flipX = velocityX < 0;
-
-        anim.SetFloat("Speed", Mathf.Abs(velocityX));
+        if (playerUI.CanJump())
+        {
+            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+            playerUI.ConsumeJump();
+            JumpClientRpc();
+        }
+        else
+        {
+            Debug.Log($"[PlayerMovement] Player {OwnerClientId} tentou pular, mas não tem pulos restantes.");
+            TurnControl.Instance?.EndTurn();
+        }
     }
 
-    private void TryJump()
+    [ClientRpc]
+    private void JumpClientRpc()
     {
-        if (!IsGrounded() || playerUI.RemainingJumps <= 0) return;
-
-        playerUI.ConsumeJump();
-
-        rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
-        anim.SetTrigger("Jump");
-
-        Debug.Log($"[{gameObject.name}] Pulou! ({playerUI.JumpsUsed}/{playerUI.MaxJumps})");
+        if (anim != null)
+            anim.SetTrigger("Jump");
     }
-
-    private bool IsGrounded()
-    {
-        Collider2D hit = Physics2D.OverlapCircle(groundCheck.position, 0.15f, groundLayer);
-        return hit != null;
-    }
-
-    // ====================================================
-    // ==== SINCRONIZAÇÃO DE TURNOS E ATIVAÇÃO ============
-    // ====================================================
 
     [ServerRpc(RequireOwnership = false)]
     public void SetTurnActiveServerRpc(bool active)
     {
-        SetTurnActiveClientRpc(active);
-    }
-
-    [ClientRpc]
-    private void SetTurnActiveClientRpc(bool active)
-    {
-        isActive = active;
+        isTurnActive = active;
 
         if (active)
-        {
             playerUI?.StartTurn();
-        }
         else
-        {
             playerUI?.EndTurn();
-        }
 
-        string status = active ? "ATIVO" : "INATIVO";
-        Debug.Log($"[{gameObject.name}] Agora está {status}");
+        Debug.Log($"[PlayerMovement] Turno do jogador {OwnerClientId}: {(active ? "Ativo" : "Inativo")}");
     }
 
-    [ServerRpc(RequireOwnership = false)]
-    private void EndTurnServerRpc()
+    private void UpdateAnimations()
     {
-        TurnControl.Instance?.EndTurn();
+        if (anim == null) return;
+
+        anim.SetBool("isRunning", Mathf.Abs(moveInput) > 0.1f);
+        anim.SetBool("isGrounded", isGrounded);
     }
 
-#if UNITY_EDITOR
     private void OnDrawGizmosSelected()
     {
-        if (groundCheck == null) return;
-        Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(groundCheck.position, 0.15f);
+        if (groundCheck != null)
+            Gizmos.DrawWireCube(groundCheck.position, groundCheckSize);
     }
-#endif
 }
 

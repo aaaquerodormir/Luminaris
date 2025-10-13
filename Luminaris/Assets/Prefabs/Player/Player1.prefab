@@ -168,6 +168,7 @@ GameObject:
   - component: {fileID: 3126277520389665407}
   - component: {fileID: 5387436719906497018}
   - component: {fileID: -5626809735785530810}
+  - component: {fileID: 6227805049994358070}
   m_Layer: 0
   m_Name: Player1
   m_TagString: Player
@@ -468,10 +469,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   baseMaxJumps: 3
-  JumpsUsedNet:
-    m_InternalValue: 0
-  MaxJumpsNet:
-    m_InternalValue: 3
 --- !u!114 &5387436719906497018
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -532,6 +529,21 @@ MonoBehaviour:
   SwitchTransformSpaceWhenParented: 0
   Interpolate: 1
   SlerpPosition: 0
+--- !u!114 &6227805049994358070
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3368453532942173862}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8d0727d5ae3244e3b569694d3912374, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  TransitionStateInfoList: []
+  m_Animator: {fileID: 5422800433239754117}
 --- !u!1 &6241849955727619075
 GameObject:
   m_ObjectHideFlags: 0
