@@ -536,14 +536,15 @@ MonoBehaviour:
   playerUI: {fileID: 3915764837835743624}
   anim: {fileID: 3278293586265127783}
   spriteRenderer: {fileID: 7555596430964899303}
+  moveAction: {fileID: -276721333342118783, guid: 03f621bcf66b04046a24ebfccf5c71b6, type: 3}
+  jumpAction: {fileID: 3130247826693790656, guid: 03f621bcf66b04046a24ebfccf5c71b6, type: 3}
   moveSpeed: 3
   jumpForce: 6.2
-  groundCheckPos: {fileID: 3839698034830718357}
-  groundCheckSize: {x: 0.63, y: 0.15}
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
   groundCheck: {fileID: 3839698034830718357}
+  maxJumps: 3
 --- !u!50 &7077229418032609283
 Rigidbody2D:
   serializedVersion: 5
@@ -697,7 +698,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  baseMaxJumps: 3
 --- !u!114 &7481870330957928647
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -719,7 +719,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3368453532942173862}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e8d0727d5ae3244e3b569694d3912374, type: 3}
   m_Name: 

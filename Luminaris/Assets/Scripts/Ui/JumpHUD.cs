@@ -4,75 +4,81 @@ using TMPro;
 using Unity.Netcode;
 using System.Collections;
 
-public class JumpHUD : NetworkBehaviour
+public class JumpHUD : MonoBehaviour
 {
     [Header("Referências")]
     //[SerializeField] private Image player1Icon;
-    [SerializeField] private PlayerMovementUI player;
+    [SerializeField] private PlayerMovementUI playerUI;
     [SerializeField] private Image jumpIcon;
     [SerializeField] private TextMeshProUGUI jumpText;
 
     [Header("Sprites por Quantidade de Pulos")]
     [SerializeField] private Sprite[] sprites;
 
-    private bool isLinked = false;
+    [Header("Sincronização")]
+    [SerializeField] private bool showRemotePlayers = true;
 
-    private void Start()
+
+    private bool playerFound;
+
+    private void OnEnable()
     {
-        StartCoroutine(WaitForPlayerReference());
+        PlayerMovementUI.OnJumpsChanged += UpdateDisplay;
+
+        if (NetworkManager.Singleton != null)
+            NetworkManager.Singleton.OnClientConnectedCallback += OnClientConnected;
+
+        StartCoroutine(FindPlayerUIRoutine());
     }
 
-    private IEnumerator WaitForPlayerReference()
+    private void OnDisable()
     {
-        while (!isLinked)
-        {
-            TryLinkPlayer();
-            yield return new WaitForSeconds(0.5f);
-        }
+        PlayerMovementUI.OnJumpsChanged -= UpdateDisplay;
+
+        if (NetworkManager.Singleton != null)
+            NetworkManager.Singleton.OnClientConnectedCallback -= OnClientConnected;
     }
 
-    private void TryLinkPlayer()
+    private void OnClientConnected(ulong clientId)
     {
-        var allPlayers = FindObjectsOfType<PlayerMovementUI>();
-        foreach (var p in allPlayers)
+        if (!playerFound)
+            StartCoroutine(FindPlayerUIRoutine());
+    }
+
+    private IEnumerator FindPlayerUIRoutine()
+    {
+        yield return new WaitForSeconds(1.5f);
+
+        if (playerUI == null)
         {
-            // Usa nome para vincular automaticamente
-            if (name.Contains(p.name) || (IsOwner && p.IsOwner))
+            var all = FindObjectsOfType<PlayerMovementUI>(true);
+            foreach (var ui in all)
             {
-                player = p;
-                player.OnJumpsChanged += RefreshHUD;
-                RefreshHUD();
-                isLinked = true;
-                Debug.Log($"[JumpHUD] HUD {name} vinculado a {player.name}");
-                break;
+                if (showRemotePlayers || ui.IsOwner)
+                {
+                    playerUI = ui;
+                    playerFound = true;
+                    Debug.Log($"[JumpHUD] Player UI atribuído automaticamente: {ui.name}");
+                    break;
+                }
             }
+
+            if (playerUI == null)
+                Debug.LogWarning("[JumpHUD] Nenhum PlayerMovementUI encontrado ainda — aguardando spawn.");
         }
     }
 
-    private void OnDestroy()
+    private void UpdateDisplay(PlayerMovementUI ui, int jumps)
     {
-        if (player != null)
-            player.OnJumpsChanged -= RefreshHUD;
-    }
+        if (!showRemotePlayers && ui != playerUI) return;
 
-    private void RefreshHUD()
-    {
-        if (player == null || jumpIcon == null || jumpText == null)
-            return;
+        if (jumpText != null)
+            jumpText.text = jumps.ToString();
 
-        int remaining = player.RemainingJumps;
-        int max = player.MaxJumps;
-
-        if (sprites != null && sprites.Length >= 3)
+        if (jumpIcon != null && sprites != null && sprites.Length > 0)
         {
-            if (remaining <= 3)
-                jumpIcon.sprite = sprites[0];
-            else if (remaining == 4)
-                jumpIcon.sprite = sprites[1];
-            else
-                jumpIcon.sprite = sprites[2];
+            int index = Mathf.Clamp(jumps, 0, sprites.Length - 1);
+            jumpIcon.sprite = sprites[index];
         }
-
-        jumpText.text = $"{remaining:00}";
     }
 }

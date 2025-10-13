@@ -5,65 +5,27 @@ using Unity.Netcode;
 
 public class PlayerMovementUI : NetworkBehaviour
 {
-    [Header("Jump Settings")]
-    [SerializeField] private int baseMaxJumps = 3; // Pulos base por turno
+    public int RemainingJumps { get; private set; }
 
+    public delegate void JumpUpdate(PlayerMovementUI player, int jumps);
+    public static event JumpUpdate OnJumpsChanged;
 
-    private NetworkVariable<int> jumpsUsed = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
-    private NetworkVariable<int> extraJumps = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
-
-    public event Action OnJumpsChanged;
-
-    public int MaxJumps => baseMaxJumps + extraJumps.Value;
-    public int JumpsUsed => jumpsUsed.Value;
-    public int RemainingJumps => MaxJumps - JumpsUsed;
-
-    public bool CanJump() => RemainingJumps > 0;
-
-    public void ConsumeJump()
+    public void StartTurn(int maxJumps)
     {
-        if (!IsServer) return;
-        if (jumpsUsed.Value >= MaxJumps) return;
-
-        jumpsUsed.Value++;
-        Debug.Log($"[PlayerMovementUI] {name} consumiu pulo ({RemainingJumps} restantes)");
-        OnJumpsChanged?.Invoke();
+        RemainingJumps = maxJumps;
+        Debug.Log($"[PlayerMovementUI] {name} iniciou turno. Máx = {maxJumps}");
+        OnJumpsChanged?.Invoke(this, RemainingJumps);
     }
 
-    public void StartTurn()
+    public void UpdateJumps(int newValue)
     {
-        if (!IsServer) return;
-
-        jumpsUsed.Value = 0;
-        Debug.Log($"[PlayerMovementUI] {name} iniciou turno. Máx = {MaxJumps}");
-        OnJumpsChanged?.Invoke();
+        RemainingJumps = newValue;
+        OnJumpsChanged?.Invoke(this, RemainingJumps);
     }
 
     public void EndTurn()
     {
-        if (!IsServer) return;
-        Debug.Log($"[PlayerMovementUI] {name} terminou turno ({jumpsUsed.Value}/{MaxJumps})");
-        OnJumpsChanged?.Invoke();
-    }
-
-    public void AddExtraJumps(int amount)
-    {
-        if (!IsServer) return;
-
-        extraJumps.Value += amount;
-        Debug.Log($"[PlayerMovementUI] {name} ganhou {amount} pulos extras. Total: {MaxJumps}");
-        OnJumpsChanged?.Invoke();
-    }
-
-    private void OnEnable()
-    {
-        jumpsUsed.OnValueChanged += (_, _) => OnJumpsChanged?.Invoke();
-        extraJumps.OnValueChanged += (_, _) => OnJumpsChanged?.Invoke();
-    }
-
-    private void OnDisable()
-    {
-        jumpsUsed.OnValueChanged -= (_, _) => OnJumpsChanged?.Invoke();
-        extraJumps.OnValueChanged -= (_, _) => OnJumpsChanged?.Invoke();
+        Debug.Log($"[PlayerMovementUI] {name} terminou turno ({RemainingJumps}/3)");
+        OnJumpsChanged?.Invoke(this, RemainingJumps);
     }
 }
