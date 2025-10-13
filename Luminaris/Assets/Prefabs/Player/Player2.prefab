@@ -411,6 +411,7 @@ GameObject:
   - component: {fileID: 3278293586265127783}
   - component: {fileID: 3915764837835743624}
   - component: {fileID: 7481870330957928647}
+  - component: {fileID: 6227805049994358070}
   m_Layer: 0
   m_Name: Player2
   m_TagString: Player
@@ -534,7 +535,7 @@ MonoBehaviour:
   rb: {fileID: 7077229418032609283}
   playerUI: {fileID: 3915764837835743624}
   anim: {fileID: 3278293586265127783}
-  spriteRenderer: {fileID: 0}
+  spriteRenderer: {fileID: 7555596430964899303}
   moveSpeed: 3
   jumpForce: 6.2
   groundCheckPos: {fileID: 3839698034830718357}
@@ -695,7 +696,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18eba07ca6afb8b42882f70270223474, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
   baseMaxJumps: 3
+  JumpsUsedNet:
+    m_InternalValue: 0
+  MaxJumpsNet:
+    m_InternalValue: 3
 --- !u!114 &7481870330957928647
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -710,6 +716,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerName: Jogador 2
   PlayerSprite: {fileID: 3177602255060381784, guid: 21cfb0d6922c0d94f93c79fc429525b7, type: 3}
+--- !u!114 &6227805049994358070
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3368453532942173862}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8d0727d5ae3244e3b569694d3912374, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  TransitionStateInfoList: []
+  m_Animator: {fileID: 0}
 --- !u!1001 &2212095288895709051
 PrefabInstance:
   m_ObjectHideFlags: 0

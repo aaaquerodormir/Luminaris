@@ -1,63 +1,55 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Unity.Netcode;
 
-public class JumpHUD : MonoBehaviour
+public class JumpHUD : NetworkBehaviour
 {
-    [Header("Refer�ncias")]
+    [Header("Referências")]
+    [SerializeField] private Image player1Icon;
     [SerializeField] private PlayerMovementUI playerUI;
     [SerializeField] private Image jumpIcon;
     [SerializeField] private TextMeshProUGUI jumpText;
 
-    [Header("Sprites por Cor (0=at� 3, 1=4, 2=5+)")]
+    [Header("Sprites por Quantidade de Pulos")]
     [SerializeField] private Sprite[] sprites;
 
-    private void OnEnable()
-    {
-        if (playerUI != null)
-            playerUI.OnJumpsChanged += RefreshHUD;
+    [Header("Sincronização")]
+    [SerializeField] private bool showRemotePlayers = true;
+    // se ativado, exibe também o estado de players que não são o dono local
 
-        TurnControl.OnTurnStarted += OnTurnChanged;
-    }
-
-    private void OnDisable()
-    {
-        if (playerUI != null)
-            playerUI.OnJumpsChanged -= RefreshHUD;
-
-        TurnControl.OnTurnStarted -= OnTurnChanged;
-    }
+    private PlayerMovementUI[] playerUIs;
 
     private void Start()
     {
-        RefreshHUD();
+        InvokeRepeating(nameof(UpdateHUD), 1f, 0.3f); // atualiza a cada 0.3s
     }
 
-    private void OnTurnChanged(PlayerMovement player)
+    private void UpdateHUD()
     {
-        RefreshHUD();
+        if (playerUIs == null || playerUIs.Length == 0)
+            playerUIs = FindObjectsOfType<PlayerMovementUI>().OrderBy(p => p.OwnerClientId).ToArray();
+
+        if (playerUIs.Length < 2) return;
+
+        UpdateForPlayer(playerUIs[0], player1Icon, player1Text);
+        UpdateForPlayer(playerUIs[1], player2Icon, player2Text);
     }
 
-    private void RefreshHUD()
+    private void UpdateForPlayer(PlayerMovementUI ui, Image icon, TextMeshProUGUI text)
     {
-        if (playerUI == null || jumpIcon == null || jumpText == null)
-            return;
+        if (ui == null || icon == null || text == null) return;
 
-        int remaining = playerUI.RemainingJumps;
-        int max = playerUI.MaxJumps;
+        int remaining = ui.RemainingJumps;
+        int max = ui.MaxJumps;
 
-        // Atualiza sprite conforme a quantidade de pulos
         if (sprites != null && sprites.Length >= 3)
         {
-            if (max <= 3)
-                jumpIcon.sprite = sprites[0];
-            else if (max == 4)
-                jumpIcon.sprite = sprites[1];
-            else
-                jumpIcon.sprite = sprites[2];
+            if (remaining <= 3) icon.sprite = sprites[0];
+            else if (remaining == 4) icon.sprite = sprites[1];
+            else icon.sprite = sprites[2];
         }
 
-        // Atualiza texto
-        jumpText.text = $"{remaining:00}";
+        text.text = $"{remaining:00}";
     }
 }

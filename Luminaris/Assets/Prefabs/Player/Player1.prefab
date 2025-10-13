@@ -291,7 +291,7 @@ MonoBehaviour:
   rb: {fileID: 7077229418032609283}
   playerUI: {fileID: 3126277520389665407}
   anim: {fileID: 5422800433239754117}
-  spriteRenderer: {fileID: 0}
+  spriteRenderer: {fileID: 7555596430964899303}
   moveSpeed: 3
   jumpForce: 6.2
   groundCheckPos: {fileID: 3839698034830718357}
@@ -466,7 +466,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18eba07ca6afb8b42882f70270223474, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
   baseMaxJumps: 3
+  JumpsUsedNet:
+    m_InternalValue: 0
+  MaxJumpsNet:
+    m_InternalValue: 3
 --- !u!114 &5387436719906497018
 MonoBehaviour:
   m_ObjectHideFlags: 0

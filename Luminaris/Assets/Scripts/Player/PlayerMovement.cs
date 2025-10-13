@@ -14,7 +14,7 @@ public class PlayerMovement : NetworkBehaviour
     [SerializeField] private PlayerMovementUI playerUI;
     [SerializeField] private Animator anim;
     [SerializeField] private SpriteRenderer spriteRenderer;
-    [SerializeField] private NetworkAnimator netAnimator;
+   // [SerializeField] private NetworkAnimator netAnimator;
 
     //[Header("Input Actions")]
     //[SerializeField] private InputActionReference moveAction;
@@ -31,24 +31,16 @@ public class PlayerMovement : NetworkBehaviour
     [SerializeField] private Transform groundCheck;
 
 
-    private bool isGrounded;
-    private bool isMoving;
-    private bool jumpPressed;
-
-    private AudioSource walkAudio;
-    private bool isActiveTurn = false;
+    private bool isActive = false; // controlado via RPCs
     private float moveInput;
     private bool isFacingRight = true;
-
-
-    private NetworkVariable<int> jumpsRemaining = new(3, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
 
     private void Awake()
     {
         if (rb == null) rb = GetComponent<Rigidbody2D>();
         if (anim == null) anim = GetComponent<Animator>();
         if (spriteRenderer == null) spriteRenderer = GetComponent<SpriteRenderer>();
-        if (netAnimator == null) netAnimator = GetComponent<NetworkAnimator>();
+        if (playerUI == null) playerUI = GetComponent<PlayerMovementUI>();
     }
 
     public override void OnNetworkSpawn()
@@ -57,17 +49,14 @@ public class PlayerMovement : NetworkBehaviour
 
         if (IsServer)
         {
-            Debug.Log($"[PlayerMovement] (Server) Registrando {OwnerClientId} no TurnControl.");
+            Debug.Log($"[PlayerMovement] (Server) Registrando jogador {OwnerClientId} no TurnControl...");
             TurnControl.Instance?.RegisterPlayer(this);
         }
-
-        // Atualiza HUD em todos os clientes
-        jumpsRemaining.OnValueChanged += (_, _) => playerUI?.OnJumpsChanged?.Invoke();
     }
 
     private void Update()
     {
-        if (!IsOwner || !isActiveTurn) return;
+        if (!IsOwner || !isActive) return;
 
         moveInput = Input.GetAxisRaw("Horizontal");
 
@@ -75,49 +64,53 @@ public class PlayerMovement : NetworkBehaviour
         {
             TryJump();
         }
+
+        if (playerUI != null && playerUI.RemainingJumps <= 0)
+        {
+            Debug.Log($"[{gameObject.name}] Sem pulos restantes — encerrando turno automaticamente.");
+            EndTurnServerRpc();
+        }
     }
 
     private void FixedUpdate()
     {
-        if (!IsOwner || !isActiveTurn) return;
+        if (!IsOwner || !isActive) return;
         Move();
     }
 
     private void Move()
     {
-        float moveVelocity = moveInput * moveSpeed;
-        rb.linearVelocity = new Vector2(moveVelocity, rb.linearVelocity.y);
+        float velocityX = moveInput * moveSpeed;
+        rb.linearVelocity = new Vector2(velocityX, rb.linearVelocity.y);
 
-        if (moveVelocity != 0)
-            spriteRenderer.flipX = moveVelocity < 0;
+        if (Mathf.Abs(velocityX) > 0.01f)
+            spriteRenderer.flipX = velocityX < 0;
 
-        anim.SetFloat("Speed", Mathf.Abs(moveVelocity));
-        Debug.Log($"[PlayerMovement] (Client {OwnerClientId}) Movendo: {moveVelocity}");
+        anim.SetFloat("Speed", Mathf.Abs(velocityX));
     }
 
     private void TryJump()
     {
-        if (!IsGrounded()) return;
-        if (jumpsRemaining.Value <= 0) return;
+        if (!IsGrounded() || playerUI.RemainingJumps <= 0) return;
 
-        jumpsRemaining.Value--;
+        playerUI.ConsumeJump();
 
         rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
-        netAnimator.SetTrigger("Jump"); // sincroniza animação via rede
+        anim.SetTrigger("Jump");
 
-        Debug.Log($"[PlayerMovement] (Client {OwnerClientId}) Pulou! Restam {jumpsRemaining.Value}");
+        Debug.Log($"[{gameObject.name}] Pulou! ({playerUI.JumpsUsed}/{playerUI.MaxJumps})");
     }
 
     private bool IsGrounded()
     {
         Collider2D hit = Physics2D.OverlapCircle(groundCheck.position, 0.15f, groundLayer);
-        isGrounded = hit != null;
-        return isGrounded;
+        return hit != null;
     }
 
-    // =====================================================
-    // === CONTROLE DE TURNOS (SINCRONIZADO PELO SERVIDOR) =
-    // =====================================================
+    // ====================================================
+    // ==== SINCRONIZAÇÃO DE TURNOS E ATIVAÇÃO ============
+    // ====================================================
+
     [ServerRpc(RequireOwnership = false)]
     public void SetTurnActiveServerRpc(bool active)
     {
@@ -127,11 +120,10 @@ public class PlayerMovement : NetworkBehaviour
     [ClientRpc]
     private void SetTurnActiveClientRpc(bool active)
     {
-        isActiveTurn = active;
+        isActive = active;
 
         if (active)
         {
-            jumpsRemaining.Value = 3; // reseta os pulos no início do turno
             playerUI?.StartTurn();
         }
         else
@@ -140,7 +132,13 @@ public class PlayerMovement : NetworkBehaviour
         }
 
         string status = active ? "ATIVO" : "INATIVO";
-        Debug.Log($"[PlayerMovement] Jogador {OwnerClientId} agora está {status}");
+        Debug.Log($"[{gameObject.name}] Agora está {status}");
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    private void EndTurnServerRpc()
+    {
+        TurnControl.Instance?.EndTurn();
     }
 
 #if UNITY_EDITOR
@@ -152,3 +150,4 @@ public class PlayerMovement : NetworkBehaviour
     }
 #endif
 }
+

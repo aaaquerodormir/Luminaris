@@ -145,6 +145,11 @@ public class TurnControl : NetworkBehaviour
         }
 
         Debug.Log($"[TurnControl] 🔁 Novo turno iniciado — Jogador ativo: {player.name}");
+
+        // 🔹 Reseta o contador de pulos do jogador ativo no servidor
+        if (player.TryGetComponent<PlayerMovementUI>(out var ui))
+            ui.StartTurn();
+
         player.SetTurnActiveServerRpc(true);
         OnTurnStarted?.Invoke(player);
     }
