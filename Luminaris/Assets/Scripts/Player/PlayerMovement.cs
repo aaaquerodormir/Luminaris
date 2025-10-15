@@ -7,6 +7,7 @@ using System.Collections;
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(NetworkObject))]
 [RequireComponent(typeof(NetworkAnimator))]
+[RequireComponent(typeof(NetworkRigidbody2D))]
 
 public class PlayerMovement : NetworkBehaviour
 {
@@ -15,7 +16,7 @@ public class PlayerMovement : NetworkBehaviour
     [SerializeField] private PlayerMovementUI playerUI;
     [SerializeField] private Animator anim;
     [SerializeField] private SpriteRenderer spriteRenderer;
-   // [SerializeField] private NetworkAnimator netAnimator;
+    [SerializeField] private NetworkAnimator netAnimator;
 
 
     [Header("Input Actions")]
@@ -52,26 +53,24 @@ public class PlayerMovement : NetworkBehaviour
     private void Awake()
     {
         if (!rb) rb = GetComponent<Rigidbody2D>();
-        if (!anim) anim = GetComponentInChildren<Animator>();
-        if (!spriteRenderer) spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        if (!netAnimator) netAnimator = GetComponent<NetworkAnimator>();
         if (!playerUI) playerUI = GetComponent<PlayerMovementUI>();
+        if (!spriteRenderer) spriteRenderer = GetComponentInChildren<SpriteRenderer>();
     }
 
     public override void OnNetworkSpawn()
     {
         base.OnNetworkSpawn();
+
         netFacingRight.OnValueChanged += (_, __) => UpdateFacingDirection();
 
-        // Espera o TurnControl existir antes de registrar
         if (IsServer)
-            StartCoroutine(WaitForTurnControlAndRegister());
+            StartCoroutine(RegisterToTurnControl());
 
-        // Só o dono local habilita inputs
         if (IsOwner)
         {
-            // Se não estiver atribuída no inspector, tenta carregar dinamicamente
             if (moveAction == null || jumpAction == null)
-                AssignActionsByOwner();
+                AssignInputActions();
 
             moveAction?.action.Enable();
             jumpAction?.action.Enable();
@@ -85,41 +84,28 @@ public class PlayerMovement : NetworkBehaviour
             jumpAction.action.performed -= OnJump;
     }
 
-    // ==============================
-    // == REGISTRO DE TURNO ========
-    // ==============================
-    private IEnumerator WaitForTurnControlAndRegister()
+    private IEnumerator RegisterToTurnControl()
     {
         while (TurnControl.Instance == null)
             yield return null;
 
         TurnControl.Instance.RegisterPlayer(this);
-        Debug.Log($"[PlayerMovement] Registrado no TurnControl: {name}");
     }
 
-    // ==============================
-    // == INPUT SYSTEM ==============
-    // ==============================
-    private void AssignActionsByOwner()
+    private void AssignInputActions()
     {
         string basePath = "InputActions/";
-        if (OwnerClientId == 0)
-        {
-            moveAction = Resources.Load<InputActionReference>(basePath + "MovePlayer1");
-            jumpAction = Resources.Load<InputActionReference>(basePath + "JumpPlayer1");
-        }
-        else
-        {
-            moveAction = Resources.Load<InputActionReference>(basePath + "MovePlayer2");
-            jumpAction = Resources.Load<InputActionReference>(basePath + "JumpPlayer2");
-        }
-
-        Debug.Log($"[PlayerMovement] Atribuiu ações automaticamente para o jogador {OwnerClientId}.");
+        moveAction = Resources.Load<InputActionReference>(OwnerClientId == 0
+            ? basePath + "MovePlayer1"
+            : basePath + "MovePlayer2");
+        jumpAction = Resources.Load<InputActionReference>(OwnerClientId == 0
+            ? basePath + "JumpPlayer1"
+            : basePath + "JumpPlayer2");
     }
 
     private void Update()
     {
-        if (!IsOwner || !isMyTurn || moveAction == null) return;
+        if (!IsOwner || !isMyTurn) return;
 
         moveInput = moveAction.action.ReadValue<Vector2>();
         UpdateAnimations();
@@ -127,9 +113,17 @@ public class PlayerMovement : NetworkBehaviour
 
     private void FixedUpdate()
     {
+        CheckGround();
+
+        // 🔒 Se o turno acabou e o player está no chão, ele fica imóvel
+        if (!isMyTurn && isGrounded)
+        {
+            rb.linearVelocity = Vector2.zero;
+            return;
+        }
+
         if (!IsOwner || !isMyTurn) return;
 
-        CheckGround();
         Move();
     }
 
@@ -157,6 +151,9 @@ public class PlayerMovement : NetworkBehaviour
         currentJumps--;
         playerUI?.UpdateJumps(currentJumps);
 
+        // 🔁 dispara animação de pulo via NetworkAnimator
+        netAnimator.SetTrigger("isJumping");
+
         if (currentJumps <= 0)
             NotifyEndTurnServerRpc();
     }
@@ -173,9 +170,6 @@ public class PlayerMovement : NetworkBehaviour
         TurnControl.Instance.EndTurn();
     }
 
-    // ==============================
-    // == GROUND & ANIMATIONS ======
-    // ==============================
     private void CheckGround()
     {
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
@@ -183,6 +177,7 @@ public class PlayerMovement : NetworkBehaviour
 
     private void UpdateAnimations()
     {
+        Animator anim = netAnimator.Animator;
         if (anim == null) return;
 
         anim.SetBool("isIdle", Mathf.Abs(moveInput.x) < 0.1f && isGrounded);
@@ -196,7 +191,7 @@ public class PlayerMovement : NetworkBehaviour
     {
         facingRight = netFacingRight.Value;
         if (spriteRenderer != null)
-            spriteRenderer.flipX = facingRight; // flip ajustado para sprite base virado à esquerda
+            spriteRenderer.flipX = facingRight;
     }
 
     [ServerRpc]
@@ -228,11 +223,9 @@ public class PlayerMovement : NetworkBehaviour
         }
         else
         {
-            rb.linearVelocity = Vector2.zero;
+            moveInput = Vector2.zero;
             playerUI?.EndTurn();
         }
-
-        Debug.Log($"[PlayerMovement] Turno de {OwnerClientId}: {(active ? "Ativo" : "Inativo")}");
     }
 }
 

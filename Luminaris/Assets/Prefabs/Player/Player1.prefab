@@ -167,8 +167,9 @@ GameObject:
   - component: {fileID: 5422800433239754117}
   - component: {fileID: 3126277520389665407}
   - component: {fileID: 5387436719906497018}
-  - component: {fileID: -5626809735785530810}
-  - component: {fileID: 6227805049994358070}
+  - component: {fileID: -4297708015954877441}
+  - component: {fileID: 8292333376657206070}
+  - component: {fileID: 1129849178422819866}
   m_Layer: 0
   m_Name: Player1
   m_TagString: Player
@@ -293,6 +294,7 @@ MonoBehaviour:
   playerUI: {fileID: 3126277520389665407}
   anim: {fileID: 5422800433239754117}
   spriteRenderer: {fileID: 7555596430964899303}
+  netAnimator: {fileID: -4297708015954877441}
   moveAction: {fileID: -3754844944467460052, guid: 03f621bcf66b04046a24ebfccf5c71b6, type: 3}
   jumpAction: {fileID: 6508505653016678817, guid: 03f621bcf66b04046a24ebfccf5c71b6, type: 3}
   moveSpeed: 3
@@ -483,7 +485,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerName: Jogador 1
   PlayerSprite: {fileID: -7592784740955137085, guid: c8b59cfbe66e4c44da9748c457038c81, type: 3}
---- !u!114 &-5626809735785530810
+--- !u!114 &-4297708015954877441
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3368453532942173862}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8d0727d5ae3244e3b569694d3912374, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  TransitionStateInfoList: []
+  m_Animator: {fileID: 5422800433239754117}
+--- !u!114 &8292333376657206070
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -507,7 +524,7 @@ MonoBehaviour:
   RotationMaxInterpolationTime: 0.1
   ScaleLerpSmoothing: 1
   ScaleMaxInterpolationTime: 0.1
-  AuthorityMode: 0
+  AuthorityMode: 1
   TickSyncChildren: 0
   UseUnreliableDeltas: 0
   SyncPositionX: 1
@@ -529,21 +546,23 @@ MonoBehaviour:
   SwitchTransformSpaceWhenParented: 0
   Interpolate: 1
   SlerpPosition: 0
---- !u!114 &6227805049994358070
+--- !u!114 &1129849178422819866
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3368453532942173862}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8d0727d5ae3244e3b569694d3912374, type: 3}
+  m_Script: {fileID: 11500000, guid: 80d7c879794dfda4687da0e400131852, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  TransitionStateInfoList: []
-  m_Animator: {fileID: 5422800433239754117}
+  NetworkRigidbodyBaseExpanded: 0
+  UseRigidBodyForMotion: 0
+  AutoUpdateKinematicState: 1
+  AutoSetKinematicOnDespawn: 1
 --- !u!1 &6241849955727619075
 GameObject:
   m_ObjectHideFlags: 0
