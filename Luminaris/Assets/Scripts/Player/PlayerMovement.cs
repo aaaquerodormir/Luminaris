@@ -28,34 +28,44 @@ public class PlayerMovement : NetworkBehaviour
     [SerializeField] private float jumpForce = 8f;
 
     [Header("Ground Check")]
-    //[SerializeField] private Transform groundCheck;
-    //[SerializeField] private Vector2 groundCheckSize = new(0.5f, 0.05f);
+    
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private Transform groundCheck;
 
     [Header("Controle de Pulo")]
     [SerializeField] private int maxJumps = 3;
     private int currentJumps;
-
     private bool isGrounded;
     private bool isMyTurn;
     private bool facingRight = true;
-
     private Vector2 moveInput;
 
-    private NetworkVariable<bool> netFacingRight = new NetworkVariable<bool>(
-       true, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server
-   );
+    private BoxCollider2D groundCollider;
 
-    // ==============================
-    // == INITIALIZATION ============
-    // ==============================
+    private NetworkVariable<bool> netFacingRight = new NetworkVariable<bool>(
+        true, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server
+    );
+
+    // ============================== //
+    // == INITIALIZATION ============ //
+    // ============================== //
+
     private void Awake()
     {
         if (!rb) rb = GetComponent<Rigidbody2D>();
         if (!netAnimator) netAnimator = GetComponent<NetworkAnimator>();
         if (!playerUI) playerUI = GetComponent<PlayerMovementUI>();
         if (!spriteRenderer) spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+
+        if (groundCheck)
+            groundCollider = groundCheck.GetComponent<BoxCollider2D>();
+
+        // 🔒 Garante que o groundLayer detecta a layer "Plataforma"
+        int plataformaLayer = LayerMask.NameToLayer("Plataforma");
+        if (plataformaLayer >= 0)
+            groundLayer = 1 << plataformaLayer;
+        else
+            Debug.LogWarning("[PlayerMovement] Layer 'Plataforma' não encontrada. Configure no Inspector!");
     }
 
     public override void OnNetworkSpawn()
@@ -76,6 +86,8 @@ public class PlayerMovement : NetworkBehaviour
             jumpAction?.action.Enable();
             jumpAction.action.performed += OnJump;
         }
+
+        Debug.Log($"[Network] Player {OwnerClientId} spawned | Authority = {(IsServer ? "Server" : "Owner")}");
     }
 
     private void OnDestroy()
@@ -86,22 +98,20 @@ public class PlayerMovement : NetworkBehaviour
 
     private IEnumerator RegisterToTurnControl()
     {
-        while (TurnControl.Instance == null)
-            yield return null;
-
+        while (TurnControl.Instance == null) yield return null;
         TurnControl.Instance.RegisterPlayer(this);
     }
 
     private void AssignInputActions()
     {
         string basePath = "InputActions/";
-        moveAction = Resources.Load<InputActionReference>(OwnerClientId == 0
-            ? basePath + "MovePlayer1"
-            : basePath + "MovePlayer2");
-        jumpAction = Resources.Load<InputActionReference>(OwnerClientId == 0
-            ? basePath + "JumpPlayer1"
-            : basePath + "JumpPlayer2");
+        moveAction = Resources.Load<InputActionReference>(OwnerClientId == 0 ? basePath + "MovePlayer1" : basePath + "MovePlayer2");
+        jumpAction = Resources.Load<InputActionReference>(OwnerClientId == 0 ? basePath + "JumpPlayer1" : basePath + "JumpPlayer2");
     }
+
+    // ============================== //
+    // == GAME LOOP ================= //
+    // ============================== //
 
     private void Update()
     {
@@ -131,10 +141,8 @@ public class PlayerMovement : NetworkBehaviour
     {
         rb.linearVelocity = new Vector2(moveInput.x * moveSpeed, rb.linearVelocity.y);
 
-        if (moveInput.x > 0 && !facingRight)
-            SetFacingServerRpc(true);
-        else if (moveInput.x < 0 && facingRight)
-            SetFacingServerRpc(false);
+        if (moveInput.x > 0 && !facingRight) SetFacingServerRpc(true);
+        else if (moveInput.x < 0 && facingRight) SetFacingServerRpc(false);
     }
 
     private void OnJump(InputAction.CallbackContext ctx)
@@ -151,8 +159,10 @@ public class PlayerMovement : NetworkBehaviour
         currentJumps--;
         playerUI?.UpdateJumps(currentJumps);
 
-        // 🔁 dispara animação de pulo via NetworkAnimator
-        netAnimator.SetTrigger("isJumping");
+        anim.SetBool("isJumping", true);
+        anim.SetBool("IsGrounded", false);
+
+        Debug.Log($"[Jump] Player {OwnerClientId} pulou — jumps restantes: {currentJumps}");
 
         if (currentJumps <= 0)
             NotifyEndTurnServerRpc();
@@ -161,30 +171,59 @@ public class PlayerMovement : NetworkBehaviour
     [ServerRpc]
     private void NotifyEndTurnServerRpc()
     {
-        StartCoroutine(EndTurnAfterDelay());
+        StartCoroutine(EndTurnAfterLanding());
     }
 
-    private IEnumerator EndTurnAfterDelay()
+    private IEnumerator EndTurnAfterLanding()
     {
-        yield return new WaitForSeconds(0.5f);
+        // 🔄 Aguarda o personagem tocar o chão antes de encerrar o turno
+        yield return new WaitUntil(() => isGrounded);
+        yield return new WaitForSeconds(0.2f);
+
+        Debug.Log($"[Turn] Player {OwnerClientId} finalizou turno (pousou).");
         TurnControl.Instance.EndTurn();
     }
 
+    // ============================== //
+    // == GROUND CHECK ============== //
+    // ============================== //
+
     private void CheckGround()
     {
-        isGrounded = Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
+        if (groundCollider == null)
+        {
+            Debug.LogError("[GroundCheck] Nenhum BoxCollider2D encontrado no objeto groundCheck!");
+            return;
+        }
+
+        bool wasGrounded = isGrounded;
+        isGrounded = Physics2D.OverlapBox(groundCollider.bounds.center, groundCollider.size, 0f, groundLayer);
+
+        if (isGrounded && !wasGrounded)
+        {
+            anim.SetBool("IsGrounded", true);
+            anim.SetBool("isJumping", false);
+            Debug.Log($"[GroundCheck] Player {OwnerClientId} pousou na layer 'Plataforma'.");
+        }
+        else if (!isGrounded && wasGrounded)
+        {
+            anim.SetBool("IsGrounded", false);
+            Debug.Log($"[GroundCheck] Player {OwnerClientId} saiu da plataforma.");
+        }
     }
+
+    // ============================== //
+    // == ANIMATIONS ================ //
+    // ============================== //
 
     private void UpdateAnimations()
     {
-        Animator anim = netAnimator.Animator;
-        if (anim == null) return;
+        Animator a = netAnimator.Animator;
+        if (a == null) return;
 
-        anim.SetBool("isIdle", Mathf.Abs(moveInput.x) < 0.1f && isGrounded);
-        anim.SetBool("isWalking", Mathf.Abs(moveInput.x) > 0.1f && isGrounded);
-        anim.SetBool("isJumping", !isGrounded);
-        anim.SetBool("IsGrounded", isGrounded);
-        anim.SetFloat("yVelocity", rb.linearVelocity.y);
+        a.SetBool("isIdle", Mathf.Abs(moveInput.x) < 0.1f && isGrounded);
+        a.SetBool("isWalking", Mathf.Abs(moveInput.x) > 0.1f && isGrounded);
+        a.SetFloat("yVelocity", rb.linearVelocity.y);
     }
 
     private void UpdateFacingDirection()
@@ -220,12 +259,33 @@ public class PlayerMovement : NetworkBehaviour
         {
             currentJumps = maxJumps;
             playerUI?.StartTurn(maxJumps);
+            Debug.Log($"[TurnControl] Player {OwnerClientId} iniciou turno.");
         }
         else
         {
             moveInput = Vector2.zero;
             playerUI?.EndTurn();
+            Debug.Log($"[TurnControl] Player {OwnerClientId} encerrou turno.");
         }
     }
-}
 
+    // ============================== //
+    // == DEBUG GIZMOS ============== //
+    // ============================== //
+
+    private void OnDrawGizmosSelected()
+    {
+        if (groundCollider == null)
+        {
+            if (groundCheck)
+            {
+                groundCollider = groundCheck.GetComponent<BoxCollider2D>();
+                if (groundCollider == null) return;
+            }
+            else return;
+        }
+
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireCube(groundCollider.bounds.center, groundCollider.size);
+    }
+}
