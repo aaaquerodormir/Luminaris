@@ -8,7 +8,7 @@ public class TurnControl : NetworkBehaviour
 {
     public static TurnControl Instance;
 
-    [Header("Jogadores Registrados (serão preenchidos automáticamente)")]
+    [Header("Jogadores Registrados")]
     public List<PlayerMovement> players = new();
 
     private NetworkVariable<int> currentIndex = new(
@@ -26,19 +26,24 @@ public class TurnControl : NetworkBehaviour
     private void Start()
     {
         if (IsServer)
+        {
+            Debug.Log("[TurnControl] Servidor aguardando jogadores...");
             StartCoroutine(WaitForPlayersAndStartTurns());
+        }
     }
 
     private IEnumerator WaitForPlayersAndStartTurns()
     {
         yield return new WaitForSeconds(1f);
+
         while (players.Count < 2)
         {
             FindPlayersInScene();
+            Debug.Log($"[TurnControl] Encontrados {players.Count}/2 jogadores...");
             yield return new WaitForSeconds(0.5f);
         }
 
-        Debug.Log($"[TurnControl] {players.Count} jogadores encontrados. Iniciando turnos...");
+        Debug.Log($"[TurnControl] {players.Count} jogadores detectados. Iniciando sistema de turnos.");
         ResetTurns();
     }
 
@@ -56,10 +61,10 @@ public class TurnControl : NetworkBehaviour
         if (!players.Contains(player))
         {
             players.Add(player);
-            Debug.Log($"[TurnControl] Player registrado: {player.name} | Total: {players.Count}");
+            Debug.Log($"[TurnControl] Player registrado: {player.name}");
         }
 
-        if (players.Count >= 2 && currentIndex.Value == 0)
+        if (players.Count >= 2 && IsServer && currentIndex.Value == 0)
         {
             Debug.Log("[TurnControl] Dois jogadores registrados — iniciando turnos.");
             ResetTurns();
@@ -70,6 +75,7 @@ public class TurnControl : NetworkBehaviour
     {
         if (!IsServer) return;
 
+        Debug.Log("[TurnControl] Reiniciando turnos...");
         foreach (var p in players)
             if (p != null)
                 p.SetTurnActiveServerRpc(false);
@@ -97,9 +103,13 @@ public class TurnControl : NetworkBehaviour
 
     private void TriggerTurnStarted(PlayerMovement player)
     {
-        if (player == null) return;
+        if (player == null)
+        {
+            Debug.LogWarning("[TurnControl] Tentou iniciar turno com Player nulo!");
+            return;
+        }
 
-        Debug.Log($"[TurnControl] Novo turno iniciado — Jogador ativo: {player.name}");
+        Debug.Log($"[TurnControl] Novo turno: {player.name}");
         player.SetTurnActiveServerRpc(true);
         OnTurnStarted?.Invoke(player);
     }

@@ -60,7 +60,7 @@ public class GameManager : NetworkBehaviour
         {
             Instance = this;
             session = new GameSession();
-            Debug.Log("[GameManager] Instância criada com sucesso.");
+            Debug.Log("[GameManager] Instância criada.");
         }
         else
         {
@@ -92,7 +92,7 @@ public class GameManager : NetworkBehaviour
     {
         if (!IsServer)
         {
-            Debug.Log("[GameManager] Cliente detectou morte (ignorado, apenas o servidor executa GameOver).");
+            Debug.Log("[GameManager] Cliente detectou morte (ignorado).");
             return;
         }
 
@@ -106,8 +106,7 @@ public class GameManager : NetworkBehaviour
         if (isGameOver) return;
         isGameOver = true;
 
-        Debug.Log("[GameManager] Exibindo tela de Game Over em todos os clientes.");
-
+        Debug.Log("[GameManager] Exibindo tela de Game Over.");
         if (pauseMenu != null) pauseMenu.gameObject.SetActive(false);
         if (hudContainer != null) hudContainer.SetActive(false);
         if (victoryUI != null) victoryUI.SetActive(false);
@@ -124,13 +123,13 @@ public class GameManager : NetworkBehaviour
     }
 
     // ==========================
-    // ==== TURNOS ============
+    // ==== TURNOS ==============
     // ==========================
     private void HandleTurnStart(PlayerMovement newPlayer)
     {
         if (newPlayer == null)
         {
-            Debug.LogWarning("[GameManager] Turno iniciado, mas PlayerMovement é nulo!");
+            Debug.LogWarning("[GameManager] Turno iniciado com Player nulo!");
             return;
         }
 
@@ -157,55 +156,18 @@ public class GameManager : NetworkBehaviour
             }
         }
 
+        Debug.Log($"[GameManager] Exibindo painel de turno para {playerToShow.name}");
         turnChangePanel.SetActive(true);
         yield return new WaitForSeconds(turnPanelDisplayDuration);
         turnChangePanel.SetActive(false);
     }
 
     // ==========================
-    // ==== CHECKPOINT ==========
-    // ==========================
-    public void ReachCheckpoint(Transform checkpointTransform)
-    {
-        if (!IsServer)
-        {
-            Debug.Log("[GameManager] Cliente tentou registrar checkpoint (ignorado).");
-            return;
-        }
-
-        var cp = checkpointTransform.GetComponent<Checkpoint>();
-        if (cp == null) return;
-
-        Debug.Log("[GameManager] Checkpoint atingido — verificando progresso global.");
-
-        var p1Pending = player1 != null ? player1.GetPendingCheckpoint() : null;
-        var p2Pending = player2 != null ? player2.GetPendingCheckpoint() : null;
-
-        if (p1Pending != null && p2Pending != null && p1Pending.GroupId == p2Pending.GroupId)
-        {
-            Debug.Log($"[GameManager] Ambos os jogadores atingiram o mesmo checkpoint {cp.GroupId}.");
-
-            player1.CommitPendingCheckpoint();
-            player2.CommitPendingCheckpoint();
-            lastCheckpoint = p1Pending;
-
-            lava.SaveProgressAtCheckpoint();
-
-            float safeZone = Mathf.Min(
-                player1.GetCommittedCheckpoint().LavaSafeHeight,
-                player2.GetCommittedCheckpoint().LavaSafeHeight
-            );
-
-            lava.SetSafeZone(safeZone);
-        }
-    }
-
-    // ==========================
-    // ==== REINICIAR ==========
+    // ==== REINICIAR ===========
     // ==========================
     public void TryAgain()
     {
-        Debug.Log("[GameManager] Reiniciando partida (TryAgain).");
+        Debug.Log("[GameManager] Reiniciando partida.");
 
         if (gameOverUI != null) gameOverUI.SetActive(false);
         Time.timeScale = 1f;
@@ -213,41 +175,13 @@ public class GameManager : NetworkBehaviour
         if (player1 != null) player1.Respawn();
         if (player2 != null) player2.Respawn();
 
-        if (lastCheckpoint != null && lava != null)
-            lava.ResetLava(lastCheckpoint);
-
         if (turnControl != null)
             turnControl.ResetTurns();
-
-        session?.ResetSession();
 
         if (pauseMenu != null) pauseMenu.gameObject.SetActive(true);
         if (hudContainer != null) hudContainer.SetActive(true);
 
         isGameOver = false;
         OnTryAgain?.Invoke();
-    }
-
-    // ==========================
-    // ==== VITÓRIA ============
-    // ==========================
-    [ClientRpc]
-    public void ShowVictoryPanelClientRpc()
-    {
-        Debug.Log("[GameManager] Exibindo tela de vitória em todos os clientes.");
-
-        if (gameOverUI != null) gameOverUI.SetActive(false);
-        if (victoryUI != null) victoryUI.SetActive(true);
-        if (victoryMenuWrapper != null) victoryMenuWrapper.SetActive(true);
-
-        if (victoryUI != null && victoryUI.TryGetComponent(out Animator anim))
-            anim.updateMode = AnimatorUpdateMode.UnscaledTime;
-
-        if (pauseMenu != null) pauseMenu.gameObject.SetActive(true);
-        if (hudContainer != null) hudContainer.SetActive(true);
-        if (jumpCounterUI != null) jumpCounterUI.SetActive(false);
-
-        AudioManager.Instance.PauseAllLoops();
-        Time.timeScale = 0f;
     }
 }

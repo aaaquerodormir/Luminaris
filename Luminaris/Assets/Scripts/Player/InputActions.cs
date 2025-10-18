@@ -29,18 +29,18 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             ""actions"": [
                 {
                     ""name"": ""MovePlayer1"",
-                    ""type"": ""Value"",
+                    ""type"": ""Button"",
                     ""id"": ""9f755cbd-205a-459c-8ac0-9f84dcda550a"",
-                    ""expectedControlType"": ""Vector2"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
                 },
                 {
                     ""name"": ""MovePlayer2"",
-                    ""type"": ""Value"",
+                    ""type"": ""Button"",
                     ""id"": ""afa3e061-af43-4cf9-bf9e-4674ca2f5ffb"",
-                    ""expectedControlType"": ""Vector2"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true

@@ -37,7 +37,7 @@ public class VictoryManager : NetworkBehaviour
     private void NotifyVictoryClientRpc()
     {
         Debug.Log("[VictoryManager] RPC de vitória recebido — exibindo painel.");
-        GameManager.Instance.ShowVictoryPanelClientRpc();
+        //GameManager.Instance.ShowVictoryPanelClientRpc();
     }
 
     //public void OnClickMenuPrincipal()

@@ -40,7 +40,7 @@ public class PlayerRespawn : NetworkBehaviour
 
             pendingCheckpoint = checkpoint;
             checkpoint.TryActivate();
-            GameManager.Instance.ReachCheckpoint(checkpoint.transform);
+            //GameManager.Instance.ReachCheckpoint(checkpoint.transform);
         }
     }
 
