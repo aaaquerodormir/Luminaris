@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using Unity.Netcode;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
@@ -18,9 +18,7 @@ public class CustomPlayerSpawner : NetworkBehaviour
     private void Start()
     {
         if (NetworkManager.Singleton != null)
-        {
             NetworkManager.Singleton.SceneManager.OnLoadEventCompleted += OnSceneLoaded;
-        }
     }
 
     private void OnSceneLoaded(string sceneName, LoadSceneMode mode, List<ulong> clientsCompleted, List<ulong> clientsTimedOut)
@@ -36,12 +34,11 @@ public class CustomPlayerSpawner : NetworkBehaviour
 
     private IEnumerator SpawnPlayersWhenReady()
     {
-        // Espera um pouquinho para garantir que tudo est� inicializado
         yield return new WaitForSeconds(1f);
 
-        var clientIds = NetworkManager.Singleton.ConnectedClients.Keys.ToArray();
-
-        Debug.Log($"[Spawner] Conectados: {clientIds.Length} jogadores.");
+        // 🔹 Ordena IDs para garantir que o host (0) é sempre Player 1
+        var clientIds = NetworkManager.Singleton.ConnectedClients.Keys.OrderBy(id => id).ToArray();
+        Debug.Log($"[Spawner] Conectados: {clientIds.Length} jogadores (ordenados).");
 
         if (clientIds.Length >= 1)
             SpawnPlayer(clientIds[0], player1Prefab, spawnP1);
@@ -54,34 +51,39 @@ public class CustomPlayerSpawner : NetworkBehaviour
     {
         if (prefab == null)
         {
-            Debug.LogError("[Spawner] Prefab de jogador n�o atribu�do!");
+            Debug.LogError("[Spawner] Prefab de jogador não atribuído!");
             return;
         }
 
-        var spawnPos = spawnPoint != null ? spawnPoint.position : Vector3.zero;
-        var spawnRot = spawnPoint != null ? spawnPoint.rotation : Quaternion.identity;
+        var spawnPos = spawnPoint ? spawnPoint.position : Vector3.zero;
+        var spawnRot = spawnPoint ? spawnPoint.rotation : Quaternion.identity;
 
         var player = Instantiate(prefab, spawnPos, spawnRot);
         var netObj = player.GetComponent<NetworkObject>();
 
         if (netObj == null)
         {
-            Debug.LogError("[Spawner] Prefab n�o tem NetworkObject!");
+            Debug.LogError("[Spawner] Prefab não tem NetworkObject!");
             Destroy(player);
             return;
         }
 
         netObj.SpawnAsPlayerObject(clientId, true);
         Debug.Log($"[Spawner] Player {clientId} spawnado em {spawnPos}");
+
+        // 🔹 Registra no TurnControl se já existir
+        if (TurnControl.Instance != null)
+        {
+            var movement = player.GetComponent<PlayerMovement>();
+            if (movement != null)
+                TurnControl.Instance.RegisterPlayer(movement);
+        }
     }
 
     public override void OnDestroy()
     {
         base.OnDestroy();
-
         if (NetworkManager.Singleton != null)
-        {
             NetworkManager.Singleton.SceneManager.OnLoadEventCompleted -= OnSceneLoaded;
-        }
     }
 }

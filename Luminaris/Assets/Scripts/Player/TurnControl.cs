@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
+using System.Linq;
 
 public class TurnControl : NetworkBehaviour
 {
@@ -37,7 +38,14 @@ public class TurnControl : NetworkBehaviour
             yield return new WaitForSeconds(0.5f);
         }
 
-        Debug.Log($"[TurnControl] {players.Count} jogadores encontrados. Iniciando turnos...");
+        Debug.Log($"[TurnControl] {players.Count} jogadores encontrados. Ordenando e iniciando turnos...");
+
+        // 🔹 Garante ordem fixa de OwnerClientId (Player1 = host)
+        players = players.OrderBy(p => p.OwnerClientId).ToList();
+
+        foreach (var p in players)
+            Debug.Log($"[TurnControl] Registrado: {p.name} (Owner={p.OwnerClientId})");
+
         ResetTurns();
     }
 
@@ -45,8 +53,10 @@ public class TurnControl : NetworkBehaviour
     {
         var found = FindObjectsByType<PlayerMovement>(FindObjectsSortMode.None);
         foreach (var p in found)
+        {
             if (!players.Contains(p))
                 players.Add(p);
+        }
     }
 
     public void RegisterPlayer(PlayerMovement player)
@@ -56,12 +66,13 @@ public class TurnControl : NetworkBehaviour
         if (!players.Contains(player))
         {
             players.Add(player);
-            Debug.Log($"[TurnControl] Player registrado: {player.name} | Total: {players.Count}");
+            Debug.Log($"[TurnControl] Player registrado: {player.name} (Owner={player.OwnerClientId})");
         }
 
-        if (players.Count >= 2 && currentIndex.Value == 0)
+        if (players.Count >= 2)
         {
-            Debug.Log("[TurnControl] Dois jogadores registrados — iniciando turnos.");
+            players = players.OrderBy(p => p.OwnerClientId).ToList();
+            Debug.Log("[TurnControl] Dois jogadores registrados — iniciando turnos ordenados.");
             ResetTurns();
         }
     }
@@ -89,12 +100,11 @@ public class TurnControl : NetworkBehaviour
         if (!IsServer || players.Count == 0) return;
 
         var current = players[currentIndex.Value];
-        Debug.Log($"[TurnControl] Encerrando turno do Player {current.name}");
-
+        Debug.Log($"[TurnControl] Encerrando turno de {current.name} (Index={currentIndex.Value})");
         current?.SetTurnActiveServerRpc(false);
 
         currentIndex.Value = (currentIndex.Value + 1) % players.Count;
-        Debug.Log($"[TurnControl] Passando turno para Player {players[currentIndex.Value].name}");
+        Debug.Log($"[TurnControl] Passando turno para {players[currentIndex.Value].name} (Index={currentIndex.Value})");
 
         TriggerTurnStarted(players[currentIndex.Value]);
     }
@@ -103,7 +113,7 @@ public class TurnControl : NetworkBehaviour
     {
         if (player == null) return;
 
-        Debug.Log($"[TurnControl] Novo turno iniciado — Jogador ativo: {player.name}");
+        Debug.Log($"[TurnControl] 🔹 Novo turno iniciado — Player ativo: {player.name} (Owner={player.OwnerClientId})");
         player.SetTurnActiveServerRpc(true);
         OnTurnStarted?.Invoke(player);
     }
