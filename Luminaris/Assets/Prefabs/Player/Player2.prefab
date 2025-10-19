@@ -292,7 +292,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &3839698034830718357
 Transform:
   m_ObjectHideFlags: 0
@@ -538,15 +538,17 @@ MonoBehaviour:
   playerUI: {fileID: 3915764837835743624}
   anim: {fileID: 3278293586265127783}
   spriteRenderer: {fileID: 7555596430964899303}
-  moveAction: {fileID: -276721333342118783, guid: 03f621bcf66b04046a24ebfccf5c71b6, type: 3}
-  jumpAction: {fileID: 3130247826693790656, guid: 03f621bcf66b04046a24ebfccf5c71b6, type: 3}
+  netAnimator: {fileID: 6227805049994358070}
   moveSpeed: 3
   jumpForce: 6.2
+  groundRadius: 0.2
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
   groundCheck: {fileID: 3839698034830718357}
   maxJumps: 3
+  moveAction: {fileID: -276721333342118783, guid: 03f621bcf66b04046a24ebfccf5c71b6, type: 3}
+  jumpAction: {fileID: 3130247826693790656, guid: 03f621bcf66b04046a24ebfccf5c71b6, type: 3}
 --- !u!50 &7077229418032609283
 Rigidbody2D:
   serializedVersion: 5

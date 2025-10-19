@@ -25,7 +25,7 @@ public class PlayerMovement : NetworkBehaviour
 
     [Header("Ground Check")]
     //[SerializeField] private Transform groundCheck;
-    //[SerializeField] private Vector2 groundCheckSize = new(0.5f, 0.05f);
+    [SerializeField] private float groundRadius = 0.2f;
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private Transform groundCheck;
 
@@ -33,20 +33,19 @@ public class PlayerMovement : NetworkBehaviour
     [SerializeField] private int maxJumps = 3;
     private int currentJumps;
 
+    [Header("Input Actions")]
+    [SerializeField] private InputActionReference moveAction;
+    [SerializeField] private InputActionReference jumpAction;
+
     private bool isGrounded;
     private bool facingRight = true;
     private bool isMyTurn = false;
     private Vector2 moveInput;
 
-    [Header("Input Actions")]
-    [SerializeField] private InputActionReference moveLeftAction;
-    [SerializeField] private InputActionReference moveRightAction;
-    [SerializeField] private InputActionReference jumpAction;
-
     private readonly NetworkVariable<bool> netFacingRight = new(
         true, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
 
-    // ==================================================
+    // ===========================================================
     private void Awake()
     {
         if (!rb) rb = GetComponent<Rigidbody2D>();
@@ -61,67 +60,54 @@ public class PlayerMovement : NetworkBehaviour
 
         if (IsOwner)
         {
-            Debug.Log($"[PlayerMovement:{name}] OnNetworkSpawn — sou o dono ({OwnerClientId})");
-            AssignInputActions();
+            Debug.Log($"[PlayerMovement:{name}] OnNetworkSpawn (Owner={OwnerClientId})");
             EnableInputs();
             currentJumps = maxJumps;
         }
         else
         {
-            Debug.Log($"[PlayerMovement:{name}] OnNetworkSpawn — não sou o dono ({OwnerClientId})");
+            DisableInputs(); // Evita input em jogadores remotos
         }
     }
 
-    private void OnDestroy()
+    public override void OnDestroy()
     {
+        base.OnDestroy();
+
         if (IsOwner)
             DisableInputs();
     }
 
-    // ================================================
-    private void AssignInputActions()
-    {
-        // Carrega o arquivo principal (ex: "InputActions.inputactions")
-        var inputAsset = Resources.Load<InputActionAsset>("InputActions/InputActions");
-        if (inputAsset == null)
-        {
-            Debug.LogError($"[PlayerMovement:{name}] ERRO: Não encontrou InputActions em Resources/InputActions/InputActions!");
-            return;
-        }
-
-        bool isPlayer1 = (OwnerClientId == 0);
-
-        // Busca ações pelo nome exato dentro do Input Actions Editor
-        moveLeftAction = InputActionReference.Create(inputAsset.FindAction(isPlayer1 ? "MovePlayer1" : "MovePlayer2"));
-        jumpAction = InputActionReference.Create(inputAsset.FindAction(isPlayer1 ? "JumpPlayer1" : "JumpPlayer2"));
-
-        if (moveLeftAction == null || jumpAction == null)
-        {
-            Debug.LogError($"[PlayerMovement:{name}] ERRO: Falhou ao encontrar ações de input!");
-        }
-        else
-        {
-            Debug.Log($"[PlayerMovement:{name}] Inputs carregados com sucesso para Player{(isPlayer1 ? 1 : 2)}.");
-        }
-    }
-
+    // ===========================================================
     private void EnableInputs()
     {
-        moveLeftAction?.action.Enable();
-        moveRightAction?.action.Enable();
-        jumpAction?.action.Enable();
-        jumpAction.action.performed += OnJump;
+        if (moveAction != null)
+        {
+            moveAction.action.Enable();
+            Debug.Log($"[PlayerMovement:{name}] Move Action habilitada: {moveAction.action.name}");
+        }
+        else Debug.LogWarning($"[PlayerMovement:{name}] Move Action não atribuída!");
+
+        if (jumpAction != null)
+        {
+            jumpAction.action.Enable();
+            jumpAction.action.performed += OnJump;
+            Debug.Log($"[PlayerMovement:{name}] Jump Action habilitada: {jumpAction.action.name}");
+        }
+        else Debug.LogWarning($"[PlayerMovement:{name}] Jump Action não atribuída!");
     }
 
     private void DisableInputs()
     {
-        moveLeftAction?.action.Disable();
-        moveRightAction?.action.Disable();
-        jumpAction?.action.Disable();
-        jumpAction.action.performed -= OnJump;
+        if (moveAction != null) moveAction.action.Disable();
+        if (jumpAction != null)
+        {
+            jumpAction.action.Disable();
+            jumpAction.action.performed -= OnJump;
+        }
     }
 
-    // ================================================
+    // ===========================================================
     private void Update()
     {
         if (!IsOwner || !isMyTurn) return;
@@ -137,21 +123,19 @@ public class PlayerMovement : NetworkBehaviour
         Move();
     }
 
+    // ===========================================================
     private void ReadMovementInput()
     {
         moveInput = Vector2.zero;
 
-        // Lê o valor das ações de movimento (botões)
-        var move = moveLeftAction.action.ReadValue<Vector2>();
+        // Usa teclas para movimento lateral
+        if (Keyboard.current == null) return;
 
-        // MAS se for Button, use IsPressed()
-        if (moveLeftAction.action.IsPressed()) moveInput.x -= 1f;
-        if (moveRightAction != null && moveRightAction.action.IsPressed()) moveInput.x += 1f;
-
-
+        if (Keyboard.current.aKey.isPressed || Keyboard.current.leftArrowKey.isPressed)
+            moveInput.x -= 1f;
+        if (Keyboard.current.dKey.isPressed || Keyboard.current.rightArrowKey.isPressed)
+            moveInput.x += 1f;
     }
-
-
 
     private void Move()
     {
@@ -163,6 +147,7 @@ public class PlayerMovement : NetworkBehaviour
             SetFacingServerRpc(false);
     }
 
+    // ===========================================================
     private void OnJump(InputAction.CallbackContext ctx)
     {
         if (!IsOwner || !isMyTurn) return;
@@ -177,17 +162,18 @@ public class PlayerMovement : NetworkBehaviour
         currentJumps--;
 
         Debug.Log($"[PlayerMovement:{name}] Pulou! Restam {currentJumps} pulos.");
-        netAnimator.SetTrigger("JumpTrigger");
+        netAnimator.SetTrigger("Jump"); // <- Corrigido (parâmetro igual ao Animator)
     }
 
+    // ===========================================================
     private void CheckGround()
     {
         bool wasGrounded = isGrounded;
-        isGrounded = Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
+        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, groundLayer);
 
-        if (isGrounded && !wasGrounded)
+        if (IsOwner && isGrounded && !wasGrounded)
         {
-            Debug.Log($"[PlayerMovement:{name}] Tocou o solo — reiniciando pulos.");
+            Debug.Log($"[PlayerMovement:{name}] Tocou o solo — resetando pulos.");
             currentJumps = maxJumps;
         }
     }
@@ -215,9 +201,7 @@ public class PlayerMovement : NetworkBehaviour
         netFacingRight.Value = right;
     }
 
-    // ==================================================
-    // ======== TURN CONTROL SYNC (Host + Client) ========
-    // ==================================================
+    // ===========================================================
     [ServerRpc(RequireOwnership = false)]
     public void SetTurnActiveServerRpc(bool active)
     {
@@ -255,7 +239,7 @@ public class PlayerMovement : NetworkBehaviour
     {
         if (groundCheck == null) return;
         Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(groundCheck.position, 0.2f);
+        Gizmos.DrawWireSphere(groundCheck.position, groundRadius);
     }
 }
 

@@ -12,8 +12,7 @@ public class TurnControl : NetworkBehaviour
     public List<PlayerMovement> players = new();
 
     private NetworkVariable<int> currentIndex = new(
-        0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server
-    );
+        0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
 
     public static event Action<PlayerMovement> OnTurnStarted;
 
@@ -26,32 +25,28 @@ public class TurnControl : NetworkBehaviour
     private void Start()
     {
         if (IsServer)
-        {
-            Debug.Log("[TurnControl] Servidor aguardando jogadores...");
             StartCoroutine(WaitForPlayersAndStartTurns());
-        }
     }
 
     private IEnumerator WaitForPlayersAndStartTurns()
     {
         yield return new WaitForSeconds(1f);
-
         while (players.Count < 2)
         {
             FindPlayersInScene();
-            Debug.Log($"[TurnControl] Encontrados {players.Count}/2 jogadores...");
             yield return new WaitForSeconds(0.5f);
         }
 
-        Debug.Log($"[TurnControl] {players.Count} jogadores detectados. Iniciando sistema de turnos.");
+        Debug.Log($"[TurnControl] {players.Count} jogadores encontrados. Iniciando turnos...");
         ResetTurns();
     }
 
     private void FindPlayersInScene()
     {
-        var found = FindObjectsOfType<PlayerMovement>();
+        var found = FindObjectsByType<PlayerMovement>(FindObjectsSortMode.None);
         foreach (var p in found)
-            if (!players.Contains(p)) players.Add(p);
+            if (!players.Contains(p))
+                players.Add(p);
     }
 
     public void RegisterPlayer(PlayerMovement player)
@@ -61,10 +56,10 @@ public class TurnControl : NetworkBehaviour
         if (!players.Contains(player))
         {
             players.Add(player);
-            Debug.Log($"[TurnControl] Player registrado: {player.name}");
+            Debug.Log($"[TurnControl] Player registrado: {player.name} | Total: {players.Count}");
         }
 
-        if (players.Count >= 2 && IsServer && currentIndex.Value == 0)
+        if (players.Count >= 2 && currentIndex.Value == 0)
         {
             Debug.Log("[TurnControl] Dois jogadores registrados — iniciando turnos.");
             ResetTurns();
@@ -75,7 +70,6 @@ public class TurnControl : NetworkBehaviour
     {
         if (!IsServer) return;
 
-        Debug.Log("[TurnControl] Reiniciando turnos...");
         foreach (var p in players)
             if (p != null)
                 p.SetTurnActiveServerRpc(false);
@@ -95,21 +89,21 @@ public class TurnControl : NetworkBehaviour
         if (!IsServer || players.Count == 0) return;
 
         var current = players[currentIndex.Value];
+        Debug.Log($"[TurnControl] Encerrando turno do Player {current.name}");
+
         current?.SetTurnActiveServerRpc(false);
 
         currentIndex.Value = (currentIndex.Value + 1) % players.Count;
+        Debug.Log($"[TurnControl] Passando turno para Player {players[currentIndex.Value].name}");
+
         TriggerTurnStarted(players[currentIndex.Value]);
     }
 
     private void TriggerTurnStarted(PlayerMovement player)
     {
-        if (player == null)
-        {
-            Debug.LogWarning("[TurnControl] Tentou iniciar turno com Player nulo!");
-            return;
-        }
+        if (player == null) return;
 
-        Debug.Log($"[TurnControl] Novo turno: {player.name}");
+        Debug.Log($"[TurnControl] Novo turno iniciado — Jogador ativo: {player.name}");
         player.SetTurnActiveServerRpc(true);
         OnTurnStarted?.Invoke(player);
     }

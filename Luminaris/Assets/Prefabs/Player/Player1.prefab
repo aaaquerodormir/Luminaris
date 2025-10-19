@@ -297,13 +297,13 @@ MonoBehaviour:
   netAnimator: {fileID: -4297708015954877441}
   moveSpeed: 3
   jumpForce: 6.2
+  groundRadius: 0.2
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
   groundCheck: {fileID: 3839698034830718357}
   maxJumps: 3
-  moveLeftAction: {fileID: 2685324879968096250, guid: 03f621bcf66b04046a24ebfccf5c71b6, type: 3}
-  moveRightAction: {fileID: 0}
+  moveAction: {fileID: -3754844944467460052, guid: 03f621bcf66b04046a24ebfccf5c71b6, type: 3}
   jumpAction: {fileID: 6508505653016678817, guid: 03f621bcf66b04046a24ebfccf5c71b6, type: 3}
 --- !u!50 &7077229418032609283
 Rigidbody2D:
