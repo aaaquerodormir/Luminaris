@@ -1,53 +1,66 @@
-using UnityEngine;
+﻿using UnityEngine;
 using Unity.Netcode;
 public class VictoryManager : NetworkBehaviour
 {
-    private static VictoryManager instance;
+    private static VictoryManager Instance;
     private FinalDoor[] doors;
 
     private void Awake()
     {
-        if (instance == null) instance = this;
-        else Destroy(gameObject);
+        if (Instance == null) Instance = this;
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
 
         doors = FindObjectsByType<FinalDoor>(FindObjectsSortMode.None);
         Debug.Log($"[VictoryManager] Encontradas {doors.Length} portas finais.");
     }
 
+    /// <summary>
+    /// Chamado pelas portas quando um jogador entra.
+    /// </summary>
     public static void CheckVictory()
     {
-        if (instance == null) return;
-        if (!instance.IsServer)
+        if (Instance == null) return;
+
+        // Somente o servidor valida vitória
+        if (!Instance.IsServer)
         {
-            Debug.Log("[VictoryManager] Cliente tentou verificar vit�ria � ignorado.");
+            Debug.Log("[VictoryManager] Cliente tentou verificar vitória — ignorado.");
             return;
         }
 
-        foreach (var door in instance.doors)
+        // Se qualquer porta ainda não tiver o jogador correto dentro, não vence
+        foreach (var door in Instance.doors)
         {
-            if (door == null || !door.IsPlayerInside)
+            if (door == null)
+            {
+                Debug.LogWarning("[VictoryManager] Porta nula detectada, abortando verificação.");
                 return;
+            }
+
+            if (!door.IsPlayerInside)
+            {
+                // Algum jogador ainda não chegou
+                Debug.Log($"[VictoryManager] {door.AssignedPlayer?.name ?? "??"} ainda não chegou.");
+                return;
+            }
         }
 
-        Debug.Log("[VictoryManager] Todos os jogadores chegaram! Enviando RPC de vit�ria.");
-        instance.NotifyVictoryClientRpc();
+        Debug.Log("[VictoryManager] ✅ Todos os jogadores chegaram à porta final! Enviando RPC de vitória global.");
+        Instance.NotifyVictoryClientRpc();
     }
 
     [ClientRpc]
     private void NotifyVictoryClientRpc()
     {
-        Debug.Log("[VictoryManager] RPC de vit�ria recebido � exibindo painel.");
-        //GameManager.Instance.ShowVictoryPanelClientRpc();
+        Debug.Log("[VictoryManager] RPC de vitória recebido — exibindo painel de vitória.");
+
+        if (GameManager.Instance != null)
+            GameManager.Instance.ShowVictoryClientRpc();
+        else
+            Debug.LogWarning("[VictoryManager] GameManager.Instance é nulo — vitória não exibida!");
     }
-
-    //public void OnClickMenuPrincipal()
-    //{
-    //    //GameManager.Instance.OpenVictoryConfirmation(() =>
-    //    {
-    //        Time.timeScale = 1f;
-    //        UnityEngine.SceneManagement.SceneManager.LoadScene("Menu");
-
-    //    );
-    //    }
-    //}
 }

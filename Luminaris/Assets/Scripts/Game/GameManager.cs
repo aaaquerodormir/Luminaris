@@ -122,6 +122,20 @@ public class GameManager : NetworkBehaviour
         OnGameOver?.Invoke();
     }
 
+    [ClientRpc]
+    public void ShowVictoryClientRpc()
+    {
+        Debug.Log("[GameManager] 🎊 Vitória global recebida — exibindo painel em todos os clientes.");
+
+        if (victoryUI != null) victoryUI.SetActive(true);
+        if (victoryMenuWrapper != null) victoryMenuWrapper.SetActive(true);
+        if (hudContainer != null) hudContainer.SetActive(false);
+        if (gameOverUI != null) gameOverUI.SetActive(false);
+        if (turnChangePanel != null) turnChangePanel.SetActive(false);
+
+        Time.timeScale = 0f;
+    }
+
     // ==========================
     // ==== TURNOS ==============
     // ==========================
