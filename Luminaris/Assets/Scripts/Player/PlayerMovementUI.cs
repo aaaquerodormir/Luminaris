@@ -18,7 +18,7 @@ public class PlayerMovementUI : NetworkBehaviour
         if (IsServer)
             jumpsNetworked.Value = maxJumps;
 
-        Debug.Log($"[PlayerMovementUI] {name} iniciou turno. Máx = {maxJumps}");
+        Debug.Log($"[PlayerUI:{name}] ▶ Início do turno — Máx = {maxJumps}");
         OnJumpsChanged?.Invoke(this, maxJumps);
     }
 
@@ -32,7 +32,7 @@ public class PlayerMovementUI : NetworkBehaviour
 
     public void EndTurn()
     {
-        Debug.Log($"[PlayerMovementUI] {name} terminou turno ({jumpsNetworked.Value}/3)");
+        Debug.Log($"[PlayerUI:{name}] ⏹ Fim do turno ({jumpsNetworked.Value}/3)");
         OnJumpsChanged?.Invoke(this, jumpsNetworked.Value);
     }
 

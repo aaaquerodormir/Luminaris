@@ -60,7 +60,7 @@ public class GameManager : NetworkBehaviour
         {
             Instance = this;
             session = new GameSession();
-            Debug.Log("[GameManager] Instância criada.");
+            //Debug.Log("[GameManager] Instância criada.");
         }
         else
         {
@@ -82,7 +82,7 @@ public class GameManager : NetworkBehaviour
 
     private void Start()
     {
-        Debug.Log($"[GameManager] Start — IsServer={IsServer}, IsClient={IsClient}, IsHost={IsHost}");
+        //Debug.Log($"[GameManager] Start — IsServer={IsServer}, IsClient={IsClient}, IsHost={IsHost}");
     }
 
     // ==========================
@@ -92,11 +92,11 @@ public class GameManager : NetworkBehaviour
     {
         if (!IsServer)
         {
-            Debug.Log("[GameManager] Cliente detectou morte (ignorado).");
+            //Debug.Log("[GameManager] Cliente detectou morte (ignorado).");
             return;
         }
 
-        Debug.Log("[GameManager] Um jogador morreu — acionando GameOver para todos.");
+        //Debug.Log("[GameManager] Um jogador morreu — acionando GameOver para todos.");
         ShowGameOverClientRpc();
     }
 
@@ -156,7 +156,7 @@ public class GameManager : NetworkBehaviour
             }
         }
 
-        Debug.Log($"[GameManager] Exibindo painel de turno para {playerToShow.name}");
+        //Debug.Log($"[GameManager] Exibindo painel de turno para {playerToShow.name}");
         turnChangePanel.SetActive(true);
         yield return new WaitForSeconds(turnPanelDisplayDuration);
         turnChangePanel.SetActive(false);

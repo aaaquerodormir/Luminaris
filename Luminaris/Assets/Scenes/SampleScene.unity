@@ -28975,11 +28975,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bacbbcb3c41df2c468f9490c66a12b4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  playerUI: {fileID: 0}
   jumpIcon: {fileID: 1902057274}
   jumpText: {fileID: 65123987}
   sprites:
   - {fileID: -4175370496997902698, guid: 70f35c0698e45ba428d5f1868aca909b, type: 3}
+  showRemotePlayers: 1
 --- !u!1 &2042382863
 GameObject:
   m_ObjectHideFlags: 0
@@ -29300,11 +29301,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bacbbcb3c41df2c468f9490c66a12b4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  playerUI: {fileID: 0}
   jumpIcon: {fileID: 1938311498}
   jumpText: {fileID: 2110991711}
   sprites:
   - {fileID: 992895060, guid: 70f35c0698e45ba428d5f1868aca909b, type: 3}
+  showRemotePlayers: 1
 --- !u!1001 &2063091658
 PrefabInstance:
   m_ObjectHideFlags: 0
