@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
 using TMPro; // Adicionado para TextMeshPro
@@ -33,14 +33,14 @@ public class GameManager : NetworkBehaviour
     [Header("UI de Turno")]
     [Tooltip("O painel que aparece brevemente quando o turno muda.")]
     [SerializeField] private GameObject turnChangePanel;
-    [Tooltip("O texto que será atualizado com o nome do jogador.")]
+    [Tooltip("O texto que serÃ¡ atualizado com o nome do jogador.")]
     [SerializeField] private TextMeshProUGUI turnChangeText;
-    [Tooltip("A imagem que será atualizada com o sprite do jogador.")]
+    [Tooltip("A imagem que serÃ¡ atualizada com o sprite do jogador.")]
     [SerializeField] private Image turnChangeImage;
     [Tooltip("Quantos segundos o painel de troca de turno fica na tela.")]
     [SerializeField] private float turnPanelDisplayDuration = 2.5f;
 
-    [Header("UI Específica")]
+    [Header("UI EspecÃ­fica")]
     [SerializeField] private GameObject jumpCounterUI;
 
     private bool isGameOver = false;
@@ -60,7 +60,7 @@ public class GameManager : NetworkBehaviour
         {
             Instance = this;
             session = new GameSession();
-            //Debug.Log("[GameManager] Instância criada.");
+            //Debug.Log("[GameManager] InstÃ¢ncia criada.");
         }
         else
         {
@@ -82,7 +82,7 @@ public class GameManager : NetworkBehaviour
 
     private void Start()
     {
-        //Debug.Log($"[GameManager] Start — IsServer={IsServer}, IsClient={IsClient}, IsHost={IsHost}");
+        //Debug.Log($"[GameManager] Start â€” IsServer={IsServer}, IsClient={IsClient}, IsHost={IsHost}");
     }
 
     // ==========================
@@ -96,7 +96,7 @@ public class GameManager : NetworkBehaviour
             return;
         }
 
-        //Debug.Log("[GameManager] Um jogador morreu — acionando GameOver para todos.");
+        //Debug.Log("[GameManager] Um jogador morreu â€” acionando GameOver para todos.");
         ShowGameOverClientRpc();
     }
 
@@ -147,7 +147,7 @@ public class GameManager : NetworkBehaviour
         if (id != null)
         {
             if (turnChangeText != null)
-                turnChangeText.text = $"Agora é a vez da {id.PlayerName}";
+                turnChangeText.text = $"Agora Ã© a vez da {id.PlayerName}";
 
             if (turnChangeImage != null)
             {
@@ -183,5 +183,21 @@ public class GameManager : NetworkBehaviour
 
         isGameOver = false;
         OnTryAgain?.Invoke();
+    }
+    // ==========================
+    // ==== GAME OVER RPC =======
+    // ==========================
+    [ServerRpc(RequireOwnership = false)]
+    public void InvokeGameOverServerRpc()
+    {
+        if (!IsServer) return;
+        Debug.Log("[GameManager] Um jogador morreu â€” acionando GameOver para todos.");
+        ShowGameOverClientRpc();
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    public void OnPlayerDiedServerRpc()
+    {
+        ShowGameOverClientRpc();
     }
 }

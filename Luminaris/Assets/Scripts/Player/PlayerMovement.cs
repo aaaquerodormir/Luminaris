@@ -260,6 +260,31 @@ public class PlayerMovement : NetworkBehaviour
     }
 
     // ==============================
+    // 🔥 DETECÇÃO DE MORTE NA LAVA
+    // ==============================
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Lava"))
+        {
+            Debug.Log($"[PlayerMovement:{name}] tocou na lava!");
+            if (IsServer)
+            {
+                GameManager.Instance?.OnPlayerDiedServerRpc();
+            }
+            else
+            {
+                NotifyDeathServerRpc();
+            }
+        }
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    private void NotifyDeathServerRpc()
+    {
+        GameManager.Instance?.OnPlayerDiedServerRpc();
+    }
+
+    // ==============================
     private void OnDrawGizmosSelected()
     {
         if (groundCheck == null) return;

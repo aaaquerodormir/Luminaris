@@ -31,7 +31,12 @@ public class LavaRise : NetworkBehaviour
     private void Update()
     {
         if (!IsServer) return;
+
         transform.position += Vector3.up * currentSpeed * Time.deltaTime;
+
+        // trava a altura para não passar do teto
+        if (transform.position.y > 50f)
+            currentSpeed = 0;
     }
 
     public void SaveProgressAtCheckpoint() => Debug.Log("[LavaRise] Progresso salvo.");
