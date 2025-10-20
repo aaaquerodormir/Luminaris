@@ -105,17 +105,20 @@ public class PlayerMovement : NetworkBehaviour
     private void Update()
     {
         CheckGround();
-        UpdateAnimations();
-        if (!IsOwner || !isMyTurn) return;
+        // 🔹 Agora sincronizamos o estado da animação via RPC
+        bool isMoving = Mathf.Abs(moveInput.x) > 0.1f;
+        float yVel = rb.linearVelocity.y;
+        UpdateAnimatorServerRpc(isMoving, isGrounded, yVel);
+
+        if (!IsOwner || !isMyTurn)
+            return;
 
         moveInput = moveAction != null ? moveAction.action.ReadValue<Vector2>() : Vector2.zero;
 
-        //CheckGround();
-        //UpdateAnimations();
-
-        //if (!IsOwner) return;
-
-        //if (!isMyTurn) return;
+        //// 🔹 Agora sincronizamos o estado da animação via RPC
+        //bool isMoving = Mathf.Abs(moveInput.x) > 0.1f;
+        //float yVel = rb.linearVelocity.y;
+        //UpdateAnimatorServerRpc(isMoving, isGrounded, yVel);
     }
 
     private void FixedUpdate()
@@ -173,14 +176,16 @@ public class PlayerMovement : NetworkBehaviour
         }
     }
 
-    private void UpdateAnimations()
+    [ServerRpc]
+
+    private void UpdateAnimatorServerRpc(bool moving, bool grounded, float yVel)
     {
         Animator a = netAnimator.Animator;
         if (a == null) return;
 
-        a.SetBool("IsGrounded", isGrounded);
-        a.SetBool("IsMoving", Mathf.Abs(moveInput.x) > 0.1f);
-        a.SetFloat("yVelocity", rb.linearVelocity.y);
+        a.SetBool("IsMoving", moving);
+        a.SetBool("IsGrounded", grounded);
+        a.SetFloat("yVelocity", yVel);
     }
 
     // ==============================
@@ -260,7 +265,7 @@ public class PlayerMovement : NetworkBehaviour
     }
 
     // ==============================
-    // 🔥 DETECÇÃO DE MORTE NA LAVA
+    //  DETECÇÃO DE MORTE NA LAVA
     // ==============================
     private void OnTriggerEnter2D(Collider2D collision)
     {

@@ -15,26 +15,20 @@ public class JumpHUD : MonoBehaviour
     [Header("Sprites por Quantidade de Pulos")]
     [SerializeField] private Sprite[] sprites;
 
-    [Header("Sincronização")]
-    [SerializeField] private bool showRemotePlayers = true;
-
-
     private bool playerFound;
 
     private void OnEnable()
     {
         PlayerMovementUI.OnJumpsChanged += UpdateDisplay;
-
         if (NetworkManager.Singleton != null)
             NetworkManager.Singleton.OnClientConnectedCallback += OnClientConnected;
 
-        StartCoroutine(FindPlayerUIRoutine());
+        StartCoroutine(FindLocalPlayerUIRoutine());
     }
 
     private void OnDisable()
     {
         PlayerMovementUI.OnJumpsChanged -= UpdateDisplay;
-
         if (NetworkManager.Singleton != null)
             NetworkManager.Singleton.OnClientConnectedCallback -= OnClientConnected;
     }
@@ -42,35 +36,38 @@ public class JumpHUD : MonoBehaviour
     private void OnClientConnected(ulong clientId)
     {
         if (!playerFound)
-            StartCoroutine(FindPlayerUIRoutine());
+            StartCoroutine(FindLocalPlayerUIRoutine());
     }
 
-    private IEnumerator FindPlayerUIRoutine()
+    private IEnumerator FindLocalPlayerUIRoutine()
     {
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(1f);
 
         if (playerUI == null)
         {
             var all = FindObjectsOfType<PlayerMovementUI>(true);
             foreach (var ui in all)
             {
-                if (showRemotePlayers || ui.IsOwner)
+                // 🔹 Cada HUD pega o playerUI que pertence ao dono (IsOwner = true)
+                if (ui.IsOwner)
                 {
                     playerUI = ui;
                     playerFound = true;
-                    Debug.Log($"[JumpHUD] Player UI atribuído automaticamente: {ui.name}");
+                    Debug.Log($"[JumpHUD] UI vinculada ao jogador local: {ui.name}");
                     break;
                 }
             }
 
             if (playerUI == null)
-                Debug.LogWarning("[JumpHUD] Nenhum PlayerMovementUI encontrado ainda — aguardando spawn.");
+                Debug.LogWarning("[JumpHUD] Nenhum PlayerMovementUI local encontrado — aguardando spawn...");
         }
     }
 
     private void UpdateDisplay(PlayerMovementUI ui, int jumps)
     {
-        if (!showRemotePlayers && ui != playerUI) return;
+        // 🔹 Ignora atualizações de outros jogadores
+        if (playerUI == null || ui != playerUI)
+            return;
 
         if (jumpText != null)
             jumpText.text = jumps.ToString();
