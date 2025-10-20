@@ -15,6 +15,9 @@ public class CustomPlayerSpawner : NetworkBehaviour
     [SerializeField] private Transform spawnP1;
     [SerializeField] private Transform spawnP2;
 
+    // 🔹 Evento global para que HUDs saibam quando um jogador foi spawnado
+    public static event System.Action<ulong, PlayerMovementUI> OnPlayerSpawned;
+
     private void Start()
     {
         if (NetworkManager.Singleton != null)
@@ -77,6 +80,13 @@ public class CustomPlayerSpawner : NetworkBehaviour
             var movement = player.GetComponent<PlayerMovement>();
             if (movement != null)
                 TurnControl.Instance.RegisterPlayer(movement);
+        }
+        // 🔹 Notifica todos os HUDs sobre o novo jogador
+        var ui = player.GetComponent<PlayerMovementUI>();
+        if (ui != null)
+        {
+            Debug.Log($"[Spawner] PlayerMovementUI do Client {clientId} detectado e notificado.");
+            OnPlayerSpawned?.Invoke(clientId, ui);
         }
     }
 

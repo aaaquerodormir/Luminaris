@@ -15,59 +15,83 @@ public class JumpHUD : MonoBehaviour
     [Header("Sprites por Quantidade de Pulos")]
     [SerializeField] private Sprite[] sprites;
 
+    [Header("HUD Configuração")]
+    [Tooltip("Marque se esta HUD representa o jogador host (Player1).")]
+    [SerializeField] private bool isHostHUD;
+
+
     private bool playerFound;
 
     private void OnEnable()
     {
         PlayerMovementUI.OnJumpsChanged += UpdateDisplay;
+
+        // 🔹 Escuta o spawn real vindo do servidor
+        CustomPlayerSpawner.OnPlayerSpawned += HandlePlayerSpawned;
+
+        // 🔹 Escuta conexões (útil no client)
         if (NetworkManager.Singleton != null)
             NetworkManager.Singleton.OnClientConnectedCallback += OnClientConnected;
-
-        StartCoroutine(FindLocalPlayerUIRoutine());
     }
 
     private void OnDisable()
     {
         PlayerMovementUI.OnJumpsChanged -= UpdateDisplay;
+        CustomPlayerSpawner.OnPlayerSpawned -= HandlePlayerSpawned;
+
         if (NetworkManager.Singleton != null)
             NetworkManager.Singleton.OnClientConnectedCallback -= OnClientConnected;
     }
 
     private void OnClientConnected(ulong clientId)
     {
+        // Reforço: tenta encontrar o jogador novamente após nova conexão
         if (!playerFound)
-            StartCoroutine(FindLocalPlayerUIRoutine());
+            StartCoroutine(TryFindPlayerDelayed());
     }
 
-    private IEnumerator FindLocalPlayerUIRoutine()
+    private void HandlePlayerSpawned(ulong clientId, PlayerMovementUI ui)
+    {
+        // Vincula quando o player é realmente spawnado
+        var id = ui.GetComponent<PlayerIdentifier>();
+        if (id == null) return;
+
+        if (id.IsHostPlayer == isHostHUD)
+        {
+            playerUI = ui;
+            playerFound = true;
+            Debug.Log($"[JumpHUD:{name}] Vinculado automaticamente ao jogador {(isHostHUD ? "HOST" : "CLIENT")} ({ui.name})");
+        }
+    }
+
+    private IEnumerator TryFindPlayerDelayed()
     {
         yield return new WaitForSeconds(1f);
 
-        if (playerUI == null)
-        {
-            var all = FindObjectsOfType<PlayerMovementUI>(true);
-            foreach (var ui in all)
-            {
-                // 🔹 Cada HUD pega o playerUI que pertence ao dono (IsOwner = true)
-                if (ui.IsOwner)
-                {
-                    playerUI = ui;
-                    playerFound = true;
-                    Debug.Log($"[JumpHUD] UI vinculada ao jogador local: {ui.name}");
-                    break;
-                }
-            }
+        if (playerFound) yield break;
 
-            if (playerUI == null)
-                Debug.LogWarning("[JumpHUD] Nenhum PlayerMovementUI local encontrado — aguardando spawn...");
+        var all = FindObjectsOfType<PlayerMovementUI>(true);
+        foreach (var ui in all)
+        {
+            var id = ui.GetComponent<PlayerIdentifier>();
+            if (id == null) continue;
+
+            if (id.IsHostPlayer == isHostHUD)
+            {
+                playerUI = ui;
+                playerFound = true;
+                Debug.Log($"[JumpHUD:{name}] Encontrado manualmente o jogador {(isHostHUD ? "HOST" : "CLIENT")} ({ui.name})");
+                break;
+            }
         }
+
+        if (!playerFound)
+            Debug.LogWarning($"[JumpHUD:{name}] Nenhum jogador correspondente encontrado mesmo após delay.");
     }
 
     private void UpdateDisplay(PlayerMovementUI ui, int jumps)
     {
-        // 🔹 Ignora atualizações de outros jogadores
-        if (playerUI == null || ui != playerUI)
-            return;
+        if (playerUI == null || ui != playerUI) return;
 
         if (jumpText != null)
             jumpText.text = jumps.ToString();

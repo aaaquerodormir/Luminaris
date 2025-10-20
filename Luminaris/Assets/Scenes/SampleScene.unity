@@ -29032,7 +29032,7 @@ MonoBehaviour:
   jumpText: {fileID: 65123987}
   sprites:
   - {fileID: -4175370496997902698, guid: 70f35c0698e45ba428d5f1868aca909b, type: 3}
-  showRemotePlayers: 1
+  isHostHUD: 0
 --- !u!1 &2042382863
 GameObject:
   m_ObjectHideFlags: 0
@@ -29358,7 +29358,7 @@ MonoBehaviour:
   jumpText: {fileID: 2110991711}
   sprites:
   - {fileID: 992895060, guid: 70f35c0698e45ba428d5f1868aca909b, type: 3}
-  showRemotePlayers: 1
+  isHostHUD: 1
 --- !u!1001 &2063091658
 PrefabInstance:
   m_ObjectHideFlags: 0

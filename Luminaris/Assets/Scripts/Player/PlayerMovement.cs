@@ -176,10 +176,13 @@ public class PlayerMovement : NetworkBehaviour
         }
     }
 
-    [ServerRpc]
-
-    private void UpdateAnimatorServerRpc(bool moving, bool grounded, float yVel)
+    [ServerRpc(RequireOwnership = false)]
+    private void UpdateAnimatorServerRpc(bool moving, bool grounded, float yVel, ServerRpcParams rpcParams = default)
     {
+        // 🔒 Garantir que apenas o dono real desse player envie atualizações válidas
+        if (rpcParams.Receive.SenderClientId != OwnerClientId)
+            return;
+
         Animator a = netAnimator.Animator;
         if (a == null) return;
 

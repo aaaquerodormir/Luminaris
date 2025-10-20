@@ -1,10 +1,22 @@
-using UnityEngine;
+﻿using UnityEngine;
+using Unity.Netcode;
 
-public class PlayerIdentifier : MonoBehaviour
+
+public class PlayerIdentifier : NetworkBehaviour
 {
-    [Tooltip("O nome que ser� exibido na UI (ex: Jogador 1).")]
+    [Tooltip("Nome que será exibido na UI (ex: Jogador 1).")]
     public string PlayerName = "Jogador";
 
-    [Tooltip("O sprite/imagem que representa este jogador na UI.")]
+    [Tooltip("Sprite/imagem que representa este jogador na UI.")]
     public Sprite PlayerSprite;
+
+    [Header("Identificação de Rede")]
+    [SerializeField] private bool isHostPlayer;
+    public bool IsHostPlayer => isHostPlayer;
+
+    public override void OnNetworkSpawn()
+    {
+        isHostPlayer = IsServer;
+        Debug.Log($"[PlayerIdentifier:{name}] Registrado como {(isHostPlayer ? "Host" : "Client")}");
+    }
 }
