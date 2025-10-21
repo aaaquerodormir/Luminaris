@@ -13,7 +13,7 @@ public class PlayerMovement : NetworkBehaviour
 {
     [Header("References")]
     [SerializeField] private Rigidbody2D rb;
-    [SerializeField] private PlayerMovementUI playerUI;
+    //[SerializeField] private PlayerMovementUI playerUI;
     [SerializeField] private Animator anim;
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private NetworkAnimator netAnimator;
@@ -32,8 +32,11 @@ public class PlayerMovement : NetworkBehaviour
 
     [Header("Controle de Pulo")]
     [SerializeField] private int maxJumps = 3;
-    private int remainingJumps;
+    public readonly NetworkVariable<int> CompletedJumpsNet = new(
+        0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server
+    );
     private bool pendingJump = false;
+    public event System.Action<ulong, int> OnTurnStarted;
 
     [Header("Input Actions")]
     [SerializeField] private InputActionReference moveAction;
@@ -56,27 +59,20 @@ public class PlayerMovement : NetworkBehaviour
         if (!anim) anim = GetComponent<Animator>();
         if (!spriteRenderer) spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         if (!netAnimator) netAnimator = GetComponent<NetworkAnimator>();
-        if (!playerUI) playerUI = GetComponent<PlayerMovementUI>();
+        //if (!playerUI) playerUI = GetComponent<PlayerMovementUI>();
     }
 
     public override void OnNetworkSpawn()
     {
         base.OnNetworkSpawn();
-
-        if (IsOwner)
-            EnableInputs();
-        else
-            DisableInputs();
-
         netFacingRight.OnValueChanged += (_, __) => UpdateFacingDirection();
 
-        if (IsServer)
-        {
-            remainingJumps = maxJumps;
-            playerUI?.SetJumps(remainingJumps);
-        }
+        CompletedJumpsNet.OnValueChanged += HandleJumpsChanged;
 
-        Debug.Log($"[PlayerMovement:{name}] Spawned | Owner={OwnerClientId} | Server={IsServer}");
+        if (IsOwner) EnableInputs();
+        else DisableInputs();
+
+        Debug.Log($"[PlayerMovement:{name}] NetworkSpawn — Owner={IsOwner} ({OwnerClientId})");
     }
 
     public override void OnDestroy()
@@ -84,6 +80,25 @@ public class PlayerMovement : NetworkBehaviour
         base.OnDestroy();
         if (IsOwner) DisableInputs();
         netFacingRight.OnValueChanged -= (_, __) => UpdateFacingDirection();
+        CompletedJumpsNet.OnValueChanged -= HandleJumpsChanged; // Desassina
+    }
+
+    // CALLBACK DE REDE: Dispara em TODOS os clientes quando CompletedJumpsNet muda
+    private void HandleJumpsChanged(int oldVal, int newVal)
+    {
+        int remaining = maxJumps - newVal;
+        // Chama o método para todos os HUDs atualizarem sua exibição
+        UpdateJumpsClientRpc(remaining);
+    }
+
+    // CLIENT RPC: Garante que a UI seja atualizada em todos
+    [ClientRpc]
+    private void UpdateJumpsClientRpc(int remainingJumps)
+    {
+        // 🔑 MUDANÇA AQUI: Chame o método público estático para disparar o evento
+        JumpHUD.NotifyJumpsChanged(OwnerClientId, remainingJumps); // <-- CORREÇÃO
+
+        Debug.Log($"[SYNC-RPC:{OwnerClientId}] Novo total de pulos: {remainingJumps}");
     }
 
     // ==============================
@@ -111,79 +126,94 @@ public class PlayerMovement : NetworkBehaviour
     private void Update()
     {
         CheckGround();
-        // 🔹 Agora sincronizamos o estado da animação via RPC
         bool isMoving = Mathf.Abs(moveInput.x) > 0.1f;
         float yVel = rb.linearVelocity.y;
         UpdateAnimatorServerRpc(isMoving, isGrounded, yVel);
 
-        if (!IsOwner || !isMyTurn)
-            return;
+        if (!IsOwner || !isMyTurn) return;
 
         moveInput = moveAction != null ? moveAction.action.ReadValue<Vector2>() : Vector2.zero;
-
-        //// 🔹 Agora sincronizamos o estado da animação via RPC
-        //bool isMoving = Mathf.Abs(moveInput.x) > 0.1f;
-        //float yVel = rb.linearVelocity.y;
-        //UpdateAnimatorServerRpc(isMoving, isGrounded, yVel);
     }
 
     private void FixedUpdate()
     {
         if (!IsOwner || !isMyTurn) return;
-        Move();
+        HandleMovement();
     }
 
-    private void Move()
+    private void HandleMovement()
     {
-        rb.linearVelocity = new Vector2(moveInput.x * moveSpeed, rb.linearVelocity.y);
+        float moveX = moveInput.x;
+        rb.linearVelocity = new Vector2(moveX * moveSpeed, rb.linearVelocity.y);
 
-        if (moveInput.x > 0 && !facingRight)
+        if (moveX > 0 && !facingRight)
             SetFacingServerRpc(true);
-        else if (moveInput.x < 0 && facingRight)
+        else if (moveX < 0 && facingRight)
             SetFacingServerRpc(false);
     }
 
-    // =======================================
     private void OnJump(InputAction.CallbackContext ctx)
     {
-        if (!IsOwner || !isMyTurn) return;
-        if (!isGrounded || remainingJumps <= 0) return;
+        if (!IsOwner || !isMyTurn || !isGrounded) return;
 
         rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
-        netAnimator.SetTrigger("Jump");
         pendingJump = true;
 
-        remainingJumps--;
-        playerUI?.SetJumps(remainingJumps);
-
-        Debug.Log($"[PlayerMovement:{name}] Pulou → restam {remainingJumps} pulos");
+        netAnimator.SetTrigger("Jump");
+        Debug.Log($"[PlayerMovement:{name}] ⬆️ Pulou (aguardando aterrissagem)");
     }
 
-    // =======================================
     private void CheckGround()
     {
         wasGrounded = isGrounded;
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, groundLayer);
 
-        if (isGrounded && !wasGrounded && pendingJump)
+        if (isGrounded && !wasGrounded)
         {
-            pendingJump = false;
-            Debug.Log($"[PlayerMovement:{name}] Aterrissou");
-
-            if (remainingJumps <= 0)
+            if (pendingJump)
             {
-                Debug.Log($"[PlayerMovement:{name}] 🚩 Acabaram os pulos");
+                pendingJump = false;
+
+                // NOVO: Apenas o Server pode modificar a NetworkVariable
+                if (IsServer)
+                {
+                    // Se for o Host, ele modifica diretamente e o callback dispara
+                    CompletedJumpsNet.Value++;
+                }
+                else // Se for o Client, ele precisa solicitar ao Server para modificar
+                {
+                    // RPC para solicitar a contagem de pulos
+                    SubmitJumpServerRpc();
+                }
+
+                Debug.Log($"[PlayerMovement:{name}] 🟢 Aterrissou.");
+            }
+
+            // A condição de fim de turno deve usar o valor SINCRONIZADO
+            if (CompletedJumpsNet.Value >= maxJumps)
+            {
+                Debug.Log($"[PlayerMovement:{name}] 🚩 Máximo de pulos atingido — fim de turno!");
                 RequestEndTurn();
             }
         }
     }
 
-    // =======================================
+    // RPC do Client para o Server: solicita incremento de pulo
     [ServerRpc(RequireOwnership = false)]
-    private void UpdateAnimatorServerRpc(bool moving, bool grounded, float yVel)
+    private void SubmitJumpServerRpc(ServerRpcParams rpcParams = default)
     {
-        if (netAnimator.Animator == null) return;
-        var a = netAnimator.Animator;
+        // Garante que apenas o Host ou o dono do objeto pode fazer a alteração.
+        if (rpcParams.Receive.SenderClientId != OwnerClientId && !IsServer) return;
+
+        CompletedJumpsNet.Value++; // O Server faz a mudança
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    private void UpdateAnimatorServerRpc(bool moving, bool grounded, float yVel, ServerRpcParams rpcParams = default)
+    {
+        if (rpcParams.Receive.SenderClientId != OwnerClientId) return;
+        Animator a = netAnimator.Animator;
+        if (a == null) return;
         a.SetBool("IsMoving", moving);
         a.SetBool("IsGrounded", grounded);
         a.SetFloat("yVelocity", yVel);
@@ -192,7 +222,7 @@ public class PlayerMovement : NetworkBehaviour
     private void UpdateFacingDirection()
     {
         bool newFacing = netFacingRight.Value;
-        if (facingRight == newFacing) return;
+        if (newFacing == facingRight) return;
 
         facingRight = newFacing;
         if (spriteRenderer != null)
@@ -206,28 +236,20 @@ public class PlayerMovement : NetworkBehaviour
             netFacingRight.Value = right;
     }
 
-    // =======================================
     private void RequestEndTurn()
     {
         if (IsServer)
-        {
-            Debug.Log($"[PlayerMovement:{name}] 🔁 Encerrando turno (Host)");
             TurnControl.Instance?.EndTurn();
-        }
         else
-        {
-            Debug.Log($"[PlayerMovement:{name}] 🔁 Solicitando fim de turno via RPC");
             SubmitEndTurnServerRpc();
-        }
     }
 
-    [ServerRpc(RequireOwnership = false)]
-    private void SubmitEndTurnServerRpc()
+    [ServerRpc]
+    private void SubmitEndTurnServerRpc(ServerRpcParams rpcParams = default)
     {
         TurnControl.Instance?.EndTurn();
     }
 
-    // =======================================
     [ServerRpc(RequireOwnership = false)]
     public void SetTurnActiveServerRpc(bool active)
     {
@@ -243,24 +265,25 @@ public class PlayerMovement : NetworkBehaviour
     private void SetTurnActive(bool active)
     {
         isMyTurn = active;
-
         if (!IsOwner) return;
 
         if (active)
         {
-            remainingJumps = maxJumps;
-            playerUI?.SetJumps(remainingJumps);
-            Debug.Log($"[PlayerMovement:{name}] ▶️ Turno iniciado — {remainingJumps} pulos");
+            // NOVO: Apenas o Server reseta a contagem
+            if (IsServer)
+            {
+                CompletedJumpsNet.Value = 0;
+            }
+            // NOVO: Dispara evento para o HUD (útil para HUDs que precisam saber o máximo)
+            OnTurnStarted?.Invoke(OwnerClientId, maxJumps);
         }
         else
         {
             moveInput = Vector2.zero;
             rb.linearVelocity = Vector2.zero;
-            Debug.Log($"[PlayerMovement:{name}] ⏹ Turno encerrado");
         }
     }
 
-    // =======================================
     private void OnDrawGizmosSelected()
     {
         if (groundCheck == null) return;

@@ -16,7 +16,7 @@ public class CustomPlayerSpawner : NetworkBehaviour
     [SerializeField] private Transform spawnP2;
 
     // 🔹 Evento global para que HUDs saibam quando um jogador foi spawnado
-    public static event System.Action<ulong, PlayerMovementUI> OnPlayerSpawned;
+    //public static event System.Action<ulong, PlayerMovementUI> OnPlayerSpawned;
 
     private void Start()
     {
@@ -28,7 +28,7 @@ public class CustomPlayerSpawner : NetworkBehaviour
     {
         if (!IsServer) return;
 
-        if (sceneName == "SampleScene")
+        if (sceneName == "SampleScene") // Ajuste o nome da cena se necessário
         {
             Debug.Log("[Spawner] Cena de jogo carregada, iniciando spawn dos jogadores...");
             StartCoroutine(SpawnPlayersWhenReady());
@@ -39,13 +39,15 @@ public class CustomPlayerSpawner : NetworkBehaviour
     {
         yield return new WaitForSeconds(1f);
 
-        // 🔹 Ordena IDs para garantir que o host (0) é sempre Player 1
+        // Ordena IDs para garantir que o host (0) é sempre Player 1
         var clientIds = NetworkManager.Singleton.ConnectedClients.Keys.OrderBy(id => id).ToArray();
         Debug.Log($"[Spawner] Conectados: {clientIds.Length} jogadores (ordenados).");
 
+        // Spawn Player 1 (ID 0)
         if (clientIds.Length >= 1)
             SpawnPlayer(clientIds[0], player1Prefab, spawnP1);
 
+        // Spawn Player 2 (ID 1)
         if (clientIds.Length >= 2)
             SpawnPlayer(clientIds[1], player2Prefab, spawnP2);
     }
@@ -74,20 +76,15 @@ public class CustomPlayerSpawner : NetworkBehaviour
         netObj.SpawnAsPlayerObject(clientId, true);
         Debug.Log($"[Spawner] Player {clientId} spawnado em {spawnPos}");
 
-        // 🔹 Registra no TurnControl se já existir
+        // Registra no TurnControl
         if (TurnControl.Instance != null)
         {
             var movement = player.GetComponent<PlayerMovement>();
             if (movement != null)
                 TurnControl.Instance.RegisterPlayer(movement);
         }
-        // 🔹 Notifica todos os HUDs sobre o novo jogador
-        var ui = player.GetComponent<PlayerMovementUI>();
-        if (ui != null)
-        {
-            Debug.Log($"[Spawner] PlayerMovementUI do Client {clientId} detectado e notificado.");
-            OnPlayerSpawned?.Invoke(clientId, ui);
-        }
+
+        // CÓDIGO ANTIGO DE NOTIFICAÇÃO DA UI REMOVIDO!
     }
 
     public override void OnDestroy()

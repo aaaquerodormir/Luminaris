@@ -38,13 +38,9 @@ public class TurnControl : NetworkBehaviour
             yield return new WaitForSeconds(0.5f);
         }
 
-        //Debug.Log($"[TurnControl] {players.Count} jogadores encontrados. Ordenando e iniciando turnos...");
-
-        // 🔹 Garante ordem fixa de OwnerClientId (Player1 = host)
+        // Garante ordem fixa de OwnerClientId (Player1 = host)
         players = players.OrderBy(p => p.OwnerClientId).ToList();
         Debug.Log($"[TurnControl] 🟢 {players.Count} jogadores detectados. Iniciando sequência.");
-        //foreach (var p in players)
-            //Debug.Log($"[TurnControl] Registrado: {p.name} (Owner={p.OwnerClientId})");
 
         ResetTurns();
     }
@@ -97,6 +93,13 @@ public class TurnControl : NetworkBehaviour
     private void TriggerTurnStarted(PlayerMovement player)
     {
         if (player == null) return;
+
+        // 🔑 CORREÇÃO CRÍTICA: Resetar a NetworkVariable aqui no Server
+        if (IsServer)
+        {
+            player.CompletedJumpsNet.Value = 0;
+            Debug.Log($"[TurnControl] Jumps Resetados para {player.name}.");
+        }
 
         Debug.Log($"[TurnControl] ▶ Turno ativo: {player.name}");
         player.SetTurnActiveServerRpc(true);
