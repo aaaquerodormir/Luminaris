@@ -24,13 +24,10 @@ public class RelayManager : MonoBehaviour
         else Destroy(gameObject);
     }
 
-    // --- MÉTODOS ORIGINAIS DO RELAY (INTERNET) ---
-    // (Todo o seu código original de Relay permanece aqui, sem alterações)
-    #region Relay Methods
-
     private async Task EnsureInitialized()
     {
         if (_initTask != null) { await _initTask; return; }
+
         _initTask = InitializeAsync();
         await _initTask;
     }
@@ -61,13 +58,16 @@ public class RelayManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Cria uma allocation (host). Retorna joinCode ou null em falha.
+    /// </summary>
     public async Task<string> CreateRelay(int maxPlayers = 2)
     {
         await EnsureInitialized();
 
         if (NetworkManager.Singleton == null)
         {
-            Debug.LogError("[RelayManager] NetworkManager.Singleton é null.");
+            Debug.LogError("[RelayManager] NetworkManager.Singleton é null. Coloque um NetworkManager na cena (Menu).");
             return null;
         }
 
@@ -78,6 +78,7 @@ public class RelayManager : MonoBehaviour
             string joinCode = await RelayService.Instance.GetJoinCodeAsync(alloc.AllocationId);
             Debug.Log($"[RelayManager] Allocation criada. joinCode={joinCode}");
 
+            // Configura o UnityTransport para usar Relay.
             var ut = NetworkManager.Singleton.GetComponent<UnityTransport>();
             if (ut == null)
             {
@@ -85,10 +86,22 @@ public class RelayManager : MonoBehaviour
                 return null;
             }
 
-            ut.SetRelayServerData(new RelayServerData(alloc, "dtls")); // Usando o construtor moderno
+            // --- USO DO OVERLOAD CLÁSSICO (mais compatível com várias versões) ---
+            // Se sua versão usa outro overload, adapte conforme a sua API.
+            ut.SetRelayServerData(
+                alloc.RelayServer.IpV4,
+                (ushort)alloc.RelayServer.Port,
+                alloc.AllocationIdBytes,
+                alloc.Key,
+                alloc.ConnectionData
+            );
 
             Debug.Log("[RelayManager] Transport configurado para Relay. Iniciando Host...");
             NetworkManager.Singleton.StartHost();
+
+            // Opcional: LoadScene pelo NetworkManager (se quiser mudar de cena aqui)
+            // NetworkManager.Singleton.SceneManager.LoadScene("SampleScene", UnityEngine.SceneManagement.LoadSceneMode.Single);
+
             return joinCode;
         }
         catch (RelayServiceException ex)
@@ -103,13 +116,16 @@ public class RelayManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Faz o client entrar na relay com joinCode.
+    /// </summary>
     public async Task<bool> JoinRelay(string joinCode)
     {
         await EnsureInitialized();
 
         if (NetworkManager.Singleton == null)
         {
-            Debug.LogError("[RelayManager] NetworkManager.Singleton é null.");
+            Debug.LogError("[RelayManager] NetworkManager.Singleton é null. Coloque um NetworkManager na cena (Menu).");
             return false;
         }
 
@@ -125,7 +141,15 @@ public class RelayManager : MonoBehaviour
                 return false;
             }
 
-            ut.SetRelayServerData(new RelayServerData(joinAlloc, "dtls")); // Usando o construtor moderno
+            // Overload com hostConnectionData (= joinAlloc.HostConnectionData)
+            ut.SetRelayServerData(
+                joinAlloc.RelayServer.IpV4,
+                (ushort)joinAlloc.RelayServer.Port,
+                joinAlloc.AllocationIdBytes,
+                joinAlloc.Key,
+                joinAlloc.ConnectionData,
+                joinAlloc.HostConnectionData
+            );
 
             Debug.Log("[RelayManager] Transport configurado. Iniciando cliente...");
             NetworkManager.Singleton.StartClient();
@@ -142,56 +166,4 @@ public class RelayManager : MonoBehaviour
             return false;
         }
     }
-    #endregion
-
-    // --- NOVOS MÉTODOS PARA LAN (REDE LOCAL) ---
-    #region LAN Methods
-
-    /// <summary>
-    /// Inicia o jogo como um Host na rede local (LAN).
-    /// </summary>
-    public void StartLanHost()
-    {
-        if (NetworkManager.Singleton == null)
-        {
-            Debug.LogError("[LAN] NetworkManager.Singleton é null.");
-            return;
-        }
-
-        var ut = NetworkManager.Singleton.GetComponent<UnityTransport>();
-        if (ut == null)
-        {
-            Debug.LogError("[LAN] UnityTransport não encontrado no NetworkManager.");
-            return;
-        }
-
-        ut.SetConnectionData("0.0.0.0", 5000);
-        Debug.Log("[LAN] Iniciando Host na rede local...");
-        NetworkManager.Singleton.StartHost();
-    }
-
-    /// <summary>
-    /// Entra em um jogo como Client na rede local (LAN), conectando a um IP.
-    /// </summary>
-    public void JoinLanClient(string ipAddress)
-    {
-        if (NetworkManager.Singleton == null)
-        {
-            Debug.LogError("[LAN] NetworkManager.Singleton é null.");
-            return;
-        }
-
-        var ut = NetworkManager.Singleton.GetComponent<UnityTransport>();
-        if (ut == null)
-        {
-            Debug.LogError("[LAN] UnityTransport não encontrado no NetworkManager.");
-            return;
-        }
-
-        ut.SetConnectionData(ipAddress, 5000);
-        Debug.Log($"[LAN] Conectando ao Host no IP: {ipAddress}...");
-        NetworkManager.Singleton.StartClient();
-    }
-
-    #endregion
 }

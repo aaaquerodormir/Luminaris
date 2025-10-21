@@ -28,9 +28,6 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private TMP_Text relayCodeText;
     [SerializeField] private TMP_InputField joinCodeInput;
 
-    [Header("LAN UI")]
-    [SerializeField] private TMP_InputField ipAddressInput; // NOVO CAMPO
-
     private RelayManager relayManager;
 
     private void Start()
@@ -140,32 +137,6 @@ public class MainMenu : MonoBehaviour
         {
             Debug.LogError("[MainMenu] Falha ao entrar na sala!");
         }
-    }
-
-    // --- NOVOS MÉTODOS LAN ---
-
-    public void OnLanHostButtonPressed()
-    {
-        if (relayManager == null) return;
-
-        relayManager.StartLanHost();
-        if (relayCodeText != null)
-        {
-            relayCodeText.text = "Sala LAN criada!\nPeça para os outros se conectarem ao seu IP.";
-        }
-        StartCoroutine(WaitForPlayersAndLoadScene());
-    }
-
-    public void OnLanJoinButtonPressed()
-    {
-        if (relayManager == null) return;
-        string ipAddress = ipAddressInput.text.Trim();
-        if (string.IsNullOrEmpty(ipAddress))
-        {
-            Debug.LogWarning("[MainMenu] O endereço de IP não pode estar vazio!");
-            return;
-        }
-        relayManager.JoinLanClient(ipAddress);
     }
 
     private IEnumerator WaitForPlayersAndLoadScene()
