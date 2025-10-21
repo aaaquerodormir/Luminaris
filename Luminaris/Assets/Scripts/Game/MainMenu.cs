@@ -42,6 +42,7 @@ public class MainMenu : MonoBehaviour
 
     // Flag para evitar chamadas concorrentes ao iniciar cliente
     private bool _isConnecting = false;
+    private bool _lanSceneLoaded = false;
 
     private void Start()
     {
@@ -80,7 +81,6 @@ public class MainMenu : MonoBehaviour
     public void MostrarMultiplayer() => AtivarSomente(painelMultiplayer);
     public void MostrarLan() => AtivarSomente(painelLan);
 
-
     private void AtivarSomente(GameObject alvo)
     {
         painelPrincipal.SetActive(false);
@@ -100,8 +100,9 @@ public class MainMenu : MonoBehaviour
 #endif
     }
 
-    //Relay
-
+    // --------------------------
+    // RELAY (mantido intacto)
+    // --------------------------
     public async void OnHostButtonPressed()
     {
         if (relayManager == null)
@@ -120,7 +121,6 @@ public class MainMenu : MonoBehaviour
             if (relayCodeText != null)
                 relayCodeText.text = $"Código da Sala: {joinCode}\nAguardando jogador...";
 
-            // Espera até o segundo jogador se conectar antes de iniciar
             StartCoroutine(WaitForPlayersAndLoadScene());
         }
         else
@@ -160,11 +160,8 @@ public class MainMenu : MonoBehaviour
 
     private IEnumerator WaitForPlayersAndLoadScene()
     {
-        // Espera até que pelo menos 2 jogadores estejam conectados (Host + Cliente)
         while (NetworkManager.Singleton.ConnectedClients.Count < 2)
-        {
             yield return null;
-        }
 
         if (relayCodeText != null)
             relayCodeText.text = "Jogador conectado! Iniciando...";
@@ -179,7 +176,9 @@ public class MainMenu : MonoBehaviour
         NetworkManager.Singleton.SceneManager.LoadScene(gameSceneName, LoadSceneMode.Single);
     }
 
-    // --- LAN: Host ---
+    // --------------------------
+    // LAN HOST
+    // --------------------------
     public void OnHostLanButton()
     {
         if (netManager == null || transport == null)
@@ -188,14 +187,9 @@ public class MainMenu : MonoBehaviour
             return;
         }
 
-        // Mostra informações de rede
         Debug.Log($"[MainMenu][LAN] Iniciando HOST...");
         Debug.Log($"[MainMenu][LAN] Endereço de escuta: 0.0.0.0:{lanPort}");
 
-        // Comentado: propriedade inválida que causava compilação
-        // Debug.Log($"[MainMenu][LAN] Protocolo: {transport.ProtocolType}");
-
-        // Configura transporte para escutar em todas interfaces locais
         transport.SetConnectionData("0.0.0.0", (ushort)lanPort);
 
         bool success = netManager.StartHost();
@@ -203,14 +197,34 @@ public class MainMenu : MonoBehaviour
             ? $"[MainMenu][LAN] ✅ Host iniciado com sucesso! Escutando em 0.0.0.0:{lanPort}"
             : "[MainMenu][LAN] ❌ Falha ao iniciar Host.");
 
-        // Mostra IPs disponíveis
-        Debug.Log($"[MainMenu][LAN] IPs locais disponíveis:");
-        foreach (var ip in System.Net.Dns.GetHostEntry(System.Net.Dns.GetHostName()).AddressList)
-            if (ip.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
-                Debug.Log($"   - {ip}");
+        if (!success) return;
+
+        // Evento: quando cliente conectar, o host troca de cena
+        netManager.OnClientConnectedCallback += OnClientConnectedToHost;
+
+        // OBS: havia aqui uma inscrição em OnLoadEventCompleted que depende da versão do NGO.
+        // Essa inscrição foi removida para evitar incompatibilidades de assinatura do delegate.
     }
 
-    // --- LAN: Join ---
+    private void OnClientConnectedToHost(ulong clientId)
+    {
+        if (!NetworkManager.Singleton.IsHost || _lanSceneLoaded)
+            return;
+
+        int connectedCount = NetworkManager.Singleton.ConnectedClients.Count;
+        Debug.Log($"[MainMenu][LAN] Cliente conectado! Total: {connectedCount}");
+
+        if (connectedCount >= 2)
+        {
+            _lanSceneLoaded = true;
+            Debug.Log("[MainMenu][LAN] 🟢 Carregando cena LAN sincronizada...");
+            NetworkManager.Singleton.SceneManager.LoadScene(gameSceneName, LoadSceneMode.Single);
+        }
+    }
+
+    // --------------------------
+    // LAN CLIENT
+    // --------------------------
     public void OnJoinLanButton()
     {
         if (netManager == null || transport == null)
@@ -233,9 +247,7 @@ public class MainMenu : MonoBehaviour
         }
 
         Debug.Log($"[MainMenu][LAN] Tentando se conectar ao host {ip}:{lanPort}");
-        Debug.Log($"[MainMenu][LAN] Transport ativo: {(transport != null)} | Network ativo: {NetworkManager.Singleton.IsListening}");
 
-        // Se já existe sessão, precisa aguardar o Shutdown terminar antes de iniciar cliente
         if (NetworkManager.Singleton.IsListening)
         {
             Debug.LogWarning("[MainMenu][LAN] ⚠️ Já existe uma sessão ativa de rede. Parando antes de conectar...");
@@ -245,25 +257,17 @@ public class MainMenu : MonoBehaviour
         }
         else
         {
-            // Sem sessão ativa: iniciar cliente imediatamente
             StartCoroutine(StartClientRoutine(ip));
         }
     }
 
-    // Aguarda o NetworkManager parar de escutar e então inicia o cliente
     private IEnumerator StartClientWhenShutdown(string ip)
     {
-        // aguarda até que NetworkManager não esteja mais "listening" (Shutdown aplicado)
         yield return new WaitUntil(() => !NetworkManager.Singleton.IsListening);
-
-        // espera um frame adicional para estabilidade
         yield return null;
-
-        // inicia a rotina normal de start client
         yield return StartCoroutine(StartClientRoutine(ip));
     }
 
-    // Rotina que configura o transporte e inicia o cliente, com timeout/checagens
     private IEnumerator StartClientRoutine(string ip)
     {
         if (transport == null || netManager == null)
@@ -273,7 +277,6 @@ public class MainMenu : MonoBehaviour
             yield break;
         }
 
-        // Configura transporte para se conectar ao IP informado
         transport.SetConnectionData(ip, (ushort)lanPort);
         Debug.Log($"[MainMenu][LAN] transport.SetConnectionData({ip},{lanPort})");
 
@@ -283,15 +286,11 @@ public class MainMenu : MonoBehaviour
             ? $"[MainMenu][LAN] ✅ Cliente iniciado. Tentando conectar a {ip}:{lanPort}"
             : "[MainMenu][LAN] ❌ Falha ao iniciar cliente.");
 
-        // inicia monitoração de status
         StartCoroutine(DebugConnectionStatus());
-
-        // limpa flag de conexão após um pequeno delay (ou você pode limpar em DebugConnectionStatus quando conectado/timeout)
         yield return new WaitForSeconds(1f);
         _isConnecting = false;
     }
 
-    // Coroutine que monitora o status da conexão
     private IEnumerator DebugConnectionStatus()
     {
         float timer = 0f;
@@ -310,6 +309,7 @@ public class MainMenu : MonoBehaviour
 
         Debug.LogError("[MainMenu][LAN] ❌ Timeout de conexão após 10 segundos.");
     }
+
     private string GetLocalIPAddress()
     {
         try
