@@ -32,8 +32,8 @@ public class PlayerMovement : NetworkBehaviour
 
     [Header("Controle de Pulo")]
     [SerializeField] private int maxJumps = 3;
-    private int completedJumps = 0;     // pulos *completos* (pular e aterrissar)
-    private bool pendingJump = false;   // marcado quando pulou e aguarda aterrissagem
+    private int remainingJumps;
+    private bool pendingJump = false;
 
     [Header("Input Actions")]
     [SerializeField] private InputActionReference moveAction;
@@ -63,14 +63,20 @@ public class PlayerMovement : NetworkBehaviour
     {
         base.OnNetworkSpawn();
 
-        netFacingRight.OnValueChanged += (_, __) => UpdateFacingDirection();
-
         if (IsOwner)
             EnableInputs();
         else
             DisableInputs();
 
-        Debug.Log($"[PlayerMovement:{name}] NetworkSpawn — Owner={IsOwner} ({OwnerClientId})");
+        netFacingRight.OnValueChanged += (_, __) => UpdateFacingDirection();
+
+        if (IsServer)
+        {
+            remainingJumps = maxJumps;
+            playerUI?.SetJumps(remainingJumps);
+        }
+
+        Debug.Log($"[PlayerMovement:{name}] Spawned | Owner={OwnerClientId} | Server={IsServer}");
     }
 
     public override void OnDestroy()
@@ -124,84 +130,73 @@ public class PlayerMovement : NetworkBehaviour
     private void FixedUpdate()
     {
         if (!IsOwner || !isMyTurn) return;
-        HandleMovement();
+        Move();
     }
 
-    private void HandleMovement()
+    private void Move()
     {
-        float moveX = moveInput.x;
-        rb.linearVelocity = new Vector2(moveX * moveSpeed, rb.linearVelocity.y);
+        rb.linearVelocity = new Vector2(moveInput.x * moveSpeed, rb.linearVelocity.y);
 
-        if (moveX > 0 && !facingRight)
+        if (moveInput.x > 0 && !facingRight)
             SetFacingServerRpc(true);
-        else if (moveX < 0 && facingRight)
+        else if (moveInput.x < 0 && facingRight)
             SetFacingServerRpc(false);
     }
 
-    // ==============================
+    // =======================================
     private void OnJump(InputAction.CallbackContext ctx)
     {
         if (!IsOwner || !isMyTurn) return;
-
-        if (!isGrounded) return;
+        if (!isGrounded || remainingJumps <= 0) return;
 
         rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
+        netAnimator.SetTrigger("Jump");
         pendingJump = true;
 
-        netAnimator.SetTrigger("Jump");
-        Debug.Log($"[PlayerMovement:{name}] ⬆️ Pulou (aguardando aterrissagem)");
+        remainingJumps--;
+        playerUI?.SetJumps(remainingJumps);
+
+        Debug.Log($"[PlayerMovement:{name}] Pulou → restam {remainingJumps} pulos");
     }
 
-    // ==============================
+    // =======================================
     private void CheckGround()
     {
         wasGrounded = isGrounded;
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, groundLayer);
 
-        if (isGrounded && !wasGrounded)
+        if (isGrounded && !wasGrounded && pendingJump)
         {
-            if (pendingJump)
-            {
-                completedJumps++;
-                pendingJump = false;
-                playerUI?.UpdateJumps(Mathf.Max(0, maxJumps - completedJumps));
-                Debug.Log($"[PlayerMovement:{name}] 🟢 Aterrissou — Pulos: {completedJumps}/{maxJumps}");
-            }
+            pendingJump = false;
+            Debug.Log($"[PlayerMovement:{name}] Aterrissou");
 
-            if (completedJumps >= maxJumps)
+            if (remainingJumps <= 0)
             {
-                Debug.Log($"[PlayerMovement:{name}] 🚩 Máximo de pulos atingido — fim de turno!");
+                Debug.Log($"[PlayerMovement:{name}] 🚩 Acabaram os pulos");
                 RequestEndTurn();
             }
         }
     }
 
+    // =======================================
     [ServerRpc(RequireOwnership = false)]
-    private void UpdateAnimatorServerRpc(bool moving, bool grounded, float yVel, ServerRpcParams rpcParams = default)
+    private void UpdateAnimatorServerRpc(bool moving, bool grounded, float yVel)
     {
-        // 🔒 Garantir que apenas o dono real desse player envie atualizações válidas
-        if (rpcParams.Receive.SenderClientId != OwnerClientId)
-            return;
-
-        Animator a = netAnimator.Animator;
-        if (a == null) return;
-
+        if (netAnimator.Animator == null) return;
+        var a = netAnimator.Animator;
         a.SetBool("IsMoving", moving);
         a.SetBool("IsGrounded", grounded);
         a.SetFloat("yVelocity", yVel);
     }
 
-    // ==============================
     private void UpdateFacingDirection()
     {
         bool newFacing = netFacingRight.Value;
-        if (newFacing == facingRight) return;
+        if (facingRight == newFacing) return;
 
         facingRight = newFacing;
         if (spriteRenderer != null)
             spriteRenderer.flipX = !facingRight;
-
-        Debug.Log($"[PlayerMovement:{name}] ↔️ Direção sincronizada: {(facingRight ? "Right" : "Left")}");
     }
 
     [ServerRpc(RequireOwnership = false)]
@@ -211,28 +206,28 @@ public class PlayerMovement : NetworkBehaviour
             netFacingRight.Value = right;
     }
 
-    // ==============================
+    // =======================================
     private void RequestEndTurn()
     {
         if (IsServer)
         {
-            Debug.Log($"[PlayerMovement:{name}] 🔁 (Host) Encerrando turno localmente");
+            Debug.Log($"[PlayerMovement:{name}] 🔁 Encerrando turno (Host)");
             TurnControl.Instance?.EndTurn();
         }
         else
         {
-            Debug.Log($"[PlayerMovement:{name}] 🔁 (Client) Solicitando fim de turno via RPC");
+            Debug.Log($"[PlayerMovement:{name}] 🔁 Solicitando fim de turno via RPC");
             SubmitEndTurnServerRpc();
         }
     }
 
-    [ServerRpc]
-    private void SubmitEndTurnServerRpc(ServerRpcParams rpcParams = default)
+    [ServerRpc(RequireOwnership = false)]
+    private void SubmitEndTurnServerRpc()
     {
         TurnControl.Instance?.EndTurn();
     }
 
-    // ==============================
+    // =======================================
     [ServerRpc(RequireOwnership = false)]
     public void SetTurnActiveServerRpc(bool active)
     {
@@ -253,46 +248,19 @@ public class PlayerMovement : NetworkBehaviour
 
         if (active)
         {
-            completedJumps = 0;
-            pendingJump = false;
-            playerUI?.StartTurn(maxJumps);
-            Debug.Log($"[PlayerMovement:{name}] ▶️ TURNO ATIVO");
+            remainingJumps = maxJumps;
+            playerUI?.SetJumps(remainingJumps);
+            Debug.Log($"[PlayerMovement:{name}] ▶️ Turno iniciado — {remainingJumps} pulos");
         }
         else
         {
             moveInput = Vector2.zero;
             rb.linearVelocity = Vector2.zero;
-            playerUI?.EndTurn();
-            Debug.Log($"[PlayerMovement:{name}] ⏹ TURNO ENCERRADO");
+            Debug.Log($"[PlayerMovement:{name}] ⏹ Turno encerrado");
         }
     }
 
-    // ==============================
-    //  DETECÇÃO DE MORTE NA LAVA
-    // ==============================
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Lava"))
-        {
-            Debug.Log($"[PlayerMovement:{name}] tocou na lava!");
-            if (IsServer)
-            {
-                GameManager.Instance?.OnPlayerDiedServerRpc();
-            }
-            else
-            {
-                NotifyDeathServerRpc();
-            }
-        }
-    }
-
-    [ServerRpc(RequireOwnership = false)]
-    private void NotifyDeathServerRpc()
-    {
-        GameManager.Instance?.OnPlayerDiedServerRpc();
-    }
-
-    // ==============================
+    // =======================================
     private void OnDrawGizmosSelected()
     {
         if (groundCheck == null) return;

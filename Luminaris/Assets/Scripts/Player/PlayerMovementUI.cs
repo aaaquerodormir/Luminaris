@@ -5,47 +5,54 @@ using Unity.Netcode;
 
 public class PlayerMovementUI : NetworkBehaviour
 {
-    public int RemainingJumps => jumpsNetworked.Value;
+    [Header("Configuração")]
+    [SerializeField] private int maxJumps = 3;
 
-    private NetworkVariable<int> jumpsNetworked = new(
-        0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server
+    // 🔹 Variável de rede simples e confiável
+    private NetworkVariable<int> remainingJumps = new(
+        0,
+        NetworkVariableReadPermission.Everyone,
+        NetworkVariableWritePermission.Server
     );
 
-    public static event System.Action<PlayerMovementUI, int> OnJumpsChanged;
+    // 🔹 Callback local (para a HUD)
+    public event Action<int> OnJumpCountChanged;
 
-    public void StartTurn(int maxJumps)
+    public override void OnNetworkSpawn()
     {
         if (IsServer)
-            jumpsNetworked.Value = maxJumps;
+            remainingJumps.Value = maxJumps;
 
-        Debug.Log($"[PlayerUI:{name}] ▶ Início do turno — Máx = {maxJumps}");
-        OnJumpsChanged?.Invoke(this, maxJumps);
+        remainingJumps.OnValueChanged += OnJumpsChanged;
+
+        Debug.Log($"[PlayerUI:{name}] Spawned | Owner={OwnerClientId} | Server={IsServer}");
     }
 
-    public void UpdateJumps(int newValue)
+    private void OnDestroy()
+    {
+        remainingJumps.OnValueChanged -= OnJumpsChanged;
+    }
+
+    private void OnJumpsChanged(int oldValue, int newValue)
+    {
+        Debug.Log($"[SYNC:{name}] Jumps mudou {oldValue} → {newValue}");
+        OnJumpCountChanged?.Invoke(newValue);
+    }
+
+    // 🔹 Apenas o Host altera o valor — clients recebem automaticamente
+    [ServerRpc(RequireOwnership = false)]
+    public void UpdateJumpCountServerRpc(int newCount)
+    {
+        remainingJumps.Value = newCount;
+    }
+
+    // 🔹 Acesso público simples para PlayerMovement
+    public int GetJumps() => remainingJumps.Value;
+    public void SetJumps(int newCount)
     {
         if (IsServer)
-            jumpsNetworked.Value = newValue;
-
-        OnJumpsChanged?.Invoke(this, newValue);
-    }
-
-    public void EndTurn()
-    {
-        Debug.Log($"[PlayerUI:{name}] ⏹ Fim do turno ({jumpsNetworked.Value}/3)");
-        OnJumpsChanged?.Invoke(this, jumpsNetworked.Value);
-    }
-
-    private void OnEnable()
-    {
-        jumpsNetworked.OnValueChanged += (_, newVal) =>
-        {
-            OnJumpsChanged?.Invoke(this, newVal);
-        };
-    }
-
-    private void OnDisable()
-    {
-        jumpsNetworked.OnValueChanged -= (_, __) => { };
+            remainingJumps.Value = newCount;
+        else
+            UpdateJumpCountServerRpc(newCount);
     }
 }
