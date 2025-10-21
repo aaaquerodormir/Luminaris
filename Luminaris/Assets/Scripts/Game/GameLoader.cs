@@ -44,8 +44,8 @@ public class GameLoader : MonoBehaviour
         );
 
         // aplica progresso da lava apenas se checkpoint > 0
-        if (group > 0) lava.LoadSavedTurns(savedTurns);
-        else lava.LoadSavedTurns(0);
+        //if (group > 0) lava.LoadSavedTurns(savedTurns);
+        //else lava.LoadSavedTurns(0);
 
         foreach (var c in checkpointsPlayer1)
             if (c.GroupId <= group) c.PreActivate();

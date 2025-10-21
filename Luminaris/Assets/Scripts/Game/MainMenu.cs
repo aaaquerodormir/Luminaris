@@ -3,20 +3,32 @@ using UnityEngine.SceneManagement;
 using Unity.Netcode;
 using Unity.Netcode.Transports.UTP;
 using UnityEngine.UI;
+using System.Collections;
+using System.Threading.Tasks;
+using TMPro;
+
 public class MainMenu : MonoBehaviour
 {
     [Header("Paineis")]
     [SerializeField] private GameObject painelPrincipal;
     [SerializeField] private GameObject painelOpcoes;
     [SerializeField] private GameObject painelCreditos;
-    [SerializeField] private GameObject botaoContinuar;
     [SerializeField] private GameObject painelMultiplayer;
-    //[SerializeField] private string gameSceneName = "Game";
+    //[SerializeField] private GameObject painelCodigo; // onde aparece o código do Relay
+    //[SerializeField] private Text codigoRelayText;
 
-    [Header("Config")]
+    [Header("Botões")]
+    [SerializeField] private GameObject botaoContinuar;
+
+    [Header("Configurações")]
     [SerializeField] private string gameSceneName = "SampleScene";
-    [SerializeField] private InputField ipInput;
-    [SerializeField] private ushort port = 7777;
+    //[SerializeField] private InputField joinCodeInput;
+
+    [Header("Relay UI")]
+    [SerializeField] private TMP_Text relayCodeText;
+    [SerializeField] private TMP_InputField joinCodeInput;
+
+    private RelayManager relayManager;
 
     private void Start()
     {
@@ -24,6 +36,8 @@ public class MainMenu : MonoBehaviour
 
         if (botaoContinuar != null)
             botaoContinuar.SetActive(SaveSystem.HasSave());
+
+        relayManager = FindObjectOfType<RelayManager>();
     }
 
     public void NovoJogo()
@@ -45,7 +59,6 @@ public class MainMenu : MonoBehaviour
     public void MostrarPrincipal() => AtivarSomente(painelPrincipal);
     public void MostrarOpcoes() => AtivarSomente(painelOpcoes);
     public void MostrarCreditos() => AtivarSomente(painelCreditos);
-
     public void MostrarMultiplayer() => AtivarSomente(painelMultiplayer);
 
     private void AtivarSomente(GameObject alvo)
@@ -54,7 +67,6 @@ public class MainMenu : MonoBehaviour
         painelOpcoes.SetActive(false);
         painelCreditos.SetActive(false);
         painelMultiplayer.SetActive(false);
-
         alvo.SetActive(true);
     }
 
@@ -67,24 +79,84 @@ public class MainMenu : MonoBehaviour
 #endif
     }
 
-    // Botões Multiplayer
-    public void HostGame()
+    // ===============================
+    // ======= MULTIPLAYER ===========
+    // ===============================
+
+    public async void OnHostButtonPressed()
     {
-        NetworkManager.Singleton.StartHost();
+        if (relayManager == null)
+        {
+            Debug.LogError("[MainMenu] RelayManager não encontrado na cena!");
+            return;
+        }
+
+        Debug.Log("[MainMenu] Criando Relay...");
+        string joinCode = await relayManager.CreateRelay(2);
+
+        if (!string.IsNullOrEmpty(joinCode))
+        {
+            Debug.Log($"[MainMenu] Relay criado com código: {joinCode}");
+
+            if (relayCodeText != null)
+                relayCodeText.text = $"Código da Sala: {joinCode}\nAguardando jogador...";
+
+            // Espera até o segundo jogador se conectar antes de iniciar
+            StartCoroutine(WaitForPlayersAndLoadScene());
+        }
+        else
+        {
+            Debug.LogError("[MainMenu] Falha ao criar Relay!");
+        }
+    }
+
+    public async void OnJoinButtonPressed()
+    {
+        if (relayManager == null)
+        {
+            Debug.LogError("[MainMenu] RelayManager não encontrado!");
+            return;
+        }
+
+        string joinCode = joinCodeInput.text.Trim();
+
+        if (string.IsNullOrEmpty(joinCode))
+        {
+            Debug.LogWarning("[MainMenu] Nenhum código foi inserido!");
+            return;
+        }
+
+        bool success = await relayManager.JoinRelay(joinCode);
+
+        if (success)
+        {
+            Debug.Log($"[MainMenu] Entrando na sala com código {joinCode}");
+            StartCoroutine(LoadSceneAfterDelay(1f));
+        }
+        else
+        {
+            Debug.LogError("[MainMenu] Falha ao entrar na sala!");
+        }
+    }
+
+    private IEnumerator WaitForPlayersAndLoadScene()
+    {
+        // Espera até que pelo menos 2 jogadores estejam conectados (Host + Cliente)
+        while (NetworkManager.Singleton.ConnectedClients.Count < 2)
+        {
+            yield return null;
+        }
+
+        if (relayCodeText != null)
+            relayCodeText.text = "Jogador conectado! Iniciando...";
+
+        yield return new WaitForSeconds(1f);
         NetworkManager.Singleton.SceneManager.LoadScene(gameSceneName, LoadSceneMode.Single);
     }
 
-    public void JoinGame()
+    private IEnumerator LoadSceneAfterDelay(float delay)
     {
-        var address = ipInput != null && !string.IsNullOrEmpty(ipInput.text) ? ipInput.text : "127.0.0.1";
-        var ut = NetworkManager.Singleton.GetComponent<UnityTransport>();
-        ut.SetConnectionData(address, port);
-        NetworkManager.Singleton.StartClient();
-    }
-
-    public void VoltarDoMultiplayer()
-    {
-        MostrarPrincipal();
+        yield return new WaitForSeconds(delay);
+        NetworkManager.Singleton.SceneManager.LoadScene(gameSceneName, LoadSceneMode.Single);
     }
 }
-    

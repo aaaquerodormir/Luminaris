@@ -1,85 +1,59 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using System;
 using System.Collections.Generic;
+using Unity.Netcode;
 
-public class PlayerMovementUI : MonoBehaviour
+public class PlayerMovementUI : NetworkBehaviour
 {
-    [Header("Jump Settings")]
-    [SerializeField] private int baseMaxJumps = 3; // Pulos base por turno
+    private NetworkVariable<int> jumpsNetworked = new(
+        0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server
+    );
 
-    private int jumpsUsed = 0;
-    private readonly List<(int extraJumps, int turnsLeft)> activeJumpPowerUps = new();
+    public int RemainingJumps => jumpsNetworked.Value;
+    public static event System.Action<PlayerMovementUI, int> OnJumpsChanged;
 
-    public event Action OnJumpsChanged;
-
-    // Quantidade máxima de pulos neste turno (base + extras válidos)
-    public int MaxJumps
+    public void StartTurn(int maxJumps)
     {
-        get
-        {
-            int extras = 0;
-            foreach (var power in activeJumpPowerUps)
-                extras += power.extraJumps;
+        if (IsServer) jumpsNetworked.Value = maxJumps;
+        else UpdateJumpsServerRpc(maxJumps);
 
-            return baseMaxJumps + extras;
-        }
+        OnJumpsChanged?.Invoke(this, maxJumps);
     }
 
-    public int JumpsUsed => jumpsUsed;
-    public int RemainingJumps => MaxJumps - jumpsUsed;
-
-    public void ConsumeJump()
+    public void UpdateJumps(int newValue)
     {
-        if (jumpsUsed >= MaxJumps) return;
+        if (IsServer) jumpsNetworked.Value = newValue;
+        else UpdateJumpsServerRpc(newValue);
 
-        jumpsUsed++;
-        Debug.Log($"[DEBUG] {gameObject.name} consumiu 1 pulo. Restando: {RemainingJumps} ({jumpsUsed}/{MaxJumps})");
-
-        OnJumpsChanged?.Invoke();
-    }
-
-    public void StartTurn()
-    {
-        jumpsUsed = 0;
-
-        // Reduz duração dos powerups
-        for (int i = activeJumpPowerUps.Count - 1; i >= 0; i--)
-        {
-            var p = activeJumpPowerUps[i];
-            p.turnsLeft--;
-            if (p.turnsLeft <= 0)
-                activeJumpPowerUps.RemoveAt(i);
-            else
-                activeJumpPowerUps[i] = p;
-        }
-
-        Debug.Log($"[DEBUG] {gameObject.name} iniciou turno: Base={baseMaxJumps}, Extras={GetTotalExtraJumps()}, Max={MaxJumps}");
-        OnJumpsChanged?.Invoke();
+        OnJumpsChanged?.Invoke(this, newValue);
     }
 
     public void EndTurn()
     {
-        Debug.Log($"[DEBUG] {gameObject.name} terminou turno ({jumpsUsed}/{MaxJumps} usados).");
-        OnJumpsChanged?.Invoke();
+        OnJumpsChanged?.Invoke(this, jumpsNetworked.Value);
     }
 
-    public void AddJumpPowerUp(int extraJumps, int duration)
+    [ServerRpc(RequireOwnership = false)]
+    private void UpdateJumpsServerRpc(int newValue, ServerRpcParams rpcParams = default)
     {
-        if (extraJumps <= 0) return;
-
-        activeJumpPowerUps.Add((extraJumps, duration));
-
-        Debug.Log($"[DEBUG] {gameObject.name} ganhou PowerUp: +{extraJumps} pulos por {duration} turnos. " +
-                  $"Base={baseMaxJumps}, Extras={GetTotalExtraJumps()}, Max={MaxJumps}");
-
-        OnJumpsChanged?.Invoke();
+        jumpsNetworked.Value = newValue;
+        OnJumpsChanged?.Invoke(this, newValue);
     }
 
-    private int GetTotalExtraJumps()
+    private void OnEnable()
     {
-        int total = 0;
-        foreach (var p in activeJumpPowerUps)
-            total += p.extraJumps;
-        return total;
+        jumpsNetworked.OnValueChanged += HandleJumpChanged;
+    }
+
+    private void OnDisable()
+    {
+        jumpsNetworked.OnValueChanged -= HandleJumpChanged;
+    }
+
+    private void HandleJumpChanged(int oldVal, int newVal)
+    {
+        Debug.Log($"[SYNC:{name}] Jumps {oldVal} â†’ {newVal}");
+        OnJumpsChanged?.Invoke(this, newVal);
     }
 }
+

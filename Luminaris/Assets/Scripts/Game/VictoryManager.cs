@@ -1,38 +1,66 @@
-using UnityEngine;
-
-public class VictoryManager : MonoBehaviour
+﻿using UnityEngine;
+using Unity.Netcode;
+public class VictoryManager : NetworkBehaviour
 {
-    private static VictoryManager instance;
+    private static VictoryManager Instance;
     private FinalDoor[] doors;
 
     private void Awake()
     {
-        if (instance == null) instance = this;
-        else Destroy(gameObject);
-
-        doors = FindObjectsByType<FinalDoor>(FindObjectsSortMode.None);
-    }
-
-    public static void CheckVictory()
-    {
-        if (instance == null) return;
-
-        foreach (var door in instance.doors)
+        if (Instance == null) Instance = this;
+        else
         {
-            if (door == null || !door.IsPlayerInside)
-                return; // algum jogador ainda n�o chegou
+            Destroy(gameObject);
+            return;
         }
 
-        GameManager.Instance.ShowVictoryPanel();
+        doors = FindObjectsByType<FinalDoor>(FindObjectsSortMode.None);
+        Debug.Log($"[VictoryManager] Encontradas {doors.Length} portas finais.");
     }
 
-    // M�todo para bot�o Menu Principal do VictoryMenuWrapper
-    public void OnClickMenuPrincipal()
+    /// <summary>
+    /// Chamado pelas portas quando um jogador entra.
+    /// </summary>
+    public static void CheckVictory()
     {
-        GameManager.Instance.OpenVictoryConfirmation(() =>
+        if (Instance == null) return;
+
+        // Somente o servidor valida vitória
+        if (!Instance.IsServer)
         {
-            Time.timeScale = 1f;
-            UnityEngine.SceneManagement.SceneManager.LoadScene("Menu");
-        });
+            Debug.Log("[VictoryManager] Cliente tentou verificar vitória — ignorado.");
+            return;
+        }
+
+        // Se qualquer porta ainda não tiver o jogador correto dentro, não vence
+        foreach (var door in Instance.doors)
+        {
+            if (door == null)
+            {
+                Debug.LogWarning("[VictoryManager] Porta nula detectada, abortando verificação.");
+                return;
+            }
+
+            if (!door.IsPlayerInside)
+            {
+                // Algum jogador ainda não chegou
+                Debug.Log($"[VictoryManager] {door.AssignedPlayer?.name ?? "??"} ainda não chegou.");
+                return;
+            }
+        }
+
+        Debug.Log("[VictoryManager] ✅ Todos os jogadores chegaram à porta final! Enviando RPC de vitória global.");
+        Instance.NotifyVictoryClientRpc();
+    }
+
+    [ClientRpc]
+    private void NotifyVictoryClientRpc()
+    {
+        Debug.Log("[VictoryManager] RPC de vitória recebido — exibindo painel de vitória.");
+
+        if (GameManager.Instance != null)
+            GameManager.Instance.ShowVictoryClientRpc();
+        else
+            Debug.LogWarning("[VictoryManager] GameManager.Instance é nulo — vitória não exibida!");
     }
 }

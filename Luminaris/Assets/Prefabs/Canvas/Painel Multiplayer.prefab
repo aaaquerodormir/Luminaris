@@ -146,7 +146,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
-        m_MethodName: ContinuarJogo
+        m_MethodName: HostRelay
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -190,9 +190,9 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 11500000, guid: a64085e439c8ecc41b09e686d257c0ba, type: 3}
           m_TargetAssemblyTypeName: MenuNavigation, Assembly-CSharp
-          m_MethodName: OnButtonHover
+          m_MethodName: 
           m_Mode: 3
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -564,7 +564,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
-        m_MethodName: NovoJogo
+        m_MethodName: JoinRelay
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1561,7 +1561,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &9083603308487999928
 RectTransform:
   m_ObjectHideFlags: 0

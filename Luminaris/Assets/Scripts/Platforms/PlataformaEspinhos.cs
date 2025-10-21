@@ -56,7 +56,7 @@ public class PlataformaEspinhos : MonoBehaviour
         var respawn = collision.GetComponentInParent<PlayerRespawn>();
         if (respawn != null)
         {
-            respawn.Die();
+            //respawn.Die();
         }
 
         HandlePlayerBounce(collision.attachedRigidbody);

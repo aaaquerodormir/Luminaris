@@ -28,7 +28,7 @@ public class PlataformaInstavel : MonoBehaviour, IResettable
         startPos = transform.position;
         startRot = transform.rotation;
 
-        GameManager.Instance.RegisterResettable(this);
+        //GameManager.Instance.RegisterResettable(this);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

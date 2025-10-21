@@ -11,7 +11,7 @@ public class JumpPowerUp : PowerUpModificador
 
         if (player != null)
         {
-            player.AddJumpPowerUp(extraJumps, durationTurns);
+            //player.AddJumpPowerUp(extraJumps, durationTurns);
             Debug.Log($"PowerUp de Pulo ativado em {player.name} (+{extraJumps} pulos por {durationTurns} turnos)");
         }
     }

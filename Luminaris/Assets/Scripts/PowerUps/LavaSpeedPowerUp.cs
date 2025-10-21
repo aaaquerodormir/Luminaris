@@ -10,7 +10,7 @@ public class LavaSpeedPowerUp : PowerUpModificador
         var lava = Object.FindFirstObjectByType<LavaRise>();
         if (lava == null) return;
 
-        lava.AddSpeedModifier(newMultiplier, durationTurns);
+        //lava.AddSpeedModifier(newMultiplier, durationTurns);
     }
 
     public override void Deactivate(GameObject target)

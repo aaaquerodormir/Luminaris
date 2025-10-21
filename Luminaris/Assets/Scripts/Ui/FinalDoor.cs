@@ -1,6 +1,7 @@
-using UnityEngine;
+﻿using UnityEngine;
+using Unity.Netcode;
 
-public class FinalDoor : MonoBehaviour
+public class FinalDoor : NetworkBehaviour
 {
     [Header("Jogador esperado nesta porta")]
     [SerializeField] private PlayerRespawn assignedPlayer;
@@ -20,7 +21,8 @@ public class FinalDoor : MonoBehaviour
         if (respawn == assignedPlayer)
         {
             playerInside = true;
-            VictoryManager.CheckVictory();
+            Debug.Log($"[FinalDoor] {assignedPlayer.name} entrou na porta!");
+            VictoryManager.CheckVictory(); // ✅ já chama corretamente
         }
     }
 
@@ -34,6 +36,7 @@ public class FinalDoor : MonoBehaviour
         if (respawn == assignedPlayer)
         {
             playerInside = false;
+            Debug.Log($"[FinalDoor] {assignedPlayer.name} saiu da porta.");
         }
     }
 }
