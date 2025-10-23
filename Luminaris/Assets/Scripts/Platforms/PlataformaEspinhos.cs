@@ -1,7 +1,9 @@
 using UnityEngine;
 using System.Collections;
+using Unity.Netcode;
+using Unity.Netcode.Components;
 
-public class PlataformaEspinhos : MonoBehaviour
+public class PlataformaEspinhos : NetworkBehaviour
 {
     [SerializeField] private float cycleInterval = 2f;   // Tempo total do ciclo (sobe + desce)
     [SerializeField] private float initialDelay = 0f;    // Atraso inicial
@@ -10,12 +12,16 @@ public class PlataformaEspinhos : MonoBehaviour
 
     private Animator animator;
     private Transform espinhoTransform;
+    private NetworkAnimator networkAnimator;
 
     private void Start()
     {
         animator = GetComponent<Animator>();
+        networkAnimator = GetComponent<NetworkAnimator>();
         espinhoTransform = transform;
-        StartCoroutine(AnimationLoop());
+
+        if (IsServer)
+            StartCoroutine(AnimationLoop());
     }
 
     private IEnumerator AnimationLoop()
@@ -25,16 +31,13 @@ public class PlataformaEspinhos : MonoBehaviour
 
         while (true)
         {
-            // dispara a animação dos espinhos
-            animator.Play("Espinhos", 0, 0f);
+            // Dispara trigger para o NetworkAnimator sincronizar
+            networkAnimator.SetTrigger("Activate");
 
-            // sincroniza o som apenas quando começa a subir
+            // Toca som apenas no servidor (evita duplicar áudio nos clients)
             if (IsPlayerNearby())
-            {
                 AudioManager.Instance.PlaySound("Espinho");
-            }
 
-            // espera até o próximo ciclo
             yield return new WaitForSeconds(cycleInterval);
         }
     }
@@ -56,7 +59,7 @@ public class PlataformaEspinhos : MonoBehaviour
         var respawn = collision.GetComponentInParent<PlayerRespawn>();
         if (respawn != null)
         {
-            //respawn.Die();
+            // respawn.Die(); // mantenha desativado se o sistema de respawn ainda não estiver pronto
         }
 
         HandlePlayerBounce(collision.attachedRigidbody);

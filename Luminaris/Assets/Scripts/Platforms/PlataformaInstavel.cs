@@ -1,7 +1,8 @@
 using System.Collections;
 using UnityEngine;
+using Unity.Netcode;
 
-public class PlataformaInstavel : MonoBehaviour, IResettable
+public class PlataformaInstavel : NetworkBehaviour, IResettable
 {
     [SerializeField] private float fallWait = 2f;
     [SerializeField] private float respawnWait = 2f;
@@ -28,26 +29,30 @@ public class PlataformaInstavel : MonoBehaviour, IResettable
         startPos = transform.position;
         startRot = transform.rotation;
 
-        //GameManager.Instance.RegisterResettable(this);
+        // Garante estado inicial correto apenas no servidor
+        if (IsServer)
+            ResetState();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        if (!IsServer) return; // apenas o servidor processa
+
         if (!isFalling && collision.gameObject.CompareTag("Player"))
         {
             foreach (ContactPoint2D contact in collision.contacts)
             {
-                // Apenas ativa se o Player encostou por cima
+                // ativa apenas se o player encostou por cima
                 if (contact.normal.y < -0.5f)
                 {
-                    StartCoroutine(Fall());
+                    StartCoroutine(FallSequence());
                     break;
                 }
             }
         }
     }
 
-    private IEnumerator Fall()
+    private IEnumerator FallSequence()
     {
         isFalling = true;
         yield return StartCoroutine(Shake(shakeDuration, shakeMagnitude, shakeFrequency));
@@ -72,7 +77,6 @@ public class PlataformaInstavel : MonoBehaviour, IResettable
         {
             float x = Mathf.Sin(elapsed * frequency) * magnitude;
             float y = Mathf.Cos(elapsed * (frequency * 0.5f)) * magnitude * 0.5f;
-
             transform.localPosition = originalPos + new Vector3(x, y, 0f);
 
             elapsed += Time.deltaTime;
@@ -84,6 +88,8 @@ public class PlataformaInstavel : MonoBehaviour, IResettable
 
     public void ResetState()
     {
+        if (!IsServer) return;
+
         StopAllCoroutines();
         isFalling = false;
 
@@ -91,9 +97,7 @@ public class PlataformaInstavel : MonoBehaviour, IResettable
         rb.linearVelocity = Vector2.zero;
         rb.angularVelocity = 0f;
 
-        transform.position = startPos;
-        transform.rotation = startRot;
-
+        transform.SetPositionAndRotation(startPos, startRot);
         col.enabled = true;
         sr.enabled = true;
     }

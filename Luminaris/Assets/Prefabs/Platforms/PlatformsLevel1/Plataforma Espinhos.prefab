@@ -147,7 +147,9 @@ GameObject:
   - component: {fileID: 1376991923219077267}
   - component: {fileID: 451032039586606995}
   - component: {fileID: 7419839965007763438}
+  - component: {fileID: 7393548139392657754}
   - component: {fileID: 5279898114109789264}
+  - component: {fileID: 1751741447567512616}
   m_Layer: 3
   m_Name: Espinhos
   m_TagString: Untagged
@@ -293,6 +295,31 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1.4375, y: 0.5223931}
   m_EdgeRadius: 0
+--- !u!114 &7393548139392657754
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2686233165176008548}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 0
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  DeferredDespawnTick: 0
+  Ownership: 1
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+  SyncOwnerTransformWhenParented: 1
+  AllowOwnerToParent: 0
 --- !u!114 &5279898114109789264
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -305,9 +332,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fb82d626655a0841a7bb92b93fcda74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
   cycleInterval: 2
   initialDelay: 0
   detectionRadius: 4
   playerMask:
     serializedVersion: 2
     m_Bits: 512
+--- !u!114 &1751741447567512616
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2686233165176008548}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8d0727d5ae3244e3b569694d3912374, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  TransitionStateInfoList: []
+  m_Animator: {fileID: 451032039586606995}
