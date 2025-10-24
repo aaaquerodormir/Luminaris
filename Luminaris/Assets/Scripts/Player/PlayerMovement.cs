@@ -174,24 +174,22 @@ public class PlayerMovement : NetworkBehaviour
             {
                 pendingJump = false;
 
-                // NOVO: Apenas o Server pode modificar a NetworkVariable
-                if (IsServer)
+                // NOVO: Apenas o Server pode modificar a NetworkVariable
+                if (IsServer)
                 {
-                    // Se for o Host, ele modifica diretamente e o callback dispara
                     CompletedJumpsNet.Value++;
                 }
                 else // Se for o Client, ele precisa solicitar ao Server para modificar
-                {
-                    // RPC para solicitar a contagem de pulos
+                {
                     SubmitJumpServerRpc();
                 }
 
                 Debug.Log($"[PlayerMovement:{name}] 🟢 Aterrissou.");
             }
 
-            // A condição de fim de turno deve usar o valor SINCRONIZADO
-            if (CompletedJumpsNet.Value >= maxJumps)
-            {
+            // CORREÇÃO: Só encerra o turno se for o turno ativo E atingiu o limite de pulos
+            if (isMyTurn && CompletedJumpsNet.Value >= maxJumps) // <--- Adicionar isMyTurn aqui
+            {
                 Debug.Log($"[PlayerMovement:{name}] 🚩 Máximo de pulos atingido — fim de turno!");
                 RequestEndTurn();
             }
@@ -290,6 +288,42 @@ public class PlayerMovement : NetworkBehaviour
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(groundCheck.position, groundRadius);
     }
-}
+    [ServerRpc(RequireOwnership = false)]
+    public void NotifyPlatformTouchServerRpc(NetworkObjectReference platformNetObj, ServerRpcParams rpcParams = default)
+    {
+        // ... (código que notifica a plataforma, este está CORRETO)
+        if (platformNetObj.TryGet(out NetworkObject netObj))
+        {
+            if (netObj.TryGetComponent(out PlataformaInstavel platform))
+            {
+                platform.ActivateFallFromServer();
+            }
+        }
+    }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        // ... (lógica existente)
+
+        // VERIFICAÇÃO DE COLISÃO COM PLATAFORMA (Não requer Tag, usa o Componente)
+        if (IsOwner)
+        {
+            if (collision.gameObject.TryGetComponent(out PlataformaInstavel platform))
+            {
+                foreach (ContactPoint2D contact in collision.contacts)
+                {
+                    // 🔑 CORREÇÃO AQUI: A normal.y deve ser POSITIVA (apontando para cima) para ser o topo.
+                    if (contact.normal.y > 0.5f) // <--- CONDIÇÃO CORRIGIDA!
+                    {
+                        if (platform.NetworkObject.IsSpawned)
+                        {
+                            NotifyPlatformTouchServerRpc(platform.NetworkObject);
+                        }
+                        break;
+                    }
+                }
+            }
+        }
+    }
+}
 

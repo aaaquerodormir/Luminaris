@@ -11,15 +11,19 @@ public class PlataformaEspinhos : NetworkBehaviour
     [SerializeField] private LayerMask playerMask;       // Layer dos jogadores
 
     private Animator animator;
+    private NetworkAnimator netAnimator;
     private Transform espinhoTransform;
-    private NetworkAnimator networkAnimator;
+    private static readonly int ActivateTrigger = Animator.StringToHash("Activate");
 
-    private void Start()
+    private void Awake()
     {
         animator = GetComponent<Animator>();
-        networkAnimator = GetComponent<NetworkAnimator>();
+        netAnimator = GetComponent<NetworkAnimator>();
         espinhoTransform = transform;
+    }
 
+    public override void OnNetworkSpawn()
+    {
         if (IsServer)
             StartCoroutine(AnimationLoop());
     }
@@ -31,10 +35,8 @@ public class PlataformaEspinhos : NetworkBehaviour
 
         while (true)
         {
-            // Dispara trigger para o NetworkAnimator sincronizar
-            networkAnimator.SetTrigger("Activate");
+            netAnimator.SetTrigger(ActivateTrigger);
 
-            // Toca som apenas no servidor (evita duplicar áudio nos clients)
             if (IsPlayerNearby())
                 AudioManager.Instance.PlaySound("Espinho");
 
@@ -59,7 +61,7 @@ public class PlataformaEspinhos : NetworkBehaviour
         var respawn = collision.GetComponentInParent<PlayerRespawn>();
         if (respawn != null)
         {
-            // respawn.Die(); // mantenha desativado se o sistema de respawn ainda não estiver pronto
+            // respawn.Die();
         }
 
         HandlePlayerBounce(collision.attachedRigidbody);
