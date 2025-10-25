@@ -333,12 +333,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  cycleInterval: 2
   initialDelay: 0
-  detectionRadius: 6
-  playerMask:
-    serializedVersion: 2
-    m_Bits: 512
+  pauseDuration: 5
+  attackAnimationName: Espinhos Ativados
+  activateTriggerName: Activate
 --- !u!114 &1721935119314500361
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -352,5 +350,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  TransitionStateInfoList: []
+  TransitionStateInfoList:
+  - IsCrossFadeExit: 0
+    Layer: 0
+    OriginatingState: 1650813048
+    DestinationState: 2009210615
+    TransitionDuration: 0
+    TriggerNameHash: 1326475003
+    TransitionIndex: 0
+  - IsCrossFadeExit: 0
+    Layer: 0
+    OriginatingState: 2009210615
+    DestinationState: 1650813048
+    TransitionDuration: 0
+    TriggerNameHash: 426031496
+    TransitionIndex: 0
   m_Animator: {fileID: 451032039586606995}

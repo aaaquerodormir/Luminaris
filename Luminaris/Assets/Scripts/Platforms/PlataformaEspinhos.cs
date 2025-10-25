@@ -5,134 +5,121 @@ using Unity.Netcode.Components;
 
 public class PlataformaEspinhos : NetworkBehaviour
 {
-    [SerializeField] private float pauseDuration = 2f;   // Tempo total do ciclo (sobe + desce)
-    [SerializeField] private float initialDelay = 0f;    // Atraso inicial
-    [SerializeField] private float detectionRadius = 6f; // Raio para ouvir o som
-    [SerializeField] private LayerMask playerMask;       // Layer dos jogadores
+    [Header("Configuração de Timing (Somente Host)")]
 
-    private Animator animator;
-    private NetworkAnimator netAnimator;
-    private Transform espinhoTransform;
+    [SerializeField]
+    [Tooltip("O atraso inicial (em segundos) antes do primeiro ciclo de ataque começar.")]
+    private float initialDelay = 3.0f;
 
-    private static readonly int ActivateTrigger = Animator.StringToHash("Activate");
-    // 🔑 NOVO: Hash para o Trigger de Saída (Stop)
-    private static readonly int StopTrigger = Animator.StringToHash("Stop");
+    [SerializeField]
+    [Tooltip("A duração (em segundos) que o espinho fica em 'Idle' (abaixado) entre os ataques.")]
+    private float pauseDuration = 5.0f;
 
+
+    [Header("Configuração de Animação")]
+
+    [SerializeField]
+    [Tooltip("O NOME EXATO do clipe de animação de 'Ataque' no seu Animator Controller. Usado para buscar sua duração.")]
+    private string attackAnimationName = "Espinhos Ativados";
+
+    [SerializeField]
+    [Tooltip("O NOME EXATO do parâmetro 'Trigger' no seu Animator Controller que inicia o ataque.")]
+    private string activateTriggerName = "Activate";
+
+    // Componentes cacheados
+    private Animator m_Animator;
+
+    // Estado interno
+    private float m_AttackAnimationLength = 1.0f; // Duração do clipe de ataque (será buscada)
+
+    /// <summary>
+    /// Awake é chamado quando o script é carregado.
+    /// Usamos para cachear componentes e buscar a duração da animação.
+    /// </summary>
     private void Awake()
     {
-        espinhoTransform = transform;
+        // Cacheia o componente Animator local
+        m_Animator = GetComponent<Animator>();
+
+        // Busca a duração real da animação de ataque para um timing perfeito
+        FindAttackAnimationLength();
     }
 
-    public override void OnNetworkSpawn()
+    /// <summary>
+    /// Busca a duração do clipe de animação de ataque pelo nome.
+    /// </summary>
+    private void FindAttackAnimationLength()
     {
-        base.OnNetworkSpawn();
-
-        // 1. Obter componentes no OnNetworkSpawn continua correto.
-        animator = GetComponent<Animator>();
-        netAnimator = GetComponent<NetworkAnimator>();
-
-        if (netAnimator == null)
+        if (m_Animator.runtimeAnimatorController == null)
         {
-            Debug.LogError("NetworkAnimator não encontrado após OnNetworkSpawn. O objeto pode estar mal configurado. A desativação é segura se não for o objeto host.", this);
-            // Retornar aqui é seguro para clientes sem a autoridade ou configuração.
+            Debug.LogError($"[SpikePlatform] O Animator neste objeto ({gameObject.name}) não possui um RuntimeAnimatorController assignado.", this);
             return;
         }
 
+        // Itera por todos os clipes no controller
+        foreach (var clip in m_Animator.runtimeAnimatorController.animationClips)
+        {
+            if (clip.name == attackAnimationName)
+            {
+                m_AttackAnimationLength = clip.length;
+                return; // Encontramos o clipe e armazenamos sua duração
+            }
+        }
+
+        // Aviso caso o clipe não seja encontrado
+        Debug.LogWarning($"[SpikePlatform] Não foi possível encontrar o clipe de animação com o nome '{attackAnimationName}'. " +
+                         $"Usando a duração padrão de {m_AttackAnimationLength}s. " +
+                         $"Verifique o campo 'Attack Animation Name' no Inspector.", this);
+    }
+
+    /// <summary>
+    /// OnNetworkSpawn é chamado quando o objeto é spawnado na rede.
+    /// É a maneira correta de iniciar lógicas de rede.
+    /// </summary>
+    public override void OnNetworkSpawn()
+    {
+        // Esta lógica DEVE rodar apenas no Servidor (Host).
+        // O Host tem autoridade sobre o "quando" o espinho ataca.
         if (IsServer)
         {
-            // 2. CORREÇÃO FINAL: Esperar 1 frame antes de iniciar a lógica do ciclo.
-            // Isso garante que o netAnimator está 100% pronto.
-            StartCoroutine(AwaitForReadinessAndStartCycle());
+            // Inicia a corrotina que gerencia o ciclo de ataque/pausa.
+            StartCoroutine(SpikeCycleCoroutine());
         }
+
+        // NOTA SOBRE RACE CONDITION:
+        // Não precisamos de lógica extra no cliente. Se um cliente entrar
+        // no meio de uma animação, o NetworkAnimator automaticamente sincronizará
+        // o estado atual (ex: "Attack" em 50% de progresso). O servidor
+        // continua seu ciclo de timer, e o próximo trigger "Activate" será
+        // enviado e sincronizado normalmente.
     }
 
-    // 🔑 NOVO: Controla a pausa (o tempo que a plataforma fica inativa)
-    private IEnumerator AwaitForReadinessAndStartCycle()
+    /// <summary>
+    /// Corrotina que gerencia o ciclo de vida do espinho (Ataque -> Pausa -> Ataque...)
+    /// Roda APENAS no Servidor.
+    /// </summary>
+    private IEnumerator SpikeCycleCoroutine()
     {
-        // Espera o próximo ciclo de atualização do Unity (próximo frame).
-        yield return null;
+        // 1. Espera o delay inicial configurável
+        yield return new WaitForSeconds(initialDelay);
 
-        // Agora, o Servidor inicia o ciclo de PAUSA com o delay inicial.
-        StartCoroutine(StartNewCycle(initialDelay));
-    }
-
-    private IEnumerator StartNewCycle(float delay)
-    {
-        if (delay > 0f)
-            yield return new WaitForSeconds(delay);
-
-        // 1. A PAUSA terminou. Agora inicia o ATAQUE.
-        TriggerAttack();
-    }
-
-    // 🔑 NOVO: Função chamada pelo Animation Event no final do ataque!
-    // Esta função reinicia o ciclo de PAUSA.
-    public void EndAttackEvent()
-    {
-        if (!IsServer) return;
-
-        // 1. Dispara o Trigger 'Stop' para que o Animator saia
-        // do estado 'Espinhos Ativados' e entre em 'Espinhos Desativados' (Idle).
-        netAnimator.SetTrigger(StopTrigger);
-
-        // 2. Inicia o timer de PAUSA (o controle do Inspector).
-        StartCoroutine(StartNewCycle(pauseDuration));
-    }
-
-    // Dispara o Trigger de ataque pela rede.
-    private void TriggerAttack()
-    {
-        if (!IsServer) return;
-
-        // Dispara o Trigger 'Activate' para iniciar o ataque.
-        netAnimator.SetTrigger(ActivateTrigger);
-
-        if (IsPlayerNearby())
+        // Loop infinito enquanto formos o servidor
+        while (IsServer)
         {
-            PlaySpikeSoundClientRpc();
+            // 2. Dispara o gatilho de ataque.
+            // O NetworkAnimator (componente) detectará esta mudança
+            // e enviará o trigger para todos os clientes automaticamente.
+            m_Animator.SetTrigger(activateTriggerName);
+
+            // 3. Espera a duração da animação de ATAQUE (ciclo completo de subir/descer).
+            // Isso garante que não comecemos a pausa antes do espinho descer.
+            yield return new WaitForSeconds(m_AttackAnimationLength);
+
+            // 4. Espera a duração da PAUSA (estado Idle)
+            // O espinho agora está abaixado, aguardando.
+            yield return new WaitForSeconds(pauseDuration);
+
+            // O loop reinicia, disparando o próximo ataque.
         }
-    }
-
-    // Restante do código (ClientRpc, Colisão, Gizmos) permanece igual...
-
-    [ClientRpc]
-    private void PlaySpikeSoundClientRpc()
-    {
-        if (AudioManager.Instance != null)
-        {
-            AudioManager.Instance.PlaySound("Espinho");
-        }
-    }
-
-    private bool IsPlayerNearby()
-    {
-        Collider2D playerNearby = Physics2D.OverlapCircle(
-            espinhoTransform.position, detectionRadius, playerMask
-        );
-        return playerNearby != null;
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (!collision.CompareTag("Player")) return;
-
-        if (IsServer)
-        {
-            var respawn = collision.GetComponentInParent<PlayerRespawn>();
-            // ... (lógica de dano)
-            HandlePlayerBounce(collision.attachedRigidbody);
-        }
-    }
-
-    private void HandlePlayerBounce(Rigidbody2D rb)
-    {
-        if (rb == null) return;
-        rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0f);
-    }
-
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, detectionRadius);
     }
 }
