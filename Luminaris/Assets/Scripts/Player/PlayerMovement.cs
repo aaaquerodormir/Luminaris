@@ -80,12 +80,25 @@ public class PlayerMovement : NetworkBehaviour
         base.OnNetworkSpawn();
         netFacingRight.OnValueChanged += (_, __) => UpdateFacingDirection();
 
-        CompletedJumpsNet.OnValueChanged += HandleJumpsChanged;
+        // ⬇️ MODIFICAÇÃO AQUI ⬇️
+        // Removemos o 'HandleJumpsChanged' antigo.
+        // CompletedJumpsNet.OnValueChanged += HandleJumpsChanged; // <--- REMOVA/COMENTE ESTA LINHA
+
+        // Precisamos ouvir AMBAS as variáveis que afetam os pulos restantes.
+        // Usamos a mesma função de callback para as duas.
+        CompletedJumpsNet.OnValueChanged += OnJumpVariablesChanged;
+        MaxJumpsNet.OnValueChanged += OnJumpVariablesChanged;
+        // ⬆️ FIM DA MODIFICAÇÃO ⬆️
 
         if (IsOwner) EnableInputs();
         else DisableInputs();
 
         Debug.Log($"[PlayerMovement:{name}] NetworkSpawn — Owner={IsOwner} ({OwnerClientId})");
+
+        // ⬇️ NOVO: Garante que a UI tenha o valor correto no Spawn ⬇️
+        // (Isso é bom para jogadores que se conectam tarde)
+        // Disparamos manualmente no início para sincronizar a UI com o estado inicial.
+        OnJumpVariablesChanged(0, 0);
     }
 
     public override void OnDestroy()
@@ -93,26 +106,49 @@ public class PlayerMovement : NetworkBehaviour
         base.OnDestroy();
         if (IsOwner) DisableInputs();
         netFacingRight.OnValueChanged -= (_, __) => UpdateFacingDirection();
-        CompletedJumpsNet.OnValueChanged -= HandleJumpsChanged; // Desassina
+
+        // ⬇️ MODIFICAÇÃO AQUI ⬇️
+        // CompletedJumpsNet.OnValueChanged -= HandleJumpsChanged; // <--- REMOVA/COMENTE ESTA LINHA
+
+        // Garante que estamos desassinando os novos callbacks
+        CompletedJumpsNet.OnValueChanged -= OnJumpVariablesChanged;
+        MaxJumpsNet.OnValueChanged -= OnJumpVariablesChanged;
+        // ⬆️ FIM DA MODIFICAÇÃO ⬆️
+    }
+
+    // ⬇️ ESTE É O NOVO MÉTODO CENTRAL ⬇️
+    /// <summary>
+    /// Este callback é disparado em TODOS OS CLIENTES quando
+    /// MaxJumpsNet ou CompletedJumpsNet mudam de valor na rede.
+    /// </summary>
+    private void OnJumpVariablesChanged(int oldVal, int newVal)
+    {
+        // 1. Calcula o valor restante
+        int remaining = MaxJumpsNet.Value - CompletedJumpsNet.Value;
+
+        // 2. Dispara o evento estático do JumpHUD.
+        // O JumpHUD (sendo uma classe de UI local) está escutando este evento
+        // e filtrará pelo OwnerClientId correto.
+        JumpHUD.NotifyJumpsChanged(OwnerClientId, remaining);
     }
 
     // CALLBACK DE REDE: Dispara em TODOS os clientes quando CompletedJumpsNet muda
-    private void HandleJumpsChanged(int oldVal, int newVal)
-    {
-        int remaining = MaxJumpsNet.Value - newVal;
-        // Chama o método para todos os HUDs atualizarem sua exibição
-        UpdateJumpsClientRpc(remaining);
-    }
+    //private void HandleJumpsChanged(int oldVal, int newVal)
+    //{
+    //    int remaining = MaxJumpsNet.Value - newVal;
+    //    // Chama o método para todos os HUDs atualizarem sua exibição
+    //    UpdateJumpsClientRpc(remaining);
+    //}
 
     // CLIENT RPC: Garante que a UI seja atualizada em todos
-    [ClientRpc]
-    private void UpdateJumpsClientRpc(int remainingJumps)
-    {
-        // 🔑 MUDANÇA AQUI: Chame o método público estático para disparar o evento
-        JumpHUD.NotifyJumpsChanged(OwnerClientId, remainingJumps); // <-- CORREÇÃO
+    //[ClientRpc]
+    //private void UpdateJumpsClientRpc(int remainingJumps)
+    //{
+    //    // 🔑 MUDANÇA AQUI: Chame o método público estático para disparar o evento
+    //    JumpHUD.NotifyJumpsChanged(OwnerClientId, remainingJumps); // <-- CORREÇÃO
 
-        Debug.Log($"[SYNC-RPC:{OwnerClientId}] Novo total de pulos: {remainingJumps}");
-    }
+    //    Debug.Log($"[SYNC-RPC:{OwnerClientId}] Novo total de pulos: {remainingJumps}");
+    //}
 
     // ==============================
     private void EnableInputs()
