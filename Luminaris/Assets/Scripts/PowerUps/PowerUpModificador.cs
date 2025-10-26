@@ -8,5 +8,5 @@ public abstract class PowerUpModificador : ScriptableObject
     public int DurationTurns => durationTurns;
 
     public abstract void Activate(GameObject target);
-    //public abstract void Deactivate(GameObject target);
+    public abstract void Deactivate(GameObject target);
 }

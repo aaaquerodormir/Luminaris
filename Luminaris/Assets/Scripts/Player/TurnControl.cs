@@ -15,12 +15,25 @@ public class TurnControl : NetworkBehaviour
     private NetworkVariable<int> currentIndex = new(
         0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
 
+    [Header("Referências da Cena")]
+    [SerializeField] private LavaRise lavaInstance;
+
     public static event Action<PlayerMovement> OnTurnStarted;
 
     private void Awake()
     {
         if (Instance == null) Instance = this;
         else Destroy(gameObject);
+
+        // ⬇️ NOVO: Fallback se não foi atribuído no Inspector ⬇️
+        if (IsServer && lavaInstance == null)
+        {
+            lavaInstance = FindFirstObjectByType<LavaRise>();
+            if (lavaInstance != null)
+                Debug.Log("[TurnControl] Referência da Lava encontrada na cena.");
+            else
+                Debug.LogError("[TurnControl] NÃO FOI POSSÍVEL ENCONTRAR LavaRise NA CENA!");
+        }
     }
 
     private void Start()
@@ -38,6 +51,7 @@ public class TurnControl : NetworkBehaviour
             yield return new WaitForSeconds(0.5f);
         }
 
+        // Garante ordem fixa de OwnerClientId (Player1 = host)
         players = players.OrderBy(p => p.OwnerClientId).ToList();
         Debug.Log($"[TurnControl] 🟢 {players.Count} jogadores detectados. Iniciando sequência.");
 
@@ -48,7 +62,10 @@ public class TurnControl : NetworkBehaviour
     {
         var found = FindObjectsByType<PlayerMovement>(FindObjectsSortMode.None);
         foreach (var p in found)
-            if (!players.Contains(p)) players.Add(p);
+        {
+            if (!players.Contains(p))
+                players.Add(p);
+        }
     }
 
     public void RegisterPlayer(PlayerMovement player)
@@ -81,8 +98,14 @@ public class TurnControl : NetworkBehaviour
         var current = players[currentIndex.Value];
         current?.SetTurnActiveServerRpc(false);
 
-        // NOVO: decrementar buffs do jogador cujo turno acabou
-        current?.OnTurnEndedServer();
+        // ⬇️ LÓGICA DE DECREMENTO DE BUFFS (AQUI) ⬇️
+        // Decrementa o buff do jogador que acabou de terminar o turno
+        current?.DecrementBuffTurns();
+
+        // Decrementa o buff da lava (acontece a cada turno de jogador)
+        lavaInstance?.DecrementBuffTurns();
+        // ⬆️ FIM DA LÓGICA DE BUFFS ⬆️
+
 
         currentIndex.Value = (currentIndex.Value + 1) % players.Count;
         Debug.Log($"[TurnControl] 🔁 Passando turno -> {players[currentIndex.Value].name}");
@@ -93,6 +116,7 @@ public class TurnControl : NetworkBehaviour
     {
         if (player == null) return;
 
+        // 🔑 CORREÇÃO CRÍTICA: Resetar a NetworkVariable aqui no Server
         if (IsServer)
         {
             player.CompletedJumpsNet.Value = 0;

@@ -33,9 +33,21 @@ public class PlayerMovement : NetworkBehaviour
 
     [Header("Controle de Pulo")]
     [SerializeField] private int baseMaxJumps = 3;
+    // Adicione a NetworkVariable
     public readonly NetworkVariable<int> CompletedJumpsNet = new(
         0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server
     );
+    public readonly NetworkVariable<int> MaxJumpsNet = new(
+        3, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server
+    );
+
+    // ⬇️ NOVO: Rastreia a duração do power-up de pulo ⬇️
+    public readonly NetworkVariable<int> JumpBuffTurnsLeft = new(
+        0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server
+    );
+
+    // ⬇️ NOVO: Apenas o servidor usa isso para lembrar o quanto reverter ⬇️
+    private int server_extraJumpsApplied = 0;
     private bool pendingJump = false;
     public event System.Action<ulong, int> OnTurnStarted;
 
@@ -49,70 +61,60 @@ public class PlayerMovement : NetworkBehaviour
     private bool facingRight = false;
     private Vector2 moveInput;
 
-    // Networked flip
+    // sincroniza flip entre host/client
     private readonly NetworkVariable<bool> netFacingRight =
-        new(true, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
+       new(true, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
 
-    // ===== PowerUp state (networked summaries) =====
-    // Total extra jumps currently active (sum of active jump buffs)
-    private NetworkVariable<int> jumpBonusNet = new(
-        0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server
-    );
-
-    // Total movement multiplier (product of active speed buffs). Start = 1.0f
-    private NetworkVariable<float> speedMultiplierNet = new(
-        1f, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server
-    );
-
-    // ===== Server-only: list of active buffs with their remaining turns =====
-    private class ActiveJumpBuff { public int extraJumps; public int turnsLeft; }
-    private class ActiveSpeedBuff { public float multiplier; public int turnsLeft; }
-
-    // Only the server modifies/reads these lists. Clients read only via NetworkVariables above.
-    private readonly List<ActiveJumpBuff> activeJumpBuffs = new();
-    private readonly List<ActiveSpeedBuff> activeSpeedBuffs = new();
-
-    // ================== Unity / Netcode lifecycle ==================
+    // ==============================
     private void Awake()
     {
         if (!rb) rb = GetComponent<Rigidbody2D>();
         if (!anim) anim = GetComponent<Animator>();
         if (!spriteRenderer) spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         if (!netAnimator) netAnimator = GetComponent<NetworkAnimator>();
+        //if (!playerUI) playerUI = GetComponent<PlayerMovementUI>();
     }
 
     public override void OnNetworkSpawn()
     {
         base.OnNetworkSpawn();
         netFacingRight.OnValueChanged += (_, __) => UpdateFacingDirection();
+
         CompletedJumpsNet.OnValueChanged += HandleJumpsChanged;
-        jumpBonusNet.OnValueChanged += (_, __) => { /* optional UI */ };
-        speedMultiplierNet.OnValueChanged += (_, __) => { /* optional UI */ };
 
         if (IsOwner) EnableInputs();
         else DisableInputs();
+
+        Debug.Log($"[PlayerMovement:{name}] NetworkSpawn — Owner={IsOwner} ({OwnerClientId})");
     }
 
     public override void OnDestroy()
     {
         base.OnDestroy();
+        if (IsOwner) DisableInputs();
         netFacingRight.OnValueChanged -= (_, __) => UpdateFacingDirection();
-        CompletedJumpsNet.OnValueChanged -= HandleJumpsChanged;
+        CompletedJumpsNet.OnValueChanged -= HandleJumpsChanged; // Desassina
     }
 
+    // CALLBACK DE REDE: Dispara em TODOS os clientes quando CompletedJumpsNet muda
     private void HandleJumpsChanged(int oldVal, int newVal)
     {
-        int remaining = GetMaxJumps() - newVal;
+        int remaining = MaxJumpsNet.Value - newVal;
+        // Chama o método para todos os HUDs atualizarem sua exibição
         UpdateJumpsClientRpc(remaining);
     }
 
+    // CLIENT RPC: Garante que a UI seja atualizada em todos
     [ClientRpc]
     private void UpdateJumpsClientRpc(int remainingJumps)
     {
-        JumpHUD.NotifyJumpsChanged(OwnerClientId, remainingJumps);
+        // 🔑 MUDANÇA AQUI: Chame o método público estático para disparar o evento
+        JumpHUD.NotifyJumpsChanged(OwnerClientId, remainingJumps); // <-- CORREÇÃO
+
+        Debug.Log($"[SYNC-RPC:{OwnerClientId}] Novo total de pulos: {remainingJumps}");
     }
 
-    // ================== Input ==================
+    // ==============================
     private void EnableInputs()
     {
         moveAction?.action.Enable();
@@ -133,16 +135,16 @@ public class PlayerMovement : NetworkBehaviour
         }
     }
 
-    // ================== Update/FixedUpdate ==================
+    // ==============================
     private void Update()
     {
         CheckGround();
-
         bool isMoving = Mathf.Abs(moveInput.x) > 0.1f;
         float yVel = rb.linearVelocity.y;
         UpdateAnimatorServerRpc(isMoving, isGrounded, yVel);
 
         if (!IsOwner || !isMyTurn) return;
+
         moveInput = moveAction != null ? moveAction.action.ReadValue<Vector2>() : Vector2.zero;
     }
 
@@ -155,8 +157,7 @@ public class PlayerMovement : NetworkBehaviour
     private void HandleMovement()
     {
         float moveX = moveInput.x;
-        float speed = baseMoveSpeed * speedMultiplierNet.Value;
-        rb.linearVelocity = new Vector2(moveX * speed, rb.linearVelocity.y);
+        rb.linearVelocity = new Vector2(moveX * moveSpeed, rb.linearVelocity.y);
 
         if (moveX > 0 && !facingRight)
             SetFacingServerRpc(true);
@@ -170,7 +171,9 @@ public class PlayerMovement : NetworkBehaviour
 
         rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
         pendingJump = true;
+
         netAnimator.SetTrigger("Jump");
+        Debug.Log($"[PlayerMovement:{name}] ⬆️ Pulou (aguardando aterrissagem)");
     }
 
     private void CheckGround()
@@ -183,24 +186,37 @@ public class PlayerMovement : NetworkBehaviour
             if (pendingJump)
             {
                 pendingJump = false;
+
+                // NOVO: Apenas o Server pode modificar a NetworkVariable
                 if (IsServer)
+                {
                     CompletedJumpsNet.Value++;
-                else
+                }
+                else // Se for o Client, ele precisa solicitar ao Server para modificar
+                {
                     SubmitJumpServerRpc();
+                }
+
+                Debug.Log($"[PlayerMovement:{name}] 🟢 Aterrissou.");
             }
 
-            if (isMyTurn && CompletedJumpsNet.Value >= GetMaxJumps())
+            // CORREÇÃO: Só encerra o turno se for o turno ativo E atingiu o limite de pulos
+            if (isMyTurn && CompletedJumpsNet.Value >= MaxJumpsNet.Value)
             {
+                Debug.Log($"[PlayerMovement:{name}] 🚩 Máximo de pulos atingido — fim de turno!");
                 RequestEndTurn();
             }
         }
     }
 
+    // RPC do Client para o Server: solicita incremento de pulo
     [ServerRpc(RequireOwnership = false)]
     private void SubmitJumpServerRpc(ServerRpcParams rpcParams = default)
     {
-        // Only server increments, but RPC is requested by owner
-        CompletedJumpsNet.Value++;
+        // Garante que apenas o Host ou o dono do objeto pode fazer a alteração.
+        if (rpcParams.Receive.SenderClientId != OwnerClientId && !IsServer) return;
+
+        CompletedJumpsNet.Value++; // O Server faz a mudança
     }
 
     [ServerRpc(RequireOwnership = false)]
@@ -218,6 +234,7 @@ public class PlayerMovement : NetworkBehaviour
     {
         bool newFacing = netFacingRight.Value;
         if (newFacing == facingRight) return;
+
         facingRight = newFacing;
         if (spriteRenderer != null)
             spriteRenderer.flipX = !facingRight;
@@ -230,8 +247,7 @@ public class PlayerMovement : NetworkBehaviour
             netFacingRight.Value = right;
     }
 
-    // =============== Turn control helpers =================
-    public void RequestEndTurn()
+    private void RequestEndTurn()
     {
         if (IsServer)
             TurnControl.Instance?.EndTurn();
@@ -264,12 +280,13 @@ public class PlayerMovement : NetworkBehaviour
 
         if (active)
         {
+            // NOVO: Apenas o Server reseta a contagem
             if (IsServer)
             {
                 CompletedJumpsNet.Value = 0;
             }
-            // exemplo: notificar HUD
-            // OnTurnStarted?.Invoke(OwnerClientId, GetMaxJumps());
+            // NOVO: Dispara evento para o HUD (útil para HUDs que precisam saber o máximo)
+            OnTurnStarted?.Invoke(OwnerClientId, MaxJumpsNet.Value);
         }
         else
         {
@@ -278,85 +295,16 @@ public class PlayerMovement : NetworkBehaviour
         }
     }
 
-    // Called by server when a player's turn ends (TurnControl will call this)
-    public void OnTurnEndedServer()
-    {
-        if (!IsServer) return;
-        DecrementBuffTurns();
-    }
-
-    // ================== PowerUp methods (Server only) ==================
-    public void AddJumpPowerup_Server(int extraJumps, int durationTurns)
-    {
-        if (!IsServer) return;
-        if (extraJumps <= 0 || durationTurns <= 0) return;
-
-        activeJumpBuffs.Add(new ActiveJumpBuff { extraJumps = extraJumps, turnsLeft = durationTurns });
-        RecalculateJumpBonusNet();
-    }
-
-    public void AddSpeedPowerup_Server(float multiplier, int durationTurns)
-    {
-        if (!IsServer) return;
-        if (multiplier <= 0f || durationTurns <= 0) return;
-
-        activeSpeedBuffs.Add(new ActiveSpeedBuff { multiplier = multiplier, turnsLeft = durationTurns });
-        RecalculateSpeedMultiplierNet();
-    }
-
-    private void DecrementBuffTurns()
-    {
-        // jump buffs
-        for (int i = activeJumpBuffs.Count - 1; i >= 0; i--)
-        {
-            activeJumpBuffs[i].turnsLeft--;
-            if (activeJumpBuffs[i].turnsLeft <= 0)
-                activeJumpBuffs.RemoveAt(i);
-        }
-        RecalculateJumpBonusNet();
-
-        // speed buffs
-        for (int i = activeSpeedBuffs.Count - 1; i >= 0; i--)
-        {
-            activeSpeedBuffs[i].turnsLeft--;
-            if (activeSpeedBuffs[i].turnsLeft <= 0)
-                activeSpeedBuffs.RemoveAt(i);
-        }
-        RecalculateSpeedMultiplierNet();
-    }
-
-    private void RecalculateJumpBonusNet()
-    {
-        int total = 0;
-        foreach (var b in activeJumpBuffs) total += b.extraJumps;
-        jumpBonusNet.Value = total;
-    }
-
-    private void RecalculateSpeedMultiplierNet()
-    {
-        float total = 1f;
-        foreach (var b in activeSpeedBuffs) total *= b.multiplier;
-        speedMultiplierNet.Value = total;
-    }
-
-    // =============== Helpers ====================
-    // Max jumps = base + bonus (from networked summary)
-    public int GetMaxJumps()
-    {
-        return baseMaxJumps + jumpBonusNet.Value;
-    }
-
     private void OnDrawGizmosSelected()
     {
         if (groundCheck == null) return;
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(groundCheck.position, groundRadius);
     }
-
-    // Platform notification (mantive)
     [ServerRpc(RequireOwnership = false)]
     public void NotifyPlatformTouchServerRpc(NetworkObjectReference platformNetObj, ServerRpcParams rpcParams = default)
     {
+        // ... (código que notifica a plataforma, este está CORRETO)
         if (platformNetObj.TryGet(out NetworkObject netObj))
         {
             if (netObj.TryGetComponent(out PlataformaInstavel platform))
@@ -366,24 +314,72 @@ public class PlayerMovement : NetworkBehaviour
         }
     }
 
+    // 3. Adicione a função pública que o PowerUp chamará (SÓ NO SERVIDOR)
+    public void ApplyJumpPowerUp(int extraJumps, int durationTurns)
+    {
+        if (!IsServer) return;
+
+        // 2. SOMA o novo bônus ao valor de rede
+        MaxJumpsNet.Value += extraJumps;
+
+        // 3. SOMA o bônus ao nosso rastreador de servidor (para reverter DEPOIS)
+        server_extraJumpsApplied += extraJumps;
+
+        // 4. Define a duração para o MÁXIMO entre a atual e a nova
+        JumpBuffTurnsLeft.Value = Mathf.Max(JumpBuffTurnsLeft.Value, durationTurns);
+
+        Debug.Log($"[PlayerMovement-SERVER] {name} (ID: {OwnerClientId}) ACUMULOU {extraJumps} pulos. Total extra: {server_extraJumpsApplied}. Duração: {JumpBuffTurnsLeft.Value} turnos.");
+    }
+
+    public void DecrementBuffTurns()
+    {
+        if (!IsServer || JumpBuffTurnsLeft.Value == 0) return;
+
+        JumpBuffTurnsLeft.Value--;
+
+        if (JumpBuffTurnsLeft.Value <= 0)
+        {
+            RevertJumpPowerUp(); // Esta função já está correta
+        }
+    }
+
+    private void RevertJumpPowerUp()
+    {
+        if (!IsServer) return;
+
+        // Esta função já funciona para o acúmulo, pois ela remove
+        // o valor total que rastreamos em 'server_extraJumpsApplied'.
+        MaxJumpsNet.Value -= server_extraJumpsApplied;
+        server_extraJumpsApplied = 0;
+        JumpBuffTurnsLeft.Value = 0; // Garante que está zerado
+
+        Debug.Log($"[PlayerMovement-SERVER] {name} (ID: {OwnerClientId}) PowerUp de pulo expirou.");
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (!IsOwner) return;
+        // ... (lógica existente)
 
-        if (collision.gameObject.TryGetComponent(out PlataformaInstavel platform))
+        // VERIFICAÇÃO DE COLISÃO COM PLATAFORMA (Não requer Tag, usa o Componente)
+        if (IsOwner)
         {
-            foreach (ContactPoint2D contact in collision.contacts)
+            if (collision.gameObject.TryGetComponent(out PlataformaInstavel platform))
             {
-                if (contact.normal.y > 0.5f)
+                foreach (ContactPoint2D contact in collision.contacts)
                 {
-                    if (platform.NetworkObject.IsSpawned)
+                    // 🔑 CORREÇÃO AQUI: A normal.y deve ser POSITIVA (apontando para cima) para ser o topo.
+                    if (contact.normal.y > 0.5f) // <--- CONDIÇÃO CORRIGIDA!
                     {
-                        NotifyPlatformTouchServerRpc(platform.NetworkObject);
+                        if (platform.NetworkObject.IsSpawned)
+                        {
+                            NotifyPlatformTouchServerRpc(platform.NetworkObject);
+                        }
+                        break;
                     }
-                    break;
                 }
             }
         }
     }
 }
+
 

@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c88749ed310ccae4bb16f47ce4346486, type: 3}
   m_Name: PowerUpPulo+2
   m_EditorClassIdentifier: 
-  durationTurns: 1
+  durationTurns: 3
   extraJumps: 2

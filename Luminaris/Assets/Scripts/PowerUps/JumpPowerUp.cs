@@ -8,12 +8,17 @@ public class JumpPowerUp : PowerUpModificador
 
     public override void Activate(GameObject target)
     {
-        if (target == null) return;
-        var player = target.GetComponent<PlayerMovement>();
-        if (player == null) return;
+        PlayerMovement player = target.GetComponent<PlayerMovement>();
 
-        // Chama o método do Player que adiciona o buff (servidor)
-        player.AddJumpPowerup_Server(extraJumps, durationTurns);
-        Debug.Log($"[JumpPowerUp] Aplicado em {player.name}: +{extraJumps} por {durationTurns} turns");
+        if (player != null)
+        {
+            player.ApplyJumpPowerUp(extraJumps, durationTurns);
+            Debug.Log($"PowerUp de Pulo ativado em {player.name} (+{extraJumps} pulos por {durationTurns} turnos)");
+        }
+    }
+
+    public override void Deactivate(GameObject target)
+    {
+        // Como já consumimos por turnos no Player, nada a fazer aqui
     }
 }

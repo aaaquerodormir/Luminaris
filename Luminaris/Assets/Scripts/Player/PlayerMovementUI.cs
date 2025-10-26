@@ -10,7 +10,7 @@ public class PlayerMovementUI : NetworkBehaviour
     );
 
     public int RemainingJumps => jumpsNetworked.Value;
-    public static event Action<PlayerMovementUI, int> OnJumpsChanged;
+    public static event System.Action<PlayerMovementUI, int> OnJumpsChanged;
 
     public void StartTurn(int maxJumps)
     {
@@ -56,4 +56,5 @@ public class PlayerMovementUI : NetworkBehaviour
         OnJumpsChanged?.Invoke(this, newVal);
     }
 }
+
 

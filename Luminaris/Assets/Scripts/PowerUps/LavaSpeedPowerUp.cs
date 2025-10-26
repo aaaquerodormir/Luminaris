@@ -9,15 +9,15 @@ public class LavaSpeedPowerUp : PowerUpModificador
 
     public override void Activate(GameObject target)
     {
-        if (!NetworkManager.Singleton.IsServer) return;
+        var lava = Object.FindFirstObjectByType<LavaRise>();
+        if (lava == null) return;
 
-        PlayerMovement player = target.GetComponent<PlayerMovement>();
-        if (player == null) return;
+        lava.AddSpeedModifier(newMultiplier, durationTurns);
+    }
 
-        LavaRise lava = Object.FindAnyObjectByType<LavaRise>();
-        if (lava != null)
-        {
-            lava.AddSpeedMultiplier(newMultiplier, DurationTurns, player.OwnerClientId);
-        }
+    public override void Deactivate(GameObject target)
+    {
+        // Lava já reseta sozinha quando turnsLeft <= 0
     }
 }
+

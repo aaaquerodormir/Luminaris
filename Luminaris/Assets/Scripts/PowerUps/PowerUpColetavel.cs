@@ -1,8 +1,10 @@
 ﻿using UnityEngine;
 using Unity.Netcode;
+using TMPro;
 
 [RequireComponent(typeof(NetworkObject))]
 public class PowerUpColetavel : NetworkBehaviour
+
 {
     [SerializeField] private GameObject feedBackTextualPrefab;
     [SerializeField] private PowerUpModificador powerModificador;
@@ -10,75 +12,100 @@ public class PowerUpColetavel : NetworkBehaviour
     [Header("Mensagem do Feedback")]
     [SerializeField] private string mensagemFeedback = "";
 
-    [SerializeField] private float pickupValidateRadius = 2f; // não crítico, só pra evitar pegar do outro lado do mapa
 
+    // 2. 'collected' só precisa existir no servidor.
+    // Evita que o servidor processe múltiplos triggers no mesmo frame.
+    private bool collectedOnServer = false;
+
+    // A lógica de 'IResettable' e 'startPos' foi removida.
+    // Em Netcode, para "resetar" um item coletado, o servidor
+    // deve re-spawnar o prefab do power-up, em vez de
+    // reativar um objeto local.
+
+    // 3. OnTriggerEnter2D SÓ DEVE EXECUTAR NO SERVIDOR
     private void OnTriggerEnter2D(Collider2D col)
     {
-        if (!col.CompareTag("Player")) return;
-        if (powerModificador == null) return;
+        // Apenas o servidor (Host) pode processar a coleta.
+        if (!IsServer) return;
 
-        var player = col.GetComponentInParent<PlayerMovement>();
-        if (player == null) return;
+        // Se já foi coletado pelo servidor, ignora.
+        if (collectedOnServer) return;
 
-        // Se estamos no servidor aplicamos direto
-        if (IsServer)
+        // Verifica se é um jogador e se o modificador existe
+        if (col.CompareTag("Player") && powerModificador != null)
         {
-            ApplyOnServer(player);
-            return;
+            // Tenta obter o NetworkObject do jogador para garantir
+            // que é um objeto de rede válido.
+            if (!col.TryGetComponent<PlayerMovement>(out var player))
+            {
+                Debug.LogWarning($"[PowerUpColetavel] Objeto {col.name} tem tag 'Player' mas não tem script 'PlayerMovement'.");
+                return;
+            }
+
+            // 4. LÓGICA AUTORITÁRIA (SERVER)
+
+            // Marca como coletado (no servidor)
+            collectedOnServer = true;
+            Debug.Log($"[PowerUp-SERVER] {col.name} (Client: {player.OwnerClientId}) coletou {gameObject.name}");
+
+            // Aplica o efeito (no servidor).
+            // O ScriptableObject (JumpPowerUp/LavaSpeedPowerUp)
+            // executará no servidor, modificando o estado de rede
+            // do PlayerMovement ou do LavaRise.
+            powerModificador.Activate(col.gameObject);
+
+            // 5. DISPARA FEEDBACK EM TODOS OS CLIENTES
+            Vector3 feedbackPos = transform.position + Vector3.up * 1f;
+
+            // Passa o ID do cliente que pegou, caso queira customizar a msg
+            // (Ex: "Você pegou!" vs "Player 2 pegou!")
+            NotifyClientsOfPickupClientRpc(player.OwnerClientId, mensagemFeedback, feedbackPos);
+
+            // 6. DESPAWNA O OBJETO DA REDE
+            // Isso remove o power-up para TODOS os jogadores.
+            if (NetworkObject.IsSpawned)
+            {
+                NetworkObject.Despawn();
+            }
+            else
+            {
+                // Fallback para testes (se não foi spawnado pela rede)
+                gameObject.SetActive(false);
+            }
+        }
+    }
+
+    // 7. CLIENT RPC PARA FEEDBACK
+    [ClientRpc]
+    private void NotifyClientsOfPickupClientRpc(ulong collectingClientId, string mensagem, Vector3 posicao)
+    {
+        // Este código executa em TODOS os clientes.
+
+        // Toca o som localmente
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.PlaySound("PowerUp");
         }
 
-        // Cliente: solicita ao servidor a coleta
-        RequestCollectServerRpc(player.OwnerClientId);
+        // Mostra o texto de feedback visual localmente
+        // Você pode usar o 'collectingClientId' para customizar a mensagem
+        // ex: if (collectingClientId == NetworkManager.Singleton.LocalClientId) { ... }
+        ShowFeedback(mensagem, posicao);
     }
 
-    [ServerRpc(RequireOwnership = false)]
-    private void RequestCollectServerRpc(ulong playerOwnerClientId, ServerRpcParams rpcParams = default)
-    {
-        // Simples: encontramos o player no servidor e aplicamos.
-        var all = FindObjectsByType<PlayerMovement>(FindObjectsSortMode.None);
-        PlayerMovement target = null;
-        foreach (var p in all)
-            if (p.NetworkObject.OwnerClientId == playerOwnerClientId) { target = p; break; }
-
-        if (target == null) return;
-
-        // Opcional: valida distância pra reduzir flagrante de cheat (não obrigatório)
-        float d = Vector3.Distance(transform.position, target.transform.position);
-        if (d > pickupValidateRadius) return;
-
-        ApplyOnServer(target);
-    }
-
-    private void ApplyOnServer(PlayerMovement target)
-    {
-        // 1) Aplica efeito (no servidor) — powerModificador cuida de chamar os métodos do Player
-        powerModificador.Activate(target.gameObject);
-
-        // 2) Notifica clients para mostrar feedback
-        ShowFeedbackClientRpc(mensagemFeedback, transform.position + Vector3.up * 1f);
-        PlaySoundClientRpc("PowerUp");
-
-        // 3) Despawn do objeto (servidor)
-        if (NetworkObject != null && NetworkObject.IsSpawned)
-            NetworkObject.Despawn(true);
-        else
-            gameObject.SetActive(false);
-    }
-
-    [ClientRpc]
-    private void ShowFeedbackClientRpc(string mensagem, Vector3 pos)
+    // Esta função é local e chamada pelo ClientRpc
+    private void ShowFeedback(string mensagem, Vector3 posicao)
     {
         if (feedBackTextualPrefab == null) return;
-        GameObject t = Instantiate(feedBackTextualPrefab, pos, Quaternion.identity);
-        var txt = t.GetComponentInChildren<TMPro.TextMeshProUGUI>();
-        if (txt != null) txt.text = mensagem;
-        t.transform.SetParent(null);
-        Destroy(t, 1.5f);
-    }
 
-    [ClientRpc]
-    private void PlaySoundClientRpc(string sound)
-    {
-        AudioManager.Instance?.PlaySound(sound);
+        // Instancia o feedback localmente.
+        // Isso NÃO precisa ser um NetworkObject.
+        GameObject temp = Instantiate(feedBackTextualPrefab, posicao, Quaternion.identity);
+        var textComp = temp.GetComponentInChildren<TextMeshProUGUI>();
+        if (textComp != null)
+            textComp.text = mensagem;
+
+        temp.transform.SetParent(null);
+        Destroy(temp, 1.5f);
     }
 }
