@@ -375,6 +375,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: PowerUpPulo (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 3980446886
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: SceneMigrationSynchronization
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 2074627154
+      objectReference: {fileID: 0}
     - target: {fileID: 6439115748960710005, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
       propertyPath: m_SortingOrder
       value: 1
@@ -397,6 +409,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 874269059}
     m_Modifications:
+    - target: {fileID: 669829392998171238, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 3772724796
+      objectReference: {fileID: 0}
+    - target: {fileID: 669829392998171238, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: SceneMigrationSynchronization
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 669829392998171238, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 331696544
+      objectReference: {fileID: 0}
     - target: {fileID: 6028353623979869689, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
       propertyPath: m_Name
       value: PowerUpLava
@@ -492,6 +516,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1206645033}
     m_Modifications:
+    - target: {fileID: 669829392998171238, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 2269978967
+      objectReference: {fileID: 0}
+    - target: {fileID: 669829392998171238, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: SceneMigrationSynchronization
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 669829392998171238, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 331696544
+      objectReference: {fileID: 0}
     - target: {fileID: 6028353623979869689, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
       propertyPath: m_Name
       value: PowerUpLava (5)
@@ -549,6 +585,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1534447227}
     m_Modifications:
+    - target: {fileID: 669829392998171238, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 3984640892
+      objectReference: {fileID: 0}
+    - target: {fileID: 669829392998171238, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: SceneMigrationSynchronization
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 669829392998171238, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 331696544
+      objectReference: {fileID: 0}
     - target: {fileID: 6028353623979869689, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
       propertyPath: m_Name
       value: PowerUpLava
@@ -1276,6 +1324,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2069854379}
     m_Modifications:
+    - target: {fileID: 669829392998171238, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 972009972
+      objectReference: {fileID: 0}
+    - target: {fileID: 669829392998171238, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: SceneMigrationSynchronization
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 669829392998171238, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 331696544
+      objectReference: {fileID: 0}
     - target: {fileID: 6028353623979869689, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
       propertyPath: m_Name
       value: PowerUpLava
@@ -1819,6 +1879,80 @@ MonoBehaviour:
   highlightedColor: {r: 0.95686275, g: 0.8352941, b: 0.39607844, a: 1}
   hoverSound: {fileID: 8300000, guid: bd2561dca6152da4ab822f30fa6157ed, type: 3}
   clickSound: {fileID: 8300000, guid: 86061330351d59b42b0b919953710575, type: 3}
+--- !u!1001 &163302087
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 2069854379}
+    m_Modifications:
+    - target: {fileID: 669829392998171238, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 29013922
+      objectReference: {fileID: 0}
+    - target: {fileID: 669829392998171238, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: SceneMigrationSynchronization
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 669829392998171238, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 331696544
+      objectReference: {fileID: 0}
+    - target: {fileID: 6028353623979869689, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: m_Name
+      value: PowerUpLava (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6753299463268027633, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -31.44
+      objectReference: {fileID: 0}
+    - target: {fileID: 6753299463268027633, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 8.49
+      objectReference: {fileID: 0}
+    - target: {fileID: 6753299463268027633, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6753299463268027633, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6753299463268027633, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6753299463268027633, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6753299463268027633, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6753299463268027633, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6753299463268027633, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6753299463268027633, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+--- !u!4 &163302088 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6753299463268027633, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+  m_PrefabInstance: {fileID: 163302087}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &164072062
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1879,6 +2013,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: PowerUpPulo (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 169523937
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: SceneMigrationSynchronization
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 2074627154
+      objectReference: {fileID: 0}
     - target: {fileID: 6439115748960710005, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
       propertyPath: m_SortingOrder
       value: 1
@@ -1901,6 +2047,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1534447227}
     m_Modifications:
+    - target: {fileID: 669829392998171238, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 634466756
+      objectReference: {fileID: 0}
+    - target: {fileID: 669829392998171238, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: SceneMigrationSynchronization
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 669829392998171238, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 331696544
+      objectReference: {fileID: 0}
     - target: {fileID: 6028353623979869689, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
       propertyPath: m_Name
       value: PowerUpLava (2)
@@ -2009,6 +2167,18 @@ PrefabInstance:
     - target: {fileID: 3537007080289609497, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
       propertyPath: m_Name
       value: PowerUpPulo (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 3648440318
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: SceneMigrationSynchronization
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 2074627154
       objectReference: {fileID: 0}
     - target: {fileID: 6439115748960710005, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
       propertyPath: m_SortingOrder
@@ -2249,6 +2419,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: PowerUpPulo (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 1786948948
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: SceneMigrationSynchronization
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 2074627154
+      objectReference: {fileID: 0}
     - target: {fileID: 6439115748960710005, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
       propertyPath: m_SortingOrder
       value: 1
@@ -2442,6 +2624,18 @@ PrefabInstance:
     - target: {fileID: 3537007080289609497, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
       propertyPath: m_Name
       value: PowerUpPulo (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 2830170829
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: SceneMigrationSynchronization
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 2074627154
       objectReference: {fileID: 0}
     - target: {fileID: 6439115748960710005, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
       propertyPath: m_SortingOrder
@@ -3022,6 +3216,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: PowerUpPulo (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 3037762551
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: SceneMigrationSynchronization
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 2074627154
+      objectReference: {fileID: 0}
     - target: {fileID: 6439115748960710005, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
       propertyPath: m_SortingOrder
       value: 1
@@ -3044,6 +3250,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1206645033}
     m_Modifications:
+    - target: {fileID: 669829392998171238, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 2849626774
+      objectReference: {fileID: 0}
+    - target: {fileID: 669829392998171238, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: SceneMigrationSynchronization
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 669829392998171238, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 331696544
+      objectReference: {fileID: 0}
     - target: {fileID: 6028353623979869689, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
       propertyPath: m_Name
       value: PowerUpLava (4)
@@ -3153,6 +3371,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: PowerUpPulo (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 3936999321
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: SceneMigrationSynchronization
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 2074627154
+      objectReference: {fileID: 0}
     - target: {fileID: 6439115748960710005, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
       propertyPath: m_SortingOrder
       value: 1
@@ -3239,6 +3469,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 874269059}
     m_Modifications:
+    - target: {fileID: 669829392998171238, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 3689798783
+      objectReference: {fileID: 0}
+    - target: {fileID: 669829392998171238, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: SceneMigrationSynchronization
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 669829392998171238, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 331696544
+      objectReference: {fileID: 0}
     - target: {fileID: 6028353623979869689, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
       propertyPath: m_Name
       value: PowerUpLava (3)
@@ -3426,6 +3668,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: PowerUpPulo (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 266376792
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: SceneMigrationSynchronization
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 2074627154
+      objectReference: {fileID: 0}
     - target: {fileID: 6439115748960710005, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
       propertyPath: m_SortingOrder
       value: 1
@@ -3526,6 +3780,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1851013905}
     m_Modifications:
+    - target: {fileID: 669829392998171238, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 745146180
+      objectReference: {fileID: 0}
+    - target: {fileID: 669829392998171238, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: SceneMigrationSynchronization
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 669829392998171238, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 331696544
+      objectReference: {fileID: 0}
     - target: {fileID: 6028353623979869689, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
       propertyPath: m_Name
       value: PowerUpLava (3)
@@ -3639,6 +3905,18 @@ PrefabInstance:
     - target: {fileID: 3537007080289609497, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
       propertyPath: m_Name
       value: PowerUpPulo (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 3924347933
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: SceneMigrationSynchronization
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 2074627154
       objectReference: {fileID: 0}
     - target: {fileID: 6439115748960710005, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
       propertyPath: m_SortingOrder
@@ -4128,6 +4406,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1534447227}
     m_Modifications:
+    - target: {fileID: 669829392998171238, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 2304173340
+      objectReference: {fileID: 0}
+    - target: {fileID: 669829392998171238, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: SceneMigrationSynchronization
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 669829392998171238, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 331696544
+      objectReference: {fileID: 0}
     - target: {fileID: 6028353623979869689, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
       propertyPath: m_Name
       value: PowerUpLava (4)
@@ -4373,6 +4663,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: PowerUpPulo (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 3404852037
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: SceneMigrationSynchronization
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 2074627154
+      objectReference: {fileID: 0}
     - target: {fileID: 6439115748960710005, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
       propertyPath: m_SortingOrder
       value: 1
@@ -4520,6 +4822,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1097816524}
     m_Modifications:
+    - target: {fileID: 669829392998171238, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 2477340736
+      objectReference: {fileID: 0}
+    - target: {fileID: 669829392998171238, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: SceneMigrationSynchronization
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 669829392998171238, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 331696544
+      objectReference: {fileID: 0}
     - target: {fileID: 6028353623979869689, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
       propertyPath: m_Name
       value: PowerUpLava (4)
@@ -4665,6 +4979,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: PowerUpPulo (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 3786842247
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: SceneMigrationSynchronization
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 2074627154
+      objectReference: {fileID: 0}
     - target: {fileID: 6439115748960710005, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
       propertyPath: m_SortingOrder
       value: 1
@@ -4738,6 +5064,18 @@ PrefabInstance:
     - target: {fileID: 3537007080289609497, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
       propertyPath: m_Name
       value: PowerUpPulo (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 1967598858
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: SceneMigrationSynchronization
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 2074627154
       objectReference: {fileID: 0}
     - target: {fileID: 6439115748960710005, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
       propertyPath: m_SortingOrder
@@ -4983,6 +5321,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2069854379}
     m_Modifications:
+    - target: {fileID: 669829392998171238, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 1085063224
+      objectReference: {fileID: 0}
+    - target: {fileID: 669829392998171238, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: SceneMigrationSynchronization
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 669829392998171238, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 331696544
+      objectReference: {fileID: 0}
     - target: {fileID: 6028353623979869689, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
       propertyPath: m_Name
       value: PowerUpLava (1)
@@ -5527,6 +5877,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1851013905}
     m_Modifications:
+    - target: {fileID: 669829392998171238, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 777600217
+      objectReference: {fileID: 0}
+    - target: {fileID: 669829392998171238, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: SceneMigrationSynchronization
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 669829392998171238, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 331696544
+      objectReference: {fileID: 0}
     - target: {fileID: 6028353623979869689, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
       propertyPath: m_Name
       value: PowerUpLava
@@ -6073,6 +6435,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: PowerUpPulo
       objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 1602746168
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: SceneMigrationSynchronization
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 2074627154
+      objectReference: {fileID: 0}
     - target: {fileID: 6439115748960710005, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
       propertyPath: m_SortingOrder
       value: 1
@@ -6194,6 +6568,18 @@ PrefabInstance:
     - target: {fileID: 3537007080289609497, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
       propertyPath: m_Name
       value: PowerUpPulo (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 116863569
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: SceneMigrationSynchronization
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 2074627154
       objectReference: {fileID: 0}
     - target: {fileID: 6439115748960710005, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
       propertyPath: m_SortingOrder
@@ -6398,6 +6784,18 @@ PrefabInstance:
     - target: {fileID: 3537007080289609497, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
       propertyPath: m_Name
       value: PowerUpPulo (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 621139519
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: SceneMigrationSynchronization
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 2074627154
       objectReference: {fileID: 0}
     - target: {fileID: 6439115748960710005, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
       propertyPath: m_SortingOrder
@@ -6625,6 +7023,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: PowerUpPulo (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 2951425513
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: SceneMigrationSynchronization
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 2074627154
+      objectReference: {fileID: 0}
     - target: {fileID: 6439115748960710005, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
       propertyPath: m_SortingOrder
       value: 1
@@ -6698,6 +7108,18 @@ PrefabInstance:
     - target: {fileID: 3537007080289609497, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
       propertyPath: m_Name
       value: PowerUpPulo (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 1040624610
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: SceneMigrationSynchronization
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 2074627154
       objectReference: {fileID: 0}
     - target: {fileID: 6439115748960710005, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
       propertyPath: m_SortingOrder
@@ -7101,6 +7523,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: PowerUpPulo (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 42088582
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: SceneMigrationSynchronization
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 2074627154
+      objectReference: {fileID: 0}
     - target: {fileID: 6439115748960710005, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
       propertyPath: m_SortingOrder
       value: 1
@@ -7128,6 +7562,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 874269059}
     m_Modifications:
+    - target: {fileID: 669829392998171238, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 906838186
+      objectReference: {fileID: 0}
+    - target: {fileID: 669829392998171238, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: SceneMigrationSynchronization
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 669829392998171238, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 331696544
+      objectReference: {fileID: 0}
     - target: {fileID: 6028353623979869689, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
       propertyPath: m_Name
       value: PowerUpLava (1)
@@ -7319,6 +7765,18 @@ PrefabInstance:
     - target: {fileID: 3537007080289609497, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
       propertyPath: m_Name
       value: PowerUpPulo (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 4209456537
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: SceneMigrationSynchronization
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 2074627154
       objectReference: {fileID: 0}
     - target: {fileID: 6439115748960710005, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
       propertyPath: m_SortingOrder
@@ -7637,6 +8095,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1097816524}
     m_Modifications:
+    - target: {fileID: 669829392998171238, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 1939942747
+      objectReference: {fileID: 0}
+    - target: {fileID: 669829392998171238, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: SceneMigrationSynchronization
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 669829392998171238, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 331696544
+      objectReference: {fileID: 0}
     - target: {fileID: 6028353623979869689, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
       propertyPath: m_Name
       value: PowerUpLava (3)
@@ -7802,6 +8272,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2069854379}
     m_Modifications:
+    - target: {fileID: 669829392998171238, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 3197797383
+      objectReference: {fileID: 0}
+    - target: {fileID: 669829392998171238, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: SceneMigrationSynchronization
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 669829392998171238, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 331696544
+      objectReference: {fileID: 0}
     - target: {fileID: 6028353623979869689, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
       propertyPath: m_Name
       value: PowerUpLava (3)
@@ -7958,6 +8440,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2069854379}
     m_Modifications:
+    - target: {fileID: 669829392998171238, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 106015683
+      objectReference: {fileID: 0}
+    - target: {fileID: 669829392998171238, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: SceneMigrationSynchronization
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 669829392998171238, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 331696544
+      objectReference: {fileID: 0}
     - target: {fileID: 6028353623979869689, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
       propertyPath: m_Name
       value: PowerUpLava (2)
@@ -8142,6 +8636,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: PowerUpPulo (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 3974291634
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: SceneMigrationSynchronization
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 2074627154
+      objectReference: {fileID: 0}
     - target: {fileID: 6439115748960710005, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
       propertyPath: m_SortingOrder
       value: 1
@@ -8216,6 +8722,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: PowerUpPulo (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 3672320844
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: SceneMigrationSynchronization
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 2074627154
+      objectReference: {fileID: 0}
     - target: {fileID: 6439115748960710005, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
       propertyPath: m_SortingOrder
       value: 1
@@ -8238,6 +8756,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1534447227}
     m_Modifications:
+    - target: {fileID: 669829392998171238, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 1424549326
+      objectReference: {fileID: 0}
+    - target: {fileID: 669829392998171238, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: SceneMigrationSynchronization
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 669829392998171238, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 331696544
+      objectReference: {fileID: 0}
     - target: {fileID: 6028353623979869689, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
       propertyPath: m_Name
       value: PowerUpLava (6)
@@ -8500,6 +9030,18 @@ PrefabInstance:
     - target: {fileID: 3537007080289609497, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
       propertyPath: m_Name
       value: PowerUpPulo
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 1772305169
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: SceneMigrationSynchronization
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 2074627154
       objectReference: {fileID: 0}
     - target: {fileID: 6439115748960710005, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
       propertyPath: m_SortingOrder
@@ -9026,6 +9568,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: PowerUpPulo (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 1889321819
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: SceneMigrationSynchronization
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 2074627154
+      objectReference: {fileID: 0}
     - target: {fileID: 6439115748960710005, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
       propertyPath: m_SortingOrder
       value: 1
@@ -9379,6 +9933,80 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6753299463268027633, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
   m_PrefabInstance: {fileID: 327325490}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1063261029
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 2069854379}
+    m_Modifications:
+    - target: {fileID: 669829392998171238, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 3571485115
+      objectReference: {fileID: 0}
+    - target: {fileID: 669829392998171238, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: SceneMigrationSynchronization
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 669829392998171238, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 331696544
+      objectReference: {fileID: 0}
+    - target: {fileID: 6028353623979869689, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: m_Name
+      value: PowerUpLava (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6753299463268027633, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1.06
+      objectReference: {fileID: 0}
+    - target: {fileID: 6753299463268027633, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 7.19
+      objectReference: {fileID: 0}
+    - target: {fileID: 6753299463268027633, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6753299463268027633, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6753299463268027633, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6753299463268027633, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6753299463268027633, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6753299463268027633, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6753299463268027633, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6753299463268027633, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+--- !u!4 &1063261030 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6753299463268027633, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+  m_PrefabInstance: {fileID: 1063261029}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1079652141
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9442,6 +10070,18 @@ PrefabInstance:
     - target: {fileID: 3537007080289609497, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
       propertyPath: m_Name
       value: PowerUpPulo (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 3404572211
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: SceneMigrationSynchronization
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 2074627154
       objectReference: {fileID: 0}
     - target: {fileID: 6439115748960710005, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
       propertyPath: m_SortingOrder
@@ -9517,6 +10157,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: PowerUpPulo (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 3974844505
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: SceneMigrationSynchronization
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 2074627154
+      objectReference: {fileID: 0}
     - target: {fileID: 6439115748960710005, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
       propertyPath: m_SortingOrder
       value: 1
@@ -9530,6 +10182,92 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 1184877703159799833, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
   m_PrefabInstance: {fileID: 1083122290}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1092122923
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 2069854379}
+    m_Modifications:
+    - target: {fileID: -258644934399997119, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: mensagemFeedback
+      value: +2 Pulos
+      objectReference: {fileID: 0}
+    - target: {fileID: -258644934399997119, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: feedbackTextPrefab
+      value: 
+      objectReference: {fileID: 2386259172372037562, guid: 9437baf268231174baab34208ea7ec15, type: 3}
+    - target: {fileID: 1184877703159799833, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -22.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 1184877703159799833, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 8.79
+      objectReference: {fileID: 0}
+    - target: {fileID: 1184877703159799833, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1184877703159799833, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1184877703159799833, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1184877703159799833, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1184877703159799833, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1184877703159799833, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1184877703159799833, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1184877703159799833, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3537007080289609497, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: m_Name
+      value: PowerUpPulo (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 3667984431
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: SceneMigrationSynchronization
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 2074627154
+      objectReference: {fileID: 0}
+    - target: {fileID: 6439115748960710005, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+--- !u!4 &1092122924 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1184877703159799833, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+  m_PrefabInstance: {fileID: 1092122923}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &1095492649 stripped
 Transform:
@@ -9720,6 +10458,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: PowerUpPulo (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 2141544442
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: SceneMigrationSynchronization
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 2074627154
+      objectReference: {fileID: 0}
     - target: {fileID: 6439115748960710005, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
       propertyPath: m_SortingOrder
       value: 1
@@ -9786,6 +10536,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 874269059}
     m_Modifications:
+    - target: {fileID: 669829392998171238, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 3007413164
+      objectReference: {fileID: 0}
+    - target: {fileID: 669829392998171238, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: SceneMigrationSynchronization
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 669829392998171238, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 331696544
+      objectReference: {fileID: 0}
     - target: {fileID: 6028353623979869689, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
       propertyPath: m_Name
       value: PowerUpLava (4)
@@ -9916,6 +10678,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1206645033}
     m_Modifications:
+    - target: {fileID: 669829392998171238, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 1072513854
+      objectReference: {fileID: 0}
+    - target: {fileID: 669829392998171238, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: SceneMigrationSynchronization
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 669829392998171238, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 331696544
+      objectReference: {fileID: 0}
     - target: {fileID: 6028353623979869689, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
       propertyPath: m_Name
       value: PowerUpLava
@@ -10075,6 +10849,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: PowerUpPulo (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 1323971995
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: SceneMigrationSynchronization
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 2074627154
+      objectReference: {fileID: 0}
     - target: {fileID: 6439115748960710005, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
       propertyPath: m_SortingOrder
       value: 1
@@ -10198,6 +10984,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1534447227}
     m_Modifications:
+    - target: {fileID: 669829392998171238, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 2001131314
+      objectReference: {fileID: 0}
+    - target: {fileID: 669829392998171238, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: SceneMigrationSynchronization
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 669829392998171238, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 331696544
+      objectReference: {fileID: 0}
     - target: {fileID: 6028353623979869689, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
       propertyPath: m_Name
       value: PowerUpLava (3)
@@ -10312,6 +11110,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: PowerUpPulo (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 3848438498
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: SceneMigrationSynchronization
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 2074627154
+      objectReference: {fileID: 0}
     - target: {fileID: 6439115748960710005, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
       propertyPath: m_SortingOrder
       value: 1
@@ -10334,6 +11144,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1851013905}
     m_Modifications:
+    - target: {fileID: 669829392998171238, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 2897004444
+      objectReference: {fileID: 0}
+    - target: {fileID: 669829392998171238, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: SceneMigrationSynchronization
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 669829392998171238, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 331696544
+      objectReference: {fileID: 0}
     - target: {fileID: 6028353623979869689, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
       propertyPath: m_Name
       value: PowerUpLava (2)
@@ -10553,6 +11375,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1097816524}
     m_Modifications:
+    - target: {fileID: 669829392998171238, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 1526641665
+      objectReference: {fileID: 0}
+    - target: {fileID: 669829392998171238, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: SceneMigrationSynchronization
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 669829392998171238, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 331696544
+      objectReference: {fileID: 0}
     - target: {fileID: 6028353623979869689, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
       propertyPath: m_Name
       value: PowerUpLava
@@ -10810,6 +11644,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1206645033}
     m_Modifications:
+    - target: {fileID: 669829392998171238, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 3300562322
+      objectReference: {fileID: 0}
+    - target: {fileID: 669829392998171238, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: SceneMigrationSynchronization
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 669829392998171238, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 331696544
+      objectReference: {fileID: 0}
     - target: {fileID: 6028353623979869689, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
       propertyPath: m_Name
       value: PowerUpLava (3)
@@ -10923,6 +11769,18 @@ PrefabInstance:
     - target: {fileID: 3537007080289609497, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
       propertyPath: m_Name
       value: PowerUpPulo (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 1689039280
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: SceneMigrationSynchronization
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 2074627154
       objectReference: {fileID: 0}
     - target: {fileID: 6439115748960710005, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
       propertyPath: m_SortingOrder
@@ -24545,6 +25403,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1206645033}
     m_Modifications:
+    - target: {fileID: 669829392998171238, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 499259357
+      objectReference: {fileID: 0}
+    - target: {fileID: 669829392998171238, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: SceneMigrationSynchronization
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 669829392998171238, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 331696544
+      objectReference: {fileID: 0}
     - target: {fileID: 6028353623979869689, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
       propertyPath: m_Name
       value: PowerUpLava (1)
@@ -24653,6 +25523,18 @@ PrefabInstance:
     - target: {fileID: 3537007080289609497, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
       propertyPath: m_Name
       value: PowerUpPulo (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 1426021382
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: SceneMigrationSynchronization
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 2074627154
       objectReference: {fileID: 0}
     - target: {fileID: 6439115748960710005, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
       propertyPath: m_SortingOrder
@@ -24829,6 +25711,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1097816524}
     m_Modifications:
+    - target: {fileID: 669829392998171238, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 19656442
+      objectReference: {fileID: 0}
+    - target: {fileID: 669829392998171238, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: SceneMigrationSynchronization
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 669829392998171238, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 331696544
+      objectReference: {fileID: 0}
     - target: {fileID: 6028353623979869689, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
       propertyPath: m_Name
       value: PowerUpLava (5)
@@ -24969,6 +25863,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1206645033}
     m_Modifications:
+    - target: {fileID: 669829392998171238, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 4187515290
+      objectReference: {fileID: 0}
+    - target: {fileID: 669829392998171238, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: SceneMigrationSynchronization
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 669829392998171238, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 331696544
+      objectReference: {fileID: 0}
     - target: {fileID: 6028353623979869689, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
       propertyPath: m_Name
       value: PowerUpLava (2)
@@ -25196,6 +26102,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1534447227}
     m_Modifications:
+    - target: {fileID: 669829392998171238, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 318874632
+      objectReference: {fileID: 0}
+    - target: {fileID: 669829392998171238, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: SceneMigrationSynchronization
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 669829392998171238, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 331696544
+      objectReference: {fileID: 0}
     - target: {fileID: 6028353623979869689, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
       propertyPath: m_Name
       value: PowerUpLava (5)
@@ -25354,6 +26272,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1851013905}
     m_Modifications:
+    - target: {fileID: 669829392998171238, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 1123045202
+      objectReference: {fileID: 0}
+    - target: {fileID: 669829392998171238, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: SceneMigrationSynchronization
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 669829392998171238, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 331696544
+      objectReference: {fileID: 0}
     - target: {fileID: 6028353623979869689, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
       propertyPath: m_Name
       value: PowerUpLava (5)
@@ -25794,6 +26724,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: PowerUpPulo (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 589575780
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: SceneMigrationSynchronization
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 2074627154
+      objectReference: {fileID: 0}
     - target: {fileID: 6439115748960710005, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
       propertyPath: m_SortingOrder
       value: 1
@@ -25867,6 +26809,18 @@ PrefabInstance:
     - target: {fileID: 3537007080289609497, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
       propertyPath: m_Name
       value: PowerUpPulo
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 3323619191
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: SceneMigrationSynchronization
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 2074627154
       objectReference: {fileID: 0}
     - target: {fileID: 6439115748960710005, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
       propertyPath: m_SortingOrder
@@ -25942,6 +26896,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: PowerUpPulo (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 3332158402
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: SceneMigrationSynchronization
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 2074627154
+      objectReference: {fileID: 0}
     - target: {fileID: 6439115748960710005, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
       propertyPath: m_SortingOrder
       value: 1
@@ -26016,6 +26982,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: PowerUpPulo (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 2233884602
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: SceneMigrationSynchronization
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 2074627154
+      objectReference: {fileID: 0}
     - target: {fileID: 6439115748960710005, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
       propertyPath: m_SortingOrder
       value: 1
@@ -26089,6 +27067,18 @@ PrefabInstance:
     - target: {fileID: 3537007080289609497, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
       propertyPath: m_Name
       value: PowerUpPulo (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 70404388
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: SceneMigrationSynchronization
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 2074627154
       objectReference: {fileID: 0}
     - target: {fileID: 6439115748960710005, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
       propertyPath: m_SortingOrder
@@ -26229,6 +27219,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1097816524}
     m_Modifications:
+    - target: {fileID: 669829392998171238, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 2612406168
+      objectReference: {fileID: 0}
+    - target: {fileID: 669829392998171238, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: SceneMigrationSynchronization
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 669829392998171238, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 331696544
+      objectReference: {fileID: 0}
     - target: {fileID: 6028353623979869689, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
       propertyPath: m_Name
       value: PowerUpLava (1)
@@ -26498,6 +27500,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: PowerUpPulo (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 452241069
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: SceneMigrationSynchronization
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 2074627154
+      objectReference: {fileID: 0}
     - target: {fileID: 6439115748960710005, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
       propertyPath: m_SortingOrder
       value: 1
@@ -26571,6 +27585,18 @@ PrefabInstance:
     - target: {fileID: 3537007080289609497, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
       propertyPath: m_Name
       value: PowerUpPulo
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 2553231485
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: SceneMigrationSynchronization
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 2074627154
       objectReference: {fileID: 0}
     - target: {fileID: 6439115748960710005, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
       propertyPath: m_SortingOrder
@@ -26646,6 +27672,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: PowerUpPulo (9)
       objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 826661094
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: SceneMigrationSynchronization
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 2074627154
+      objectReference: {fileID: 0}
     - target: {fileID: 6439115748960710005, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
       propertyPath: m_SortingOrder
       value: 1
@@ -26720,6 +27758,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: PowerUpPulo (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 2625005426
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: SceneMigrationSynchronization
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 2074627154
+      objectReference: {fileID: 0}
     - target: {fileID: 6439115748960710005, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
       propertyPath: m_SortingOrder
       value: 1
@@ -26793,6 +27843,18 @@ PrefabInstance:
     - target: {fileID: 3537007080289609497, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
       propertyPath: m_Name
       value: PowerUpPulo (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 1980836951
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: SceneMigrationSynchronization
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 2074627154
       objectReference: {fileID: 0}
     - target: {fileID: 6439115748960710005, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
       propertyPath: m_SortingOrder
@@ -26896,6 +27958,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 874269059}
     m_Modifications:
+    - target: {fileID: 669829392998171238, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 4008318196
+      objectReference: {fileID: 0}
+    - target: {fileID: 669829392998171238, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: SceneMigrationSynchronization
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 669829392998171238, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 331696544
+      objectReference: {fileID: 0}
     - target: {fileID: 6028353623979869689, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
       propertyPath: m_Name
       value: PowerUpLava (2)
@@ -27004,6 +28078,18 @@ PrefabInstance:
     - target: {fileID: 3537007080289609497, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
       propertyPath: m_Name
       value: PowerUpPulo (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 2188186179
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: SceneMigrationSynchronization
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 2074627154
       objectReference: {fileID: 0}
     - target: {fileID: 6439115748960710005, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
       propertyPath: m_SortingOrder
@@ -27183,6 +28269,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1851013905}
     m_Modifications:
+    - target: {fileID: 669829392998171238, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 2088519744
+      objectReference: {fileID: 0}
+    - target: {fileID: 669829392998171238, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: SceneMigrationSynchronization
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 669829392998171238, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 331696544
+      objectReference: {fileID: 0}
     - target: {fileID: 6028353623979869689, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
       propertyPath: m_Name
       value: PowerUpLava (4)
@@ -27405,6 +28503,18 @@ PrefabInstance:
     - target: {fileID: 3537007080289609497, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
       propertyPath: m_Name
       value: PowerUpPulo (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 3530101483
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: SceneMigrationSynchronization
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 2074627154
       objectReference: {fileID: 0}
     - target: {fileID: 6439115748960710005, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
       propertyPath: m_SortingOrder
@@ -27721,6 +28831,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: PowerUpPulo (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 1437821401
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: SceneMigrationSynchronization
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 2074627154
+      objectReference: {fileID: 0}
     - target: {fileID: 6439115748960710005, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
       propertyPath: m_SortingOrder
       value: 1
@@ -27794,6 +28916,18 @@ PrefabInstance:
     - target: {fileID: 3537007080289609497, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
       propertyPath: m_Name
       value: PowerUpPulo (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 463230742
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: SceneMigrationSynchronization
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 2074627154
       objectReference: {fileID: 0}
     - target: {fileID: 6439115748960710005, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
       propertyPath: m_SortingOrder
@@ -27895,6 +29029,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2069854379}
     m_Modifications:
+    - target: {fileID: 669829392998171238, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 3517559207
+      objectReference: {fileID: 0}
+    - target: {fileID: 669829392998171238, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: SceneMigrationSynchronization
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 669829392998171238, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 331696544
+      objectReference: {fileID: 0}
     - target: {fileID: 6028353623979869689, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
       propertyPath: m_Name
       value: PowerUpLava (4)
@@ -28003,6 +29149,18 @@ PrefabInstance:
     - target: {fileID: 3537007080289609497, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
       propertyPath: m_Name
       value: PowerUpPulo (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 2009446331
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: SceneMigrationSynchronization
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 2074627154
       objectReference: {fileID: 0}
     - target: {fileID: 6439115748960710005, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
       propertyPath: m_SortingOrder
@@ -28167,6 +29325,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1097816524}
     m_Modifications:
+    - target: {fileID: 669829392998171238, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 629718608
+      objectReference: {fileID: 0}
+    - target: {fileID: 669829392998171238, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: SceneMigrationSynchronization
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 669829392998171238, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 331696544
+      objectReference: {fileID: 0}
     - target: {fileID: 6028353623979869689, guid: 401b82fbf9037204eb26f3a3dd3675fd, type: 3}
       propertyPath: m_Name
       value: PowerUpLava (2)
@@ -28246,6 +29416,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1542988158}
+  - {fileID: 1988400123}
   - {fileID: 421619822}
   - {fileID: 29886194}
   - {fileID: 1822246582}
@@ -28932,6 +30103,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: PowerUpPulo (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 3685067308
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: SceneMigrationSynchronization
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 2074627154
+      objectReference: {fileID: 0}
     - target: {fileID: 6439115748960710005, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
       propertyPath: m_SortingOrder
       value: 1
@@ -29227,6 +30410,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: PowerUpPulo (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 1063015021
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: SceneMigrationSynchronization
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 2074627154
+      objectReference: {fileID: 0}
     - target: {fileID: 6439115748960710005, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
       propertyPath: m_SortingOrder
       value: 1
@@ -29300,6 +30495,18 @@ PrefabInstance:
     - target: {fileID: 3537007080289609497, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
       propertyPath: m_Name
       value: PowerUpPulo
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 103208134
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: SceneMigrationSynchronization
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 2074627154
       objectReference: {fileID: 0}
     - target: {fileID: 6439115748960710005, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
       propertyPath: m_SortingOrder
@@ -29504,6 +30711,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: PowerUpPulo (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 748333077
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: SceneMigrationSynchronization
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 2074627154
+      objectReference: {fileID: 0}
     - target: {fileID: 6439115748960710005, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
       propertyPath: m_SortingOrder
       value: 1
@@ -29533,6 +30752,92 @@ MonoBehaviour:
   ShowTopMostFoldoutHeaderGroup: 1
   TransitionStateInfoList: []
   m_Animator: {fileID: 1909042942}
+--- !u!1001 &1988400122
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1851013905}
+    m_Modifications:
+    - target: {fileID: -258644934399997119, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: mensagemFeedback
+      value: +2 Pulos
+      objectReference: {fileID: 0}
+    - target: {fileID: -258644934399997119, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: feedbackTextPrefab
+      value: 
+      objectReference: {fileID: 2386259172372037562, guid: 9437baf268231174baab34208ea7ec15, type: 3}
+    - target: {fileID: 1184877703159799833, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.69
+      objectReference: {fileID: 0}
+    - target: {fileID: 1184877703159799833, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 7.28
+      objectReference: {fileID: 0}
+    - target: {fileID: 1184877703159799833, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1184877703159799833, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1184877703159799833, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1184877703159799833, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1184877703159799833, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1184877703159799833, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1184877703159799833, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1184877703159799833, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3537007080289609497, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: m_Name
+      value: PowerUpPulo (10)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 3914145445
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: SceneMigrationSynchronization
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 2074627154
+      objectReference: {fileID: 0}
+    - target: {fileID: 6439115748960710005, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+--- !u!4 &1988400123 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1184877703159799833, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+  m_PrefabInstance: {fileID: 1988400122}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2003509818
 GameObject:
   m_ObjectHideFlags: 0
@@ -29859,6 +31164,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: PowerUpPulo (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 2259164143
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: SceneMigrationSynchronization
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 2074627154
+      objectReference: {fileID: 0}
     - target: {fileID: 6439115748960710005, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
       propertyPath: m_SortingOrder
       value: 1
@@ -30064,6 +31381,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: PowerUpPulo
       objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 486558325
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: SceneMigrationSynchronization
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 2074627154
+      objectReference: {fileID: 0}
     - target: {fileID: 6439115748960710005, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
       propertyPath: m_SortingOrder
       value: 1
@@ -30108,6 +31437,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1938430804}
+  - {fileID: 1092122924}
   - {fileID: 1539152236}
   - {fileID: 164072063}
   - {fileID: 1798235547}
@@ -30118,6 +31448,8 @@ Transform:
   - {fileID: 99254881}
   - {fileID: 586249104}
   - {fileID: 1308759878}
+  - {fileID: 163302088}
+  - {fileID: 1063261030}
   - {fileID: 631087409}
   - {fileID: 1473211277}
   m_Father: {fileID: 246708401}
@@ -30620,6 +31952,18 @@ PrefabInstance:
     - target: {fileID: 3537007080289609497, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
       propertyPath: m_Name
       value: PowerUpPulo (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 2505875871
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: SceneMigrationSynchronization
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977025617509132520, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 2074627154
       objectReference: {fileID: 0}
     - target: {fileID: 6439115748960710005, guid: 42ac2ed2950b24142b0cac5640777caa, type: 3}
       propertyPath: m_SortingOrder
