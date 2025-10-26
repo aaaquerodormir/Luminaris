@@ -38,7 +38,6 @@ public class TurnControl : NetworkBehaviour
             yield return new WaitForSeconds(0.5f);
         }
 
-        // Garante ordem fixa de OwnerClientId (Player1 = host)
         players = players.OrderBy(p => p.OwnerClientId).ToList();
         Debug.Log($"[TurnControl] 🟢 {players.Count} jogadores detectados. Iniciando sequência.");
 
@@ -49,10 +48,7 @@ public class TurnControl : NetworkBehaviour
     {
         var found = FindObjectsByType<PlayerMovement>(FindObjectsSortMode.None);
         foreach (var p in found)
-        {
-            if (!players.Contains(p))
-                players.Add(p);
-        }
+            if (!players.Contains(p)) players.Add(p);
     }
 
     public void RegisterPlayer(PlayerMovement player)
@@ -85,6 +81,9 @@ public class TurnControl : NetworkBehaviour
         var current = players[currentIndex.Value];
         current?.SetTurnActiveServerRpc(false);
 
+        // NOVO: decrementar buffs do jogador cujo turno acabou
+        current?.OnTurnEndedServer();
+
         currentIndex.Value = (currentIndex.Value + 1) % players.Count;
         Debug.Log($"[TurnControl] 🔁 Passando turno -> {players[currentIndex.Value].name}");
         TriggerTurnStarted(players[currentIndex.Value]);
@@ -94,7 +93,6 @@ public class TurnControl : NetworkBehaviour
     {
         if (player == null) return;
 
-        // 🔑 CORREÇÃO CRÍTICA: Resetar a NetworkVariable aqui no Server
         if (IsServer)
         {
             player.CompletedJumpsNet.Value = 0;

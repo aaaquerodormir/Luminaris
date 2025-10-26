@@ -1,20 +1,23 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 [CreateAssetMenu(menuName = "PowerUps/Lava Speed Power Up")]
 public class LavaSpeedPowerUp : PowerUpModificador
 {
-    [SerializeField] private float newMultiplier = 0.5f;
+    [Header("Config do PowerUp")]
+    [Tooltip("Multiplicador aplicado ao movimento do jogador (ex: 1.5 → +50% velocidade)")]
+    [SerializeField] private float newMultiplier = 1.5f;
 
     public override void Activate(GameObject target)
     {
-        var lava = Object.FindFirstObjectByType<LavaRise>();
-        if (lava == null) return;
+        if (!NetworkManager.Singleton.IsServer) return;
 
-        //lava.AddSpeedModifier(newMultiplier, durationTurns);
-    }
+        PlayerMovement player = target.GetComponent<PlayerMovement>();
+        if (player == null) return;
 
-    public override void Deactivate(GameObject target)
-    {
-        // Lava j� reseta sozinha quando turnsLeft <= 0
+        LavaRise lava = Object.FindAnyObjectByType<LavaRise>();
+        if (lava != null)
+        {
+            lava.AddSpeedMultiplier(newMultiplier, DurationTurns, player.OwnerClientId);
+        }
     }
 }

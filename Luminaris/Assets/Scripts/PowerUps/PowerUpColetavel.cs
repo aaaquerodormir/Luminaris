@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using Unity.Netcode;
 
-public class PowerUpColetavel : MonoBehaviour, IResettable
+[RequireComponent(typeof(NetworkObject))]
+public class PowerUpColetavel : NetworkBehaviour
 {
     [SerializeField] private GameObject feedBackTextualPrefab;
     [SerializeField] private PowerUpModificador powerModificador;
@@ -9,47 +10,75 @@ public class PowerUpColetavel : MonoBehaviour, IResettable
     [Header("Mensagem do Feedback")]
     [SerializeField] private string mensagemFeedback = "";
 
-    private Vector3 startPos;
-    private bool collected = false;
-
-    private void Start()
-    {
-        startPos = transform.position;
-        //GameManager.Instance.RegisterResettable(this);
-        Debug.Log($"[PowerUpColetavel] Registrado resetável {gameObject.name}");
-    }
+    [SerializeField] private float pickupValidateRadius = 2f; // não crítico, só pra evitar pegar do outro lado do mapa
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.CompareTag("Player") && powerModificador != null && !collected)
-        {
-            Debug.Log($"[PowerUpColetavel] {col.name} coletou {gameObject.name}");
-            powerModificador.Activate(col.gameObject);
-            collected = true;
+        if (!col.CompareTag("Player")) return;
+        if (powerModificador == null) return;
 
-            AudioManager.Instance.PlaySound("PowerUp");
-            ShowFeedback(mensagemFeedback, transform.position + Vector3.up * 1f);
-            gameObject.SetActive(false);
+        var player = col.GetComponentInParent<PlayerMovement>();
+        if (player == null) return;
+
+        // Se estamos no servidor aplicamos direto
+        if (IsServer)
+        {
+            ApplyOnServer(player);
+            return;
         }
+
+        // Cliente: solicita ao servidor a coleta
+        RequestCollectServerRpc(player.OwnerClientId);
     }
 
-    private void ShowFeedback(string mensagem, Vector3 posicao)
+    [ServerRpc(RequireOwnership = false)]
+    private void RequestCollectServerRpc(ulong playerOwnerClientId, ServerRpcParams rpcParams = default)
+    {
+        // Simples: encontramos o player no servidor e aplicamos.
+        var all = FindObjectsByType<PlayerMovement>(FindObjectsSortMode.None);
+        PlayerMovement target = null;
+        foreach (var p in all)
+            if (p.NetworkObject.OwnerClientId == playerOwnerClientId) { target = p; break; }
+
+        if (target == null) return;
+
+        // Opcional: valida distância pra reduzir flagrante de cheat (não obrigatório)
+        float d = Vector3.Distance(transform.position, target.transform.position);
+        if (d > pickupValidateRadius) return;
+
+        ApplyOnServer(target);
+    }
+
+    private void ApplyOnServer(PlayerMovement target)
+    {
+        // 1) Aplica efeito (no servidor) — powerModificador cuida de chamar os métodos do Player
+        powerModificador.Activate(target.gameObject);
+
+        // 2) Notifica clients para mostrar feedback
+        ShowFeedbackClientRpc(mensagemFeedback, transform.position + Vector3.up * 1f);
+        PlaySoundClientRpc("PowerUp");
+
+        // 3) Despawn do objeto (servidor)
+        if (NetworkObject != null && NetworkObject.IsSpawned)
+            NetworkObject.Despawn(true);
+        else
+            gameObject.SetActive(false);
+    }
+
+    [ClientRpc]
+    private void ShowFeedbackClientRpc(string mensagem, Vector3 pos)
     {
         if (feedBackTextualPrefab == null) return;
-        GameObject temp = Instantiate(feedBackTextualPrefab, posicao, Quaternion.identity);
-        var textComp = temp.GetComponentInChildren<TMPro.TextMeshProUGUI>();
-        if (textComp != null)
-            textComp.text = mensagem;
-
-        temp.transform.SetParent(null);
-        Destroy(temp, 1.5f);
+        GameObject t = Instantiate(feedBackTextualPrefab, pos, Quaternion.identity);
+        var txt = t.GetComponentInChildren<TMPro.TextMeshProUGUI>();
+        if (txt != null) txt.text = mensagem;
+        t.transform.SetParent(null);
+        Destroy(t, 1.5f);
     }
 
-    public void ResetState()
+    [ClientRpc]
+    private void PlaySoundClientRpc(string sound)
     {
-        collected = false;
-        transform.position = startPos;
-        gameObject.SetActive(true);
-        Debug.Log($"[PowerUpColetavel] Resetado {gameObject.name}");
+        AudioManager.Instance?.PlaySound(sound);
     }
 }

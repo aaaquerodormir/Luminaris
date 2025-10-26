@@ -12,10 +12,10 @@ public class LavaRise : NetworkBehaviour
     //[SerializeField] private Transform player1;
     //[SerializeField] private Transform player2;
 
-    //private float speedModifier = 1f;
-    //private int turnsLeft = 0;
-    //private int totalTurns = 0;
-    //private int savedTurns = 0;
+    private float speedModifier = 1f;
+    private int turnsLeft = 0;
+    private int totalTurns = 0;
+    private int savedTurns = 0;
 
     private float safeZoneHeight = -Mathf.Infinity;
     private float currentSpeed;
