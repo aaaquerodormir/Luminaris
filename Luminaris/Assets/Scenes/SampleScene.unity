@@ -29802,6 +29802,7 @@ GameObject:
   - component: {fileID: 1885562396}
   - component: {fileID: 1885562398}
   - component: {fileID: 1885562397}
+  - component: {fileID: 1885562400}
   - component: {fileID: 1885562399}
   m_Layer: 5
   m_Name: PauseMenu
@@ -29881,10 +29882,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa40680e0d8c60d45a2f488079913a2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
   pauseUI: {fileID: 942902739}
   optionsUI: {fileID: 1027310741}
   confirmationUI: {fileID: 1326465732}
   pauseAction: {fileID: 2685324879968096250, guid: 03f621bcf66b04046a24ebfccf5c71b6, type: 3}
+--- !u!114 &1885562400
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1885562395}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 3288638877
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  DeferredDespawnTick: 0
+  Ownership: 1
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 0
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+  SyncOwnerTransformWhenParented: 1
+  AllowOwnerToParent: 0
 --- !u!1 &1902057272
 GameObject:
   m_ObjectHideFlags: 0
