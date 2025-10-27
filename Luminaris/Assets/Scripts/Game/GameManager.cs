@@ -179,24 +179,71 @@ public class GameManager : NetworkBehaviour
     // ==========================
     // ==== REINICIAR ===========
     // ==========================
-    public void TryAgain()
+
+    /// <summary>
+    /// Esta é a função pública que o botão da UI (GameOverMenu) deve chamar.
+    /// Ela funciona se chamada pelo Host ou por um Cliente.
+    /// </summary>
+    public void RequestRetryGame()
     {
-        Debug.Log("[GameManager] Reiniciando partida.");
+        Debug.Log("[GameManager] Recebida solicitação de Retry. Enviando ao servidor.");
 
-        if (gameOverUI != null) gameOverUI.SetActive(false);
+        // Não alteramos o Time.timeScale ou a UI localmente.
+        // Deixamos o servidor ditar o estado para todos ao mesmo tempo.
+        RequestRetryGameServerRpc();
+    }
+
+    /// <summary>
+    /// Este RPC é chamado por um cliente E pelo host para notificar o servidor
+    /// que o jogo deve ser reiniciado.
+    /// </summary>
+    [ServerRpc(RequireOwnership = false)]
+    private void RequestRetryGameServerRpc(ServerRpcParams rpcParams = default)
+    {
+        // Apenas o servidor pode executar esta lógica
+        if (!IsServer) return;
+
+        Debug.Log($"[GameManager-SERVER] Cliente {rpcParams.Receive.SenderClientId} requisitou reinício. Enviando ClientRpc para todos.");
+
+        // Chama o ClientRpc para todos (incluindo o servidor)
+        // resetarem seu estado local e se prepararem para o reinício.
+        ResetStateAndReloadClientRpc();
+    }
+
+    [ClientRpc]
+    private void ResetStateAndReloadClientRpc()
+    {
+        Debug.Log($"[GameManager-CLIENT {NetworkManager.Singleton.LocalClientId}] Recebido comando de Reset. Restaurando Time.timeScale e UI.");
+
+        // 1. Restaura o estado local em TODOS os clientes
         Time.timeScale = 1f;
-
-        if (player1 != null) player1.Respawn();
-        if (player2 != null) player2.Respawn();
-
-        if (turnControl != null)
-            turnControl.ResetTurns();
-
-        if (pauseMenu != null) pauseMenu.gameObject.SetActive(true);
-        if (hudContainer != null) hudContainer.SetActive(true);
-
         isGameOver = false;
-        OnTryAgain?.Invoke();
+
+        // 2. Restaura a UI local em TODOS os clientes
+        if (gameOverUI != null) gameOverUI.SetActive(false);
+        if (hudContainer != null) hudContainer.SetActive(true);
+        if (pauseMenu != null) pauseMenu.gameObject.SetActive(false);
+        if (victoryUI != null) victoryUI.SetActive(false);
+        if (victoryMenuWrapper != null) victoryMenuWrapper.SetActive(false);
+        if (turnChangePanel != null) turnChangePanel.SetActive(false);
+
+        // 3. APENAS o Servidor/Host é responsável por
+        //    REALMENTE carregar a cena para todos.
+        //    Ele faz isso DEPOIS de resetar seu próprio estado local (acima).
+        if (IsServer)
+        {
+            Debug.Log("[GameManager-SERVER] Estado local resetado (via ClientRpc). Carregando a cena agora.");
+
+            var sceneName = SceneManager.GetActiveScene().name;
+            if (NetworkManager.Singleton != null)
+            {
+                NetworkManager.Singleton.SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
+            }
+            else
+            {
+                Debug.LogError("[GameManager-SERVER] NetworkManager.Singleton é nulo! Não é possível recarregar a cena.");
+            }
+        }
     }
     // ==========================
     // ==== GAME OVER RPC =======

@@ -1,20 +1,22 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 [CreateAssetMenu(menuName = "PowerUps/Lava Speed Power Up")]
 public class LavaSpeedPowerUp : PowerUpModificador
 {
-    [SerializeField] private float newMultiplier = 0.5f;
+    [Header("Config do PowerUp")]
+    [SerializeField] private float newMultiplier = 1.5f;
 
     public override void Activate(GameObject target)
     {
         var lava = Object.FindFirstObjectByType<LavaRise>();
         if (lava == null) return;
 
-        //lava.AddSpeedModifier(newMultiplier, durationTurns);
+        lava.AddSpeedModifier(newMultiplier, durationTurns);
     }
 
     public override void Deactivate(GameObject target)
     {
-        // Lava j� reseta sozinha quando turnsLeft <= 0
+        // Lava já reseta sozinha quando turnsLeft <= 0
     }
 }
+

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7326853868700737663}
   - component: {fileID: 5869185372875267865}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Light 2D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,7 +97,8 @@ GameObject:
   - component: {fileID: 167122386048994211}
   - component: {fileID: 5357678398082115035}
   - component: {fileID: 7335962084324734956}
-  m_Layer: 0
+  - component: {fileID: 3848285140750413301}
+  m_Layer: 7
   m_Name: CheckPoint Player 2 Inicial
   m_TagString: Checkpoint
   m_Icon: {fileID: 0}
@@ -262,3 +263,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &3848285140750413301
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6600955930297275751}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8d0727d5ae3244e3b569694d3912374, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  TransitionStateInfoList: []
+  m_Animator: {fileID: 7335962084324734956}

@@ -8,8 +8,6 @@ using System.Linq;
 public class JumpHUD : MonoBehaviour
 {
     [Header("Referências")]
-    //[SerializeField] private Image player1Icon;
-    //[SerializeField] private PlayerMovementUI linkedPlayer;  // vincule no inspector
     [SerializeField] private Image jumpIcon;
     [SerializeField] private TextMeshProUGUI jumpText;
 
@@ -120,5 +118,6 @@ public class JumpHUD : MonoBehaviour
         Debug.Log($"[HUD:{name}] Atualizado → Client ID {clientId} ({jumps} pulos restantes)");
     }
 }
+
 
 

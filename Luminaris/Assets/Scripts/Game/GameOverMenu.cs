@@ -3,7 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class GameOverMenu : MonoBehaviour
 {
-    [SerializeField] private GameManager gameManager;
+    //[SerializeField] private GameManager gameManager;
     [SerializeField] private string mainMenuScene = "Menu";
     [SerializeField] private GameObject confirmationUI;
 
@@ -27,8 +27,19 @@ public class GameOverMenu : MonoBehaviour
 
     public void TryAgain()
     {
-        AudioManager.Instance.ResumeAllLoops(); //  retoma ao recomeçar
-        gameManager.TryAgain();
+        AudioManager.Instance.ResumeAllLoops(); // retoma ao recomeçar
+
+        // Chame o Singleton diretamente.
+        // Isto é mais robusto contra recarregamento de cena.
+        if (GameManager.Instance != null)
+        {
+            // Chame o método que inicia o processo de rede
+            GameManager.Instance.RequestRetryGame();
+        }
+        else
+        {
+            Debug.LogError("[GameOverMenu] GameManager.Instance não foi encontrado!");
+        }
     }
 
     public void ReturnToMainMenu()
@@ -36,7 +47,15 @@ public class GameOverMenu : MonoBehaviour
         OpenConfirmation(() =>
         {
             Time.timeScale = 1f;
-            AudioManager.Instance.ResumeAllLoops(); // garante que não fique pausado
+            AudioManager.Instance.ResumeAllLoops();
+
+            // Desconectar ANTES de carregar o menu
+            if (Unity.Netcode.NetworkManager.Singleton != null)
+            {
+                Unity.Netcode.NetworkManager.Singleton.Shutdown();
+            }
+
+            // Agora sim, carregar o menu localmente
             SceneManager.LoadScene(mainMenuScene);
         });
     }
