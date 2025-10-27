@@ -19,10 +19,19 @@ public class PlayerMovement : NetworkBehaviour
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private NetworkAnimator netAnimator;
 
-
-    [Header("Movement")]
-    [SerializeField] private float moveSpeed = 3f;
+    [Header("Jump Physics (Integrado)")]
     [SerializeField] private float jumpForce = 8f;
+    [SerializeField] private float coyoteTime = 0.1f;
+    [SerializeField] private float jumpBufferTime = 0.1f;
+    [SerializeField] private float jumpCutMultiplier = 0.5f;
+    [SerializeField] private float jumpHangGravityMultiplier = 0.5f;
+    [SerializeField] private float jumpHangThreshold = 0.1f;
+
+    [Header("Gravity (Integrado)")]
+    [SerializeField] private float gravityScale = 4f;
+    [SerializeField] private float fallGravityMultiplier = 2f;
+
+    [SerializeField] private float moveSpeed = 3f;
 
 
     [Header("Ground Check")]
@@ -30,6 +39,10 @@ public class PlayerMovement : NetworkBehaviour
     [SerializeField] private float groundRadius = 0.2f;
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private Transform groundCheck;
+
+    private float lastOnGroundTime;
+    private float lastPressedJumpTime;
+    private bool isJumpCut;
 
     [Header("Controle de Pulo")]
     [SerializeField] private int baseMaxJumps = 3;
@@ -41,12 +54,12 @@ public class PlayerMovement : NetworkBehaviour
         3, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server
     );
 
-    // ⬇️ NOVO: Rastreia a duração do power-up de pulo ⬇️
+    //Rastreia a duração do power-up de pulo
     public readonly NetworkVariable<int> JumpBuffTurnsLeft = new(
         0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server
     );
 
-    // ⬇️ NOVO: Apenas o servidor usa isso para lembrar o quanto reverter ⬇️
+    //Apenas o servidor usa isso para lembrar o quanto reverter
     private int server_extraJumpsApplied = 0;
     private bool pendingJump = false;
     public event System.Action<ulong, int> OnTurnStarted;
@@ -58,8 +71,10 @@ public class PlayerMovement : NetworkBehaviour
     private bool isGrounded;
     private bool wasGrounded;
     private bool isMyTurn = false;
-    private bool facingRight = false;
+    private bool facingRight = true;
     private Vector2 moveInput;
+
+    private AudioSource walkAudio;
 
     // sincroniza flip entre host/client
     private readonly NetworkVariable<bool> netFacingRight =
@@ -72,7 +87,7 @@ public class PlayerMovement : NetworkBehaviour
         if (!anim) anim = GetComponent<Animator>();
         if (!spriteRenderer) spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         if (!netAnimator) netAnimator = GetComponent<NetworkAnimator>();
-        //if (!playerUI) playerUI = GetComponent<PlayerMovementUI>();
+        rb.gravityScale = gravityScale;
     }
 
     public override void OnNetworkSpawn()
@@ -80,24 +95,32 @@ public class PlayerMovement : NetworkBehaviour
         base.OnNetworkSpawn();
         netFacingRight.OnValueChanged += (_, __) => UpdateFacingDirection();
 
-        // ⬇️ MODIFICAÇÃO AQUI ⬇️
-        // Removemos o 'HandleJumpsChanged' antigo.
-        // CompletedJumpsNet.OnValueChanged += HandleJumpsChanged; // <--- REMOVA/COMENTE ESTA LINHA
-
-        // Precisamos ouvir AMBAS as variáveis que afetam os pulos restantes.
-        // Usamos a mesma função de callback para as duas.
         CompletedJumpsNet.OnValueChanged += OnJumpVariablesChanged;
         MaxJumpsNet.OnValueChanged += OnJumpVariablesChanged;
-        // ⬆️ FIM DA MODIFICAÇÃO ⬆️
 
-        if (IsOwner) EnableInputs();
-        else DisableInputs();
+        if (IsOwner)
+        {
+            EnableInputs();
+
+            // ==== ÁUDIO (INTEGRADO) ====
+            // Apenas o Owner precisa instanciar o áudio de loop local.
+            if (AudioManager.Instance != null)
+            {
+                walkAudio = AudioManager.Instance.PlayLoop("Andando", gameObject);
+                if (walkAudio != null)
+                    walkAudio.Stop(); // Começa parado
+            }
+            else
+            {
+                Debug.LogWarning("[PlayerMovement] AudioManager.Instance não encontrado!");
+            }
+        }
+        else
+        {
+            DisableInputs();
+        }
 
         Debug.Log($"[PlayerMovement:{name}] NetworkSpawn — Owner={IsOwner} ({OwnerClientId})");
-
-        // ⬇️ NOVO: Garante que a UI tenha o valor correto no Spawn ⬇️
-        // (Isso é bom para jogadores que se conectam tarde)
-        // Disparamos manualmente no início para sincronizar a UI com o estado inicial.
         OnJumpVariablesChanged(0, 0);
     }
 
@@ -106,58 +129,26 @@ public class PlayerMovement : NetworkBehaviour
         base.OnDestroy();
         if (IsOwner) DisableInputs();
         netFacingRight.OnValueChanged -= (_, __) => UpdateFacingDirection();
-
-        // ⬇️ MODIFICAÇÃO AQUI ⬇️
-        // CompletedJumpsNet.OnValueChanged -= HandleJumpsChanged; // <--- REMOVA/COMENTE ESTA LINHA
-
-        // Garante que estamos desassinando os novos callbacks
         CompletedJumpsNet.OnValueChanged -= OnJumpVariablesChanged;
         MaxJumpsNet.OnValueChanged -= OnJumpVariablesChanged;
-        // ⬆️ FIM DA MODIFICAÇÃO ⬆️
     }
 
-    // ⬇️ ESTE É O NOVO MÉTODO CENTRAL ⬇️
-    /// <summary>
-    /// Este callback é disparado em TODOS OS CLIENTES quando
-    /// MaxJumpsNet ou CompletedJumpsNet mudam de valor na rede.
-    /// </summary>
     private void OnJumpVariablesChanged(int oldVal, int newVal)
     {
-        // 1. Calcula o valor restante
         int remaining = MaxJumpsNet.Value - CompletedJumpsNet.Value;
-
-        // 2. Dispara o evento estático do JumpHUD.
-        // O JumpHUD (sendo uma classe de UI local) está escutando este evento
-        // e filtrará pelo OwnerClientId correto.
         JumpHUD.NotifyJumpsChanged(OwnerClientId, remaining);
     }
 
-    // CALLBACK DE REDE: Dispara em TODOS os clientes quando CompletedJumpsNet muda
-    //private void HandleJumpsChanged(int oldVal, int newVal)
-    //{
-    //    int remaining = MaxJumpsNet.Value - newVal;
-    //    // Chama o método para todos os HUDs atualizarem sua exibição
-    //    UpdateJumpsClientRpc(remaining);
-    //}
-
-    // CLIENT RPC: Garante que a UI seja atualizada em todos
-    //[ClientRpc]
-    //private void UpdateJumpsClientRpc(int remainingJumps)
-    //{
-    //    // 🔑 MUDANÇA AQUI: Chame o método público estático para disparar o evento
-    //    JumpHUD.NotifyJumpsChanged(OwnerClientId, remainingJumps); // <-- CORREÇÃO
-
-    //    Debug.Log($"[SYNC-RPC:{OwnerClientId}] Novo total de pulos: {remainingJumps}");
-    //}
-
-    // ==============================
     private void EnableInputs()
     {
         moveAction?.action.Enable();
         if (jumpAction != null)
         {
             jumpAction.action.Enable();
-            jumpAction.action.performed += OnJump;
+            // 'Performed' ativa o Jump Buffer
+            jumpAction.action.performed += OnJumpPressed;
+            // 'Canceled' ativa o Jump Cut
+            jumpAction.action.canceled += OnJumpReleased;
         }
     }
 
@@ -167,27 +158,116 @@ public class PlayerMovement : NetworkBehaviour
         if (jumpAction != null)
         {
             jumpAction.action.Disable();
-            jumpAction.action.performed -= OnJump;
+            jumpAction.action.performed -= OnJumpPressed;
+            jumpAction.action.canceled -= OnJumpReleased;
         }
+    }
+
+    // Chamado quando o botão de pulo é PRESSIONADO
+    private void OnJumpPressed(InputAction.CallbackContext ctx)
+    {
+        if (!IsOwner || !isMyTurn) return;
+
+        // Ativa o Jump Buffer
+        lastPressedJumpTime = jumpBufferTime;
+    }
+
+    // Chamado quando o botão de pulo é SOLTO
+    private void OnJumpReleased(InputAction.CallbackContext ctx)
+    {
+        if (!IsOwner || !isMyTurn) return;
+
+        // Ativa o Jump Cut
+        if (rb.linearVelocity.y > 0)
+            isJumpCut = true;
     }
 
     // ==============================
     private void Update()
     {
         CheckGround();
-        bool isMoving = Mathf.Abs(moveInput.x) > 0.1f;
+
+        // Atualiza animações para todos
+        bool isMoving = Mathf.Abs(moveInput.x) > 0.1f;
         float yVel = rb.linearVelocity.y;
         UpdateAnimatorServerRpc(isMoving, isGrounded, yVel);
 
-        if (!IsOwner || !isMyTurn) return;
+        // Lógica do Owner (Input, Áudio, e Lógica de Pulo)
+        if (!IsOwner || !isMyTurn)
+        {
+            // Zera os timers se não for nosso turno
+            lastOnGroundTime = 0;
+            lastPressedJumpTime = 0;
+            return;
+        }
 
-        moveInput = moveAction != null ? moveAction.action.ReadValue<Vector2>() : Vector2.zero;
+        // 1. Ler Input
+        moveInput = moveAction.action.ReadValue<Vector2>();
+
+        // 2. Lógica de Áudio (INTEGRADO)
+        if (walkAudio != null)
+        {
+            bool isMovingOnGround = isMoving && isGrounded;
+            if (isMovingOnGround && !walkAudio.isPlaying)
+            {
+                walkAudio.Play();
+            }
+            else if (!isMovingOnGround && walkAudio.isPlaying)
+            {
+                walkAudio.Stop();
+            }
+        }
+
+        // 3. Lógica de Pulo (Timers) (INTEGRADO)
+        lastOnGroundTime -= Time.deltaTime;
+        lastPressedJumpTime -= Time.deltaTime;
+
+        // 4. Lógica de Pulo (Execução) (INTEGRADO)
+        bool hasJumpsLeft = CompletedJumpsNet.Value < MaxJumpsNet.Value;
+
+        // A flag 'pendingJump' previne pular (usando Coyote)
+        // antes de aterrissar o pulo anterior.
+        if (lastPressedJumpTime > 0 && lastOnGroundTime > 0 && hasJumpsLeft && !pendingJump)
+        {
+            Jump();
+        }
     }
 
     private void FixedUpdate()
     {
-        if (!IsOwner || !isMyTurn) return;
-        HandleMovement();
+        if (!IsOwner || !isMyTurn)
+        {
+            // Zera a gravidade customizada se não for nosso turno
+            rb.gravityScale = gravityScale;
+            return;
+        }
+
+        // 1. Aplicar movimento horizontal (Lógica Atual)
+        HandleMovement();
+
+        // 2. Aplicar física de gravidade customizada (Lógica Antiga)
+        if (rb.linearVelocity.y < 0)
+        {
+            // Queda mais rápida
+            rb.gravityScale = gravityScale * fallGravityMultiplier;
+        }
+        else if (Mathf.Abs(rb.linearVelocity.y) < jumpHangThreshold)
+        {
+            // No ápice do pulo, gravidade menor (Hang Time)
+            rb.gravityScale = gravityScale * jumpHangGravityMultiplier;
+        }
+        else if (isJumpCut)
+        {
+            // Corta o pulo (Jump Cut)
+            rb.gravityScale = gravityScale; // Gravidade normal
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, rb.linearVelocity.y * jumpCutMultiplier);
+            isJumpCut = false; // Só aplica uma vez
+        }
+        else
+        {
+            // Subida normal
+            rb.gravityScale = gravityScale;
+        }
     }
 
     private void HandleMovement()
@@ -201,14 +281,33 @@ public class PlayerMovement : NetworkBehaviour
             SetFacingServerRpc(false);
     }
 
-    private void OnJump(InputAction.CallbackContext ctx)
+    /// <summary>
+    /// Executa o pulo localmente (chamado pelo Update)
+    /// </summary>
+    private void Jump()
     {
-        if (!IsOwner || !isMyTurn || !isGrounded) return;
+        if (!IsOwner) return; // Segurança
 
-        rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
-        pendingJump = true;
+        // Aplica a força
+        rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
 
-        netAnimator.SetTrigger("Jump");
+        // Reseta timers
+        lastOnGroundTime = 0;
+        lastPressedJumpTime = 0;
+
+        // Ativa flags
+        isJumpCut = false; // Garante que não corte imediatamente
+        pendingJump = true; // Flag da lógica de rede (espera aterrissar para contar)
+
+        // Feedback
+        netAnimator.SetTrigger("Jump");
+
+        // ==== ÁUDIO (INTEGRADO) ====
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.PlaySound("Pulando");
+        }
+
         Debug.Log($"[PlayerMovement:{name}] ⬆️ Pulou (aguardando aterrissagem)");
     }
 
@@ -217,27 +316,38 @@ public class PlayerMovement : NetworkBehaviour
         wasGrounded = isGrounded;
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, groundLayer);
 
-        if (isGrounded && !wasGrounded)
+        // ==== LÓGICA DE COYOTE TIME (INTEGRADO) ====
+        if (isGrounded)
         {
-            if (pendingJump)
+            // Acabou de pousar, dá a permissão de Coyote Time
+            lastOnGroundTime = coyoteTime;
+        }
+        // ==== FIM LÓGICA DE COYOTE TIME ====
+
+        // Lógica de contagem de pulo (EXISTENTE E CORRETA)
+        // Isto é chamado quando tocamos o chão
+        if (isGrounded && !wasGrounded)
+        {
+            // Se estávamos esperando um pulo ser contado...
+            if (pendingJump)
             {
                 pendingJump = false;
 
-                // NOVO: Apenas o Server pode modificar a NetworkVariable
-                if (IsServer)
+                // Apenas o Server pode modificar a NetworkVariable
+                if (IsServer)
                 {
                     CompletedJumpsNet.Value++;
                 }
                 else // Se for o Client, ele precisa solicitar ao Server para modificar
-                {
+                {
                     SubmitJumpServerRpc();
                 }
 
                 Debug.Log($"[PlayerMovement:{name}] 🟢 Aterrissou.");
             }
 
-            // CORREÇÃO: Só encerra o turno se for o turno ativo E atingiu o limite de pulos
-            if (isMyTurn && CompletedJumpsNet.Value >= MaxJumpsNet.Value)
+            // Só encerra o turno se for o turno ativo E atingiu o limite de pulos
+            if (isMyTurn && CompletedJumpsNet.Value >= MaxJumpsNet.Value)
             {
                 Debug.Log($"[PlayerMovement:{name}] 🚩 Máximo de pulos atingido — fim de turno!");
                 RequestEndTurn();
@@ -245,14 +355,11 @@ public class PlayerMovement : NetworkBehaviour
         }
     }
 
-    // RPC do Client para o Server: solicita incremento de pulo
     [ServerRpc(RequireOwnership = false)]
     private void SubmitJumpServerRpc(ServerRpcParams rpcParams = default)
     {
-        // Garante que apenas o Host ou o dono do objeto pode fazer a alteração.
         if (rpcParams.Receive.SenderClientId != OwnerClientId && !IsServer) return;
-
-        CompletedJumpsNet.Value++; // O Server faz a mudança
+        CompletedJumpsNet.Value++;
     }
 
     [ServerRpc(RequireOwnership = false)]
@@ -273,7 +380,7 @@ public class PlayerMovement : NetworkBehaviour
 
         facingRight = newFacing;
         if (spriteRenderer != null)
-            spriteRenderer.flipX = !facingRight;
+            spriteRenderer.flipX = facingRight;
     }
 
     [ServerRpc(RequireOwnership = false)]
@@ -316,18 +423,21 @@ public class PlayerMovement : NetworkBehaviour
 
         if (active)
         {
-            // NOVO: Apenas o Server reseta a contagem
             if (IsServer)
             {
                 CompletedJumpsNet.Value = 0;
             }
-            // NOVO: Dispara evento para o HUD (útil para HUDs que precisam saber o máximo)
             OnTurnStarted?.Invoke(OwnerClientId, MaxJumpsNet.Value);
         }
         else
         {
             moveInput = Vector2.zero;
             rb.linearVelocity = Vector2.zero;
+
+            // ==== ÁUDIO (INTEGRADO) ====
+            // Para o som de andar ao final do turno
+            if (walkAudio != null && walkAudio.isPlaying)
+                walkAudio.Stop();
         }
     }
 
@@ -337,10 +447,11 @@ public class PlayerMovement : NetworkBehaviour
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(groundCheck.position, groundRadius);
     }
-    [ServerRpc(RequireOwnership = false)]
+
+    // (Restante do código: PowerUps, Colisão, etc. - Sem modificações)
+    [ServerRpc(RequireOwnership = false)]
     public void NotifyPlatformTouchServerRpc(NetworkObjectReference platformNetObj, ServerRpcParams rpcParams = default)
     {
-        // ... (código que notifica a plataforma, este está CORRETO)
         if (platformNetObj.TryGet(out NetworkObject netObj))
         {
             if (netObj.TryGetComponent(out PlataformaInstavel platform))
@@ -350,61 +461,43 @@ public class PlayerMovement : NetworkBehaviour
         }
     }
 
-    // 3. Adicione a função pública que o PowerUp chamará (SÓ NO SERVIDOR)
     public void ApplyJumpPowerUp(int extraJumps, int durationTurns)
     {
         if (!IsServer) return;
-
-        // 2. SOMA o novo bônus ao valor de rede
         MaxJumpsNet.Value += extraJumps;
-
-        // 3. SOMA o bônus ao nosso rastreador de servidor (para reverter DEPOIS)
         server_extraJumpsApplied += extraJumps;
-
-        // 4. Define a duração para o MÁXIMO entre a atual e a nova
         JumpBuffTurnsLeft.Value = Mathf.Max(JumpBuffTurnsLeft.Value, durationTurns);
-
         Debug.Log($"[PlayerMovement-SERVER] {name} (ID: {OwnerClientId}) ACUMULOU {extraJumps} pulos. Total extra: {server_extraJumpsApplied}. Duração: {JumpBuffTurnsLeft.Value} turnos.");
     }
 
     public void DecrementBuffTurns()
     {
         if (!IsServer || JumpBuffTurnsLeft.Value == 0) return;
-
         JumpBuffTurnsLeft.Value--;
-
         if (JumpBuffTurnsLeft.Value <= 0)
         {
-            RevertJumpPowerUp(); // Esta função já está correta
+            RevertJumpPowerUp();
         }
     }
 
     private void RevertJumpPowerUp()
     {
         if (!IsServer) return;
-
-        // Esta função já funciona para o acúmulo, pois ela remove
-        // o valor total que rastreamos em 'server_extraJumpsApplied'.
         MaxJumpsNet.Value -= server_extraJumpsApplied;
         server_extraJumpsApplied = 0;
-        JumpBuffTurnsLeft.Value = 0; // Garante que está zerado
-
+        JumpBuffTurnsLeft.Value = 0;
         Debug.Log($"[PlayerMovement-SERVER] {name} (ID: {OwnerClientId}) PowerUp de pulo expirou.");
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        // ... (lógica existente)
-
-        // VERIFICAÇÃO DE COLISÃO COM PLATAFORMA (Não requer Tag, usa o Componente)
         if (IsOwner)
         {
             if (collision.gameObject.TryGetComponent(out PlataformaInstavel platform))
             {
                 foreach (ContactPoint2D contact in collision.contacts)
                 {
-                    // 🔑 CORREÇÃO AQUI: A normal.y deve ser POSITIVA (apontando para cima) para ser o topo.
-                    if (contact.normal.y > 0.5f) // <--- CONDIÇÃO CORRIGIDA!
+                    if (contact.normal.y > 0.5f)
                     {
                         if (platform.NetworkObject.IsSpawned)
                         {

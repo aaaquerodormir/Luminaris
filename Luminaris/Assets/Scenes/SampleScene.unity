@@ -30873,7 +30873,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e946477661ef1a45b43bf69ee699aeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameManager: {fileID: 490071351}
   mainMenuScene: Menu
   confirmationUI: {fileID: 984462423}
 --- !u!224 &1976472851
