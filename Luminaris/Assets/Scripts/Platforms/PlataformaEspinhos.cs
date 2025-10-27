@@ -26,6 +26,8 @@ public class PlataformaEspinhos : NetworkBehaviour
     [Tooltip("O NOME EXATO do parâmetro 'Trigger' no seu Animator Controller que inicia o ataque.")]
     private string activateTriggerName = "Activate";
 
+    private bool m_IsLethal = false;
+
     // Componentes cacheados
     private Animator m_Animator;
 
@@ -94,10 +96,34 @@ public class PlataformaEspinhos : NetworkBehaviour
         // enviado e sincronizado normalmente.
     }
 
-    /// <summary>
-    /// Corrotina que gerencia o ciclo de vida do espinho (Ataque -> Pausa -> Ataque...)
-    /// Roda APENAS no Servidor.
-    /// </summary>
+    // Novo método para detectar a colisão
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        // 1. Apenas o SERVIDOR deve processar a colisão.
+        // 2. Só aciona a morte se o espinho estiver atualmente letal (levantado).
+        if (!IsServer || !m_IsLethal) return;
+
+        // Verifica se o objeto que colidiu é o jogador (assumindo a tag "Player")
+        if (other.CompareTag("Player"))
+        {
+            Debug.Log($"[PlataformaEspinhos-SERVER] Jogador {other.gameObject.name} atingido! Acionando Game Over.");
+
+            // Chama a função ServerRpc do GameManager para notificar o servidor sobre a morte.
+            // O GameManager então enviará o ClientRpc de Game Over para todos.
+            if (GameManager.Instance != null)
+            {
+                GameManager.Instance.OnPlayerDiedServerRpc();
+            }
+            else
+            {
+                Debug.LogError("[PlataformaEspinhos] GameManager.Instance é nulo. A morte não pode ser acionada.");
+            }
+
+            // Define como não-letal imediatamente para evitar múltiplas chamadas
+            // de Game Over se o jogador ficar no collider durante a pausa.
+            m_IsLethal = false;
+        }
+    }
     private IEnumerator SpikeCycleCoroutine()
     {
         // 1. Espera o delay inicial configurável
@@ -107,19 +133,19 @@ public class PlataformaEspinhos : NetworkBehaviour
         while (IsServer)
         {
             // 2. Dispara o gatilho de ataque.
-            // O NetworkAnimator (componente) detectará esta mudança
-            // e enviará o trigger para todos os clientes automaticamente.
             m_Animator.SetTrigger(activateTriggerName);
 
-            // 3. Espera a duração da animação de ATAQUE (ciclo completo de subir/descer).
-            // Isso garante que não comecemos a pausa antes do espinho descer.
+            // >>> INÍCIO DO PERÍODO LETAL (espinho está subindo) <<<
+            m_IsLethal = true;
+
+            // 3. Espera a duração da animação de ATAQUE
             yield return new WaitForSeconds(m_AttackAnimationLength);
 
-            // 4. Espera a duração da PAUSA (estado Idle)
-            // O espinho agora está abaixado, aguardando.
-            yield return new WaitForSeconds(pauseDuration);
+            // >>> FIM DO PERÍODO LETAL (espinho está abaixado) <<<
+            m_IsLethal = false;
 
-            // O loop reinicia, disparando o próximo ataque.
+            // 4. Espera a duração da PAUSA (estado Idle)
+            yield return new WaitForSeconds(pauseDuration);
         }
     }
 }
