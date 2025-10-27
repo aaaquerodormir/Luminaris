@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Unity.Netcode;
+using UnityEngine.InputSystem;
 
 public class PauseMenu : MonoBehaviour
 {
@@ -8,15 +10,47 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] private GameObject optionsUI;
     [SerializeField] private GameObject confirmationUI;
 
+    [Header("Input Action")] // 2. Adicione um campo para a Action
+    [SerializeField] private InputActionReference pauseAction;
+
     private bool isPaused = false;
     private System.Action confirmedAction;
 
-    private void Update()
+    private void OnEnable()
     {
-        //if (Input.GetKeyDown(KeyCode.Escape) && !GameManager.Instance.IsGameOverActive)
+        // Garante que a action existe e a ativa
+        if (pauseAction != null)
         {
-            if (isPaused) Resume();
-            else Pause();
+            pauseAction.action.Enable();
+            // Registra a função OnPausePressed para ser chamada 
+            // quando a action for 'performed' (pressionada)
+            pauseAction.action.performed += OnPausePressed;
+        }
+    }
+
+    private void OnDisable()
+    {
+        // Limpa o registro e desativa a action
+        if (pauseAction != null)
+        {
+            pauseAction.action.Disable();
+            pauseAction.action.performed -= OnPausePressed;
+        }
+    }
+
+    private void OnPausePressed(InputAction.CallbackContext context)
+    {
+        // Coloque sua lógica de "Game Over" aqui se precisar
+        // if (GameManager.Instance.IsGameOverActive) return;
+
+        // Inverte o estado de pausa
+        if (isPaused)
+        {
+            Resume();
+        }
+        else
+        {
+            Pause();
         }
     }
 
@@ -66,7 +100,17 @@ public class PauseMenu : MonoBehaviour
     {
         OpenConfirmation(() =>
         {
+            // 2. Sempre resetar o Time.timeScale ANTES de sair da cena.
+            // (Isso evita que seu Menu fique congelado se você saiu pausado)
             Time.timeScale = 1f;
+
+            // 3. Chamar o Shutdown ANTES de carregar a cena
+            if (NetworkManager.Singleton != null)
+            {
+                NetworkManager.Singleton.Shutdown();
+            }
+
+            // 4. Agora é seguro carregar o menu localmente
             SceneManager.LoadScene("Menu");
         });
     }
@@ -75,6 +119,12 @@ public class PauseMenu : MonoBehaviour
     {
         OpenConfirmation(() =>
         {
+            // 5. Chamar o Shutdown antes de fechar o aplicativo
+            if (NetworkManager.Singleton != null)
+            {
+                NetworkManager.Singleton.Shutdown();
+            }
+
 #if UNITY_EDITOR
             UnityEditor.EditorApplication.isPlaying = false;
 #else
