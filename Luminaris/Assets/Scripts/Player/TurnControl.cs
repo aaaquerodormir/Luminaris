@@ -79,6 +79,17 @@ public class TurnControl : NetworkBehaviour
         if (players.Count >= 2)
             ResetTurns();
     }
+    public PlayerMovement GetCurrentActivePlayer()
+    {
+        // Verifica se a lista de jogadores está pronta e se o índice é válido
+        if (players.Count == 0 || currentIndex.Value < 0 || currentIndex.Value >= players.Count)
+        {
+            return null;
+        }
+
+        // Retorna o jogador na posição do índice atual
+        return players[currentIndex.Value];
+    }
 
     public void ResetTurns()
     {

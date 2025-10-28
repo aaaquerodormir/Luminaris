@@ -414,6 +414,7 @@ GameObject:
   - component: {fileID: 6227805049994358070}
   - component: {fileID: -7904922146884487291}
   - component: {fileID: 3284064426945995603}
+  - component: {fileID: 4373719642837978944}
   m_Layer: 0
   m_Name: Player2
   m_TagString: Player
@@ -552,7 +553,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   groundCheck: {fileID: 3839698034830718357}
-  baseMaxJumps: 3
   moveAction: {fileID: -276721333342118783, guid: 03f621bcf66b04046a24ebfccf5c71b6, type: 3}
   jumpAction: {fileID: 3130247826693790656, guid: 03f621bcf66b04046a24ebfccf5c71b6, type: 3}
 --- !u!50 &7077229418032609283
@@ -800,6 +800,20 @@ MonoBehaviour:
   UseRigidBodyForMotion: 0
   AutoUpdateKinematicState: 1
   AutoSetKinematicOnDespawn: 1
+--- !u!114 &4373719642837978944
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3368453532942173862}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87db28b0a79dfc145bcd7a941ac0cab4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  safePlatformTag: SafePlatform
 --- !u!1001 &2212095288895709051
 PrefabInstance:
   m_ObjectHideFlags: 0
