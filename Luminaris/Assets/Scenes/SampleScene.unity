@@ -1875,6 +1875,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buttonText: {fileID: 1535823280}
+  normalBackgroundGO: {fileID: 0}
+  hoverBackgroundGO: {fileID: 0}
   normalColor: {r: 0.47058824, g: 0.8, b: 0.7254902, a: 1}
   highlightedColor: {r: 0.95686275, g: 0.8352941, b: 0.39607844, a: 1}
   hoverSound: {fileID: 8300000, guid: bd2561dca6152da4ab822f30fa6157ed, type: 3}
@@ -2355,6 +2357,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buttonText: {fileID: 1956773744}
+  normalBackgroundGO: {fileID: 0}
+  hoverBackgroundGO: {fileID: 0}
   normalColor: {r: 0.47058824, g: 0.8, b: 0.7254902, a: 1}
   highlightedColor: {r: 0.95686275, g: 0.8352941, b: 0.39607844, a: 1}
   hoverSound: {fileID: 8300000, guid: bd2561dca6152da4ab822f30fa6157ed, type: 3}
@@ -2561,6 +2565,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buttonText: {fileID: 408724334}
+  normalBackgroundGO: {fileID: 0}
+  hoverBackgroundGO: {fileID: 0}
   normalColor: {r: 0.47058824, g: 0.8, b: 0.7254902, a: 1}
   highlightedColor: {r: 0.95686275, g: 0.8352941, b: 0.39607844, a: 1}
   hoverSound: {fileID: 8300000, guid: bd2561dca6152da4ab822f30fa6157ed, type: 3}
@@ -4805,6 +4811,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buttonText: {fileID: 485050742}
+  normalBackgroundGO: {fileID: 0}
+  hoverBackgroundGO: {fileID: 0}
   normalColor: {r: 0.47058824, g: 0.8, b: 0.7254902, a: 1}
   highlightedColor: {r: 0.95686275, g: 0.8352941, b: 0.39607844, a: 1}
   hoverSound: {fileID: 8300000, guid: bd2561dca6152da4ab822f30fa6157ed, type: 3}
@@ -6732,6 +6740,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buttonText: {fileID: 730071361}
+  normalBackgroundGO: {fileID: 0}
+  hoverBackgroundGO: {fileID: 0}
   normalColor: {r: 0.47058824, g: 0.8, b: 0.7254902, a: 1}
   highlightedColor: {r: 0.95686275, g: 0.8352941, b: 0.39607844, a: 1}
   hoverSound: {fileID: 8300000, guid: bd2561dca6152da4ab822f30fa6157ed, type: 3}
@@ -11793,6 +11803,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buttonText: {fileID: 1359905616}
+  normalBackgroundGO: {fileID: 0}
+  hoverBackgroundGO: {fileID: 0}
   normalColor: {r: 0.47058824, g: 0.8, b: 0.7254902, a: 1}
   highlightedColor: {r: 0.95686275, g: 0.8352941, b: 0.39607844, a: 1}
   hoverSound: {fileID: 8300000, guid: bd2561dca6152da4ab822f30fa6157ed, type: 3}
@@ -31385,6 +31397,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buttonText: {fileID: 782721623}
+  normalBackgroundGO: {fileID: 0}
+  hoverBackgroundGO: {fileID: 0}
   normalColor: {r: 0.47058824, g: 0.8, b: 0.7254902, a: 1}
   highlightedColor: {r: 0.95686275, g: 0.8352941, b: 0.39607844, a: 1}
   hoverSound: {fileID: 8300000, guid: bd2561dca6152da4ab822f30fa6157ed, type: 3}
