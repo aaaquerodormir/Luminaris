@@ -4179,7 +4179,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  assignedPlayer: {fileID: 8310071280383135105, guid: e87f939ef0a938a4a96c682259a642e7, type: 3}
+  assignedPlayerTemplate: {fileID: 0}
 --- !u!61 &396398381
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -6221,7 +6221,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  assignedPlayer: {fileID: 255631456070546370, guid: 5187dc984bba9bb419818612fa764200, type: 3}
+  assignedPlayerTemplate: {fileID: 0}
 --- !u!114 &557955300
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26469,6 +26469,8 @@ MonoBehaviour:
   player2Prefab: {fileID: 3368453532942173862, guid: e87f939ef0a938a4a96c682259a642e7, type: 3}
   spawnP1: {fileID: 1508195440}
   spawnP2: {fileID: 526352209}
+  doorP1: {fileID: 0}
+  doorP2: {fileID: 0}
 --- !u!114 &1510164417
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32629,7 +32631,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3111498636720698614, guid: 5f386589a65d21f4e967363c1a4ce260, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3608536498888287780, guid: 5f386589a65d21f4e967363c1a4ce260, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
