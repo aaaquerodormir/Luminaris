@@ -223,13 +223,21 @@ public class EnemyController : NetworkBehaviour
         if (!IsServer) return;
         currentState.Value = EnemyState.Attacking;
         rb.linearVelocity = Vector2.zero;
-        AttackClientRpc();
+        var rpcParams = new ClientRpcParams
+        {
+            Send = new ClientRpcSendParams
+            {
+                TargetClientIds = new ulong[] { linkedPlayerId.Value }
+            }
+        };
+        AttackClientRpc(rpcParams);
         StartCoroutine(AttackCooldown());
     }
 
     [ClientRpc]
-    private void AttackClientRpc()
+    private void AttackClientRpc(ClientRpcParams rpcParams = default)
     {
+        // Este código agora só será executado no cliente cujo ID foi especificado em rpcParams
         animator.SetTrigger("Attack");
 
         if (ScreenFade.Instance != null)
