@@ -56,7 +56,7 @@ public class MainMenu : MonoBehaviour
         transport = netManager != null ? netManager.GetComponent<UnityTransport>() : null;
 
         if (hostIpDisplay != null)
-            hostIpDisplay.text = $"Meu IP local: {GetLocalIPAddress()}\nPorta: {lanPort}";
+            hostIpDisplay.text = $"Meu IP local: {GetLocalIPAddress()}\n";
     }
 
     public void NovoJogo()
