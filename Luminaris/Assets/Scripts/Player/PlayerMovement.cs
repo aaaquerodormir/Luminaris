@@ -45,7 +45,7 @@ public class PlayerMovement : NetworkBehaviour
     private bool isJumpCut;
 
     [Header("Controle de Pulo")]
-    [SerializeField] private int baseMaxJumps = 3;
+    //[SerializeField] private int baseMaxJumps = 3;
     // Adicione a NetworkVariable
     public readonly NetworkVariable<int> CompletedJumpsNet = new(
         0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server
@@ -489,26 +489,68 @@ public class PlayerMovement : NetworkBehaviour
         Debug.Log($"[PlayerMovement-SERVER] {name} (ID: {OwnerClientId}) PowerUp de pulo expirou.");
     }
 
+    //private void OnTriggerEnter2D(Collider2D collision)
+    //{
+    //    if (!IsOwner) return;
+    //    if (collision.CompareTag("Porta"))
+    //    {
+    //        ContaPortaServerRpc(1);
+    //    }
+    //}
+    //private void OnTriggerExit2D(Collider2D collision)
+    //{
+    //    if (!IsOwner) return;
+    //    if (collision.CompareTag("Porta"))
+    //    {
+    //        ContaPortaServerRpc(-1);
+    //    }
+    //}
+    [ServerRpc]
+    void ContaPortaServerRpc(int valor)
+    {
+        // LevelManager.Instance.PlayerDoorCount.Value+=valor;
+        //  Debug.Log($"[PlayerDoorCount]:{LevelManager.Instance.PlayerDoorCount.Value}");
+        Debug.Log("Contandoooooooooo");
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (IsOwner)
+        if (!IsOwner) return;
+        PlataformaInstavel platform;
+        if (!collision.gameObject.TryGetComponent(out platform)) return;
+        foreach (ContactPoint2D contact in collision.contacts)
         {
-            if (collision.gameObject.TryGetComponent(out PlataformaInstavel platform))
+            if (contact.normal.y > 0.5f && platform.NetworkObject.IsSpawned)
             {
-                foreach (ContactPoint2D contact in collision.contacts)
-                {
-                    if (contact.normal.y > 0.5f)
-                    {
-                        if (platform.NetworkObject.IsSpawned)
-                        {
-                            NotifyPlatformTouchServerRpc(platform.NetworkObject);
-                        }
-                        break;
-                    }
-                }
+                NotifyPlatformTouchServerRpc(platform.NetworkObject);
+                break;
             }
         }
+
+
+
+        // if (IsOwner)
+        // {
+        //     if (collision.gameObject.TryGetComponent(out PlataformaInstavel platform))
+        //     {
+        //         foreach (ContactPoint2D contact in collision.contacts)
+        //         {
+        //             if (contact.normal.y > 0.5f)
+        //             {
+        //                 if (platform.NetworkObject.IsSpawned)
+        //                 {
+        //                     NotifyPlatformTouchServerRpc(platform.NetworkObject);
+        //                 }
+        //                 break;
+        //             }
+        //         }
+        //
+        //     }
+        // }
+
     }
+
+
 }
 
 

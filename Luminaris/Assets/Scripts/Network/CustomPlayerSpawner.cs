@@ -36,6 +36,16 @@ public class CustomPlayerSpawner : NetworkBehaviour
             Debug.Log("[Spawner] Cena de jogo carregada, iniciando spawn dos jogadores...");
             StartCoroutine(SpawnPlayersWhenReady());
         }
+        if (sceneName == "Fase2Final") // Ajuste o nome da cena se necessário
+        {
+            Debug.Log("[Spawner] Cena de jogo carregada, iniciando spawn dos jogadores...");
+            StartCoroutine(SpawnPlayersWhenReady());
+        }
+        if (sceneName == "Fase3") // Ajuste o nome da cena se necessário
+        {
+            Debug.Log("[Spawner] Cena de jogo carregada, iniciando spawn dos jogadores...");
+            StartCoroutine(SpawnPlayersWhenReady());
+        }
     }
 
     private IEnumerator SpawnPlayersWhenReady()

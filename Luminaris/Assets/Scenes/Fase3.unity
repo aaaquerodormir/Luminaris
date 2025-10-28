@@ -10043,7 +10043,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  nextSceneName: Fase2Final
+  nextSceneName: Fase2
 --- !u!4 &1028037377
 Transform:
   m_ObjectHideFlags: 0
