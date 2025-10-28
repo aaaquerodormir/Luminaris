@@ -15,6 +15,9 @@ public class CustomPlayerSpawner : NetworkBehaviour
     [SerializeField] private Transform spawnP1;
     [SerializeField] private Transform spawnP2;
 
+    [Header("Portas Finais (Na Cena)")]
+    [SerializeField] private FinalDoor doorP1; // Porta do P1
+    [SerializeField] private FinalDoor doorP2; // Porta do P2
     // 🔹 Evento global para que HUDs saibam quando um jogador foi spawnado
     //public static event System.Action<ulong, PlayerMovementUI> OnPlayerSpawned;
 
@@ -45,11 +48,25 @@ public class CustomPlayerSpawner : NetworkBehaviour
 
         // Spawn Player 1 (ID 0)
         if (clientIds.Length >= 1)
-            SpawnPlayer(clientIds[0], player1Prefab, spawnP1);
+        {
+            ulong p1ClientId = clientIds[0];
+            SpawnPlayer(p1ClientId, player1Prefab, spawnP1);
+
+            // AÇÃO: Atribui o Client ID à porta do P1
+            if (doorP1 != null)
+                doorP1.SetTargetClientId(p1ClientId);
+        }
 
         // Spawn Player 2 (ID 1)
         if (clientIds.Length >= 2)
-            SpawnPlayer(clientIds[1], player2Prefab, spawnP2);
+        {
+            ulong p2ClientId = clientIds[1];
+            SpawnPlayer(p2ClientId, player2Prefab, spawnP2);
+
+            // AÇÃO: Atribui o Client ID à porta do P2
+            if (doorP2 != null)
+                doorP2.SetTargetClientId(p2ClientId);
+        }
     }
 
     private void SpawnPlayer(ulong clientId, GameObject prefab, Transform spawnPoint)
