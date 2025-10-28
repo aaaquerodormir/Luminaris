@@ -8,7 +8,7 @@ TagManager:
   - Checkpoint
   - Lava
   - Porta
-  - SafePlataform
+  - SafePlatform
   layers:
   - Default
   - TransparentFX

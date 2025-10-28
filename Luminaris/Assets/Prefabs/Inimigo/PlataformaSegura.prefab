@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2435048154280951204}
   m_Layer: 3
   m_Name: PlataformaSegura
-  m_TagString: SafePlataform
+  m_TagString: SafePlatform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
