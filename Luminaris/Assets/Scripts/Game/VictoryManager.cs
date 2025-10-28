@@ -44,7 +44,7 @@ public class VictoryManager : NetworkBehaviour
             if (!door.IsPlayerInside)
             {
                 // Algum jogador ainda não chegou
-                Debug.Log($"[VictoryManager] {door.AssignedPlayer?.name ?? "??"} ainda não chegou.");
+                //Debug.Log($"[VictoryManager] {door.AssignedPlayer?.name ?? "??"} ainda não chegou.");
                 return;
             }
         }
