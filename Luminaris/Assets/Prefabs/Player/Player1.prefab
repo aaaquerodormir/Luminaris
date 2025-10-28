@@ -162,7 +162,6 @@ GameObject:
   - component: {fileID: 7077229418032609283}
   - component: {fileID: 2442291273396667845}
   - component: {fileID: 6179877032678947836}
-  - component: {fileID: 728962970084804015}
   - component: {fileID: 255631456070546370}
   - component: {fileID: 5422800433239754117}
   - component: {fileID: 3126277520389665407}
@@ -170,6 +169,7 @@ GameObject:
   - component: {fileID: -4297708015954877441}
   - component: {fileID: 8292333376657206070}
   - component: {fileID: 1129849178422819866}
+  - component: {fileID: 5740039982108417100}
   m_Layer: 0
   m_Name: Player1
   m_TagString: Player
@@ -308,7 +308,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   groundCheck: {fileID: 3839698034830718357}
-  baseMaxJumps: 3
   moveAction: {fileID: -3754844944467460052, guid: 03f621bcf66b04046a24ebfccf5c71b6, type: 3}
   jumpAction: {fileID: 6508505653016678817, guid: 03f621bcf66b04046a24ebfccf5c71b6, type: 3}
 --- !u!50 &7077229418032609283
@@ -414,20 +413,6 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &728962970084804015
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3368453532942173862}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ecb0615f8e1536458b3247c2896a87d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pm: {fileID: 2596292194444357674}
-  mysticTrailPrefab: {fileID: 6134236273318429275, guid: 61f8cc856722649429fbdfe041684236, type: 3}
 --- !u!114 &255631456070546370
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -570,6 +555,20 @@ MonoBehaviour:
   UseRigidBodyForMotion: 0
   AutoUpdateKinematicState: 1
   AutoSetKinematicOnDespawn: 1
+--- !u!114 &5740039982108417100
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3368453532942173862}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87db28b0a79dfc145bcd7a941ac0cab4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  safePlatformTag: SafePlatform
 --- !u!1 &6241849955727619075
 GameObject:
   m_ObjectHideFlags: 0

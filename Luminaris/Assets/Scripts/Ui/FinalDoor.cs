@@ -11,7 +11,7 @@ public class FinalDoor : NetworkBehaviour
     // É setado em runtime pelo Spawner, não pelo Inspector.
     private ulong targetClientId = ulong.MaxValue;
 
-    private NetworkVariable<bool> playerInside = new NetworkVariable<bool>(false);
+    public NetworkVariable<bool> playerInside = new NetworkVariable<bool>(false);
 
     public bool IsPlayerInside => playerInside.Value;
 
@@ -36,11 +36,12 @@ public class FinalDoor : NetworkBehaviour
 
         // Lógica "Procurar": A porta verifica se o objeto que colidiu é de fato
         // o Player Object que tem o OwnerClientId que ela espera.
+            //LevelManager.Instance.CheckForAllPlayersReady();
         if (respawn.OwnerClientId == targetClientId)
         {
+            //LevelManager.Instance.PlayerDoorCount.Value++;
             playerInside.Value = true;
             Debug.Log($"[FinalDoor] Player ID {targetClientId} (OwnerClientId) ENTROU.");
-            LevelManager.Instance?.CheckForAllPlayersReady();
         }
     }
 
@@ -56,6 +57,7 @@ public class FinalDoor : NetworkBehaviour
 
         if (respawn.OwnerClientId == targetClientId)
         {
+            //LevelManager.Instance.PlayerDoorCount.Value++;
             playerInside.Value = false;
             Debug.Log($"[FinalDoor] Player ID {targetClientId} SAIU.");
         }

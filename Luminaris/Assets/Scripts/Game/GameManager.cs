@@ -10,7 +10,7 @@ public class GameManager : NetworkBehaviour
     public static GameManager Instance;
 
     public static event System.Action OnGameOver;
-    public static event System.Action OnTryAgain;
+    //public static event System.Action OnTryAgain;
 
     [Header("Jogadores")]
     [SerializeField] private PlayerRespawn player1;
