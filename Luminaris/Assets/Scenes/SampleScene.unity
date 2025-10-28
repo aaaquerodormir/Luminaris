@@ -32543,12 +32543,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3111498636720698614, guid: 5f386589a65d21f4e967363c1a4ce260, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3608536498888287780, guid: 5f386589a65d21f4e967363c1a4ce260, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1976472850}
+    - target: {fileID: 3608536498888287780, guid: 5f386589a65d21f4e967363c1a4ce260, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Cancel
+      objectReference: {fileID: 0}
     - target: {fileID: 3866581439564416408, guid: 5f386589a65d21f4e967363c1a4ce260, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
