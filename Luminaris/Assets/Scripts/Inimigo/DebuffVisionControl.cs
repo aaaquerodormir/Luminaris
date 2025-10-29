@@ -117,7 +117,7 @@ public class DebuffVisionControl : NetworkBehaviour
 
     private IEnumerator FadeCoroutine(bool fadeIn)
     {
-        float targetAlpha = fadeIn ? 1f : 0f;
+        float targetAlpha = fadeIn ? 0.9f : 0f;
         float startAlpha = visionMaskImage.color.a;
         float elapsed = 0f;
 
