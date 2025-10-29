@@ -251,8 +251,13 @@ public class EnemyController : NetworkBehaviour
 
     private IEnumerator AttackCooldown()
     {
+        //tempo da animação de ataque (e do Screen Fade)
         yield return new WaitForSeconds(1.5f);
-        currentState.Value = EnemyState.Idle;
-        canPursue = false;
+
+        if (IsServer)
+        {
+            NetworkObject.Despawn(gameObject);
+
+        }
     }
 }
