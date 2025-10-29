@@ -18,6 +18,9 @@ public class EnemyController : NetworkBehaviour
     [Header("Configurações de Perseguição")]
     [SerializeField]
     private float moveSpeed = 2.5f;
+    [Header("Debuff Settings")]
+    [SerializeField]
+    private int debuffDurationTurns = 2; // Quantidade de turnos que o debuff irá durar
 
     [Header("Referências")]
     [SerializeField]
@@ -62,12 +65,10 @@ public class EnemyController : NetworkBehaviour
         }
     }
 
-    // Chamado pelo TrapPlatform (ServerRpc) para definir o "dono"
     [ServerRpc(RequireOwnership = false)]
     public void SetLinkedPlayerServerRpc(ulong playerId)
     {
         linkedPlayerId.Value = playerId;
-        // Atualiza o estado imediatamente após ser definido
         if (TurnControl.Instance != null)
         {
             PlayerMovement currentPlayer = TurnControl.Instance.GetCurrentActivePlayer();
@@ -78,28 +79,23 @@ public class EnemyController : NetworkBehaviour
         }
     }
 
-    // Lógica central: O inimigo reage à troca de turno
     private void HandleTurnChanged(PlayerMovement newActivePlayer)
     {
         if (!IsServer) return;
         if (newActivePlayer == null) return;
-
         if (linkedPlayerId.Value == 99) return; // Inimigo não foi configurado
 
         ulong newActivePlayerId = newActivePlayer.OwnerClientId;
 
-        // Se o turno ATUAL é o do jogador "linkado"...
         if (newActivePlayerId == linkedPlayerId.Value)
         {
-            // ...o inimigo FICA PARADO.
             canPursue = false;
             targetPlayerTransform = null;
             targetPlayerState = null; // Limpa a referência
             currentState.Value = EnemyState.Idle;
         }
-        else // Se for o turno do OUTRO jogador...
+        else 
         {
-            // ...o inimigo PERSEGUE o seu jogador "linkado" (que está inativo)
             canPursue = true;
 
             // Busca o PlayerMovement do jogador "linkado" na lista do TurnControl
@@ -187,7 +183,6 @@ public class EnemyController : NetworkBehaviour
     private void MoveTowardsPlayer()
     {
         Vector2 direction = (targetPlayerTransform.position - transform.position).normalized;
-        // *** CORREÇÃO UNITY 6 ***
         rb.linearVelocity = direction * moveSpeed;
 
         if (direction.x > 0.01f)
@@ -223,25 +218,46 @@ public class EnemyController : NetworkBehaviour
         if (!IsServer) return;
         currentState.Value = EnemyState.Attacking;
         rb.linearVelocity = Vector2.zero;
-        AttackClientRpc();
+
+        PlayerMovement linkedPlayerMovement = TurnControl.Instance.players
+            .FirstOrDefault(p => p.OwnerClientId == linkedPlayerId.Value);
+
+        if (linkedPlayerMovement != null)
+        {
+            DebuffVisionControl debuffControl = linkedPlayerMovement.GetComponent<DebuffVisionControl>();
+            if (debuffControl != null)
+            {
+                debuffControl.StartDebuffServer(debuffDurationTurns, linkedPlayerId.Value);
+            }
+        }
+
+        var rpcParams = new ClientRpcParams
+        {
+            Send = new ClientRpcSendParams
+            {
+                TargetClientIds = new ulong[] { linkedPlayerId.Value }
+            }
+        };
+        AttackClientRpc(rpcParams);
+
         StartCoroutine(AttackCooldown());
     }
 
     [ClientRpc]
-    private void AttackClientRpc()
+    private void AttackClientRpc(ClientRpcParams rpcParams = default)
     {
         animator.SetTrigger("Attack");
-
-        if (ScreenFade.Instance != null)
-        {
-            ScreenFade.Instance.StartFade();
-        }
     }
 
     private IEnumerator AttackCooldown()
     {
+        //tempo da animação de ataque (e do Screen Fade)
         yield return new WaitForSeconds(1.5f);
-        currentState.Value = EnemyState.Idle;
-        canPursue = false;
+
+        if (IsServer)
+        {
+            NetworkObject.Despawn(gameObject);
+
+        }
     }
 }

@@ -23,16 +23,16 @@ public class TrapPlatform : NetworkBehaviour
         GetComponent<Collider2D>().isTrigger = true;
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (isTriggered.Value) return;
         if (!IsServer) return;
 
         // Verifica se quem tocou é um jogador (use a Tag "Player")
-        if (other.CompareTag("Player"))
+        if (collision.CompareTag("Player"))
         {
             isTriggered.Value = true;
-            ulong triggeringPlayerId = other.GetComponent<NetworkObject>().OwnerClientId;
+            ulong triggeringPlayerId = collision.GetComponent<NetworkObject>().OwnerClientId;
             Vector3 spawnPosition = (spawnPoint != null) ? spawnPoint.position : transform.position;
 
             SpawnTrapServerRpc(spawnPosition, triggeringPlayerId);
