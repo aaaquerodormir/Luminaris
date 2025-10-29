@@ -21,7 +21,7 @@ public class PlayerMovement : NetworkBehaviour
 
     [Header("Jump Physics (Integrado)")]
     [SerializeField] private float jumpForce = 8f;
-    [SerializeField] private float coyoteTime = 0.1f;
+    //[SerializeField] private float coyoteTime = 0.1f;
     [SerializeField] private float jumpBufferTime = 0.1f;
     [SerializeField] private float jumpCutMultiplier = 0.5f;
     [SerializeField] private float jumpHangGravityMultiplier = 0.5f;
@@ -40,7 +40,7 @@ public class PlayerMovement : NetworkBehaviour
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private Transform groundCheck;
 
-    private float lastOnGroundTime;
+    //private float lastOnGroundTime;
     private float lastPressedJumpTime;
     private bool isJumpCut;
 
@@ -196,7 +196,7 @@ public class PlayerMovement : NetworkBehaviour
         if (!IsOwner || !isMyTurn)
         {
             // Zera os timers se não for nosso turno
-            lastOnGroundTime = 0;
+             //lastOnGroundTime = 0;
             lastPressedJumpTime = 0;
             return;
         }
@@ -219,7 +219,7 @@ public class PlayerMovement : NetworkBehaviour
         }
 
         // 3. Lógica de Pulo (Timers) (INTEGRADO)
-        lastOnGroundTime -= Time.deltaTime;
+        //lastOnGroundTime -= Time.deltaTime;
         lastPressedJumpTime -= Time.deltaTime;
 
         // 4. Lógica de Pulo (Execução) (INTEGRADO)
@@ -227,7 +227,8 @@ public class PlayerMovement : NetworkBehaviour
 
         // A flag 'pendingJump' previne pular (usando Coyote)
         // antes de aterrissar o pulo anterior.
-        if (lastPressedJumpTime > 0 && lastOnGroundTime > 0 && hasJumpsLeft && !pendingJump)
+        //if (lastPressedJumpTime > 0 && lastOnGroundTime > 0 && hasJumpsLeft && !pendingJump)
+        if (lastPressedJumpTime > 0 && isGrounded && hasJumpsLeft && !pendingJump)
         {
             Jump();
         }
@@ -292,7 +293,7 @@ public class PlayerMovement : NetworkBehaviour
         rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
 
         // Reseta timers
-        lastOnGroundTime = 0;
+        //lastOnGroundTime = 0;
         lastPressedJumpTime = 0;
 
         // Ativa flags
@@ -320,7 +321,7 @@ public class PlayerMovement : NetworkBehaviour
         if (isGrounded)
         {
             // Acabou de pousar, dá a permissão de Coyote Time
-            lastOnGroundTime = coyoteTime;
+            //lastOnGroundTime = coyoteTime;
         }
         // ==== FIM LÓGICA DE COYOTE TIME ====
 
