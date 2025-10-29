@@ -1,16 +1,10 @@
 using UnityEngine;
 using Unity.Netcode;
 using UnityEngine.UI;
-
 public class VisionFollower : NetworkBehaviour
 {
-    [Header("UI Elementos")]
-    [Tooltip("Arraste o RectTransform do seu Vision Mask Image aqui.")]
-    [SerializeField] private RectTransform visionMaskRect;
-
-    [Header("Referências")]
-    [Tooltip("Arraste o Canvas (o objeto pai da UI) aqui.")]
-    [SerializeField] private Canvas canvas;
+    private RectTransform visionMaskRect;
+    private Canvas canvas;
 
     private Camera mainCamera;
     private DebuffVisionControl debuffControl;
@@ -22,9 +16,21 @@ public class VisionFollower : NetworkBehaviour
             enabled = false;
             return;
         }
-
         mainCamera = Camera.main;
         debuffControl = GetComponent<DebuffVisionControl>();
+
+        if (UIManager.Instance != null)
+        {
+            visionMaskRect = UIManager.Instance.VisionMaskRect;
+            canvas = UIManager.Instance.MainCanvas;
+        }
+        else
+        {
+            Debug.LogError("[VisionFollower] UIManager Singleton não encontrado na cena!");
+            enabled = false; // Desativa se a UI não puder ser referenciada
+            return;
+        }
+
 
         if (mainCamera == null)
         {
@@ -39,22 +45,28 @@ public class VisionFollower : NetworkBehaviour
 
     private void Update()
     {
-        if (debuffControl == null || !debuffControl.IsDebuffed())
+        // Só executa se o debuff estiver ativo E as referências tiverem sido encontradas
+        if (debuffControl == null || !debuffControl.IsDebuffed() || visionMaskRect == null || canvas == null)
         {
             return;
         }
+
         Vector3 worldPosition = transform.position;
         Vector3 screenPoint = mainCamera.WorldToScreenPoint(worldPosition);
+
+        // Determina qual câmera usar na conversão (baseado no Render Mode do Canvas)
         Camera usedCamera = canvas.renderMode == RenderMode.ScreenSpaceCamera ? mainCamera : null;
+
         Vector2 localPoint;
 
+        // Converte a posição da tela para a posição local do RectTransform do Canvas
         if (RectTransformUtility.ScreenPointToLocalPointInRectangle(
             visionMaskRect.parent as RectTransform,
             screenPoint,
             usedCamera,
             out localPoint))
         {
-
+            // Move o RectTransform do Vision Mask (o buraco) para a posição do jogador
             visionMaskRect.localPosition = localPoint;
         }
     }

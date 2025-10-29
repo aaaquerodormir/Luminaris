@@ -2,26 +2,39 @@ using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
-
 public class DebuffVisionControl : NetworkBehaviour
 {
-    [Header("UI References")]
-    [Tooltip("Arraste o Image (Vision Mask) aqui.")]
-    [SerializeField] private Image visionMaskImage;
+
+    private Image visionMaskImage;
 
     [Header("Debuff Settings")]
     [Tooltip("Duração do Fade In/Out em segundos.")]
     [SerializeField] private float fadeDuration = 0.5f;
 
-    // Variável de rede: 
     private readonly NetworkVariable<int> turnsRemaining = new(
         0, NetworkVariableReadPermission.Owner, NetworkVariableWritePermission.Server);
+    private void Start()
+    {
+        if (UIManager.Instance != null && visionMaskImage == null)
+        {
+            visionMaskImage = UIManager.Instance.VisionMaskImage;
+        }
+        else if (UIManager.Instance == null)
+        {
+            Debug.LogError("[DebuffVisionControl] UIManager Singleton não encontrado na cena!");
+        }
+    }
+
 
     public override void OnNetworkSpawn()
     {
+        if (visionMaskImage == null)
+        {
+            Start();
+        }
+
         if (visionMaskImage != null)
         {
-            // Estado inicial: totalmente transparente
             visionMaskImage.color = new Color(1f, 1f, 1f, 0f);
         }
 
