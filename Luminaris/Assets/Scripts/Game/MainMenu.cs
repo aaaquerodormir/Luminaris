@@ -51,12 +51,12 @@ public class MainMenu : MonoBehaviour
         if (botaoContinuar != null)
             botaoContinuar.SetActive(SaveSystem.HasSave());
 
-        relayManager = FindObjectOfType<RelayManager>();
+        relayManager = Object.FindFirstObjectByType<RelayManager>();
         netManager = NetworkManager.Singleton;
         transport = netManager != null ? netManager.GetComponent<UnityTransport>() : null;
 
         if (hostIpDisplay != null)
-            hostIpDisplay.text = $"Meu IP local: {GetLocalIPAddress()}\nPorta: {lanPort}";
+            hostIpDisplay.text = $"Meu IP local: {GetLocalIPAddress()}\n";
     }
 
     public void NovoJogo()

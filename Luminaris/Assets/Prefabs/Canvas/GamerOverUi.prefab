@@ -2469,7 +2469,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 79297114520770768, guid: dda4d77b178710841969f90c666a8179, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -102.34
+      value: -145
       objectReference: {fileID: 0}
     - target: {fileID: 79297114520770768, guid: dda4d77b178710841969f90c666a8179, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -2513,7 +2513,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3842398754403673871, guid: dda4d77b178710841969f90c666a8179, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3995559362216185369, guid: dda4d77b178710841969f90c666a8179, type: 3}
       propertyPath: m_AnchorMax.x
@@ -2549,6 +2549,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6387158520302491552, guid: dda4d77b178710841969f90c666a8179, type: 3}
       propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7094469051404465477, guid: dda4d77b178710841969f90c666a8179, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7094469051404465477, guid: dda4d77b178710841969f90c666a8179, type: 3}
+      propertyPath: m_PreserveAspect
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7392651105738274185, guid: dda4d77b178710841969f90c666a8179, type: 3}

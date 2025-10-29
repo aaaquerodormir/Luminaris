@@ -2,11 +2,15 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.EventSystems;
 
-public class TextHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler, ISelectHandler
+public class TextHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler,
+                         IPointerClickHandler, ISelectHandler
 {
+    [Header("Referências")]
     [SerializeField] private TextMeshProUGUI buttonText;
+    [SerializeField] private GameObject normalBackgroundGO;   // GameObject da imagem de fundo padrão
+    [SerializeField] private GameObject hoverBackgroundGO;    // GameObject da imagem de fundo em hover
 
-    [Header("Cores")]
+    [Header("Cores do Texto")]
     [SerializeField] private Color normalColor = Color.black;
     [SerializeField] private Color highlightedColor = Color.gray;
 
@@ -22,37 +26,52 @@ public class TextHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
 
     private void Start()
     {
-        if (buttonText != null)
-            buttonText.color = normalColor;
+        SetNormalState();
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        Highlight();
-        AudioManager.Instance.PlayUISound(hoverSound);
+        SetHighlightState();
+        AudioManager.Instance?.PlayUISound(hoverSound);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        if (buttonText != null)
-            buttonText.color = normalColor;
+        SetNormalState();
     }
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        AudioManager.Instance.PlayUISound(clickSound);
+        AudioManager.Instance?.PlayUISound(clickSound);
     }
 
-    // Chamado quando o botão é selecionado via teclado ou controle
     public void OnSelect(BaseEventData eventData)
     {
-        Highlight();
-        AudioManager.Instance.PlayUISound(hoverSound);
+        SetHighlightState();
+        AudioManager.Instance?.PlayUISound(hoverSound);
     }
 
-    private void Highlight()
+    private void SetNormalState()
+    {
+        if (buttonText != null)
+            buttonText.color = normalColor;
+
+        if (normalBackgroundGO != null)
+            normalBackgroundGO.SetActive(true);
+
+        if (hoverBackgroundGO != null)
+            hoverBackgroundGO.SetActive(false);
+    }
+
+    private void SetHighlightState()
     {
         if (buttonText != null)
             buttonText.color = highlightedColor;
+
+        if (normalBackgroundGO != null)
+            normalBackgroundGO.SetActive(false);
+
+        if (hoverBackgroundGO != null)
+            hoverBackgroundGO.SetActive(true);
     }
 }
