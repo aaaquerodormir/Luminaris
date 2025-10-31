@@ -60,7 +60,7 @@ public class MainMenu : MonoBehaviour
         gameFlowManager = GameFlowManager.Instance;
 
         if (hostIpDisplay != null)
-            hostIpDisplay.text = $"Meu IP local: {GetLocalIPAddress()}\n";
+            hostIpDisplay.text = $"Meu IP local {GetLocalIPAddress()}\n";
     }
 
     // Mantenha NovoJogo e ContinuarJogo usando SceneManager.LoadScene() se for Single Player
