@@ -132,6 +132,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1357127069}
     - target: {fileID: 7930429915071235, guid: 36e3af3d951dfad49b0ea012bafdb9e5, type: 3}
+      propertyPath: minDisplayTime
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7930429915071235, guid: 36e3af3d951dfad49b0ea012bafdb9e5, type: 3}
       propertyPath: backgroundAnimator
       value: 
       objectReference: {fileID: 1357127067}

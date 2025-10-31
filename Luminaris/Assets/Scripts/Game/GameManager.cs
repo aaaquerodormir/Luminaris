@@ -232,16 +232,18 @@ public class GameManager : NetworkBehaviour
         //    Ele faz isso DEPOIS de resetar seu próprio estado local (acima).
         if (IsServer)
         {
-            Debug.Log("[GameManager-SERVER] Estado local resetado (via ClientRpc). Carregando a cena agora.");
+            Debug.Log("[GameManager-SERVER] Estado local resetado (via ClientRpc). Solicitando transição de cena agora.");
 
             var sceneName = SceneManager.GetActiveScene().name;
-            if (NetworkManager.Singleton != null)
+
+            // NOVO: Usa o GameFlowManager para a transição de cena
+            if (GameFlowManager.Instance != null)
             {
-                NetworkManager.Singleton.SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
+                GameFlowManager.Instance.TransitionToScene(sceneName);
             }
             else
             {
-                Debug.LogError("[GameManager-SERVER] NetworkManager.Singleton é nulo! Não é possível recarregar a cena.");
+                Debug.LogError("[GameManager-SERVER] GameFlowManager.Instance é nulo! Não é possível recarregar a cena. Verifique se o GameFlowManager está na cena de Menu.");
             }
         }
     }

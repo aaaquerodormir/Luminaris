@@ -1,6 +1,8 @@
 using UnityEngine;
 using Unity.Netcode;
 using UnityEngine.SceneManagement;
+using System.Collections.Generic;
+using System.Linq; // Adicionado para usar FindObjectsByType
 
 public class LevelManager : NetworkBehaviour
 {
@@ -13,6 +15,17 @@ public class LevelManager : NetworkBehaviour
     0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
     private FinalDoor[] allDoors;
 
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
+        // Assumindo que este LevelManager é recriado em cada cena de jogo.
+    }
+
     public override void OnNetworkSpawn()
     {
         base.OnNetworkSpawn();
@@ -22,7 +35,7 @@ public class LevelManager : NetworkBehaviour
         NetworkManager.Singleton.SceneManager.OnLoadComplete += InitializeLevelOnLoad;
 
         // Para a primeira cena, executa a inicialização imediatamente (se não for a fase de lobby/load)
-        // O NetworkManager pode não estar pronto, mas é mais seguro usar o evento acima.
+        InitializeLevelOnLoad(NetworkManager.Singleton.LocalClientId, SceneManager.GetActiveScene().name, LoadSceneMode.Single);
     }
 
     public override void OnDestroy()
@@ -32,9 +45,6 @@ public class LevelManager : NetworkBehaviour
 
         // Cancela a inscrição do handler de cena
         NetworkManager.Singleton.SceneManager.OnLoadComplete -= InitializeLevelOnLoad;
-
-        // ... (Manter a lógica de cancelamento de inscrição das portas, se necessário)
-        // ... (Sua lógica de OnDestroy para as portas, que já está OK)
     }
 
     private void InitializeLevelOnLoad(ulong clientId, string sceneName, LoadSceneMode loadMode)
@@ -66,20 +76,14 @@ public class LevelManager : NetworkBehaviour
         foreach (FinalDoor door in allDoors)
         {
             door.playerInside.OnValueChanged += OnDoorStateChanged;
-            // **IMPORTANTE:** O Spawner precisa rodar depois disso para chamar door.SetTargetClientId(clientId)
         }
 
         Debug.Log($"[GameLevelManager-SERVER] Nível '{sceneName}' inicializado. Monitorando {allDoors.Length} portas.");
     }
 
-    /// <summary>
-    /// O método de checagem que agora reage às mudanças de NetworkVariable.
-    /// </summary>
     private void OnDoorStateChanged(bool oldState, bool newState)
     {
-        // Este método será chamado APENAS no Servidor/Host sempre que uma NetworkVariable for alterada.
         if (!IsServer) return;
-
         CheckForAllPlayersReady();
     }
 
@@ -87,7 +91,6 @@ public class LevelManager : NetworkBehaviour
     {
         if (!IsServer) return;
 
-        // Se a lista de portas não foi populada (deveria ter sido em OnNetworkSpawn), tenta novamente.
         if (allDoors == null || allDoors.Length == 0)
         {
             allDoors = FindObjectsByType<FinalDoor>(FindObjectsSortMode.None);
@@ -99,8 +102,6 @@ public class LevelManager : NetworkBehaviour
         bool allPlayersInside = true;
         foreach (FinalDoor door in allDoors)
         {
-            // O acesso à NetworkVariable (door.IsPlayerInside) agora reflete o 
-            // valor JÁ sincronizado pelo Netcode antes desta função ser chamada.
             if (!door.IsPlayerInside)
             {
                 allPlayersInside = false;
@@ -115,14 +116,22 @@ public class LevelManager : NetworkBehaviour
             LoadNextScene();
         }
     }
-    
+
 
     private void LoadNextScene()
     {
-        // Garante que só o servidor execute (novamente, por segurança)
         if (!IsServer) return;
 
-        Debug.Log($"[GameLevelManager] Carregando próxima cena: {nextSceneName}");
-        NetworkManager.Singleton.SceneManager.LoadScene(nextSceneName, LoadSceneMode.Single);
+        Debug.Log($"[GameLevelManager] Solicitando transição para a próxima cena: {nextSceneName}");
+
+        // NOVO: Usa o GameFlowManager para a transição de cena
+        if (GameFlowManager.Instance != null)
+        {
+            GameFlowManager.Instance.TransitionToScene(nextSceneName);
+        }
+        else
+        {
+            Debug.LogError("[GameLevelManager] GameFlowManager.Instance é nulo! Verifique se o GameFlowManager está na cena de Menu.");
+        }
     }
 }
