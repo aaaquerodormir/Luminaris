@@ -16,8 +16,6 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private GameObject painelOpcoes;
     [SerializeField] private GameObject painelCreditos;
     [SerializeField] private GameObject painelMultiplayer;
-    //[SerializeField] private GameObject painelCodigo; // onde aparece o código do Relay
-    //[SerializeField] private Text codigoRelayText;
     [SerializeField] private GameObject painelLan;
 
     [Header("Botões")]
@@ -25,22 +23,20 @@ public class MainMenu : MonoBehaviour
 
     [Header("Configurações")]
     [SerializeField] private string gameSceneName = "SampleScene";
-    //[SerializeField] private InputField joinCodeInput;
 
     [Header("Relay UI")]
     [SerializeField] private TMP_Text relayCodeText;
     [SerializeField] private TMP_InputField joinCodeInput;
 
     [Header("LAN UI")]
-    [SerializeField] private TMP_InputField ipInputLan;      // Campo de entrada IP
-    [SerializeField] private TMP_Text hostIpDisplay;         // Mostra IP do host
+    [SerializeField] private TMP_InputField ipInputLan;
+    [SerializeField] private TMP_Text hostIpDisplay;
     [SerializeField] private int lanPort = 7777;
 
     private RelayManager relayManager;
     private UnityTransport transport;
     private NetworkManager netManager;
 
-    // Flag para evitar chamadas concorrentes ao iniciar cliente
     private bool _isConnecting = false;
     private bool _lanSceneLoaded = false;
 
@@ -101,7 +97,7 @@ public class MainMenu : MonoBehaviour
     }
 
     // --------------------------
-    // RELAY (mantido intacto)
+    // RELAY (com loading screen)
     // --------------------------
     public async void OnHostButtonPressed()
     {
@@ -112,6 +108,14 @@ public class MainMenu : MonoBehaviour
         }
 
         Debug.Log("[MainMenu] Criando Relay...");
+
+        // 🔹 NOVO: Mostra loading screen ao iniciar host
+        if (LoadingScreenManager.Instance != null)
+        {
+            LoadingScreenManager.Instance.SetLoadingText("Criando sala");
+            LoadingScreenManager.Instance.ShowLoadingScreen();
+        }
+
         string joinCode = await relayManager.CreateRelay(2);
 
         if (!string.IsNullOrEmpty(joinCode))
@@ -121,11 +125,23 @@ public class MainMenu : MonoBehaviour
             if (relayCodeText != null)
                 relayCodeText.text = $"Código da Sala: {joinCode}\nAguardando jogador...";
 
+            // 🔹 MODIFICADO: Atualiza texto do loading
+            if (LoadingScreenManager.Instance != null)
+            {
+                LoadingScreenManager.Instance.SetLoadingText("Aguardando jogadores");
+            }
+
             StartCoroutine(WaitForPlayersAndLoadScene());
         }
         else
         {
             Debug.LogError("[MainMenu] Falha ao criar Relay!");
+
+            // 🔹 NOVO: Esconde loading em caso de erro
+            if (LoadingScreenManager.Instance != null)
+            {
+                LoadingScreenManager.Instance.HideLoadingScreen();
+            }
         }
     }
 
@@ -145,16 +161,36 @@ public class MainMenu : MonoBehaviour
             return;
         }
 
+        // 🔹 NOVO: Mostra loading screen ao tentar conectar
+        if (LoadingScreenManager.Instance != null)
+        {
+            LoadingScreenManager.Instance.SetLoadingText("Conectando");
+            LoadingScreenManager.Instance.ShowLoadingScreen();
+        }
+
         bool success = await relayManager.JoinRelay(joinCode);
 
         if (success)
         {
             Debug.Log($"[MainMenu] Entrando na sala com código {joinCode}");
+
+            // 🔹 MODIFICADO: Atualiza texto do loading
+            if (LoadingScreenManager.Instance != null)
+            {
+                LoadingScreenManager.Instance.SetLoadingText("Carregando");
+            }
+
             StartCoroutine(LoadSceneAfterDelay(1f));
         }
         else
         {
             Debug.LogError("[MainMenu] Falha ao entrar na sala!");
+
+            // 🔹 NOVO: Esconde loading em caso de erro
+            if (LoadingScreenManager.Instance != null)
+            {
+                LoadingScreenManager.Instance.HideLoadingScreen();
+            }
         }
     }
 
@@ -165,6 +201,12 @@ public class MainMenu : MonoBehaviour
 
         if (relayCodeText != null)
             relayCodeText.text = "Jogador conectado! Iniciando...";
+
+        // 🔹 MODIFICADO: Atualiza texto do loading
+        if (LoadingScreenManager.Instance != null)
+        {
+            LoadingScreenManager.Instance.SetLoadingText("Carregando");
+        }
 
         yield return new WaitForSeconds(1f);
         NetworkManager.Singleton.SceneManager.LoadScene(gameSceneName, LoadSceneMode.Single);
@@ -177,7 +219,7 @@ public class MainMenu : MonoBehaviour
     }
 
     // --------------------------
-    // LAN HOST
+    // LAN HOST (com loading screen)
     // --------------------------
     public void OnHostLanButton()
     {
@@ -190,6 +232,13 @@ public class MainMenu : MonoBehaviour
         Debug.Log($"[MainMenu][LAN] Iniciando HOST...");
         Debug.Log($"[MainMenu][LAN] Endereço de escuta: 0.0.0.0:{lanPort}");
 
+        // 🔹 NOVO: Mostra loading screen ao iniciar host LAN
+        if (LoadingScreenManager.Instance != null)
+        {
+            LoadingScreenManager.Instance.SetLoadingText("Criando sala LAN");
+            LoadingScreenManager.Instance.ShowLoadingScreen();
+        }
+
         transport.SetConnectionData("0.0.0.0", (ushort)lanPort);
 
         bool success = netManager.StartHost();
@@ -197,13 +246,23 @@ public class MainMenu : MonoBehaviour
             ? $"[MainMenu][LAN] ✅ Host iniciado com sucesso! Escutando em 0.0.0.0:{lanPort}"
             : "[MainMenu][LAN] ❌ Falha ao iniciar Host.");
 
-        if (!success) return;
+        if (!success)
+        {
+            // 🔹 NOVO: Esconde loading em caso de erro
+            if (LoadingScreenManager.Instance != null)
+            {
+                LoadingScreenManager.Instance.HideLoadingScreen();
+            }
+            return;
+        }
 
-        // Evento: quando cliente conectar, o host troca de cena
+        // 🔹 MODIFICADO: Atualiza texto do loading
+        if (LoadingScreenManager.Instance != null)
+        {
+            LoadingScreenManager.Instance.SetLoadingText("Aguardando jogadores");
+        }
+
         netManager.OnClientConnectedCallback += OnClientConnectedToHost;
-
-        // OBS: havia aqui uma inscrição em OnLoadEventCompleted que depende da versão do NGO.
-        // Essa inscrição foi removida para evitar incompatibilidades de assinatura do delegate.
     }
 
     private void OnClientConnectedToHost(ulong clientId)
@@ -218,12 +277,19 @@ public class MainMenu : MonoBehaviour
         {
             _lanSceneLoaded = true;
             Debug.Log("[MainMenu][LAN] 🟢 Carregando cena LAN sincronizada...");
+
+            // 🔹 MODIFICADO: Atualiza texto do loading
+            if (LoadingScreenManager.Instance != null)
+            {
+                LoadingScreenManager.Instance.SetLoadingText("Carregando");
+            }
+
             NetworkManager.Singleton.SceneManager.LoadScene(gameSceneName, LoadSceneMode.Single);
         }
     }
 
     // --------------------------
-    // LAN CLIENT
+    // LAN CLIENT (com loading screen)
     // --------------------------
     public void OnJoinLanButton()
     {
@@ -247,6 +313,13 @@ public class MainMenu : MonoBehaviour
         }
 
         Debug.Log($"[MainMenu][LAN] Tentando se conectar ao host {ip}:{lanPort}");
+
+        // 🔹 NOVO: Mostra loading screen ao tentar conectar LAN
+        if (LoadingScreenManager.Instance != null)
+        {
+            LoadingScreenManager.Instance.SetLoadingText("Conectando");
+            LoadingScreenManager.Instance.ShowLoadingScreen();
+        }
 
         if (NetworkManager.Singleton.IsListening)
         {
@@ -274,6 +347,12 @@ public class MainMenu : MonoBehaviour
         {
             Debug.LogError("[MainMenu][LAN] ❌ NetworkManager ou UnityTransport ausente (durante StartClientRoutine).");
             _isConnecting = false;
+
+            // 🔹 NOVO: Esconde loading em caso de erro
+            if (LoadingScreenManager.Instance != null)
+            {
+                LoadingScreenManager.Instance.HideLoadingScreen();
+            }
             yield break;
         }
 
@@ -285,6 +364,15 @@ public class MainMenu : MonoBehaviour
         Debug.Log(success
             ? $"[MainMenu][LAN] ✅ Cliente iniciado. Tentando conectar a {ip}:{lanPort}"
             : "[MainMenu][LAN] ❌ Falha ao iniciar cliente.");
+
+        if (!success)
+        {
+            // 🔹 NOVO: Esconde loading em caso de erro
+            if (LoadingScreenManager.Instance != null)
+            {
+                LoadingScreenManager.Instance.HideLoadingScreen();
+            }
+        }
 
         StartCoroutine(DebugConnectionStatus());
         yield return new WaitForSeconds(1f);
@@ -299,6 +387,13 @@ public class MainMenu : MonoBehaviour
             if (NetworkManager.Singleton.IsConnectedClient)
             {
                 Debug.Log($"[MainMenu][LAN] 🟢 Cliente conectado com sucesso ao Host!");
+
+                // 🔹 MODIFICADO: Atualiza texto do loading quando conectar
+                if (LoadingScreenManager.Instance != null)
+                {
+                    LoadingScreenManager.Instance.SetLoadingText("Carregando");
+                }
+
                 yield break;
             }
 
@@ -308,6 +403,12 @@ public class MainMenu : MonoBehaviour
         }
 
         Debug.LogError("[MainMenu][LAN] ❌ Timeout de conexão após 10 segundos.");
+
+        // 🔹 NOVO: Esconde loading após timeout
+        if (LoadingScreenManager.Instance != null)
+        {
+            LoadingScreenManager.Instance.HideLoadingScreen();
+        }
     }
 
     private string GetLocalIPAddress()
