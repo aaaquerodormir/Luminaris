@@ -542,7 +542,6 @@ MonoBehaviour:
   spriteRenderer: {fileID: 7555596430964899303}
   netAnimator: {fileID: 6227805049994358070}
   jumpForce: 8
-  coyoteTime: 0.1
   jumpBufferTime: 0.1
   jumpCutMultiplier: 0.2
   jumpHangGravityMultiplier: 0.1
@@ -843,6 +842,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
+  screenEdgeBuffer: -20
 --- !u!1001 &2212095288895709051
 PrefabInstance:
   m_ObjectHideFlags: 0
