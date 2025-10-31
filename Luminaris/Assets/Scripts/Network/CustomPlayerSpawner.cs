@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿// CustomPlayerSpawner.cs (Integrado e Corrigido para Cliente)
+using UnityEngine;
 using Unity.Netcode;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
@@ -31,17 +32,8 @@ public class CustomPlayerSpawner : NetworkBehaviour
     {
         if (!IsServer) return;
 
-        if (sceneName == "SampleScene") // Ajuste o nome da cena se necessário
-        {
-            Debug.Log("[Spawner] Cena de jogo carregada, iniciando spawn dos jogadores...");
-            StartCoroutine(SpawnPlayersWhenReady());
-        }
-        if (sceneName == "Fase2Final") // Ajuste o nome da cena se necessário
-        {
-            Debug.Log("[Spawner] Cena de jogo carregada, iniciando spawn dos jogadores...");
-            StartCoroutine(SpawnPlayersWhenReady());
-        }
-        if (sceneName == "Fase3") // Ajuste o nome da cena se necessário
+        // O GameFlowManager cuida da transição, mas o spawner ainda precisa saber quando a cena de JOGO carregou
+        if (sceneName == "SampleScene" || sceneName == "Fase2Final" || sceneName == "Fase3") // Ajuste os nomes das cenas
         {
             Debug.Log("[Spawner] Cena de jogo carregada, iniciando spawn dos jogadores...");
             StartCoroutine(SpawnPlayersWhenReady());
@@ -50,6 +42,7 @@ public class CustomPlayerSpawner : NetworkBehaviour
 
     private IEnumerator SpawnPlayersWhenReady()
     {
+        // Seu tempo de espera original
         yield return new WaitForSeconds(1f);
 
         // Ordena IDs para garantir que o host (0) é sempre Player 1
@@ -77,10 +70,14 @@ public class CustomPlayerSpawner : NetworkBehaviour
             if (doorP2 != null)
                 doorP2.SetTargetClientId(p2ClientId);
         }
+
+        // CORREÇÃO: Chama o ClientRpc para desativar a câmera em TODOS os clientes
+        DisableFallbackCameraClientRpc();
     }
 
     private void SpawnPlayer(ulong clientId, GameObject prefab, Transform spawnPoint)
     {
+        // ... (Seu código de SpawnPlayer original) ...
         if (prefab == null)
         {
             Debug.LogError("[Spawner] Prefab de jogador não atribuído!");
@@ -110,14 +107,33 @@ public class CustomPlayerSpawner : NetworkBehaviour
             if (movement != null)
                 TurnControl.Instance.RegisterPlayer(movement);
         }
+    }
 
-        // CÓDIGO ANTIGO DE NOTIFICAÇÃO DA UI REMOVIDO!
+    // NOVO MÉTODO RPC: Desativa a câmera de fallback em todos os clientes
+    [ClientRpc]
+    private void DisableFallbackCameraClientRpc()
+    {
+        // Esta função é executada em TODOS os clientes (incluindo o Host/Servidor)
+
+        // Encontra o objeto da câmera de fallback pela tag
+        GameObject fallbackCameraGO = GameObject.FindGameObjectWithTag("FallbackCamera");
+
+        if (fallbackCameraGO != null)
+        {
+            // Desativa o objeto da câmera de fallback localmente
+            fallbackCameraGO.SetActive(false);
+            Debug.Log("[CustomPlayerSpawner] Câmera de fallback desativada LOCALMENTE em todos os clientes.");
+        }
+        else
+        {
+            Debug.LogWarning("[CustomPlayerSpawner] Câmera de fallback não encontrada (Tag: FallbackCamera).");
+        }
     }
 
     public override void OnDestroy()
     {
-        base.OnDestroy();
         if (NetworkManager.Singleton != null)
             NetworkManager.Singleton.SceneManager.OnLoadEventCompleted -= OnSceneLoaded;
+        base.OnDestroy();
     }
 }
