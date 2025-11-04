@@ -116,17 +116,23 @@ public class CustomPlayerSpawner : NetworkBehaviour
         // Esta função é executada em TODOS os clientes (incluindo o Host/Servidor)
 
         // Encontra o objeto da câmera de fallback pela tag
-        GameObject fallbackCameraGO = GameObject.FindGameObjectWithTag("FallbackCamera");
-
-        if (fallbackCameraGO != null)
+        GameObject[] fallbackCameras = GameObject.FindGameObjectsWithTag("FallbackCamera");
+        // Verifica se encontrou alguma câmera
+        if (fallbackCameras.Length > 0)
         {
-            // Desativa o objeto da câmera de fallback localmente
-            fallbackCameraGO.SetActive(false);
-            Debug.Log("[CustomPlayerSpawner] Câmera de fallback desativada LOCALMENTE em todos os clientes.");
+            // Itera (passa por) CADA câmera encontrada na lista
+            foreach (GameObject cam in fallbackCameras)
+            {
+                // Desativa o objeto da câmera de fallback localmente
+                cam.SetActive(false);
+            }
+
+            // Log atualizado para mostrar quantas câmeras foram desativadas
+            Debug.Log($"[CustomPlayerSpawner] {fallbackCameras.Length} câmera(s) de fallback desativada(s) LOCALMENTE em todos os clientes.");
         }
         else
         {
-            Debug.LogWarning("[CustomPlayerSpawner] Câmera de fallback não encontrada (Tag: FallbackCamera).");
+            Debug.LogWarning("[CustomPlayerSpawner] Nenhuma câmera de fallback foi encontrada (Tag: FallbackCamera).");
         }
     }
 
