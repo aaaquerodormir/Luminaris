@@ -19,8 +19,8 @@ public class TurnControl : NetworkBehaviour
     [SerializeField] private LavaRise lavaInstance;
 
     [Header("UI de Turno")]
-    [SerializeField] private GameObject uiLunaTurn;  // UI do turno da Luna (esquerda)
-    [SerializeField] private GameObject uiLumaTurn;  // UI do turno da Luma (direita)
+    [SerializeField] private GameObject uiLunaTurn;
+    [SerializeField] private GameObject uiLumaTurn;
 
     public static event Action<PlayerMovement> OnTurnStarted;
 
@@ -29,7 +29,7 @@ public class TurnControl : NetworkBehaviour
         if (Instance == null) Instance = this;
         else Destroy(gameObject);
 
-        // Busca a Lava automaticamente, caso não tenha sido atribuída no Inspector
+        // Só o servidor precisa da Lava
         if (IsServer && lavaInstance == null)
         {
             lavaInstance = FindFirstObjectByType<LavaRise>();
@@ -109,7 +109,6 @@ public class TurnControl : NetworkBehaviour
         var current = players[currentIndex.Value];
         current?.SetTurnActiveServerRpc(false);
 
-        // Decrementa buffs
         current?.DecrementBuffTurns();
         lavaInstance?.DecrementBuffTurns();
 
@@ -132,7 +131,6 @@ public class TurnControl : NetworkBehaviour
         player.SetTurnActiveServerRpc(true);
         OnTurnStarted?.Invoke(player);
 
-        // Atualiza UI para todos os clientes
         if (IsServer)
             UpdateTurnUIClientRpc(player.name);
     }
@@ -149,11 +147,10 @@ public class TurnControl : NetworkBehaviour
             return;
         }
 
-        // Desativa ambos
+        // 🔹 Certifica que a UI é atualizada no cliente certo
         uiLunaTurn.SetActive(false);
         uiLumaTurn.SetActive(false);
 
-        // Ativa o painel correto
         if (playerName.Contains("Luna", StringComparison.OrdinalIgnoreCase))
         {
             uiLunaTurn.SetActive(true);
@@ -162,5 +159,7 @@ public class TurnControl : NetworkBehaviour
         {
             uiLumaTurn.SetActive(true);
         }
+
+        Debug.Log($"[TurnControl] UI atualizada para {playerName}");
     }
 }
