@@ -11427,7 +11427,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1934285307154814944, guid: 528df6e56704f084c98b2cda04e3695f, type: 3}
       propertyPath: m_ColliderPaths.Array.size
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1934285307154814944, guid: 528df6e56704f084c98b2cda04e3695f, type: 3}
+      propertyPath: m_CompositePaths.m_Paths.Array.size
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2293958304940597916, guid: 528df6e56704f084c98b2cda04e3695f, type: 3}
       propertyPath: m_Size.y
@@ -24567,6 +24571,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5658012010259136666, guid: 528df6e56704f084c98b2cda04e3695f, type: 3}
       propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6565044093145838873, guid: 528df6e56704f084c98b2cda04e3695f, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6565044093145838873, guid: 528df6e56704f084c98b2cda04e3695f, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.13
+      objectReference: {fileID: 0}
+    - target: {fileID: 6565044093145838873, guid: 528df6e56704f084c98b2cda04e3695f, type: 3}
+      propertyPath: m_CompositeOperation
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7356650869500361146, guid: 528df6e56704f084c98b2cda04e3695f, type: 3}
