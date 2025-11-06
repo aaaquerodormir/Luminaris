@@ -18,6 +18,10 @@ public class TurnControl : NetworkBehaviour
     [Header("Referências da Cena")]
     [SerializeField] private LavaRise lavaInstance;
 
+    [Header("UI de Turno")]
+    [SerializeField] private GameObject uiLunaTurn;
+    [SerializeField] private GameObject uiLumaTurn;
+
     public static event Action<PlayerMovement> OnTurnStarted;
 
     private void Awake()
@@ -25,7 +29,7 @@ public class TurnControl : NetworkBehaviour
         if (Instance == null) Instance = this;
         else Destroy(gameObject);
 
-        // ⬇️ NOVO: Fallback se não foi atribuído no Inspector ⬇️
+        // Só o servidor precisa da Lava
         if (IsServer && lavaInstance == null)
         {
             lavaInstance = FindFirstObjectByType<LavaRise>();
@@ -51,7 +55,6 @@ public class TurnControl : NetworkBehaviour
             yield return new WaitForSeconds(0.5f);
         }
 
-        // Garante ordem fixa de OwnerClientId (Player1 = host)
         players = players.OrderBy(p => p.OwnerClientId).ToList();
         Debug.Log($"[TurnControl] 🟢 {players.Count} jogadores detectados. Iniciando sequência.");
 
@@ -79,15 +82,12 @@ public class TurnControl : NetworkBehaviour
         if (players.Count >= 2)
             ResetTurns();
     }
+
     public PlayerMovement GetCurrentActivePlayer()
     {
-        // Verifica se a lista de jogadores está pronta e se o índice é válido
         if (players.Count == 0 || currentIndex.Value < 0 || currentIndex.Value >= players.Count)
-        {
             return null;
-        }
 
-        // Retorna o jogador na posição do índice atual
         return players[currentIndex.Value];
     }
 
@@ -109,14 +109,8 @@ public class TurnControl : NetworkBehaviour
         var current = players[currentIndex.Value];
         current?.SetTurnActiveServerRpc(false);
 
-        // ⬇️ LÓGICA DE DECREMENTO DE BUFFS (AQUI) ⬇️
-        // Decrementa o buff do jogador que acabou de terminar o turno
         current?.DecrementBuffTurns();
-
-        // Decrementa o buff da lava (acontece a cada turno de jogador)
         lavaInstance?.DecrementBuffTurns();
-        // ⬆️ FIM DA LÓGICA DE BUFFS ⬆️
-
 
         currentIndex.Value = (currentIndex.Value + 1) % players.Count;
         Debug.Log($"[TurnControl] 🔁 Passando turno -> {players[currentIndex.Value].name}");
@@ -127,7 +121,6 @@ public class TurnControl : NetworkBehaviour
     {
         if (player == null) return;
 
-        // 🔑 CORREÇÃO CRÍTICA: Resetar a NetworkVariable aqui no Server
         if (IsServer)
         {
             player.CompletedJumpsNet.Value = 0;
@@ -137,5 +130,36 @@ public class TurnControl : NetworkBehaviour
         Debug.Log($"[TurnControl] ▶ Turno ativo: {player.name}");
         player.SetTurnActiveServerRpc(true);
         OnTurnStarted?.Invoke(player);
+
+        if (IsServer)
+            UpdateTurnUIClientRpc(player.name);
+    }
+
+    // ================================================================
+    // =====================  UI DE TURNO  =============================
+    // ================================================================
+    [ClientRpc]
+    private void UpdateTurnUIClientRpc(string playerName)
+    {
+        if (uiLunaTurn == null || uiLumaTurn == null)
+        {
+            Debug.LogWarning("[TurnControl] UIs de turno não atribuídas no Inspector!");
+            return;
+        }
+
+        // 🔹 Certifica que a UI é atualizada no cliente certo
+        uiLunaTurn.SetActive(false);
+        uiLumaTurn.SetActive(false);
+
+        if (playerName.Contains("Luna", StringComparison.OrdinalIgnoreCase))
+        {
+            uiLunaTurn.SetActive(true);
+        }
+        else if (playerName.Contains("Luma", StringComparison.OrdinalIgnoreCase))
+        {
+            uiLumaTurn.SetActive(true);
+        }
+
+        Debug.Log($"[TurnControl] UI atualizada para {playerName}");
     }
 }
