@@ -2,6 +2,7 @@ using UnityEngine;
 using Unity.Netcode;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
+using System.Collections;
 
 /// <summary>
 /// Gerenciador persistente que orquestra todas as transições de cena no jogo multiplayer.
@@ -15,6 +16,10 @@ public class GameFlowManager : NetworkBehaviour
     [Tooltip("O nome da cena que contém apenas a UI de Loading (sem câmera).")]
     // CORREÇÃO: Alterado de [SerializeField] private string para public string para permitir acesso pelo LoadingScreenManager
     public string loadingSceneName = "LoadingScene";
+
+    [Header("Configuração de Tempo")]
+    [Tooltip("Tempo mínimo em segundos que a tela de loading deve ser exibida.")]
+    [SerializeField] private float loadingDuration = 5.0f;
 
     // Variável de rede para sincronizar o nome da próxima cena a ser carregada
     private NetworkVariable<Unity.Collections.FixedString32Bytes> nextSceneToLoad = new NetworkVariable<Unity.Collections.FixedString32Bytes>();
@@ -70,21 +75,30 @@ public class GameFlowManager : NetworkBehaviour
         // Se a cena que acabou de carregar foi a cena de loading...
         if (sceneName == loadingSceneName)
         {
-            // O servidor agora carrega a cena de destino (a cena do jogo)
+            // O servidor agora inicia a Coroutine de espera
             if (IsServer)
             {
-                Debug.Log($"[GameFlowManager] Cena de loading carregada. Agora carregando a cena de destino: {nextSceneToLoad.Value}");
-                NetworkManager.Singleton.SceneManager.LoadScene(nextSceneToLoad.Value.ToString(), LoadSceneMode.Single);
+                // Inicia a rotina que vai esperar e depois carregar a cena do jogo
+                StartCoroutine(LoadGameSceneAfterDelay());
             }
-            // O cliente (não-host) apenas espera a próxima cena ser carregada pelo servidor.
         }
         // Se a cena de destino (a cena do jogo) acabou de carregar...
         else if (sceneName == nextSceneToLoad.Value.ToString())
         {
-            // A transição terminou.
             isTransitioning = false;
             Debug.Log($"[GameFlowManager] Transição completa. Cena '{sceneName}' carregada.");
         }
+    }
+    private IEnumerator LoadGameSceneAfterDelay()
+    {
+        Debug.Log($"[GameFlowManager] Cena de loading carregada. Esperando {loadingDuration} segundos...");
+
+        // Espera o tempo definido em 'loadingDuration'
+        yield return new WaitForSeconds(loadingDuration);
+
+        // Após a espera, carrega a cena de destino
+        Debug.Log($"[GameFlowManager] Tempo de espera terminado. Carregando a cena de destino: {nextSceneToLoad.Value}");
+        NetworkManager.Singleton.SceneManager.LoadScene(nextSceneToLoad.Value.ToString(), LoadSceneMode.Single);
     }
 }
 
