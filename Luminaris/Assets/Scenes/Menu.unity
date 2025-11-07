@@ -202,7 +202,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   loadingSceneName: LoadingScene
-  loadingDuration: 10
+  loadingDuration: 5
 --- !u!4 &196806318
 Transform:
   m_ObjectHideFlags: 0
