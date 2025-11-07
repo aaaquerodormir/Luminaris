@@ -161,8 +161,7 @@ public class GameManager : NetworkBehaviour
         if (id != null)
         {
             if (turnChangeText != null)
-                turnChangeText.text = $"Agora é a vez da {id.PlayerName}";
-
+                turnChangeText.text = $"TEM QUE CORRIGIR AQUI!!";
             if (turnChangeImage != null)
             {
                 turnChangeImage.sprite = id.PlayerSprite;

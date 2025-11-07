@@ -18,9 +18,11 @@ public class TurnControl : NetworkBehaviour
     [Header("Referências da Cena")]
     [SerializeField] private LavaRise lavaInstance;
 
+    // --- ALTERAÇÃO 1: Renomeado para clareza ---
     [Header("UI de Turno")]
-    [SerializeField] private GameObject uiLunaTurn;
-    [SerializeField] private GameObject uiLumaTurn;
+    [SerializeField] private GameObject uiPlayer1Turn; // Anteriormente uiLunaTurn
+    [SerializeField] private GameObject uiPlayer2Turn; // Anteriormente uiLumaTurn
+                                                       // -------------------------------------------
 
     public static event Action<PlayerMovement> OnTurnStarted;
 
@@ -29,7 +31,6 @@ public class TurnControl : NetworkBehaviour
         if (Instance == null) Instance = this;
         else Destroy(gameObject);
 
-        // Só o servidor precisa da Lava
         if (IsServer && lavaInstance == null)
         {
             lavaInstance = FindFirstObjectByType<LavaRise>();
@@ -48,6 +49,8 @@ public class TurnControl : NetworkBehaviour
 
     private IEnumerator WaitForPlayersAndStartTurns()
     {
+        // Espera pelos jogadores (o Spawner agora registra eles)
+        // Mas mantém o FindPlayersInScene como um fallback
         yield return new WaitForSeconds(1f);
         while (players.Count < 2)
         {
@@ -79,7 +82,8 @@ public class TurnControl : NetworkBehaviour
         players = players.OrderBy(p => p.OwnerClientId).ToList();
         Debug.Log($"[TurnControl] ➕ Registrado: {player.name} (Owner={player.OwnerClientId})");
 
-        if (players.Count >= 2)
+        // Inicia os turnos assim que o segundo jogador for registrado
+        if (players.Count == 2)
             ResetTurns();
     }
 
@@ -114,6 +118,7 @@ public class TurnControl : NetworkBehaviour
 
         currentIndex.Value = (currentIndex.Value + 1) % players.Count;
         Debug.Log($"[TurnControl] 🔁 Passando turno -> {players[currentIndex.Value].name}");
+
         TriggerTurnStarted(players[currentIndex.Value]);
     }
 
@@ -135,30 +140,36 @@ public class TurnControl : NetworkBehaviour
             UpdateTurnUIClientRpc(player.name);
     }
 
+
     // ================================================================
     // =====================  UI DE TURNO  =============================
     // ================================================================
+
     [ClientRpc]
     private void UpdateTurnUIClientRpc(string playerName)
     {
-        if (uiLunaTurn == null || uiLumaTurn == null)
+        // --- ALTERAÇÃO 2: Lógica da UI atualizada ---
+        // Usa as novas variáveis
+        if (uiPlayer1Turn == null || uiPlayer2Turn == null)
         {
-            Debug.LogWarning("[TurnControl] UIs de turno não atribuídas no Inspector!");
+            Debug.LogWarning("[TurnControl] UIs de turno (P1 ou P2) não atribuídas no Inspector!");
             return;
         }
 
-        // 🔹 Certifica que a UI é atualizada no cliente certo
-        uiLunaTurn.SetActive(false);
-        uiLumaTurn.SetActive(false);
+        uiPlayer1Turn.SetActive(false);
+        uiPlayer2Turn.SetActive(false);
 
-        if (playerName.Contains("Luna", StringComparison.OrdinalIgnoreCase))
+        // Checa por "Player1" ou "Player2" no nome do objeto do jogador
+        // (O Spawner usa player1Prefab e player2Prefab, então o nome instanciado conterá isso)
+        if (playerName.Contains("Player1", StringComparison.OrdinalIgnoreCase))
         {
-            uiLunaTurn.SetActive(true);
+            uiPlayer1Turn.SetActive(true);
         }
-        else if (playerName.Contains("Luma", StringComparison.OrdinalIgnoreCase))
+        else if (playerName.Contains("Player2", StringComparison.OrdinalIgnoreCase))
         {
-            uiLumaTurn.SetActive(true);
+            uiPlayer2Turn.SetActive(true);
         }
+        // --- FIM DAS ALTERAÇÕES ---
 
         Debug.Log($"[TurnControl] UI atualizada para {playerName}");
     }
