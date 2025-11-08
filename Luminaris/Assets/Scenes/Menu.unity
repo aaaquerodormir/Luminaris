@@ -203,6 +203,14 @@ MonoBehaviour:
   ShowTopMostFoldoutHeaderGroup: 1
   loadingSceneName: LoadingScene
   loadingDuration: 5
+  loadingMessages:
+  - "Luma e Luna precis\xE3o de sua ajuda..."
+  - As quedas podem machucar
+  - A lava pode ser um pouco quente demais
+  - Talvez os espinhos sejam muito pontudos
+  - Subir pode ser o caminho
+  CurrentLoadingMessageIndex:
+    m_InternalValue: 0
 --- !u!4 &196806318
 Transform:
   m_ObjectHideFlags: 0

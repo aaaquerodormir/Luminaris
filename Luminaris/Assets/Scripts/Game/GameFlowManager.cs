@@ -4,22 +4,25 @@ using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 using System.Collections;
 
-/// <summary>
-/// Gerenciador persistente que orquestra todas as transições de cena no jogo multiplayer.
-/// Usa uma cena de loading intermediária para mascarar a transição.
-/// </summary>
 public class GameFlowManager : NetworkBehaviour
 {
     public static GameFlowManager Instance { get; private set; }
 
     [Header("Configuração de Cenas")]
     [Tooltip("O nome da cena que contém apenas a UI de Loading (sem câmera).")]
-    // CORREÇÃO: Alterado de [SerializeField] private string para public string para permitir acesso pelo LoadingScreenManager
     public string loadingSceneName = "LoadingScene";
 
     [Header("Configuração de Tempo")]
     [Tooltip("Tempo mínimo em segundos que a tela de loading deve ser exibida.")]
     [SerializeField] private float loadingDuration = 5.0f;
+
+    [Header("Configuração de Mensagens (Loading)")]
+    [Tooltip("Adicione aqui todas as mensagens que podem aparecer na tela de loading.")]
+    public string[] loadingMessages;
+
+    public NetworkVariable<int> CurrentLoadingMessageIndex = new NetworkVariable<int>(
+        0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
+    private static int s_serverMessageIndex = -1;
 
     // Variável de rede para sincronizar o nome da próxima cena a ser carregada
     private NetworkVariable<Unity.Collections.FixedString32Bytes> nextSceneToLoad = new NetworkVariable<Unity.Collections.FixedString32Bytes>();
@@ -34,13 +37,9 @@ public class GameFlowManager : NetworkBehaviour
             return;
         }
         Instance = this;
-        // Torna o manager persistente
         DontDestroyOnLoad(gameObject);
     }
 
-    /// <summary>
-    /// Inicia a transição para uma nova cena. Chamado pelo Servidor.
-    /// </summary>
     public void TransitionToScene(string sceneName)
     {
         if (!IsServer || isTransitioning) return;
@@ -48,6 +47,17 @@ public class GameFlowManager : NetworkBehaviour
         Debug.Log($"[GameFlowManager] Iniciando transição para a cena: {sceneName}");
         isTransitioning = true;
         nextSceneToLoad.Value = sceneName;
+
+        if (loadingMessages.Length > 0)
+        {
+            s_serverMessageIndex = (s_serverMessageIndex + 1) % loadingMessages.Length;
+        }
+        else
+        {
+            s_serverMessageIndex = 0; // Fallback
+        }
+        CurrentLoadingMessageIndex.Value = s_serverMessageIndex;
+        Debug.Log($"[GameFlowManager] Definindo índice de loading para: {s_serverMessageIndex}");
 
         // 1. Carrega a cena de loading para todos os clientes
         NetworkManager.Singleton.SceneManager.LoadScene(loadingSceneName, LoadSceneMode.Single);
