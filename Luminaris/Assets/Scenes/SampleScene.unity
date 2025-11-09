@@ -5207,10 +5207,6 @@ MonoBehaviour:
   pauseMenu: {fileID: 1885562399}
   hudContainer: {fileID: 322329796}
   confirmationUI: {fileID: 146599495}
-  turnChangePanel: {fileID: 285012292}
-  turnChangeText: {fileID: 105645188}
-  turnChangeImage: {fileID: 553751478}
-  turnPanelDisplayDuration: 1
   jumpCounterUI: {fileID: 2003509818}
 --- !u!4 &490071352
 Transform:
@@ -5807,6 +5803,7 @@ MonoBehaviour:
   lavaInstance: {fileID: 1909042937}
   uiPlayer1Turn: {fileID: 285012292}
   uiPlayer2Turn: {fileID: 1428882744}
+  turnPanelDisplayDuration: 2.5
 --- !u!4 &554373784
 Transform:
   m_ObjectHideFlags: 0
