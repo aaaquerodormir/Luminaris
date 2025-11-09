@@ -1,7 +1,7 @@
 using Unity.Netcode;
 using UnityEngine;
 using System.Collections;
-using System.Linq; // Necessário para .FirstOrDefault
+using System.Linq;
 
 [RequireComponent(typeof(NetworkObject), typeof(Rigidbody2D), typeof(Animator))]
 public class EnemyController : NetworkBehaviour
@@ -20,18 +20,23 @@ public class EnemyController : NetworkBehaviour
     private float moveSpeed = 2.5f;
     [Header("Debuff Settings")]
     [SerializeField]
-    private int debuffDurationTurns = 2; // Quantidade de turnos que o debuff irá durar
+    private int debuffDurationTurns = 2;
 
     [Header("Referências")]
     [SerializeField]
     private Animator animator;
+
+    [SerializeField]
+    [Tooltip("Arraste TODOS os GameObjects de partículas que devem ser desativados no ataque.")]
+    private GameObject[] particleEffects; // Array para múltiplas partículas
+
     private Rigidbody2D rb;
 
     private NetworkVariable<EnemyState> currentState = new NetworkVariable<EnemyState>(EnemyState.Spawning);
-    private NetworkVariable<ulong> linkedPlayerId = new NetworkVariable<ulong>(99); // 99 = ID inválido
+    private NetworkVariable<ulong> linkedPlayerId = new NetworkVariable<ulong>(99);
 
-    private Transform targetPlayerTransform; // O transform do jogador a ser perseguido
-    private PlayerState targetPlayerState; // Referência ao script PlayerState do jogador
+    private Transform targetPlayerTransform;
+    private PlayerState targetPlayerState;
     private bool canPursue = false;
 
     public override void OnNetworkSpawn()
@@ -41,13 +46,9 @@ public class EnemyController : NetworkBehaviour
 
         if (IsServer)
         {
-            // Se inscreve no evento OnTurnStarted do SEU TurnControl
             TurnControl.OnTurnStarted += HandleTurnChanged;
-
-            // Caso o inimigo seja spownado no meio de um turno, verifica o estado
             if (TurnControl.Instance != null)
             {
-                // Usa o método helper para pegar o jogador ativo
                 PlayerMovement currentPlayer = TurnControl.Instance.GetCurrentActivePlayer();
                 if (currentPlayer != null)
                 {
@@ -83,7 +84,7 @@ public class EnemyController : NetworkBehaviour
     {
         if (!IsServer) return;
         if (newActivePlayer == null) return;
-        if (linkedPlayerId.Value == 99) return; // Inimigo não foi configurado
+        if (linkedPlayerId.Value == 99) return;
 
         ulong newActivePlayerId = newActivePlayer.OwnerClientId;
 
@@ -91,20 +92,17 @@ public class EnemyController : NetworkBehaviour
         {
             canPursue = false;
             targetPlayerTransform = null;
-            targetPlayerState = null; // Limpa a referência
+            targetPlayerState = null;
             currentState.Value = EnemyState.Idle;
         }
-        else 
+        else
         {
             canPursue = true;
-
-            // Busca o PlayerMovement do jogador "linkado" na lista do TurnControl
             PlayerMovement linkedPlayerMovement = TurnControl.Instance.players
                 .FirstOrDefault(p => p.OwnerClientId == linkedPlayerId.Value);
 
             if (linkedPlayerMovement != null)
             {
-                // Pega o transform e o script PlayerState
                 targetPlayerTransform = linkedPlayerMovement.transform;
                 targetPlayerState = linkedPlayerMovement.GetComponent<PlayerState>();
 
@@ -143,17 +141,15 @@ public class EnemyController : NetworkBehaviour
             return;
         }
 
-        // Verifica se o jogador alvo está na plataforma segura
         if (IsPlayerOnSafePlatform())
         {
             currentState.Value = EnemyState.Waiting;
         }
-        else if (currentState.Value == EnemyState.Waiting) // Se saiu da plataforma segura
+        else if (currentState.Value == EnemyState.Waiting)
         {
             currentState.Value = EnemyState.Pursuing;
         }
 
-        // Executa ação do estado
         switch (currentState.Value)
         {
             case EnemyState.Pursuing:
@@ -176,7 +172,6 @@ public class EnemyController : NetworkBehaviour
         {
             return targetPlayerState.IsOnSafePlatform.Value;
         }
-
         return false;
     }
 
@@ -200,13 +195,9 @@ public class EnemyController : NetworkBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (!IsServer) return;
-        // Verifica se o estado permite atacar/tocar
         if (currentState.Value != EnemyState.Pursuing && currentState.Value != EnemyState.Waiting) return;
-
-        // Verifica se o objeto que entrou no Trigger é o jogador alvo
         if (other.transform != targetPlayerTransform) return;
 
-        // Garante que é o jogador e não um collider extra
         if (other.CompareTag("Player"))
         {
             StartAttack();
@@ -218,6 +209,9 @@ public class EnemyController : NetworkBehaviour
         if (!IsServer) return;
         currentState.Value = EnemyState.Attacking;
         rb.linearVelocity = Vector2.zero;
+
+        // Desativa as partículas em todos os clientes
+        DisableParticlesClientRpc();
 
         PlayerMovement linkedPlayerMovement = TurnControl.Instance.players
             .FirstOrDefault(p => p.OwnerClientId == linkedPlayerId.Value);
@@ -249,15 +243,32 @@ public class EnemyController : NetworkBehaviour
         animator.SetTrigger("Attack");
     }
 
+    [ClientRpc]
+    private void DisableParticlesClientRpc()
+    {
+        if (particleEffects == null || particleEffects.Length == 0)
+        {
+            Debug.LogWarning("[EnemyController] Nenhum efeito de partícula foi atribuído no Inspector.");
+            return;
+        }
+
+        // Itera sobre CADA partícula no array e a desativa
+        foreach (GameObject particle in particleEffects)
+        {
+            if (particle != null)
+            {
+                particle.SetActive(false);
+            }
+        }
+        Debug.Log($"[EnemyController] {particleEffects.Length} sistemas de partículas desativados em todos os clientes.");
+    }
+
     private IEnumerator AttackCooldown()
     {
-        //tempo da animação de ataque (e do Screen Fade)
         yield return new WaitForSeconds(1.5f);
-
         if (IsServer)
         {
             NetworkObject.Despawn(gameObject);
-
         }
     }
 }

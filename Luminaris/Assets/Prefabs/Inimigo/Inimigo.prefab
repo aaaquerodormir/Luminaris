@@ -185,7 +185,10 @@ MonoBehaviour:
   ShowTopMostFoldoutHeaderGroup: 1
   moveSpeed: 0.5
   debuffDurationTurns: 2
-  animator: {fileID: 0}
+  animator: {fileID: 8922176778643998828}
+  particleEffects:
+  - {fileID: 962701875390007215}
+  - {fileID: 2718650036675917568}
 --- !u!61 &7784287535428714049
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -352,6 +355,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7652c3543a7b5e543a5289bb4a8d9e66, type: 3}
+--- !u!1 &2718650036675917568 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7403925106403218174, guid: 7652c3543a7b5e543a5289bb4a8d9e66, type: 3}
+  m_PrefabInstance: {fileID: 4862360813969155582}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4201510318617902869 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8733693788275514091, guid: 7652c3543a7b5e543a5289bb4a8d9e66, type: 3}
@@ -430,6 +438,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7bf476d311f389648bc3d5e42762ed80, type: 3}
+--- !u!1 &962701875390007215 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7403925106403218174, guid: 7bf476d311f389648bc3d5e42762ed80, type: 3}
+  m_PrefabInstance: {fileID: 7754128636310705489}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1344433149006401466 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8733693788275514091, guid: 7bf476d311f389648bc3d5e42762ed80, type: 3}
