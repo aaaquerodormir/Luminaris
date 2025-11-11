@@ -1,96 +1,95 @@
 using UnityEngine;
 using Unity.Netcode;
 using UnityEngine.UI;
-// Se precisar de funcionalidades específicas do Cinemachine, adicione a linha abaixo:
-//using Cinemachine; 
 
 public class VisionFollower : NetworkBehaviour
 {
     private RectTransform visionMaskRect;
+    private Image visionMaskImage;
     private Canvas canvas;
-
     private Camera localPlayerCamera;
     private DebuffVisionControl debuffControl;
 
     [Header("Limitação da Borda")]
     [SerializeField]
-    private float screenEdgeBuffer = 10f; // Margem de segurança (em pixels) para a borda da tela.
+    private float screenEdgeBuffer = 10f;
 
     public override void OnNetworkSpawn()
     {
-        // Garante que o script só execute para o cliente que é o Dono (Dono do Prefab)
-        if (!IsOwner)
+
+        localPlayerCamera = GetComponentInChildren<Camera>(true);
+        debuffControl = GetComponent<DebuffVisionControl>();
+
+        if (UIManager.Instance == null)
         {
+            Debug.LogError("[VisionFollower] UIManager Singleton não encontrado!");
             enabled = false;
             return;
         }
 
-        debuffControl = GetComponent<DebuffVisionControl>();
-        localPlayerCamera = GetComponentInChildren<Camera>(true);
+        canvas = UIManager.Instance.MainCanvas;
 
-        if (UIManager.Instance != null)
+        if (OwnerClientId == 0)
         {
-            visionMaskRect = UIManager.Instance.VisionMaskRect;
-            canvas = UIManager.Instance.MainCanvas;
+            visionMaskRect = UIManager.Instance.VisionMaskRect_P1;
+            visionMaskImage = UIManager.Instance.VisionMaskImage_P1;
         }
         else
         {
-            Debug.LogError("[VisionFollower] UIManager Singleton não encontrado na cena! A UI deve estar na cena.");
-            enabled = false;
-            return;
+            visionMaskRect = UIManager.Instance.VisionMaskRect_P2;
+            visionMaskImage = UIManager.Instance.VisionMaskImage_P2;
+        }
+
+        if (debuffControl != null)
+        {
+            debuffControl.SetLocalMask(visionMaskImage);
+        }
+        else
+        {
+            Debug.LogError($"[VisionFollower] DebuffVisionControl não encontrado no player {OwnerClientId}!");
         }
 
         if (localPlayerCamera == null)
         {
-            Debug.LogError("[VisionFollower] Câmera Local (Filha) não encontrada. Certifique-se de que a câmera está dentro do Prefab do Jogador.");
+            Debug.LogError($"[VisionFollower] Câmera Local (Filha) não encontrada para o player {OwnerClientId}.");
             enabled = false;
         }
     }
 
     private void Update()
     {
-        // Usa localPlayerCamera em vez de mainCamera
-        if (debuffControl == null || !debuffControl.IsDebuffed() || visionMaskRect == null || canvas == null || localPlayerCamera == null)
+        if (localPlayerCamera == null)
         {
             return;
         }
 
-        // 1. Converte a posição 3D do jogador para a posição 2D da tela.
+        if (debuffControl == null || !debuffControl.IsDebuffed() || visionMaskRect == null || canvas == null)
+        {
+            return;
+        }
+
         Vector3 worldPosition = transform.position;
-        // Usa a câmera local
         Vector3 screenPoint = localPlayerCamera.WorldToScreenPoint(worldPosition);
-        // Captura as dimensões atuais da viewport da Câmera LOCAL (seja tela cheia ou tela dividida)
+
         float viewportWidth = localPlayerCamera.pixelWidth;
         float viewportHeight = localPlayerCamera.pixelHeight;
-
-        // Calcula o raio da máscara, que serve como limite mínimo para o Clamp.
         float maskHalfSize = Mathf.Min(visionMaskRect.rect.width, visionMaskRect.rect.height) / 2f;
-
-        // O buffer total é o raio da máscara + a margem de segurança ajustável.
         float buffer = maskHalfSize + screenEdgeBuffer;
+        screenPoint.x = Mathf.Clamp(screenPoint.x, buffer, viewportWidth - buffer);
+        screenPoint.y = Mathf.Clamp(screenPoint.y, buffer, viewportHeight - buffer);
 
-        // Limita o screenPoint.x: O centro deve parar antes da borda lateral.
-        screenPoint.x = Mathf.Clamp(
-            screenPoint.x,
-            buffer,
-            viewportWidth - buffer
-        );
-
-        // Limita o screenPoint.y: O centro deve parar antes da borda superior/inferior.
-        screenPoint.y = Mathf.Clamp(
-            screenPoint.y,
-            buffer,
-            viewportHeight - buffer
-        );
-
-        // ---------------------------------------------
-
-        // 2. Converte a posição da tela (AGORA LIMITADA) para a posição local do Canvas
-        // Usa a câmera local
         Camera usedCamera = canvas.renderMode == RenderMode.ScreenSpaceCamera ? localPlayerCamera : null;
 
-        Vector2 localPoint;
+        if (usedCamera == null)
+        {
+            float viewportOffsetX = localPlayerCamera.rect.x * Screen.width;
+            float viewportOffsetY = localPlayerCamera.rect.y * Screen.height;
 
+            screenPoint.x += viewportOffsetX;
+            screenPoint.y += viewportOffsetY;
+        }
+
+        Vector2 localPoint;
         if (RectTransformUtility.ScreenPointToLocalPointInRectangle(
             visionMaskRect.parent as RectTransform,
             screenPoint,
@@ -100,5 +99,4 @@ public class VisionFollower : NetworkBehaviour
             visionMaskRect.localPosition = localPoint;
         }
     }
-
 }

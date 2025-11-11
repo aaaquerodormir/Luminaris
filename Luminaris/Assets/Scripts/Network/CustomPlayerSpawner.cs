@@ -18,6 +18,10 @@ public class CustomPlayerSpawner : NetworkBehaviour
     [SerializeField] private FinalDoor doorP1;
     [SerializeField] private FinalDoor doorP2;
 
+    // --- MUDANÇA 1: A "TRAVA" ---
+    // Esta variável vai impedir que o spawn rode mais de uma vez.
+    private bool playersSpawned = false;
+
     private void Start()
     {
         if (NetworkManager.Singleton != null)
@@ -35,12 +39,17 @@ public class CustomPlayerSpawner : NetworkBehaviour
             int totalClients = NetworkManager.Singleton.ConnectedClients.Count;
 
             // Verifica se TODOS os clientes terminaram de carregar a cena.
-            // Isso garante que o spawn só ocorra quando todos estiverem prontos.
             if (clientsCompleted.Count == totalClients)
             {
-                Debug.Log($"[Spawner] Todos os {totalClients} clientes carregaram a cena. Iniciando spawn imediato.");
+                // --- MUDANÇA 2: CHECAGEM DA TRAVA ---
+                // Se os jogadores já foram spawnados, não faz mais nada.
+                if (playersSpawned) return;
 
-                // Chama o método de spawn imediatamente.
+                // Ativa a trava para garantir que isso só rode uma vez.
+                playersSpawned = true;
+                // ------------------------------------
+
+                Debug.Log($"[Spawner] Todos os {totalClients} clientes carregaram a cena. Iniciando spawn.");
                 SpawnPlayersNow();
             }
         }
@@ -93,11 +102,10 @@ public class CustomPlayerSpawner : NetworkBehaviour
             return;
         }
 
-        // Instancia o objeto na rede e dá a propriedade (ownership) ao cliente específico
         netObj.SpawnAsPlayerObject(clientId, true);
         Debug.Log($"[Spawner] Player {clientId} spawnado em {spawnPos}");
 
-        // Registra o jogador em outros sistemas (ex: TurnControl)
+        // Registra o jogador no TurnControl (usando o script TurnControl que eu te passei)
         if (TurnControl.Instance != null)
         {
             var movement = player.GetComponent<PlayerMovement>();
@@ -106,7 +114,6 @@ public class CustomPlayerSpawner : NetworkBehaviour
         }
     }
 
-    // Desativa a(s) câmera(s) de fallback em todos os clientes
     [ClientRpc]
     private void DisableFallbackCameraClientRpc()
     {
@@ -119,10 +126,6 @@ public class CustomPlayerSpawner : NetworkBehaviour
                 cam.SetActive(false);
             }
             Debug.Log($"[CustomPlayerSpawner] {fallbackCameras.Length} câmera(s) de fallback desativada(s).");
-        }
-        else
-        {
-            Debug.LogWarning("[CustomPlayerSpawner] Nenhuma câmera de fallback foi encontrada (Tag: FallbackCamera).");
         }
     }
 

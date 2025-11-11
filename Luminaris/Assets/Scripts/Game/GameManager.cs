@@ -11,9 +11,11 @@ public class GameManager : NetworkBehaviour
 
     public static event System.Action OnGameOver;
 
-    [Header("Jogadores")]
-    [SerializeField] private PlayerRespawn player1;
-    [SerializeField] private PlayerRespawn player2;
+    // --- MUDANÇA: SEÇÃO "Jogadores" REMOVIDA ---
+    // Os campos [SerializeField] para player1 e player2 foram deletados
+    // para impedir a duplicação de jogadores. O script agora
+    // usa o evento estático PlayerRespawn.OnPlayerDied.
+    // ------------------------------------------
 
     [Header("Lava")]
     [SerializeField] private LavaRise lava;
@@ -28,10 +30,6 @@ public class GameManager : NetworkBehaviour
     [SerializeField] private PauseMenu pauseMenu;
     [SerializeField] private GameObject hudContainer;
     [SerializeField] private GameObject confirmationUI;
-
-    // --- SEÇÃO "UI de Turno" REMOVIDA ---
-    // [Header("UI de Turno")]
-    // ... (variáveis movidas para TurnControl)
 
     [Header("UI Específica")]
     [SerializeField] private GameObject jumpCounterUI;
@@ -56,16 +54,14 @@ public class GameManager : NetworkBehaviour
 
     private void OnEnable()
     {
+        // Esta linha é a forma correta de detectar a morte,
+        // pois funciona para *qualquer* jogador que for instanciado.
         PlayerRespawn.OnPlayerDied += OnAnyPlayerDeath;
-        // --- REMOVIDO: GameManager não escuta mais os turnos ---
-        // TurnControl.OnTurnStarted += HandleTurnStart; 
     }
 
     private void OnDisable()
     {
         PlayerRespawn.OnPlayerDied -= OnAnyPlayerDeath;
-        // --- REMOVIDO ---
-        // TurnControl.OnTurnStarted -= HandleTurnStart;
     }
 
     private void Start() { }
@@ -92,7 +88,6 @@ public class GameManager : NetworkBehaviour
         if (victoryMenuWrapper != null) victoryMenuWrapper.SetActive(false);
         if (gameOverUI != null) gameOverUI.SetActive(true);
 
-        // --- ALTERAÇÃO: Notifica o TurnControl para se limpar ---
         if (TurnControl.Instance != null)
             TurnControl.Instance.HideAllTurnUI();
 
@@ -110,19 +105,11 @@ public class GameManager : NetworkBehaviour
         if (hudContainer != null) hudContainer.SetActive(false);
         if (gameOverUI != null) gameOverUI.SetActive(false);
 
-        // --- ALTERAÇÃO: Notifica o TurnControl para se limpar ---
         if (TurnControl.Instance != null)
             TurnControl.Instance.HideAllTurnUI();
 
         Time.timeScale = 0f;
     }
-
-    // ==========================
-    // ==== TURNOS (REMOVIDO) ===
-    // ==========================
-
-    // --- MÉTODO HandleTurnStart REMOVIDO ---
-    // --- CORROTINA ShowTurnPanelRoutine REMOVIDA ---
 
     // ==========================
     // ==== REINICIAR ===========
@@ -156,7 +143,6 @@ public class GameManager : NetworkBehaviour
         if (victoryUI != null) victoryUI.SetActive(false);
         if (victoryMenuWrapper != null) victoryMenuWrapper.SetActive(false);
 
-        // --- ALTERAÇÃO: Notifica o TurnControl para se limpar ---
         if (TurnControl.Instance != null)
             TurnControl.Instance.HideAllTurnUI();
 
