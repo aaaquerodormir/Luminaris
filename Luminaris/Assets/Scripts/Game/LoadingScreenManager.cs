@@ -1,43 +1,25 @@
-﻿// LoadingScreenManager.cs
-using UnityEngine;
+﻿using UnityEngine;
 using Unity.Netcode;
 using System.Collections;
 using TMPro;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 
-/// <summary>
-/// Gerencia a tela de loading durante a conexão e carregamento de cena no Netcode for GameObjects.
-/// Este script NÃO é persistente e existe APENAS na LoadingScene.
-/// </summary>
 public class LoadingScreenManager : MonoBehaviour
 {
     [Header("Loading Screen Components")]
     [SerializeField] private GameObject loadingScreenPanel;
-    [SerializeField] private TextMeshProUGUI loadingText;
+    [SerializeField] private TextMeshProUGUI messageText;
     [SerializeField] private Animator backgroundAnimator;
-
-    [Header("Loading Text Animation")]
-    [SerializeField] private string baseLoadingText = "Carregando";
-    [SerializeField] private float dotAnimationSpeed = 0.5f;
-    [SerializeField] private int maxDots = 3;
 
     [Header("Scene Loading")]
     [SerializeField] private bool waitForAllPlayersConnected = true;
     [SerializeField] private int expectedPlayerCount = 2;
 
-    // NOVO CAMPO: Tempo mínimo que a tela de loading deve aparecer
-    [Header("Configuração de Tempo")]
-    [Tooltip("Tempo mínimo em segundos que a tela de loading deve ser exibida.")]
-    [SerializeField] private float minDisplayTime = 3.0f; // Valor padrão de 3 segundos
-
+    // Essas variáveis agora serão lidas no Update()
     private bool isSceneLoaded = false;
     private bool arePlayersConnected = false;
-    private Coroutine textAnimationCoroutine;
-    private int currentDots = 0;
 
-    // NOVO CAMPO: Para controlar o tempo de início
-    private float timeStartedLoading;
 
     private void Awake()
     {
@@ -50,95 +32,107 @@ public class LoadingScreenManager : MonoBehaviour
 
     private void Start()
     {
-        // NOVO: Registra o tempo em que a cena de loading começou
-        timeStartedLoading = Time.time;
-
-        // FIX para NullReferenceException: Espera que o NetworkManager esteja pronto
         StartCoroutine(RegisterNetworkCallbacksWhenReady());
+        StartCoroutine(SetLoadingMessage());
 
-        // Inicia animação do texto
-        if (textAnimationCoroutine != null)
-        {
-            StopCoroutine(textAnimationCoroutine);
-        }
-        textAnimationCoroutine = StartCoroutine(AnimateLoadingText());
-
-        // Se o cliente já estiver conectado (vindo do menu), verifica o estado imediatamente
         if (NetworkManager.Singleton != null && NetworkManager.Singleton.IsConnectedClient)
         {
             CheckIfAllPlayersConnected();
         }
 
-        // Adiciona um listener para o carregamento da cena de jogo (que é carregada depois da LoadingScene)
         if (NetworkManager.Singleton != null && NetworkManager.Singleton.SceneManager != null)
         {
             NetworkManager.Singleton.SceneManager.OnLoadComplete += OnLoadComplete;
         }
     }
 
+    // --- MUDANÇA 1: Adição do Update() ---
+    // Este método verifica constantemente o estado do carregamento.
+    private void Update()
+    {
+        // Verifica se a cena foi carregada E se os players estão conectados
+        if (isSceneLoaded && arePlayersConnected)
+        {
+            // Se ambas as condições forem verdadeiras, esconde a tela de loading.
+            HideLoadingScreen();
+        }
+    }
+
+    // --- MUDANÇA 2: Novo Método ---
+    // Colocamos a lógica de "esconder" em um método separado.
+    private void HideLoadingScreen()
+    {
+        if (loadingScreenPanel != null)
+        {
+            loadingScreenPanel.SetActive(false);
+            Debug.Log("[LoadingScreen] Carregamento completo. Escondendo tela.");
+        }
+
+        // Desativa este script para que o Update() pare de rodar
+        // e consumir performance.
+        this.enabled = false;
+    }
+
+    private IEnumerator SetLoadingMessage()
+    {
+        while (GameFlowManager.Instance == null)
+        {
+            Debug.LogWarning("[LoadingScreen] Esperando GameFlowManager.Instance...");
+            yield return null;
+        }
+
+        GameFlowManager flow = GameFlowManager.Instance;
+
+        while (flow.loadingMessages == null || flow.loadingMessages.Length == 0)
+        {
+            Debug.LogWarning("[LoadingScreen] Esperando GameFlowManager carregar a lista de mensagens...");
+            yield return new WaitForSeconds(0.1f);
+        }
+
+        int messageIndex = flow.CurrentLoadingMessageIndex.Value;
+        string[] messages = flow.loadingMessages;
+
+        if (messageIndex >= 0 && messageIndex < messages.Length)
+        {
+            messageText.text = messages[messageIndex];
+            Debug.Log($"[LoadingScreen] Exibindo mensagem {messageIndex}: {messages[messageIndex]}");
+        }
+        else
+        {
+            Debug.LogError($"[LoadingScreen] Índice de mensagem inválido ({messageIndex}) recebido.");
+            messageText.text = "Luma e Luna precisam da sua ajuda...";
+        }
+    }
+
     private void OnDestroy()
     {
-        if (NetworkManager.Singleton != null && NetworkManager.Singleton.SceneManager != null)
+        if (NetworkManager.Singleton != null)
         {
-            NetworkManager.Singleton.SceneManager.OnLoadComplete -= OnLoadComplete;
+            if (NetworkManager.Singleton.SceneManager != null)
+            {
+                NetworkManager.Singleton.SceneManager.OnLoadComplete -= OnLoadComplete;
+            }
+            NetworkManager.Singleton.OnClientConnectedCallback -= OnClientConnected;
+            NetworkManager.Singleton.OnClientDisconnectCallback -= OnClientDisconnected;
         }
     }
 
     private IEnumerator RegisterNetworkCallbacksWhenReady()
     {
-        // Espera até que o NetworkManager.Singleton não seja nulo
         while (NetworkManager.Singleton == null)
         {
             yield return null;
         }
 
-        // Espera até que o NetworkManager esteja inicializado (IsListening)
         while (!NetworkManager.Singleton.IsListening)
         {
             yield return null;
         }
 
-        // Registra callbacks do NetworkManager
         if (NetworkManager.Singleton != null)
         {
             NetworkManager.Singleton.OnClientConnectedCallback += OnClientConnected;
             NetworkManager.Singleton.OnClientDisconnectCallback += OnClientDisconnected;
-        }
-    }
-
-    /// <summary>
-    /// Esconde a tela de loading
-    /// </summary>
-    public void HideLoadingScreen()
-    {
-        if (loadingScreenPanel != null)
-        {
-            loadingScreenPanel.SetActive(false);
-
-            // Para animação do texto
-            if (textAnimationCoroutine != null)
-            {
-                StopCoroutine(textAnimationCoroutine);
-                textAnimationCoroutine = null;
-            }
-
-            Debug.Log("[LoadingScreen] Tela de loading escondida");
-        }
-    }
-
-    private IEnumerator AnimateLoadingText()
-    {
-        while (true)
-        {
-            currentDots = (currentDots + 1) % (maxDots + 1);
-
-            if (loadingText != null)
-            {
-                string dots = new string('.', currentDots);
-                loadingText.text = baseLoadingText + dots;
-            }
-
-            yield return new WaitForSeconds(dotAnimationSpeed);
         }
     }
 
@@ -156,14 +150,11 @@ public class LoadingScreenManager : MonoBehaviour
 
     private void OnLoadComplete(ulong clientId, string sceneName, LoadSceneMode loadMode)
     {
-        // Se o cliente que acabou de carregar for o cliente local
         if (clientId == NetworkManager.Singleton.LocalClientId)
         {
-            // Verifica se a cena carregada não é a cena de loading (que já estamos nela)
             if (GameFlowManager.Instance != null && sceneName != GameFlowManager.Instance.loadingSceneName)
             {
                 isSceneLoaded = true;
-                CheckIfCanHideLoadingScreen();
             }
         }
     }
@@ -173,7 +164,6 @@ public class LoadingScreenManager : MonoBehaviour
         if (!waitForAllPlayersConnected)
         {
             arePlayersConnected = true;
-            CheckIfCanHideLoadingScreen();
             return;
         }
 
@@ -185,37 +175,7 @@ public class LoadingScreenManager : MonoBehaviour
             {
                 arePlayersConnected = true;
                 Debug.Log($"[LoadingScreen] Todos os jogadores conectados ({connectedPlayers}/{expectedPlayerCount})");
-                CheckIfCanHideLoadingScreen();
             }
         }
-    }
-
-    private void CheckIfCanHideLoadingScreen()
-    {
-        if (isSceneLoaded && arePlayersConnected)
-        {
-            Debug.Log("[LoadingScreen] Condições atendidas: escondendo loading screen");
-
-            // NOVO: Calcula o tempo de espera necessário
-            float timeSinceStart = Time.time - timeStartedLoading;
-            float timeToWait = Mathf.Max(0f, minDisplayTime - timeSinceStart);
-
-            StartCoroutine(HideLoadingScreenDelayed(timeToWait));
-        }
-    }
-
-    private IEnumerator HideLoadingScreenDelayed(float delay)
-    {
-        // Se o tempo de espera for zero, ele espera apenas 1 frame para garantir que tudo foi renderizado
-        if (delay <= 0)
-        {
-            yield return null;
-        }
-        else
-        {
-            yield return new WaitForSeconds(delay);
-        }
-
-        HideLoadingScreen();
     }
 }

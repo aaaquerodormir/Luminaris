@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 7784287535428714049}
   - component: {fileID: 6012508606505832012}
   - component: {fileID: 8610069136042823813}
+  - component: {fileID: 5913767806158653558}
   m_Layer: 9
   m_Name: Inimigo
   m_TagString: Untagged
@@ -185,7 +186,10 @@ MonoBehaviour:
   ShowTopMostFoldoutHeaderGroup: 1
   moveSpeed: 0.5
   debuffDurationTurns: 2
-  animator: {fileID: 0}
+  animator: {fileID: 8922176778643998828}
+  particleEffects:
+  - {fileID: 962701875390007215}
+  - {fileID: 2718650036675917568}
 --- !u!61 &7784287535428714049
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -295,6 +299,28 @@ MonoBehaviour:
   UseRigidBodyForMotion: 0
   AutoUpdateKinematicState: 1
   AutoSetKinematicOnDespawn: 1
+--- !u!114 &5913767806158653558
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7946981002575320749}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8d0727d5ae3244e3b569694d3912374, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  TransitionStateInfoList:
+  - IsCrossFadeExit: 0
+    Layer: 0
+    OriginatingState: -37002998
+    DestinationState: -1740137370
+    TransitionDuration: 0.25
+    TriggerNameHash: 1080829965
+    TransitionIndex: 0
+  m_Animator: {fileID: 8922176778643998828}
 --- !u!1001 &4862360813969155582
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -352,6 +378,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7652c3543a7b5e543a5289bb4a8d9e66, type: 3}
+--- !u!1 &2718650036675917568 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7403925106403218174, guid: 7652c3543a7b5e543a5289bb4a8d9e66, type: 3}
+  m_PrefabInstance: {fileID: 4862360813969155582}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4201510318617902869 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8733693788275514091, guid: 7652c3543a7b5e543a5289bb4a8d9e66, type: 3}
@@ -430,6 +461,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7bf476d311f389648bc3d5e42762ed80, type: 3}
+--- !u!1 &962701875390007215 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7403925106403218174, guid: 7bf476d311f389648bc3d5e42762ed80, type: 3}
+  m_PrefabInstance: {fileID: 7754128636310705489}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1344433149006401466 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8733693788275514091, guid: 7bf476d311f389648bc3d5e42762ed80, type: 3}
