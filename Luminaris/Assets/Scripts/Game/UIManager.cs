@@ -3,22 +3,21 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-    // O Singleton
     public static UIManager Instance { get; private set; }
 
     [Header("Referências de UI Persistentes")]
     [Tooltip("Arraste o Canvas Principal aqui.")]
     public Canvas MainCanvas;
 
-    [Tooltip("Arraste o Image do Vision Mask aqui.")]
-    public Image VisionMaskImage;
+    [Header("Máscaras de Visão")]
+    public Image VisionMaskImage_P1;
+    public RectTransform VisionMaskRect_P1;
 
-    [Tooltip("Arraste o RectTransform do Vision Mask aqui.")]
-    public RectTransform VisionMaskRect;
+    public Image VisionMaskImage_P2;
+    public RectTransform VisionMaskRect_P2;
 
     private void Awake()
     {
-        // Garante que apenas uma instância exista
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
@@ -26,7 +25,6 @@ public class UIManager : MonoBehaviour
         }
         Instance = this;
 
-        // Se este objeto for o Canvas, atribua a si mesmo
         if (MainCanvas == null)
         {
             MainCanvas = GetComponent<Canvas>();

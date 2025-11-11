@@ -2,9 +2,10 @@ using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+
 public class DebuffVisionControl : NetworkBehaviour
 {
-
+    // A máscara de UI local (atribuída pelo VisionFollower)
     private Image visionMaskImage;
 
     [Header("Debuff Settings")]
@@ -12,32 +13,31 @@ public class DebuffVisionControl : NetworkBehaviour
     [SerializeField] private float fadeDuration = 0.5f;
 
     private readonly NetworkVariable<int> turnsRemaining = new(
-        0, NetworkVariableReadPermission.Owner, NetworkVariableWritePermission.Server);
-    private void Start()
+        0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
+
+    public void SetLocalMask(Image mask)
     {
-        if (UIManager.Instance != null && visionMaskImage == null)
+        visionMaskImage = mask;
+        if (visionMaskImage != null)
         {
-            visionMaskImage = UIManager.Instance.VisionMaskImage;
-        }
-        else if (UIManager.Instance == null)
-        {
-            Debug.LogError("[DebuffVisionControl] UIManager Singleton não encontrado na cena!");
+
+            float targetAlpha = (turnsRemaining.Value > 0) ? 0.98f : 0f;
+            visionMaskImage.color = new Color(1f, 1f, 1f, targetAlpha);
         }
     }
 
-
     public override void OnNetworkSpawn()
     {
-        if (visionMaskImage == null)
-        {
-            Start();
-        }
+        turnsRemaining.OnValueChanged += OnDebuffStateChanged;
 
+        // Garante o estado visual correto se a máscara já foi atribuída
         if (visionMaskImage != null)
         {
-            visionMaskImage.color = new Color(1f, 1f, 1f, 0f);
+            float targetAlpha = (turnsRemaining.Value > 0) ? 0.98f : 0f;
+            visionMaskImage.color = new Color(1f, 1f, 1f, targetAlpha);
         }
 
+        // Lógica do servidor continua igual
         if (IsServer)
         {
             TurnControl.OnTurnStarted += OnTurnStartedHandler;
@@ -46,78 +46,73 @@ public class DebuffVisionControl : NetworkBehaviour
 
     public override void OnNetworkDespawn()
     {
+        // Limpa a inscrição
+        turnsRemaining.OnValueChanged -= OnDebuffStateChanged;
+
         if (IsServer)
         {
             TurnControl.OnTurnStarted -= OnTurnStartedHandler;
         }
     }
 
-    // Chamado pelo EnemyController.cs
-    public void StartDebuffServer(int durationTurns, ulong targetClientId)
+    private void OnDebuffStateChanged(int previousValue, int newValue)
     {
-        // Se não for o servidor OU se o objeto não for o do cliente alvo, ignora.
-        if (!IsServer || OwnerClientId != targetClientId) return;
-
-        turnsRemaining.Value = durationTurns;
-
-        // Envia RPC de Fade IN apenas para o cliente alvo (Sintaxe Corrigida)
-        var rpcParams = new ClientRpcParams
+        if (visionMaskImage == null)
         {
-            Send = new ClientRpcSendParams
-            {
-                TargetClientIds = new ulong[] { targetClientId }
-            }
-        };
+            return;
+        }
 
-        ApplyFadeClientRpc(true, rpcParams);
+        bool isDebuffed = newValue > 0;
+        bool wasDebuffed = previousValue > 0;
+
+        // Iniciar o fade IN (só se não estava com debuff antes)
+        if (isDebuffed && !wasDebuffed)
+        {
+            StartCoroutine(FadeCoroutine(true));
+        }
+        // Iniciar o fade OUT (só se estava com debuff e agora não está)
+        else if (!isDebuffed && wasDebuffed)
+        {
+            StartCoroutine(FadeCoroutine(false));
+        }
     }
 
-    // Assumindo que este método é chamado pelo evento TurnControl.OnTurnStarted
+    public void StartDebuffServer(int durationTurns, ulong targetClientId)
+    {
+        if (!IsServer || OwnerClientId != targetClientId) return;
+
+        // Apenas atualiza a NetworkVariable. Todos os clientes
+        // reagirão a esta mudança através do 'OnValueChanged'.
+        turnsRemaining.Value = durationTurns;
+    }
+
     private void OnTurnStartedHandler(PlayerMovement newActivePlayer)
     {
         if (!IsServer) return;
 
-        // Verifica se o jogador que está começando o turno é o DONO deste script
+        // "O ID do novo jogador é o mesmo ID do dono deste script?"
+        // Se sim, o turno é do jogador que tem este debuff.
         if (newActivePlayer.OwnerClientId == OwnerClientId)
         {
             if (turnsRemaining.Value > 0)
             {
-                turnsRemaining.Value--;
-
-                if (turnsRemaining.Value == 0)
-                {
-                    // Debuff terminou. Envia RPC de Fade OUT
-                    var rpcParams = new ClientRpcParams
-                    {
-                        Send = new ClientRpcSendParams
-                        {
-                            TargetClientIds = new ulong[] { OwnerClientId }
-                        }
-                    };
-                    ApplyFadeClientRpc(false, rpcParams);
-                }
+                turnsRemaining.Value--; // Diminui o contador
             }
         }
     }
 
-    // Método que o VisionFollower usa para saber se deve mover a máscara
     public bool IsDebuffed()
     {
-        // Só faz sentido verificar se somos o jogador local
-        return IsOwner && turnsRemaining.Value > 0;
-    }
-    [ClientRpc]
-    private void ApplyFadeClientRpc(bool fadeIn, ClientRpcParams rpcParams = default)
-    {
-        // Executado APENAS no PC do jogador alvo
-        if (visionMaskImage == null) return;
-
-        StartCoroutine(FadeCoroutine(fadeIn));
+        return turnsRemaining.Value > 0;
     }
 
     private IEnumerator FadeCoroutine(bool fadeIn)
     {
-        float targetAlpha = fadeIn ? 0.9f : 0f;
+        float targetAlpha = fadeIn ? 0.98f : 0f;
+
+        // Evita erro se a máscara ainda não foi definida
+        if (visionMaskImage == null) yield break;
+
         float startAlpha = visionMaskImage.color.a;
         float elapsed = 0f;
 
