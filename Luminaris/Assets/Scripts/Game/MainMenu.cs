@@ -18,12 +18,12 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private GameObject painelCreditos;
     [SerializeField] private GameObject painelMultiplayer;
     [SerializeField] private GameObject painelLan;
+    [SerializeField] private GameObject painelModo; // ✅ NOVO painel Modo
 
     [Header("Botões")]
     [SerializeField] private GameObject botaoContinuar;
 
     [Header("Configurações")]
-    // CORREÇÃO: gameSceneName agora é a primeira fase do jogo
     [SerializeField] private string firstGameSceneName = "Fase1";
 
     [Header("Relay UI")]
@@ -42,7 +42,6 @@ public class MainMenu : MonoBehaviour
     private bool _isConnecting = false;
     private bool _lanSceneLoaded = false;
 
-    // NOVO: Referência ao GameFlowManager
     private GameFlowManager gameFlowManager;
 
     private void Start()
@@ -56,22 +55,17 @@ public class MainMenu : MonoBehaviour
         netManager = NetworkManager.Singleton;
         transport = netManager != null ? netManager.GetComponent<UnityTransport>() : null;
 
-        // NOVO: Obtém a referência ao GameFlowManager
         gameFlowManager = GameFlowManager.Instance;
 
         if (hostIpDisplay != null)
             hostIpDisplay.text = $"Meu IP local {GetLocalIPAddress()}\n";
     }
 
-    // Mantenha NovoJogo e ContinuarJogo usando SceneManager.LoadScene() se for Single Player
-    // Se for multiplayer, você deve usar a lógica do OnHostButtonPressed para iniciar
     public void NovoJogo()
     {
         SaveSystem.DeleteSave();
         Time.timeScale = 1f;
-        // Se for Single Player:
         // SceneManager.LoadScene(firstGameSceneName);
-        // Se for Multiplayer (Host), use a lógica do OnHostButtonPressed para iniciar
     }
 
     public void ContinuarJogo()
@@ -79,7 +73,6 @@ public class MainMenu : MonoBehaviour
         if (SaveSystem.HasSave())
         {
             Time.timeScale = 1f;
-            // Se for Single Player:
             // SceneManager.LoadScene(firstGameSceneName);
         }
     }
@@ -89,6 +82,7 @@ public class MainMenu : MonoBehaviour
     public void MostrarCreditos() => AtivarSomente(painelCreditos);
     public void MostrarMultiplayer() => AtivarSomente(painelMultiplayer);
     public void MostrarLan() => AtivarSomente(painelLan);
+    public void MostrarModo() => AtivarSomente(painelModo); // ✅ NOVO método
 
     private void AtivarSomente(GameObject alvo)
     {
@@ -97,6 +91,7 @@ public class MainMenu : MonoBehaviour
         painelCreditos.SetActive(false);
         painelMultiplayer.SetActive(false);
         painelLan.SetActive(false);
+        if (painelModo != null) painelModo.SetActive(false); // ✅ NOVO
         alvo.SetActive(true);
     }
 
@@ -122,10 +117,6 @@ public class MainMenu : MonoBehaviour
 
         Debug.Log("[MainMenu] Criando Relay...");
 
-        // CORREÇÃO: Não precisamos mais do LoadingScreenManager.Instance.ShowLoadingScreen()
-        // A tela de loading aparecerá automaticamente quando o GameFlowManager carregar a LoadingScene.
-        // O MainMenu agora apenas inicia o processo de rede.
-
         string joinCode = await relayManager.CreateRelay(2);
 
         if (!string.IsNullOrEmpty(joinCode))
@@ -135,14 +126,11 @@ public class MainMenu : MonoBehaviour
             if (relayCodeText != null)
                 relayCodeText.text = $"Código da Sala: {joinCode}\nAguardando jogador...";
 
-            // CORREÇÃO: Removemos a lógica de LoadingScreenManager.Instance.SetLoadingText()
-
             StartCoroutine(WaitForPlayersAndLoadScene());
         }
         else
         {
             Debug.LogError("[MainMenu] Falha ao criar Relay!");
-            // CORREÇÃO: Removemos a lógica de LoadingScreenManager.Instance.HideLoadingScreen()
         }
     }
 
@@ -162,23 +150,16 @@ public class MainMenu : MonoBehaviour
             return;
         }
 
-        // CORREÇÃO: Removemos a lógica de LoadingScreenManager.Instance.ShowLoadingScreen()
-
         bool success = await relayManager.JoinRelay(joinCode);
 
         if (success)
         {
             Debug.Log($"[MainMenu] Entrando na sala com código {joinCode}");
-
-            // CORREÇÃO: Removemos a lógica de LoadingScreenManager.Instance.SetLoadingText()
-
-            // CORREÇÃO: Usamos o GameFlowManager para iniciar a transição para a primeira cena do jogo
             gameFlowManager.TransitionToScene(firstGameSceneName);
         }
         else
         {
             Debug.LogError("[MainMenu] Falha ao entrar na sala!");
-            // CORREÇÃO: Removemos a lógica de LoadingScreenManager.Instance.HideLoadingScreen()
         }
     }
 
@@ -190,14 +171,8 @@ public class MainMenu : MonoBehaviour
         if (relayCodeText != null)
             relayCodeText.text = "Jogador conectado! Iniciando...";
 
-        // CORREÇÃO: Removemos a lógica de LoadingScreenManager.Instance.SetLoadingText()
-
-        // CORREÇÃO: Usamos o GameFlowManager para iniciar a transição para a primeira cena do jogo
         gameFlowManager.TransitionToScene(firstGameSceneName);
     }
-
-    // O LoadSceneAfterDelay não é mais necessário, pois o JoinButtonPressed
-    // agora chama diretamente o GameFlowManager.TransitionToScene()
 
     // --------------------------
     // LAN HOST (com GameFlowManager)
@@ -213,8 +188,6 @@ public class MainMenu : MonoBehaviour
         Debug.Log($"[MainMenu][LAN] Iniciando HOST...");
         Debug.Log($"[MainMenu][LAN] Endereço de escuta: 0.0.0.0:{lanPort}");
 
-        // CORREÇÃO: Removemos a lógica de LoadingScreenManager.Instance.ShowLoadingScreen()
-
         transport.SetConnectionData("0.0.0.0", (ushort)lanPort);
 
         bool success = netManager.StartHost();
@@ -223,12 +196,7 @@ public class MainMenu : MonoBehaviour
             : "[MainMenu][LAN] ❌ Falha ao iniciar Host.");
 
         if (!success)
-        {
-            // CORREÇÃO: Removemos a lógica de LoadingScreenManager.Instance.HideLoadingScreen()
             return;
-        }
-
-        // CORREÇÃO: Removemos a lógica de LoadingScreenManager.Instance.SetLoadingText()
 
         netManager.OnClientConnectedCallback += OnClientConnectedToHost;
     }
@@ -245,10 +213,6 @@ public class MainMenu : MonoBehaviour
         {
             _lanSceneLoaded = true;
             Debug.Log("[MainMenu][LAN] 🟢 Carregando cena LAN sincronizada...");
-
-            // CORREÇÃO: Removemos a lógica de LoadingScreenManager.Instance.SetLoadingText()
-
-            // CORREÇÃO: Usamos o GameFlowManager para iniciar a transição para a primeira cena do jogo
             gameFlowManager.TransitionToScene(firstGameSceneName);
         }
     }
@@ -277,8 +241,6 @@ public class MainMenu : MonoBehaviour
             return;
         }
 
-        // CORREÇÃO: Removemos a lógica de LoadingScreenManager.Instance.ShowLoadingScreen()
-
         if (NetworkManager.Singleton.IsListening)
         {
             Debug.LogWarning("[MainMenu][LAN] ⚠️ Já existe uma sessão ativa de rede. Parando antes de conectar...");
@@ -296,7 +258,6 @@ public class MainMenu : MonoBehaviour
     {
         transport.SetConnectionData(ip, (ushort)lanPort);
 
-        // Aguarda um frame para garantir que o transport tenha sido configurado
         yield return null;
 
         bool success = netManager.StartClient();
@@ -304,24 +265,17 @@ public class MainMenu : MonoBehaviour
         if (success)
         {
             Debug.Log($"[MainMenu][LAN] ✅ Conexão iniciada com sucesso! Tentando se conectar a {ip}:{lanPort}");
-            // CORREÇÃO: Removemos a lógica de LoadingScreenManager.Instance.SetLoadingText()
-
-            // O cliente não carrega a cena, ele espera o Host carregar via GameFlowManager
         }
         else
         {
             Debug.LogError("[MainMenu][LAN] ❌ Falha ao iniciar Cliente.");
-            // CORREÇÃO: Removemos a lógica de LoadingScreenManager.Instance.HideLoadingScreen()
         }
         _isConnecting = false;
     }
 
     private IEnumerator StartClientWhenShutdown(string ip)
     {
-        // Espera o Shutdown ser concluído
         yield return new WaitUntil(() => !NetworkManager.Singleton.IsListening);
-
-        // Tenta iniciar o cliente
         StartCoroutine(StartClientRoutine(ip));
     }
 
