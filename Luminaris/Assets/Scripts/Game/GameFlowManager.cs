@@ -9,24 +9,20 @@ public class GameFlowManager : NetworkBehaviour
     public static GameFlowManager Instance { get; private set; }
 
     [Header("Configuração de Cenas")]
-    [Tooltip("O nome da cena que contém apenas a UI de Loading (sem câmera).")]
     public string loadingSceneName = "LoadingScene";
+    [SerializeField] private string gameOverSceneName = "GameOverScene";
 
     [Header("Configuração de Tempo")]
-    [Tooltip("Tempo mínimo em segundos que a tela de loading deve ser exibida.")]
     [SerializeField] private float loadingDuration = 5.0f;
 
     [Header("Configuração de Mensagens (Loading)")]
-    [Tooltip("Adicione aqui todas as mensagens que podem aparecer na tela de loading.")]
     public string[] loadingMessages;
 
-    public NetworkVariable<int> CurrentLoadingMessageIndex = new NetworkVariable<int>(
-        0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
+    public NetworkVariable<int> CurrentLoadingMessageIndex = new NetworkVariable<int>();
     private static int s_serverMessageIndex = -1;
 
-    // Variável de rede para sincronizar o nome da próxima cena a ser carregada
     private NetworkVariable<Unity.Collections.FixedString32Bytes> nextSceneToLoad = new NetworkVariable<Unity.Collections.FixedString32Bytes>();
-
+    private string m_LastLoadedGameScene;
     private bool isTransitioning = false;
 
     private void Awake()
@@ -40,34 +36,54 @@ public class GameFlowManager : NetworkBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    public void TransitionToScene(string sceneName)
+    [ClientRpc]
+    private void ForceTimeScaleClientRpc(float scale)
+    {
+        Time.timeScale = scale;
+    }
+
+    // --- MUDANÇA AQUI ---
+    // Adicionado o parâmetro 'useLoadingScreen'
+    public void TransitionToScene(string sceneName, bool useLoadingScreen = true)
     {
         if (!IsServer || isTransitioning) return;
 
-        Debug.Log($"[GameFlowManager] Iniciando transição para a cena: {sceneName}");
+        ForceTimeScaleClientRpc(1.0f);
         isTransitioning = true;
-        nextSceneToLoad.Value = sceneName;
+        nextSceneToLoad.Value = sceneName; // Sempre definimos o destino
 
-        if (loadingMessages.Length > 0)
+        if (useLoadingScreen)
         {
-            s_serverMessageIndex = (s_serverMessageIndex + 1) % loadingMessages.Length;
+            // Comportamento antigo: Usar a tela de loading
+            Debug.Log($"[GameFlowManager] Iniciando transição (COM LOADING) para: {sceneName}");
+
+            if (loadingMessages.Length > 0)
+            {
+                s_serverMessageIndex = (s_serverMessageIndex + 1) % loadingMessages.Length;
+            }
+            else
+            {
+                s_serverMessageIndex = 0;
+            }
+            CurrentLoadingMessageIndex.Value = s_serverMessageIndex;
+
+            // Carrega a cena de loading
+            NetworkManager.Singleton.SceneManager.LoadScene(loadingSceneName, LoadSceneMode.Single);
         }
         else
         {
-            s_serverMessageIndex = 0; // Fallback
-        }
-        CurrentLoadingMessageIndex.Value = s_serverMessageIndex;
-        Debug.Log($"[GameFlowManager] Definindo índice de loading para: {s_serverMessageIndex}");
+            // Comportamento novo: Pular a tela de loading
+            Debug.Log($"[GameFlowManager] Iniciando transição (IMEDIATA) para: {sceneName}");
 
-        // 1. Carrega a cena de loading para todos os clientes
-        NetworkManager.Singleton.SceneManager.LoadScene(loadingSceneName, LoadSceneMode.Single);
+            // Carrega a cena de destino diretamente
+            NetworkManager.Singleton.SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
+        }
     }
 
     public override void OnNetworkSpawn()
     {
         if (IsServer)
         {
-            // O evento OnLoadComplete é acionado em todos os clientes (incluindo o host) quando uma cena é carregada.
             NetworkManager.Singleton.SceneManager.OnLoadComplete += OnLoadComplete;
         }
     }
@@ -82,34 +98,57 @@ public class GameFlowManager : NetworkBehaviour
 
     private void OnLoadComplete(ulong clientId, string sceneName, LoadSceneMode loadMode)
     {
-        // Se a cena que acabou de carregar foi a cena de loading...
+        // Se a cena de loading acabou de carregar
         if (sceneName == loadingSceneName)
         {
-            // O servidor agora inicia a Coroutine de espera
             if (IsServer)
             {
-                // Inicia a rotina que vai esperar e depois carregar a cena do jogo
                 StartCoroutine(LoadGameSceneAfterDelay());
             }
         }
-        // Se a cena de destino (a cena do jogo) acabou de carregar...
+        // Se a cena de destino (jogo ou gameover) acabou de carregar
         else if (sceneName == nextSceneToLoad.Value.ToString())
         {
+            if (IsServer)
+            {
+                // Só armazena o nome se for uma cena de JOGO
+                if (sceneName != loadingSceneName && sceneName != gameOverSceneName)
+                {
+                    m_LastLoadedGameScene = sceneName;
+                    Debug.Log($"[GameFlowManager] Cena de jogo '{m_LastLoadedGameScene}' armazenada para Retry.");
+                }
+            }
             isTransitioning = false;
-            Debug.Log($"[GameFlowManager] Transição completa. Cena '{sceneName}' carregada.");
         }
     }
+
     private IEnumerator LoadGameSceneAfterDelay()
     {
-        Debug.Log($"[GameFlowManager] Cena de loading carregada. Esperando {loadingDuration} segundos...");
+        yield return new WaitForSecondsRealtime(loadingDuration);
 
-        // Espera o tempo definido em 'loadingDuration'
-        yield return new WaitForSeconds(loadingDuration);
-
-        // Após a espera, carrega a cena de destino
-        Debug.Log($"[GameFlowManager] Tempo de espera terminado. Carregando a cena de destino: {nextSceneToLoad.Value}");
+        Debug.Log($"[GameFlowManager] Carregando a cena de destino: {nextSceneToLoad.Value}");
         NetworkManager.Singleton.SceneManager.LoadScene(nextSceneToLoad.Value.ToString(), LoadSceneMode.Single);
     }
+
+    // --- LÓGICA DE RETRY ---
+    public void RequestRetry()
+    {
+        RequestRetryServerRpc();
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    private void RequestRetryServerRpc(ServerRpcParams rpcParams = default)
+    {
+        if (!IsServer) return;
+        if (string.IsNullOrEmpty(m_LastLoadedGameScene))
+        {
+            Debug.LogError($"[GameFlowManager] 'm_LastLoadedGameScene' está vazia!");
+            return;
+        }
+
+        // --- MUDANÇA AQUI ---
+        // Ao reiniciar, QUEREMOS a tela de loading.
+        // O 'true' é o padrão, então podemos omitir ou ser explícitos.
+        TransitionToScene(m_LastLoadedGameScene, true);
+    }
 }
-
-

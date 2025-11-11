@@ -20,6 +20,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Fase3.unity
     guid: 20953199363327440a4ee4d2586820c4
+  - enabled: 1
+    path: Assets/Scenes/FinalScene.unity
+    guid: 03a3d10bcaf67774e9c2495ad42117f9
+  - enabled: 1
+    path: Assets/Scenes/GameOverScene.unity
+    guid: bd69084d932a7ae48bd8fdfc4610606e
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0

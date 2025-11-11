@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
-using System.Collections;
+using System.Collections; // Precisamos disso para Coroutines
 using TMPro;
 using UnityEngine.UI;
 using Unity.Netcode;
@@ -11,25 +11,27 @@ public class GameManager : NetworkBehaviour
 
     public static event System.Action OnGameOver;
 
-    // --- MUDANÇA: SEÇÃO "Jogadores" REMOVIDA ---
-    // Os campos [SerializeField] para player1 e player2 foram deletados
-    // para impedir a duplicação de jogadores. O script agora
-    // usa o evento estático PlayerRespawn.OnPlayerDied.
-    // ------------------------------------------
-
     [Header("Lava")]
     [SerializeField] private LavaRise lava;
 
     [Header("Controle de Turnos")]
-    [SerializeField] private TurnControl turnControl; // A referência ainda é útil
+    [SerializeField] private TurnControl turnControl;
+
+    [Header("Controle de Cenas")]
+    [Tooltip("O nome da cena de GameOver para onde o jogo deve transicionar.")]
+    [SerializeField] private string gameOverSceneName = "GameOverScene";
 
     [Header("UI Geral")]
-    [SerializeField] private GameObject gameOverUI;
-    [SerializeField] private GameObject victoryUI;
-    [SerializeField] private GameObject victoryMenuWrapper;
     [SerializeField] private PauseMenu pauseMenu;
     [SerializeField] private GameObject hudContainer;
     [SerializeField] private GameObject confirmationUI;
+
+    // --- SOLUÇÃO COMBINADA ---
+    [Header("Transições")]
+    [Tooltip("Painel de Imagem preto para cobrir a tela no Game Over")]
+    [SerializeField] private GameObject faderPanel; // O "suspensório" (solução visual)
+    // Não precisamos de um campo para a fallback camera, pois a encontramos pela tag.
+    // --- FIM DA SOLUÇÃO ---
 
     [Header("UI Específica")]
     [SerializeField] private GameObject jumpCounterUI;
@@ -54,8 +56,6 @@ public class GameManager : NetworkBehaviour
 
     private void OnEnable()
     {
-        // Esta linha é a forma correta de detectar a morte,
-        // pois funciona para *qualquer* jogador que for instanciado.
         PlayerRespawn.OnPlayerDied += OnAnyPlayerDeath;
     }
 
@@ -64,117 +64,96 @@ public class GameManager : NetworkBehaviour
         PlayerRespawn.OnPlayerDied -= OnAnyPlayerDeath;
     }
 
-    private void Start() { }
-
-    // ==========================
-    // ==== MORTE GLOBAL ========
-    // ==========================
+    // --- MORTE GLOBAL ---
     private void OnAnyPlayerDeath()
     {
-        if (!IsServer) return;
-        ShowGameOverClientRpc();
+        if (!IsServer || isGameOver) return; // Proteção
+        isGameOver = true;
+
+        // 1. Manda clientes ativarem AMBAS as proteções
+        PauseGameAndEnableTransitionSafeguardsClientRpc();
+
+        // 2. Inicia Coroutine para dar tempo ao RPC e à destruição das câmeras dos jogadores
+        StartCoroutine(DelayedSceneTransition());
     }
 
+    private IEnumerator DelayedSceneTransition()
+    {
+        // Aumentamos o tempo de espera para 0.5s.
+        // Isso dá tempo suficiente para o RPC ser processado, a FallbackCamera ser ativada
+        // e a destruição/desativação das câmeras dos jogadores ser concluída.
+        yield return new WaitForSeconds(0.5f);
+
+        // 3. AGORA, com tudo protegido, mudamos de cena
+        if (GameFlowManager.Instance != null)
+        {
+            GameFlowManager.Instance.TransitionToScene(gameOverSceneName, false);
+        }
+        else
+        {
+            Debug.LogError("[GameManager] GameFlowManager.Instance é nulo!");
+        }
+    }
+
+
     [ClientRpc]
-    private void ShowGameOverClientRpc()
+    // Nome do método atualizado para refletir ambas as ações
+    private void PauseGameAndEnableTransitionSafeguardsClientRpc()
     {
         if (isGameOver) return;
         isGameOver = true;
 
-        Debug.Log("[GameManager] Exibindo tela de Game Over.");
+        // Limpa a UI
         if (pauseMenu != null) pauseMenu.gameObject.SetActive(false);
         if (hudContainer != null) hudContainer.SetActive(false);
-        if (victoryUI != null) victoryUI.SetActive(false);
-        if (victoryMenuWrapper != null) victoryMenuWrapper.SetActive(false);
-        if (gameOverUI != null) gameOverUI.SetActive(true);
 
         if (TurnControl.Instance != null)
             TurnControl.Instance.HideAllTurnUI();
+
+        // --- SOLUÇÃO 1: O "SUSPENSÓRIO" (VISUAL) ---
+        if (faderPanel != null)
+        {
+            faderPanel.SetActive(true);
+            Debug.Log("[GameManager] FaderPanel ativado.");
+        }
+        else
+        {
+            Debug.LogWarning("[GameManager] faderPanel é nulo.");
+        }
+
+        // --- SOLUÇÃO 2: O "CINTO" (TÉCNICO) ---
+        GameObject[] fallbackCameras = GameObject.FindGameObjectsWithTag("FallbackCamera");
+
+        if (fallbackCameras.Length > 0)
+        {
+            foreach (GameObject cam in fallbackCameras)
+            {
+                cam.SetActive(true);
+            }
+            Debug.Log($"[GameManager] {fallbackCameras.Length} câmera(s) de fallback REATIVADA(S).");
+        }
+        else
+        {
+            Debug.LogWarning("[GameManager] Nenhuma câmera com a tag 'FallbackCamera' foi encontrada!");
+        }
+        // --- FIM DAS SOLUÇÕES ---
 
         Time.timeScale = 0f;
         OnGameOver?.Invoke();
     }
 
-    [ClientRpc]
-    public void ShowVictoryClientRpc()
-    {
-        Debug.Log("[GameManager] 🎊 Vitória global recebida.");
-
-        if (victoryUI != null) victoryUI.SetActive(true);
-        if (victoryMenuWrapper != null) victoryMenuWrapper.SetActive(true);
-        if (hudContainer != null) hudContainer.SetActive(false);
-        if (gameOverUI != null) gameOverUI.SetActive(false);
-
-        if (TurnControl.Instance != null)
-            TurnControl.Instance.HideAllTurnUI();
-
-        Time.timeScale = 0f;
-    }
-
-    // ==========================
-    // ==== REINICIAR ===========
-    // ==========================
-
-    public void RequestRetryGame()
-    {
-        Debug.Log("[GameManager] Recebida solicitação de Retry. Enviando ao servidor.");
-        RequestRetryGameServerRpc();
-    }
-
-    [ServerRpc(RequireOwnership = false)]
-    private void RequestRetryGameServerRpc(ServerRpcParams rpcParams = default)
-    {
-        if (!IsServer) return;
-        Debug.Log($"[GameManager-SERVER] Cliente {rpcParams.Receive.SenderClientId} requisitou reinício.");
-        ResetStateAndReloadClientRpc();
-    }
-
-    [ClientRpc]
-    private void ResetStateAndReloadClientRpc()
-    {
-        Debug.Log($"[GameManager-CLIENT {NetworkManager.Singleton.LocalClientId}] Recebido comando de Reset.");
-
-        Time.timeScale = 1f;
-        isGameOver = false;
-
-        if (gameOverUI != null) gameOverUI.SetActive(false);
-        if (hudContainer != null) hudContainer.SetActive(true);
-        if (pauseMenu != null) pauseMenu.gameObject.SetActive(false);
-        if (victoryUI != null) victoryUI.SetActive(false);
-        if (victoryMenuWrapper != null) victoryMenuWrapper.SetActive(false);
-
-        if (TurnControl.Instance != null)
-            TurnControl.Instance.HideAllTurnUI();
-
-        if (IsServer)
-        {
-            Debug.Log("[GameManager-SERVER] Estado local resetado. Solicitando transição de cena.");
-            var sceneName = SceneManager.GetActiveScene().name;
-            if (GameFlowManager.Instance != null)
-            {
-                GameFlowManager.Instance.TransitionToScene(sceneName);
-            }
-            else
-            {
-                Debug.LogError("[GameManager-SERVER] GameFlowManager.Instance é nulo!");
-            }
-        }
-    }
-
-    // ==========================
-    // ==== GAME OVER RPC =======
-    // ==========================
+    // --- RPCs DE GAME OVER ---
     [ServerRpc(RequireOwnership = false)]
     public void InvokeGameOverServerRpc()
     {
         if (!IsServer) return;
-        Debug.Log("[GameManager] Um jogador morreu — acionando GameOver para todos.");
-        ShowGameOverClientRpc();
+        OnAnyPlayerDeath(); // Chama a lógica unificada
     }
 
     [ServerRpc(RequireOwnership = false)]
     public void OnPlayerDiedServerRpc()
     {
-        ShowGameOverClientRpc();
+        if (!IsServer) return;
+        OnAnyPlayerDeath(); // Chama a lógica unificada
     }
 }

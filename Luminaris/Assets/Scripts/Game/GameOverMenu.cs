@@ -3,42 +3,37 @@ using UnityEngine.SceneManagement;
 
 public class GameOverMenu : MonoBehaviour
 {
-    //[SerializeField] private GameManager gameManager;
     [SerializeField] private string mainMenuScene = "Menu";
     [SerializeField] private GameObject confirmationUI;
 
     private System.Action confirmedAction;
 
-    private void OnEnable()
+    // Método Start é chamado assim que a cena de GameOver carrega
+    private void Start()
     {
-        PlayerRespawn.OnPlayerDied += HandlePlayerDied;
-    }
-
-    private void OnDisable()
-    {
-        PlayerRespawn.OnPlayerDied -= HandlePlayerDied;
-    }
-
-    private void HandlePlayerDied()
-    {
-        //  pausa todos os loops (lava, etc.)
-        AudioManager.Instance.PauseAllLoops();
+        // Garante que o jogo pause e o áudio pare
+        Time.timeScale = 0f;
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.PauseAllLoops();
+        }
     }
 
     public void TryAgain()
     {
-        AudioManager.Instance.ResumeAllLoops(); // retoma ao recomeçar
-
-        // Chame o Singleton diretamente.
-        // Isto é mais robusto contra recarregamento de cena.
-        if (GameManager.Instance != null)
+        if (AudioManager.Instance != null)
         {
-            // Chame o método que inicia o processo de rede
-            GameManager.Instance.RequestRetryGame();
+            AudioManager.Instance.ResumeAllLoops();
+        }
+
+        // Chama o GameFlowManager (que é persistente) para reiniciar o jogo
+        if (GameFlowManager.Instance != null)
+        {
+            GameFlowManager.Instance.RequestRetry();
         }
         else
         {
-            Debug.LogError("[GameOverMenu] GameManager.Instance não foi encontrado!");
+            Debug.LogError("[GameOverMenu] GameFlowManager.Instance não foi encontrado!");
         }
     }
 
@@ -46,16 +41,17 @@ public class GameOverMenu : MonoBehaviour
     {
         OpenConfirmation(() =>
         {
-            Time.timeScale = 1f;
-            AudioManager.Instance.ResumeAllLoops();
+            Time.timeScale = 1f; // Reseta o tempo
+            if (AudioManager.Instance != null)
+            {
+                AudioManager.Instance.ResumeAllLoops();
+            }
 
-            // Desconectar ANTES de carregar o menu
             if (Unity.Netcode.NetworkManager.Singleton != null)
             {
                 Unity.Netcode.NetworkManager.Singleton.Shutdown();
             }
 
-            // Agora sim, carregar o menu localmente
             SceneManager.LoadScene(mainMenuScene);
         });
     }
@@ -64,7 +60,10 @@ public class GameOverMenu : MonoBehaviour
     {
         OpenConfirmation(() =>
         {
-            AudioManager.Instance.PauseAllLoops(); // pausa antes de sair
+            if (AudioManager.Instance != null)
+            {
+                AudioManager.Instance.PauseAllLoops();
+            }
 #if UNITY_EDITOR
             UnityEditor.EditorApplication.isPlaying = false;
 #else
@@ -73,6 +72,7 @@ public class GameOverMenu : MonoBehaviour
         });
     }
 
+    // --- Métodos de Confirmação (Sem alteração) ---
     private void OpenConfirmation(System.Action action)
     {
         confirmationUI.SetActive(true);
