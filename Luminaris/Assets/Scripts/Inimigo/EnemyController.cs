@@ -18,6 +18,12 @@ public class EnemyController : NetworkBehaviour
     [Header("Configurações de Perseguição")]
     [SerializeField]
     private float moveSpeed = 2.5f;
+
+    [Header("Configurações de Animação")]
+    [Tooltip("Quanto tempo (em segundos) dura a animação de spawn.")]
+    [SerializeField]
+    private float spawnDuration = 1.5f;
+
     [Header("Debuff Settings")]
     [SerializeField]
     private int debuffDurationTurns = 2;
@@ -46,13 +52,27 @@ public class EnemyController : NetworkBehaviour
 
         if (IsServer)
         {
-            // --- MUDANÇA 1: Animação de Spawn ---
-            // O Servidor dispara a animação de "Spawn" (mude "Spawn" para o nome
-            // do seu trigger no Animator). O NetworkAnimator sincroniza.
             animator.SetTrigger("Spawn");
-            // ------------------------------------
-
+            StartCoroutine(FinishSpawning());
             TurnControl.OnTurnStarted += HandleTurnChanged;
+        }
+    }
+
+    // --- MUDANÇA CRÍTICA AQUI ---
+    private IEnumerator FinishSpawning()
+    {
+        yield return new WaitForSeconds(spawnDuration);
+
+        if (IsServer)
+        {
+            Debug.Log("[EnemyController] Spawn completo. Mudando para estado Idle.");
+
+            // 1. Tira o inimigo do estado 'Spawning'
+            //    Isso o "desbloqueia".
+            currentState.Value = EnemyState.Idle;
+
+            // 2. AGORA, chama HandleTurnChanged para definir o alvo.
+            //    Como o estado não é mais 'Spawning', a função vai rodar.
             if (TurnControl.Instance != null)
             {
                 PlayerMovement currentPlayer = TurnControl.Instance.GetCurrentActivePlayer();
@@ -63,6 +83,7 @@ public class EnemyController : NetworkBehaviour
             }
         }
     }
+    // --- FIM DA MUDANÇA ---
 
     public override void OnNetworkDespawn()
     {
@@ -76,6 +97,13 @@ public class EnemyController : NetworkBehaviour
     public void SetLinkedPlayerServerRpc(ulong playerId)
     {
         linkedPlayerId.Value = playerId;
+
+        if (currentState.Value == EnemyState.Spawning)
+        {
+            Debug.Log("[EnemyController] Jogador linkado, aguardando spawn terminar.");
+            return;
+        }
+
         if (TurnControl.Instance != null)
         {
             PlayerMovement currentPlayer = TurnControl.Instance.GetCurrentActivePlayer();
@@ -89,6 +117,15 @@ public class EnemyController : NetworkBehaviour
     private void HandleTurnChanged(PlayerMovement newActivePlayer)
     {
         if (!IsServer) return;
+
+        // Esta trava ainda é importante, caso o turno mude
+        // ANTES da corrotina FinishSpawning terminar.
+        if (currentState.Value == EnemyState.Spawning)
+        {
+            Debug.Log("[EnemyController] Troca de turno ignorada (ainda em spawn).");
+            return;
+        }
+
         if (newActivePlayer == null) return;
         if (linkedPlayerId.Value == 99) return;
 
@@ -114,7 +151,6 @@ public class EnemyController : NetworkBehaviour
 
                 if (targetPlayerState == null)
                 {
-                    Debug.LogError($"[EnemyController] Jogador {linkedPlayerId.Value} não tem um script PlayerState.cs!");
                     canPursue = false;
                     currentState.Value = EnemyState.Idle;
                 }
@@ -125,7 +161,6 @@ public class EnemyController : NetworkBehaviour
             }
             else
             {
-                Debug.LogError($"[EnemyController] Não encontrou o PlayerMovement com ID {linkedPlayerId.Value}");
                 targetPlayerTransform = null;
                 targetPlayerState = null;
                 currentState.Value = EnemyState.Idle;
@@ -135,17 +170,14 @@ public class EnemyController : NetworkBehaviour
 
     private void Update()
     {
-        // --- MUDANÇA 2: Cliente não deve animar ---
-        // A lógica de animação foi movida para dentro do 'if (IsServer)'
         if (!IsServer)
         {
-            // O Cliente não faz nada no Update.
-            // O NetworkTransform move o inimigo.
-            // O NetworkAnimator anima o inimigo.
             return;
         }
 
-        if (!canPursue || targetPlayerTransform == null || currentState.Value == EnemyState.Attacking)
+        if (!canPursue || targetPlayerTransform == null ||
+            currentState.Value == EnemyState.Attacking ||
+            currentState.Value == EnemyState.Spawning)
         {
             rb.linearVelocity = Vector2.zero;
         }
@@ -166,17 +198,12 @@ public class EnemyController : NetworkBehaviour
                     MoveTowardsPlayer();
                     break;
                 case EnemyState.Waiting:
-                    rb.linearVelocity = Vector2.zero;
-                    break;
                 case EnemyState.Idle:
                     rb.linearVelocity = Vector2.zero;
                     break;
             }
         }
 
-        // --- MUDANÇA 3: Animação movida ---
-        // Apenas o Servidor decide se o inimigo está se movendo.
-        // O NetworkAnimator sincronizará o bool "IsMoving" para os clientes.
         UpdateAnimations();
     }
 
@@ -209,6 +236,7 @@ public class EnemyController : NetworkBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (!IsServer) return;
+        if (currentState.Value == EnemyState.Spawning) return;
         if (currentState.Value != EnemyState.Pursuing && currentState.Value != EnemyState.Waiting) return;
         if (other.transform != targetPlayerTransform) return;
 
@@ -224,10 +252,8 @@ public class EnemyController : NetworkBehaviour
         currentState.Value = EnemyState.Attacking;
         rb.linearVelocity = Vector2.zero;
 
-        // Desativa as partículas em todos os clientes
         DisableParticlesClientRpc();
 
-        // Aplica o debuff (lógica do servidor, está correto)
         PlayerMovement linkedPlayerMovement = TurnControl.Instance.players
             .FirstOrDefault(p => p.OwnerClientId == linkedPlayerId.Value);
 
@@ -240,33 +266,15 @@ public class EnemyController : NetworkBehaviour
             }
         }
 
-        // --- MUDANÇA 4: O CONSERTO PRINCIPAL ---
-        // REMOVEMOS O RPC de ataque.
-        // O Servidor toca a animação NELE MESMO.
-        // O NetworkAnimator vai ver isso e sincronizar com TODOS os clientes.
         animator.SetTrigger("Attack");
-        // --------------------------------------
 
         StartCoroutine(AttackCooldown());
     }
 
-    // --- MUDANÇA 5: RPC REMOVIDO ---
-    // Este método era a causa do bug e não é mais necessário.
-    // [ClientRpc]
-    // private void AttackClientRpc(ClientRpcParams rpcParams = default)
-    // {
-    //     animator.SetTrigger("Attack");
-    // }
-    // ---------------------------------
-
     [ClientRpc]
     private void DisableParticlesClientRpc()
     {
-        if (particleEffects == null || particleEffects.Length == 0)
-        {
-            Debug.LogWarning("[EnemyController] Nenhum efeito de partícula foi atribuído no Inspector.");
-            return;
-        }
+        if (particleEffects == null || particleEffects.Length == 0) return;
 
         foreach (GameObject particle in particleEffects)
         {
@@ -275,7 +283,6 @@ public class EnemyController : NetworkBehaviour
                 particle.SetActive(false);
             }
         }
-        Debug.Log($"[EnemyController] {particleEffects.Length} sistemas de partículas desativados em todos os clientes.");
     }
 
     private IEnumerator AttackCooldown()
