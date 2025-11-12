@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
-using System.Collections; // Precisamos disso para Coroutines
+using System.Collections;
 using TMPro;
 using UnityEngine.UI;
 using Unity.Netcode;
@@ -27,8 +27,15 @@ public class GameManager : NetworkBehaviour
     [SerializeField] private GameObject confirmationUI;
 
     [Header("Transições")]
-    [Tooltip("Painel de Imagem preto para cobrir a tela no Game Over")]
+    [Tooltip("Painel de Imagem para cobrir a tela durante as transições")]
     [SerializeField] private GameObject faderPanel;
+
+    [Header("Configurações de Fade")]
+    [Tooltip("Duração do fade out em segundos (padrão: 0.5s)")]
+    [SerializeField] private float fadeOutDuration = 0.5f;
+
+    [Tooltip("Duração do fade in em segundos (padrão: 0.5s)")]
+    [SerializeField] private float fadeInDuration = 0.5f;
 
     [Header("UI Específica")]
     [SerializeField] private GameObject jumpCounterUI;
@@ -37,6 +44,9 @@ public class GameManager : NetworkBehaviour
     private GameSession session;
     private Checkpoint lastCheckpoint;
     private System.Action confirmedAction;
+
+    // Referência ao componente Image do faderPanel
+    private Image faderImage;
 
     private void Awake()
     {
@@ -49,6 +59,14 @@ public class GameManager : NetworkBehaviour
         {
             Destroy(gameObject);
         }
+
+        // Inicializa o faderPanel
+        InitializeFader();
+    }
+
+    private void Start()
+    {
+        SetFadeAlpha(0f);
     }
 
     private void OnEnable()
@@ -61,26 +79,109 @@ public class GameManager : NetworkBehaviour
         PlayerRespawn.OnPlayerDied -= OnAnyPlayerDeath;
     }
 
+    private void InitializeFader()
+    {
+        if (faderPanel == null)
+        {
+            Debug.LogWarning("[GameManager] faderPanel não está atribuído no Inspector!");
+            return;
+        }
+
+        // Pega o componente Image do faderPanel
+        faderImage = faderPanel.GetComponent<Image>();
+
+        if (faderImage == null)
+        {
+            Debug.LogError("[GameManager] faderPanel não tem um componente Image! Adicione um componente Image ao GameObject.");
+            return;
+        }
+
+        // Garante que o faderPanel está ativo
+        faderPanel.SetActive(true);
+
+        // Garante que o Canvas está na frente de tudo
+        Canvas canvas = faderPanel.GetComponentInParent<Canvas>();
+        if (canvas != null)
+        {
+            canvas.sortingOrder = 9999;
+        }
+    }
+
+    private IEnumerator FadeIn()
+    {
+        if (faderImage == null) yield break;
+
+        float elapsedTime = 0f;
+        Color color = faderImage.color;
+        float startAlpha = color.a;
+
+        while (elapsedTime < fadeInDuration)
+        {
+            elapsedTime += Time.unscaledDeltaTime;
+            float normalizedTime = elapsedTime / fadeInDuration;
+
+            float alpha = Mathf.SmoothStep(startAlpha, 0f, normalizedTime);
+
+            color.a = alpha;
+            faderImage.color = color;
+
+            yield return null;
+        }
+
+        color.a = 0f;
+        faderImage.color = color;
+    }
+
+    private IEnumerator FadeOut()
+    {
+        if (faderImage == null) yield break;
+
+        // Garante que o faderPanel está ativo
+        if (!faderPanel.activeSelf)
+        {
+            faderPanel.SetActive(true);
+        }
+
+        float elapsedTime = 0f;
+        Color color = faderImage.color;
+        float startAlpha = color.a;
+
+        while (elapsedTime < fadeOutDuration)
+        {
+            elapsedTime += Time.unscaledDeltaTime;
+            float normalizedTime = elapsedTime / fadeOutDuration;
+
+            float alpha = Mathf.SmoothStep(startAlpha, 1f, normalizedTime);
+
+            color.a = alpha;
+            faderImage.color = color;
+
+            yield return null;
+        }
+
+        color.a = 1f;
+        faderImage.color = color;
+    }
+
     // --- MORTE GLOBAL ---
     private void OnAnyPlayerDeath()
     {
-        if (!IsServer || isGameOver) return; // Trava do servidor (Correto)
-        isGameOver = true; // Servidor se trava para não repetir
+        if (!IsServer || isGameOver) return;
+        isGameOver = true;
 
-        // 1. Manda clientes ativarem as proteções
-        PauseGameAndEnableTransitionSafeguardsClientRpc(); // Envia o RPC (só uma vez)
+        PauseGameAndEnableTransitionSafeguardsClientRpc();
 
-        // 2. Inicia Coroutine para dar tempo ao RPC
         StartCoroutine(DelayedSceneTransition());
     }
 
     private IEnumerator DelayedSceneTransition()
     {
-        // Delay para garantir que o RPC chegue e ative o fader.
-        // 0.5s é seguro, mas você pode tentar 0.2s se quiser.
-        yield return new WaitForSeconds(0.5f);
+        // Aguarda o fade out completar antes de trocar de cena
+        yield return StartCoroutine(FadeOut());
 
-        // 3. AGORA, com tudo protegido, mudamos de cena
+        // Pequeno delay adicional para garantir que o RPC foi processado
+        yield return new WaitForSeconds(0.1f);
+
         if (GameFlowManager.Instance != null)
         {
             GameFlowManager.Instance.TransitionToScene(gameOverSceneName, false);
@@ -95,17 +196,6 @@ public class GameManager : NetworkBehaviour
     [ClientRpc]
     private void PauseGameAndEnableTransitionSafeguardsClientRpc()
     {
-        // --- A CORREÇÃO ESTÁ AQUI ---
-        // O servidor já tem a trava "isGameOver", então este RPC só será enviado UMA VEZ.
-        // A trava "if (isGameOver) return;" aqui estava fazendo o HOST
-        // (que é o servidor) pular o código.
-
-        // if (isGameOver) return; // <-- REMOVA ESTA LINHA
-        // isGameOver = true; // <-- REMOVA ESTA LINHA
-
-        // --- FIM DA CORREÇÃO ---
-
-
         // Limpa a UI
         if (pauseMenu != null) pauseMenu.gameObject.SetActive(false);
         if (hudContainer != null) hudContainer.SetActive(false);
@@ -113,50 +203,40 @@ public class GameManager : NetworkBehaviour
         if (TurnControl.Instance != null)
             TurnControl.Instance.HideAllTurnUI();
 
-        // --- SOLUÇÃO 1: O "SUSPENSÓRIO" (VISUAL) ---
-        if (faderPanel != null)
-        {
-            faderPanel.SetActive(true);
-            Debug.Log($"[GameManager] FaderPanel ativado no Client ID: {NetworkManager.Singleton.LocalClientId}");
-        }
-        else
-        {
-            Debug.LogWarning("[GameManager] faderPanel é nulo.");
-        }
+        // Inicia o fade out no cliente
+        StartCoroutine(FadeOut());
 
-        // --- SOLUÇÃO 2: O "CINTO" (TÉCNICO) ---
-        GameObject[] fallbackCameras = GameObject.FindGameObjectsWithTag("FallbackCamera");
-
-        if (fallbackCameras.Length > 0)
-        {
-            foreach (GameObject cam in fallbackCameras)
-            {
-                cam.SetActive(true);
-            }
-            Debug.Log($"[GameManager] {fallbackCameras.Length} câmera(s) de fallback REATIVADA(S).");
-        }
-        else
-        {
-            Debug.LogWarning("[GameManager] Nenhuma câmera com a tag 'FallbackCamera' foi encontrada!");
-        }
-        // --- FIM DAS SOLUÇÕES ---
-
-        Time.timeScale = 0f;
         OnGameOver?.Invoke();
     }
-
-    // --- RPCs DE GAME OVER ---
     [ServerRpc(RequireOwnership = false)]
     public void InvokeGameOverServerRpc()
     {
         if (!IsServer) return;
-        OnAnyPlayerDeath(); // Chama a lógica unificada
+        OnAnyPlayerDeath();
     }
 
     [ServerRpc(RequireOwnership = false)]
     public void OnPlayerDiedServerRpc()
     {
         if (!IsServer) return;
-        OnAnyPlayerDeath(); // Chama a lógica unificada
+        OnAnyPlayerDeath();
+    }
+    public void StartFadeIn()
+    {
+        StartCoroutine(FadeIn());
+    }
+
+    public void StartFadeOut()
+    {
+        StartCoroutine(FadeOut());
+    }
+    public void SetFadeAlpha(float alpha)
+    {
+        if (faderImage != null)
+        {
+            Color color = faderImage.color;
+            color.a = Mathf.Clamp01(alpha);
+            faderImage.color = color;
+        }
     }
 }

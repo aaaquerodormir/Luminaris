@@ -3338,7 +3338,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &285012293
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5581,6 +5581,8 @@ MonoBehaviour:
   hudContainer: {fileID: 322329796}
   confirmationUI: {fileID: 1326465732}
   faderPanel: {fileID: 1609819993}
+  fadeOutDuration: 0.25
+  fadeInDuration: 0.25
   jumpCounterUI: {fileID: 2003509818}
 --- !u!4 &490071352
 Transform:
@@ -9319,7 +9321,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  nextSceneName: Fase2Final
+  nextSceneName: Fase2
 --- !u!4 &1028037377
 Transform:
   m_ObjectHideFlags: 0
@@ -25029,7 +25031,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1428882745
 RectTransform:
   m_ObjectHideFlags: 0
@@ -26341,7 +26343,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 0.122641504, g: 0.11974902, b: 0.11974902, a: 0.99215686}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
