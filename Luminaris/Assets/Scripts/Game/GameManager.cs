@@ -26,12 +26,9 @@ public class GameManager : NetworkBehaviour
     [SerializeField] private GameObject hudContainer;
     [SerializeField] private GameObject confirmationUI;
 
-    // --- SOLUÇÃO COMBINADA ---
     [Header("Transições")]
     [Tooltip("Painel de Imagem preto para cobrir a tela no Game Over")]
-    [SerializeField] private GameObject faderPanel; // O "suspensório" (solução visual)
-    // Não precisamos de um campo para a fallback camera, pois a encontramos pela tag.
-    // --- FIM DA SOLUÇÃO ---
+    [SerializeField] private GameObject faderPanel;
 
     [Header("UI Específica")]
     [SerializeField] private GameObject jumpCounterUI;
@@ -67,21 +64,20 @@ public class GameManager : NetworkBehaviour
     // --- MORTE GLOBAL ---
     private void OnAnyPlayerDeath()
     {
-        if (!IsServer || isGameOver) return; // Proteção
-        isGameOver = true;
+        if (!IsServer || isGameOver) return; // Trava do servidor (Correto)
+        isGameOver = true; // Servidor se trava para não repetir
 
-        // 1. Manda clientes ativarem AMBAS as proteções
-        PauseGameAndEnableTransitionSafeguardsClientRpc();
+        // 1. Manda clientes ativarem as proteções
+        PauseGameAndEnableTransitionSafeguardsClientRpc(); // Envia o RPC (só uma vez)
 
-        // 2. Inicia Coroutine para dar tempo ao RPC e à destruição das câmeras dos jogadores
+        // 2. Inicia Coroutine para dar tempo ao RPC
         StartCoroutine(DelayedSceneTransition());
     }
 
     private IEnumerator DelayedSceneTransition()
     {
-        // Aumentamos o tempo de espera para 0.5s.
-        // Isso dá tempo suficiente para o RPC ser processado, a FallbackCamera ser ativada
-        // e a destruição/desativação das câmeras dos jogadores ser concluída.
+        // Delay para garantir que o RPC chegue e ative o fader.
+        // 0.5s é seguro, mas você pode tentar 0.2s se quiser.
         yield return new WaitForSeconds(0.5f);
 
         // 3. AGORA, com tudo protegido, mudamos de cena
@@ -97,11 +93,18 @@ public class GameManager : NetworkBehaviour
 
 
     [ClientRpc]
-    // Nome do método atualizado para refletir ambas as ações
     private void PauseGameAndEnableTransitionSafeguardsClientRpc()
     {
-        if (isGameOver) return;
-        isGameOver = true;
+        // --- A CORREÇÃO ESTÁ AQUI ---
+        // O servidor já tem a trava "isGameOver", então este RPC só será enviado UMA VEZ.
+        // A trava "if (isGameOver) return;" aqui estava fazendo o HOST
+        // (que é o servidor) pular o código.
+
+        // if (isGameOver) return; // <-- REMOVA ESTA LINHA
+        // isGameOver = true; // <-- REMOVA ESTA LINHA
+
+        // --- FIM DA CORREÇÃO ---
+
 
         // Limpa a UI
         if (pauseMenu != null) pauseMenu.gameObject.SetActive(false);
@@ -114,7 +117,7 @@ public class GameManager : NetworkBehaviour
         if (faderPanel != null)
         {
             faderPanel.SetActive(true);
-            Debug.Log("[GameManager] FaderPanel ativado.");
+            Debug.Log($"[GameManager] FaderPanel ativado no Client ID: {NetworkManager.Singleton.LocalClientId}");
         }
         else
         {

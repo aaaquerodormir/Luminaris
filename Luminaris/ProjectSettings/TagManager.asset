@@ -9,7 +9,6 @@ TagManager:
   - Lava
   - Porta
   - SafePlatform
-  - FallbackCamera
   layers:
   - Default
   - TransparentFX

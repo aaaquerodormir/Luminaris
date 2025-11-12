@@ -98,9 +98,7 @@ public class CustomPlayerSpawner : NetworkBehaviour
             }
         }
 
-        // A lógica de desativar a Fallback Camera agora é desnecessária,
-        // pois as câmeras virtuais ativas a substituirão imediatamente.
-        // O GameManager ainda tem a lógica de reativar a Fallback Camera no Game Over.
+        // A lógica de desativar a Fallback Camera foi removida, pois as câmeras virtuais ativas a substituirão.
     }
 
     private GameObject SpawnPlayer(ulong clientId, GameObject prefab, Transform spawnPoint)
