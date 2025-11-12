@@ -41,7 +41,7 @@ public class CustomPlayerSpawner : NetworkBehaviour
         if (!IsServer) return;
 
         // Verifica se é uma cena de jogo válida
-        if (sceneName == "SampleScene" || sceneName == "Fase2Final" || sceneName == "Fase3")
+        if (sceneName == "SampleScene" || sceneName == "Fase2" || sceneName == "FaseFinal")
         {
             int totalClients = NetworkManager.Singleton.ConnectedClients.Count;
 
