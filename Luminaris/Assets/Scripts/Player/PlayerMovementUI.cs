@@ -1,60 +1,42 @@
 ﻿using UnityEngine;
-using System;
-using System.Collections.Generic;
 using Unity.Netcode;
 
 public class PlayerMovementUI : NetworkBehaviour
 {
-    private NetworkVariable<int> jumpsNetworked = new(
-        0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server
+    private readonly NetworkVariable<int> remainingJumpsNet = new(
+        3, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server
     );
 
-    public int RemainingJumps => jumpsNetworked.Value;
-    public static event System.Action<PlayerMovementUI, int> OnJumpsChanged;
-
-    public void StartTurn(int maxJumps)
+    public override void OnNetworkSpawn()
     {
-        if (IsServer) jumpsNetworked.Value = maxJumps;
-        else UpdateJumpsServerRpc(maxJumps);
+        base.OnNetworkSpawn();
+        remainingJumpsNet.OnValueChanged += OnRemainingJumpsChanged;
 
-        OnJumpsChanged?.Invoke(this, maxJumps);
+        if (IsServer)
+        {
+            // Sincroniza o valor inicial caso o jogador entre depois
+            var playerMovement = GetComponent<PlayerMovement>();
+            if (playerMovement != null)
+            {
+                UpdateJumps(playerMovement.MaxJumpsNet.Value, playerMovement.CompletedJumpsNet.Value);
+            }
+        }
     }
 
-    public void UpdateJumps(int newValue)
+    public override void OnDestroy()
     {
-        if (IsServer) jumpsNetworked.Value = newValue;
-        else UpdateJumpsServerRpc(newValue);
-
-        OnJumpsChanged?.Invoke(this, newValue);
+        base.OnDestroy();
+        remainingJumpsNet.OnValueChanged -= OnRemainingJumpsChanged;
     }
 
-    public void EndTurn()
+    private void OnRemainingJumpsChanged(int previousValue, int newValue)
     {
-        OnJumpsChanged?.Invoke(this, jumpsNetworked.Value);
+        JumpHUD.NotifyJumpsChanged(OwnerClientId, newValue);
     }
 
-    [ServerRpc(RequireOwnership = false)]
-    private void UpdateJumpsServerRpc(int newValue, ServerRpcParams rpcParams = default)
+    public void UpdateJumps(int maxJumps, int completedJumps)
     {
-        jumpsNetworked.Value = newValue;
-        OnJumpsChanged?.Invoke(this, newValue);
-    }
-
-    private void OnEnable()
-    {
-        jumpsNetworked.OnValueChanged += HandleJumpChanged;
-    }
-
-    private void OnDisable()
-    {
-        jumpsNetworked.OnValueChanged -= HandleJumpChanged;
-    }
-
-    private void HandleJumpChanged(int oldVal, int newVal)
-    {
-        Debug.Log($"[SYNC:{name}] Jumps {oldVal} → {newVal}");
-        OnJumpsChanged?.Invoke(this, newVal);
+        if (!IsServer) return;
+        remainingJumpsNet.Value = maxJumps - completedJumps;
     }
 }
-
-

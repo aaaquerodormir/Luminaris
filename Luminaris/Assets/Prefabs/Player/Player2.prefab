@@ -541,6 +541,7 @@ MonoBehaviour:
   anim: {fileID: 3278293586265127783}
   spriteRenderer: {fileID: 7555596430964899303}
   netAnimator: {fileID: 6227805049994358070}
+  playerMovementUI: {fileID: 3915764837835743624}
   jumpForce: 8
   jumpBufferTime: 0.1
   jumpCutMultiplier: 0.2
