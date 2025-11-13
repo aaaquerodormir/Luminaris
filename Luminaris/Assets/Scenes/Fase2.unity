@@ -26344,7 +26344,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0.122641504, g: 0.11974902, b: 0.11974902, a: 0.99215686}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -30168,9 +30168,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   jumpIcon: {fileID: 1902057274}
   jumpText: {fileID: 65123987}
+  targetPlayerIndex: 1
   sprites:
   - {fileID: -4175370496997902698, guid: 70f35c0698e45ba428d5f1868aca909b, type: 3}
-  targetPlayerIndex: 1
 --- !u!1001 &2049691240
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -30309,9 +30309,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   jumpIcon: {fileID: 1938311498}
   jumpText: {fileID: 2110991711}
+  targetPlayerIndex: 0
   sprites:
   - {fileID: 992895060, guid: 70f35c0698e45ba428d5f1868aca909b, type: 3}
-  targetPlayerIndex: 0
 --- !u!1001 &2063091658
 PrefabInstance:
   m_ObjectHideFlags: 0
