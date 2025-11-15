@@ -98,11 +98,13 @@ public class PlataformaInstavel : NetworkBehaviour, IResettable
 
         yield return new WaitForSeconds(fallWait);
 
-        // A simulação de física (tornar Dynamic) é APENAS no servidor.
-        if (IsServer)
-        {
-            rb.bodyType = RigidbodyType2D.Dynamic;
-        }
+        // ==============================================================
+        // CORREÇÃO DA QUEDA (Problema 2)
+        // ==============================================================
+        // A simulação de física (tornar Dynamic) deve ocorrer em TODOS os clientes.
+        // A checagem "if (IsServer)" foi REMOVIDA daqui.
+        rb.bodyType = RigidbodyType2D.Dynamic;
+        // ==============================================================
 
         // Desativado em todos para evitar ativação dupla e novos toques
         col.enabled = false;

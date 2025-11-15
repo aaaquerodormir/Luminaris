@@ -20,6 +20,7 @@ public class PlayerMovement : NetworkBehaviour
 
     [Header("Jump Physics")]
     [SerializeField] private float jumpForce = 8f;
+    [SerializeField] private float coyoteTime = 0.1f; // <-- Adicionado
     [SerializeField] private float jumpBufferTime = 0.1f;
     [SerializeField] private float jumpCutMultiplier = 0.5f;
     [SerializeField] private float jumpHangGravityMultiplier = 0.5f;
@@ -36,6 +37,7 @@ public class PlayerMovement : NetworkBehaviour
     [SerializeField] private Transform groundCheck;
 
     private float lastPressedJumpTime;
+    private float coyoteTimeCounter; // <-- Adicionado
     private bool isJumpCut;
 
     [Header("Controle de Pulo")]
@@ -43,7 +45,7 @@ public class PlayerMovement : NetworkBehaviour
     public readonly NetworkVariable<int> MaxJumpsNet = new(3, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
     public readonly NetworkVariable<int> JumpBuffTurnsLeft = new(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
     private int server_extraJumpsApplied = 0;
-    private bool pendingJump = false;
+    // private bool pendingJump = false; // <-- Removido
 
     [Header("Input Actions")]
     [SerializeField] private InputActionReference moveAction;
@@ -152,7 +154,9 @@ public class PlayerMovement : NetworkBehaviour
 
         lastPressedJumpTime -= Time.deltaTime;
         bool hasJumpsLeft = CompletedJumpsNet.Value < MaxJumpsNet.Value;
-        if (lastPressedJumpTime > 0 && isGrounded && hasJumpsLeft && !pendingJump)
+
+        // *** LÓGICA DO PULO ATUALIZADA ***
+        if (lastPressedJumpTime > 0 && coyoteTimeCounter > 0f && hasJumpsLeft)
         {
             Jump();
         }
@@ -197,29 +201,40 @@ public class PlayerMovement : NetworkBehaviour
         else if (moveX < 0 && facingRight) SetFacingServerRpc(false);
     }
 
+    // *** MÉTODO JUMP ATUALIZADO ***
     private void Jump()
     {
         if (!IsOwner) return;
         rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
         lastPressedJumpTime = 0;
+        coyoteTimeCounter = 0f; // <-- Adicionado (Impede pulo duplo)
         isJumpCut = false;
-        pendingJump = true;
+        // pendingJump = true; // <-- Removido
         netAnimator.SetTrigger("Jump");
         if (AudioManager.Instance != null) AudioManager.Instance.PlaySound("Pulando");
+
+        SubmitJumpServerRpc(); // <-- Adicionado (Conta o pulo imediatamente)
     }
 
+    // *** MÉTODO CHECKGROUND ATUALIZADO ***
     private void CheckGround()
     {
         wasGrounded = isGrounded;
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, groundLayer);
 
+        // Lógica do Coyote Time
+        if (isGrounded)
+        {
+            coyoteTimeCounter = coyoteTime;
+        }
+        else
+        {
+            coyoteTimeCounter -= Time.deltaTime;
+        }
+
         if (isGrounded && !wasGrounded)
         {
-            if (pendingJump)
-            {
-                pendingJump = false;
-                SubmitJumpServerRpc();
-            }
+            // Bloco 'if (pendingJump)' foi removido daqui
 
             if (isMyTurn && CompletedJumpsNet.Value >= MaxJumpsNet.Value)
             {
