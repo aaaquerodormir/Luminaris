@@ -4405,7 +4405,7 @@ PrefabInstance:
     - target: {fileID: 1122741919206205099, guid: 032b96d53d90e3a42b4564f016df9d71, type: 3}
       propertyPath: botaoContinuar
       value: 
-      objectReference: {fileID: 318498475}
+      objectReference: {fileID: 0}
     - target: {fileID: 1122741919206205099, guid: 032b96d53d90e3a42b4564f016df9d71, type: 3}
       propertyPath: painelCreditos
       value: 
