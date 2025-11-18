@@ -57,6 +57,7 @@ public class PlayerMovement : NetworkBehaviour
     private bool facingRight = true;
     private Vector2 moveInput;
     private AudioSource walkAudio;
+    private MovingPlatform currentPlatform;
 
     private readonly NetworkVariable<bool> netFacingRight = new(true, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
 
@@ -195,11 +196,20 @@ public class PlayerMovement : NetworkBehaviour
     private void HandleMovement()
     {
         float moveX = moveInput.x;
-        rb.linearVelocity = new Vector2(moveX * moveSpeed, rb.linearVelocity.y);
+
+        Vector2 finalVelocity = new Vector2(moveX * moveSpeed, rb.linearVelocity.y);
+
+        if (currentPlatform != null)
+        {
+            finalVelocity += (Vector2)currentPlatform.currentVelocity;
+        }
+
+        rb.linearVelocity = finalVelocity;
 
         if (moveX > 0 && !facingRight) SetFacingServerRpc(true);
         else if (moveX < 0 && facingRight) SetFacingServerRpc(false);
     }
+
 
     // *** MÉTODO JUMP ATUALIZADO ***
     private void Jump()
@@ -383,6 +393,22 @@ public class PlayerMovement : NetworkBehaviour
                     break;
                 }
             }
+        }
+
+        if(collision.gameObject.TryGetComponent(out MovingPlatform movingPlatform))
+        {
+            currentPlatform = movingPlatform;
+        }
+    }
+
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (!IsOwner) return;
+
+        if (collision.gameObject.TryGetComponent(out MovingPlatform movingPlatform))
+        {
+            currentPlatform = null;
         }
     }
 }

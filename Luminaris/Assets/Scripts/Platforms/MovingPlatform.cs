@@ -11,16 +11,25 @@ public class MovingPlatform : MonoBehaviour, IResettable
 
     private Vector3 targetPos;
     private Vector3 startPos;
+    private Vector3 previousPos;
     private bool isMoving = true;
+    public Vector2 currentVelocity;
 
     private void Start()
     {
         startPos = transform.position;
         targetPos = pointB.position;
+        previousPos = transform.position;
 
         //GameManager.Instance.RegisterResettable(this);
 
         StartCoroutine(MovePlatform());
+    }
+
+    private void FixedUpdate()
+    {
+        currentVelocity = (transform.position - previousPos) / Time.fixedDeltaTime;
+        previousPos = transform.position;
     }
 
     private IEnumerator MovePlatform()
@@ -49,23 +58,12 @@ public class MovingPlatform : MonoBehaviour, IResettable
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Player"))
-            collision.transform.parent = transform;
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Player"))
-            collision.transform.parent = null;
-    }
-
     public void ResetState()
     {
         StopAllCoroutines();
         transform.position = startPos;
         targetPos = pointB.position;
+        previousPos = startPos;
         isMoving = true;
         StartCoroutine(MovePlatform());
     }
