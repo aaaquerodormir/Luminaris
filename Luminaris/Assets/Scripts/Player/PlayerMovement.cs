@@ -58,6 +58,7 @@ public class PlayerMovement : NetworkBehaviour
     private Vector2 moveInput;
     private AudioSource walkAudio;
     private MovingPlatform currentPlatform;
+    private float moveX; 
 
     private readonly NetworkVariable<bool> netFacingRight = new(true, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
 
@@ -165,13 +166,18 @@ public class PlayerMovement : NetworkBehaviour
 
     private void FixedUpdate()
     {
-        if (!IsOwner || !isMyTurn)
+        if (!IsOwner)
         {
             rb.gravityScale = gravityScale;
             return;
         }
 
-        HandleMovement();
+        if(!isMyTurn)
+        {
+            HandleMovement(isMyTurn);
+        }
+
+        HandleMovement(isMyTurn);
 
         if (rb.linearVelocity.y < 0)
         {
@@ -193,9 +199,14 @@ public class PlayerMovement : NetworkBehaviour
         }
     }
 
-    private void HandleMovement()
+    private void HandleMovement(bool isMyTurn)
     {
-        float moveX = moveInput.x;
+        if(!isMyTurn)
+        {
+            moveX = 0;
+        }
+
+        moveX = moveInput.x;
 
         Vector2 finalVelocity = new Vector2(moveX * moveSpeed, rb.linearVelocity.y);
 
@@ -208,6 +219,8 @@ public class PlayerMovement : NetworkBehaviour
 
         if (moveX > 0 && !facingRight) SetFacingServerRpc(true);
         else if (moveX < 0 && facingRight) SetFacingServerRpc(false);
+
+
     }
 
 
