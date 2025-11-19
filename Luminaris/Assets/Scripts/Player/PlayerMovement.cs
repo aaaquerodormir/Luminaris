@@ -9,60 +9,43 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(NetworkObject))]
 [RequireComponent(typeof(NetworkAnimator))]
 [RequireComponent(typeof(NetworkRigidbody2D))]
-
 public class PlayerMovement : NetworkBehaviour
 {
     [Header("References")]
     [SerializeField] private Rigidbody2D rb;
-    //[SerializeField] private PlayerMovementUI playerUI;
     [SerializeField] private Animator anim;
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private NetworkAnimator netAnimator;
+    [SerializeField] private PlayerMovementUI playerMovementUI;
 
-    [Header("Jump Physics (Integrado)")]
+    [Header("Jump Physics")]
     [SerializeField] private float jumpForce = 8f;
-    //[SerializeField] private float coyoteTime = 0.1f;
+    [SerializeField] private float coyoteTime = 0.1f; // <-- Adicionado
     [SerializeField] private float jumpBufferTime = 0.1f;
     [SerializeField] private float jumpCutMultiplier = 0.5f;
     [SerializeField] private float jumpHangGravityMultiplier = 0.5f;
     [SerializeField] private float jumpHangThreshold = 0.1f;
 
-    [Header("Gravity (Integrado)")]
+    [Header("Gravity")]
     [SerializeField] private float gravityScale = 4f;
     [SerializeField] private float fallGravityMultiplier = 2f;
-
     [SerializeField] private float moveSpeed = 3f;
 
-
     [Header("Ground Check")]
-    //[SerializeField] private Transform groundCheck;
     [SerializeField] private float groundRadius = 0.2f;
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private Transform groundCheck;
 
-    //private float lastOnGroundTime;
     private float lastPressedJumpTime;
+    private float coyoteTimeCounter; // <-- Adicionado
     private bool isJumpCut;
 
     [Header("Controle de Pulo")]
-    //[SerializeField] private int baseMaxJumps = 3;
-    // Adicione a NetworkVariable
-    public readonly NetworkVariable<int> CompletedJumpsNet = new(
-        0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server
-    );
-    public readonly NetworkVariable<int> MaxJumpsNet = new(
-        3, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server
-    );
-
-    //Rastreia a duração do power-up de pulo
-    public readonly NetworkVariable<int> JumpBuffTurnsLeft = new(
-        0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server
-    );
-
-    //Apenas o servidor usa isso para lembrar o quanto reverter
+    public readonly NetworkVariable<int> CompletedJumpsNet = new(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
+    public readonly NetworkVariable<int> MaxJumpsNet = new(3, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
+    public readonly NetworkVariable<int> JumpBuffTurnsLeft = new(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
     private int server_extraJumpsApplied = 0;
-    private bool pendingJump = false;
-    public event System.Action<ulong, int> OnTurnStarted;
+    // private bool pendingJump = false; // <-- Removido
 
     [Header("Input Actions")]
     [SerializeField] private InputActionReference moveAction;
@@ -73,14 +56,12 @@ public class PlayerMovement : NetworkBehaviour
     private bool isMyTurn = false;
     private bool facingRight = true;
     private Vector2 moveInput;
-
     private AudioSource walkAudio;
+    private MovingPlatform currentPlatform;
+    private float moveX; 
 
-    // sincroniza flip entre host/client
-    private readonly NetworkVariable<bool> netFacingRight =
-       new(true, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
+    private readonly NetworkVariable<bool> netFacingRight = new(true, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
 
-    // ==============================
     private void Awake()
     {
         if (!rb) rb = GetComponent<Rigidbody2D>();
@@ -95,33 +76,19 @@ public class PlayerMovement : NetworkBehaviour
         base.OnNetworkSpawn();
         netFacingRight.OnValueChanged += (_, __) => UpdateFacingDirection();
 
-        CompletedJumpsNet.OnValueChanged += OnJumpVariablesChanged;
-        MaxJumpsNet.OnValueChanged += OnJumpVariablesChanged;
-
         if (IsOwner)
         {
             EnableInputs();
-
-            // ==== ÁUDIO (INTEGRADO) ====
-            // Apenas o Owner precisa instanciar o áudio de loop local.
-            if (AudioManager.Instance != null)
+            if (AudioManager.Instance != null)
             {
                 walkAudio = AudioManager.Instance.PlayLoop("Andando", gameObject);
-                if (walkAudio != null)
-                    walkAudio.Stop(); // Começa parado
-            }
-            else
-            {
-                Debug.LogWarning("[PlayerMovement] AudioManager.Instance não encontrado!");
+                if (walkAudio != null) walkAudio.Stop();
             }
         }
         else
         {
             DisableInputs();
         }
-
-        Debug.Log($"[PlayerMovement:{name}] NetworkSpawn — Owner={IsOwner} ({OwnerClientId})");
-        OnJumpVariablesChanged(0, 0);
     }
 
     public override void OnDestroy()
@@ -129,14 +96,6 @@ public class PlayerMovement : NetworkBehaviour
         base.OnDestroy();
         if (IsOwner) DisableInputs();
         netFacingRight.OnValueChanged -= (_, __) => UpdateFacingDirection();
-        CompletedJumpsNet.OnValueChanged -= OnJumpVariablesChanged;
-        MaxJumpsNet.OnValueChanged -= OnJumpVariablesChanged;
-    }
-
-    private void OnJumpVariablesChanged(int oldVal, int newVal)
-    {
-        int remaining = MaxJumpsNet.Value - CompletedJumpsNet.Value;
-        JumpHUD.NotifyJumpsChanged(OwnerClientId, remaining);
     }
 
     private void EnableInputs()
@@ -145,10 +104,8 @@ public class PlayerMovement : NetworkBehaviour
         if (jumpAction != null)
         {
             jumpAction.action.Enable();
-            // 'Performed' ativa o Jump Buffer
-            jumpAction.action.performed += OnJumpPressed;
-            // 'Canceled' ativa o Jump Cut
-            jumpAction.action.canceled += OnJumpReleased;
+            jumpAction.action.performed += OnJumpPressed;
+            jumpAction.action.canceled += OnJumpReleased;
         }
     }
 
@@ -163,72 +120,45 @@ public class PlayerMovement : NetworkBehaviour
         }
     }
 
-    // Chamado quando o botão de pulo é PRESSIONADO
-    private void OnJumpPressed(InputAction.CallbackContext ctx)
+    private void OnJumpPressed(InputAction.CallbackContext ctx)
     {
         if (!IsOwner || !isMyTurn) return;
-
-        // Ativa o Jump Buffer
         lastPressedJumpTime = jumpBufferTime;
     }
 
-    // Chamado quando o botão de pulo é SOLTO
-    private void OnJumpReleased(InputAction.CallbackContext ctx)
+    private void OnJumpReleased(InputAction.CallbackContext ctx)
     {
         if (!IsOwner || !isMyTurn) return;
-
-        // Ativa o Jump Cut
-        if (rb.linearVelocity.y > 0)
-            isJumpCut = true;
+        if (rb.linearVelocity.y > 0) isJumpCut = true;
     }
 
-    // ==============================
     private void Update()
     {
         CheckGround();
-
-        // Atualiza animações para todos
-        bool isMoving = Mathf.Abs(moveInput.x) > 0.1f;
+        bool isMoving = Mathf.Abs(moveInput.x) > 0.1f;
         float yVel = rb.linearVelocity.y;
         UpdateAnimatorServerRpc(isMoving, isGrounded, yVel);
 
-        // Lógica do Owner (Input, Áudio, e Lógica de Pulo)
-        if (!IsOwner || !isMyTurn)
+        if (!IsOwner || !isMyTurn)
         {
-            // Zera os timers se não for nosso turno
-             //lastOnGroundTime = 0;
             lastPressedJumpTime = 0;
             return;
         }
 
-        // 1. Ler Input
-        moveInput = moveAction.action.ReadValue<Vector2>();
+        moveInput = moveAction.action.ReadValue<Vector2>();
 
-        // 2. Lógica de Áudio (INTEGRADO)
-        if (walkAudio != null)
+        if (walkAudio != null)
         {
             bool isMovingOnGround = isMoving && isGrounded;
-            if (isMovingOnGround && !walkAudio.isPlaying)
-            {
-                walkAudio.Play();
-            }
-            else if (!isMovingOnGround && walkAudio.isPlaying)
-            {
-                walkAudio.Stop();
-            }
+            if (isMovingOnGround && !walkAudio.isPlaying) walkAudio.Play();
+            else if (!isMovingOnGround && walkAudio.isPlaying) walkAudio.Stop();
         }
 
-        // 3. Lógica de Pulo (Timers) (INTEGRADO)
-        //lastOnGroundTime -= Time.deltaTime;
         lastPressedJumpTime -= Time.deltaTime;
+        bool hasJumpsLeft = CompletedJumpsNet.Value < MaxJumpsNet.Value;
 
-        // 4. Lógica de Pulo (Execução) (INTEGRADO)
-        bool hasJumpsLeft = CompletedJumpsNet.Value < MaxJumpsNet.Value;
-
-        // A flag 'pendingJump' previne pular (usando Coyote)
-        // antes de aterrissar o pulo anterior.
-        //if (lastPressedJumpTime > 0 && lastOnGroundTime > 0 && hasJumpsLeft && !pendingJump)
-        if (lastPressedJumpTime > 0 && isGrounded && hasJumpsLeft && !pendingJump)
+        // *** LÓGICA DO PULO ATUALIZADA ***
+        if (lastPressedJumpTime > 0 && coyoteTimeCounter > 0f && hasJumpsLeft)
         {
             Jump();
         }
@@ -236,121 +166,101 @@ public class PlayerMovement : NetworkBehaviour
 
     private void FixedUpdate()
     {
-        if (!IsOwner || !isMyTurn)
+        if (!IsOwner)
         {
-            // Zera a gravidade customizada se não for nosso turno
-            rb.gravityScale = gravityScale;
+            rb.gravityScale = gravityScale;
             return;
         }
 
-        // 1. Aplicar movimento horizontal (Lógica Atual)
-        HandleMovement();
-
-        // 2. Aplicar física de gravidade customizada (Lógica Antiga)
-        if (rb.linearVelocity.y < 0)
+        if(!isMyTurn)
         {
-            // Queda mais rápida
-            rb.gravityScale = gravityScale * fallGravityMultiplier;
+            HandleMovement(isMyTurn);
+        }
+
+        HandleMovement(isMyTurn);
+
+        if (rb.linearVelocity.y < 0)
+        {
+            rb.gravityScale = gravityScale * fallGravityMultiplier;
         }
         else if (Mathf.Abs(rb.linearVelocity.y) < jumpHangThreshold)
         {
-            // No ápice do pulo, gravidade menor (Hang Time)
-            rb.gravityScale = gravityScale * jumpHangGravityMultiplier;
+            rb.gravityScale = gravityScale * jumpHangGravityMultiplier;
         }
         else if (isJumpCut)
         {
-            // Corta o pulo (Jump Cut)
-            rb.gravityScale = gravityScale; // Gravidade normal
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, rb.linearVelocity.y * jumpCutMultiplier);
-            isJumpCut = false; // Só aplica uma vez
-        }
+            rb.gravityScale = gravityScale;
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, rb.linearVelocity.y * jumpCutMultiplier);
+            isJumpCut = false;
+        }
         else
         {
-            // Subida normal
-            rb.gravityScale = gravityScale;
+            rb.gravityScale = gravityScale;
         }
     }
 
-    private void HandleMovement()
+    private void HandleMovement(bool isMyTurn)
     {
-        float moveX = moveInput.x;
-        rb.linearVelocity = new Vector2(moveX * moveSpeed, rb.linearVelocity.y);
-
-        if (moveX > 0 && !facingRight)
-            SetFacingServerRpc(true);
-        else if (moveX < 0 && facingRight)
-            SetFacingServerRpc(false);
-    }
-
-    /// <summary>
-    /// Executa o pulo localmente (chamado pelo Update)
-    /// </summary>
-    private void Jump()
-    {
-        if (!IsOwner) return; // Segurança
-
-        // Aplica a força
-        rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
-
-        // Reseta timers
-        //lastOnGroundTime = 0;
-        lastPressedJumpTime = 0;
-
-        // Ativa flags
-        isJumpCut = false; // Garante que não corte imediatamente
-        pendingJump = true; // Flag da lógica de rede (espera aterrissar para contar)
-
-        // Feedback
-        netAnimator.SetTrigger("Jump");
-
-        // ==== ÁUDIO (INTEGRADO) ====
-        if (AudioManager.Instance != null)
+        if(!isMyTurn)
         {
-            AudioManager.Instance.PlaySound("Pulando");
+            moveX = 0;
         }
 
-        Debug.Log($"[PlayerMovement:{name}] ⬆️ Pulou (aguardando aterrissagem)");
+        moveX = moveInput.x;
+
+        Vector2 finalVelocity = new Vector2(moveX * moveSpeed, rb.linearVelocity.y);
+
+        if (currentPlatform != null)
+        {
+            finalVelocity += (Vector2)currentPlatform.currentVelocity;
+        }
+
+        rb.linearVelocity = finalVelocity;
+
+        if (moveX > 0 && !facingRight) SetFacingServerRpc(true);
+        else if (moveX < 0 && facingRight) SetFacingServerRpc(false);
+
+
     }
 
+
+    // *** MÉTODO JUMP ATUALIZADO ***
+    private void Jump()
+    {
+        if (!IsOwner) return;
+        rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
+        lastPressedJumpTime = 0;
+        coyoteTimeCounter = 0f; // <-- Adicionado (Impede pulo duplo)
+        isJumpCut = false;
+        // pendingJump = true; // <-- Removido
+        netAnimator.SetTrigger("Jump");
+        if (AudioManager.Instance != null) AudioManager.Instance.PlaySound("Pulando");
+
+        SubmitJumpServerRpc(); // <-- Adicionado (Conta o pulo imediatamente)
+    }
+
+    // *** MÉTODO CHECKGROUND ATUALIZADO ***
     private void CheckGround()
     {
         wasGrounded = isGrounded;
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, groundLayer);
 
-        // ==== LÓGICA DE COYOTE TIME (INTEGRADO) ====
-        if (isGrounded)
+        // Lógica do Coyote Time
+        if (isGrounded)
         {
-            // Acabou de pousar, dá a permissão de Coyote Time
-            //lastOnGroundTime = coyoteTime;
+            coyoteTimeCounter = coyoteTime;
         }
-        // ==== FIM LÓGICA DE COYOTE TIME ====
-
-        // Lógica de contagem de pulo (EXISTENTE E CORRETA)
-        // Isto é chamado quando tocamos o chão
-        if (isGrounded && !wasGrounded)
+        else
         {
-            // Se estávamos esperando um pulo ser contado...
-            if (pendingJump)
+            coyoteTimeCounter -= Time.deltaTime;
+        }
+
+        if (isGrounded && !wasGrounded)
+        {
+            // Bloco 'if (pendingJump)' foi removido daqui
+
+            if (isMyTurn && CompletedJumpsNet.Value >= MaxJumpsNet.Value)
             {
-                pendingJump = false;
-
-                // Apenas o Server pode modificar a NetworkVariable
-                if (IsServer)
-                {
-                    CompletedJumpsNet.Value++;
-                }
-                else // Se for o Client, ele precisa solicitar ao Server para modificar
-                {
-                    SubmitJumpServerRpc();
-                }
-
-                Debug.Log($"[PlayerMovement:{name}] 🟢 Aterrissou.");
-            }
-
-            // Só encerra o turno se for o turno ativo E atingiu o limite de pulos
-            if (isMyTurn && CompletedJumpsNet.Value >= MaxJumpsNet.Value)
-            {
-                Debug.Log($"[PlayerMovement:{name}] 🚩 Máximo de pulos atingido — fim de turno!");
                 RequestEndTurn();
             }
         }
@@ -360,7 +270,12 @@ public class PlayerMovement : NetworkBehaviour
     private void SubmitJumpServerRpc(ServerRpcParams rpcParams = default)
     {
         if (rpcParams.Receive.SenderClientId != OwnerClientId && !IsServer) return;
-        CompletedJumpsNet.Value++;
+
+        if (CompletedJumpsNet.Value < MaxJumpsNet.Value)
+        {
+            CompletedJumpsNet.Value++;
+            playerMovementUI.UpdateJumps(MaxJumpsNet.Value, CompletedJumpsNet.Value);
+        }
     }
 
     [ServerRpc(RequireOwnership = false)]
@@ -378,29 +293,24 @@ public class PlayerMovement : NetworkBehaviour
     {
         bool newFacing = netFacingRight.Value;
         if (newFacing == facingRight) return;
-
         facingRight = newFacing;
-        if (spriteRenderer != null)
-            spriteRenderer.flipX = facingRight;
+        if (spriteRenderer != null) spriteRenderer.flipX = facingRight;
     }
 
     [ServerRpc(RequireOwnership = false)]
     private void SetFacingServerRpc(bool right)
     {
-        if (netFacingRight.Value != right)
-            netFacingRight.Value = right;
+        if (netFacingRight.Value != right) netFacingRight.Value = right;
     }
 
     private void RequestEndTurn()
     {
-        if (IsServer)
-            TurnControl.Instance?.EndTurn();
-        else
-            SubmitEndTurnServerRpc();
+        if (IsServer) TurnControl.Instance?.EndTurn();
+        else SubmitEndTurnServerRpc();
     }
 
     [ServerRpc]
-    private void SubmitEndTurnServerRpc(ServerRpcParams rpcParams = default)
+    private void SubmitEndTurnServerRpc()
     {
         TurnControl.Instance?.EndTurn();
     }
@@ -420,25 +330,19 @@ public class PlayerMovement : NetworkBehaviour
     private void SetTurnActive(bool active)
     {
         isMyTurn = active;
+        if (active && IsServer)
+        {
+            CompletedJumpsNet.Value = 0;
+            playerMovementUI.UpdateJumps(MaxJumpsNet.Value, CompletedJumpsNet.Value);
+        }
+
         if (!IsOwner) return;
 
-        if (active)
-        {
-            if (IsServer)
-            {
-                CompletedJumpsNet.Value = 0;
-            }
-            OnTurnStarted?.Invoke(OwnerClientId, MaxJumpsNet.Value);
-        }
-        else
+        if (!active)
         {
             moveInput = Vector2.zero;
             rb.linearVelocity = Vector2.zero;
-
-            // ==== ÁUDIO (INTEGRADO) ====
-            // Para o som de andar ao final do turno
-            if (walkAudio != null && walkAudio.isPlaying)
-                walkAudio.Stop();
+            if (walkAudio != null && walkAudio.isPlaying) walkAudio.Stop();
         }
     }
 
@@ -449,9 +353,8 @@ public class PlayerMovement : NetworkBehaviour
         Gizmos.DrawWireSphere(groundCheck.position, groundRadius);
     }
 
-    // (Restante do código: PowerUps, Colisão, etc. - Sem modificações)
-    [ServerRpc(RequireOwnership = false)]
-    public void NotifyPlatformTouchServerRpc(NetworkObjectReference platformNetObj, ServerRpcParams rpcParams = default)
+    [ServerRpc(RequireOwnership = false)]
+    public void NotifyPlatformTouchServerRpc(NetworkObjectReference platformNetObj)
     {
         if (platformNetObj.TryGet(out NetworkObject netObj))
         {
@@ -468,7 +371,7 @@ public class PlayerMovement : NetworkBehaviour
         MaxJumpsNet.Value += extraJumps;
         server_extraJumpsApplied += extraJumps;
         JumpBuffTurnsLeft.Value = Mathf.Max(JumpBuffTurnsLeft.Value, durationTurns);
-        Debug.Log($"[PlayerMovement-SERVER] {name} (ID: {OwnerClientId}) ACUMULOU {extraJumps} pulos. Total extra: {server_extraJumpsApplied}. Duração: {JumpBuffTurnsLeft.Value} turnos.");
+        playerMovementUI.UpdateJumps(MaxJumpsNet.Value, CompletedJumpsNet.Value);
     }
 
     public void DecrementBuffTurns()
@@ -487,71 +390,38 @@ public class PlayerMovement : NetworkBehaviour
         MaxJumpsNet.Value -= server_extraJumpsApplied;
         server_extraJumpsApplied = 0;
         JumpBuffTurnsLeft.Value = 0;
-        Debug.Log($"[PlayerMovement-SERVER] {name} (ID: {OwnerClientId}) PowerUp de pulo expirou.");
-    }
-
-    //private void OnTriggerEnter2D(Collider2D collision)
-    //{
-    //    if (!IsOwner) return;
-    //    if (collision.CompareTag("Porta"))
-    //    {
-    //        ContaPortaServerRpc(1);
-    //    }
-    //}
-    //private void OnTriggerExit2D(Collider2D collision)
-    //{
-    //    if (!IsOwner) return;
-    //    if (collision.CompareTag("Porta"))
-    //    {
-    //        ContaPortaServerRpc(-1);
-    //    }
-    //}
-    [ServerRpc]
-    void ContaPortaServerRpc(int valor)
-    {
-        // LevelManager.Instance.PlayerDoorCount.Value+=valor;
-        //  Debug.Log($"[PlayerDoorCount]:{LevelManager.Instance.PlayerDoorCount.Value}");
-        Debug.Log("Contandoooooooooo");
+        playerMovementUI.UpdateJumps(MaxJumpsNet.Value, CompletedJumpsNet.Value);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (!IsOwner) return;
-        PlataformaInstavel platform;
-        if (!collision.gameObject.TryGetComponent(out platform)) return;
-        foreach (ContactPoint2D contact in collision.contacts)
+        if (collision.gameObject.TryGetComponent(out PlataformaInstavel platform))
         {
-            if (contact.normal.y > 0.5f && platform.NetworkObject.IsSpawned)
+            foreach (ContactPoint2D contact in collision.contacts)
             {
-                NotifyPlatformTouchServerRpc(platform.NetworkObject);
-                break;
+                if (contact.normal.y > 0.5f && platform.NetworkObject.IsSpawned)
+                {
+                    NotifyPlatformTouchServerRpc(platform.NetworkObject);
+                    break;
+                }
             }
         }
 
-
-
-        // if (IsOwner)
-        // {
-        //     if (collision.gameObject.TryGetComponent(out PlataformaInstavel platform))
-        //     {
-        //         foreach (ContactPoint2D contact in collision.contacts)
-        //         {
-        //             if (contact.normal.y > 0.5f)
-        //             {
-        //                 if (platform.NetworkObject.IsSpawned)
-        //                 {
-        //                     NotifyPlatformTouchServerRpc(platform.NetworkObject);
-        //                 }
-        //                 break;
-        //             }
-        //         }
-        //
-        //     }
-        // }
-
+        if(collision.gameObject.TryGetComponent(out MovingPlatform movingPlatform))
+        {
+            currentPlatform = movingPlatform;
+        }
     }
 
 
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (!IsOwner) return;
+
+        if (collision.gameObject.TryGetComponent(out MovingPlatform movingPlatform))
+        {
+            currentPlatform = null;
+        }
+    }
 }
-
-

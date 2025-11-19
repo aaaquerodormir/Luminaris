@@ -1,5 +1,4 @@
-﻿// MainMenu.cs
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using Unity.Netcode;
 using Unity.Netcode.Transports.UTP;
@@ -20,8 +19,8 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private GameObject painelLan;
     [SerializeField] private GameObject painelModo; // ✅ NOVO painel Modo
 
-    [Header("Botões")]
-    [SerializeField] private GameObject botaoContinuar;
+    // [Header("Botões")]
+    // [SerializeField] private GameObject botaoContinuar;
 
     [Header("Configurações")]
     [SerializeField] private string firstGameSceneName = "Fase1";
@@ -48,8 +47,8 @@ public class MainMenu : MonoBehaviour
     {
         MostrarPrincipal();
 
-        if (botaoContinuar != null)
-            botaoContinuar.SetActive(SaveSystem.HasSave());
+        // if (botaoContinuar != null)
+        // botaoContinuar.SetActive(SaveSystem.HasSave());
 
         relayManager = Object.FindFirstObjectByType<RelayManager>();
         netManager = NetworkManager.Singleton;
@@ -61,21 +60,21 @@ public class MainMenu : MonoBehaviour
             hostIpDisplay.text = $"Meu IP local {GetLocalIPAddress()}\n";
     }
 
-    public void NovoJogo()
-    {
-        SaveSystem.DeleteSave();
-        Time.timeScale = 1f;
-        // SceneManager.LoadScene(firstGameSceneName);
-    }
+    //public void NovoJogo()
+    //{
+    //  SaveSystem.DeleteSave();
+    //Time.timeScale = 1f;
+    // SceneManager.LoadScene(firstGameSceneName);
+    // }
 
-    public void ContinuarJogo()
-    {
-        if (SaveSystem.HasSave())
-        {
-            Time.timeScale = 1f;
-            // SceneManager.LoadScene(firstGameSceneName);
-        }
-    }
+    // public void ContinuarJogo()
+    // {
+    //  if (SaveSystem.HasSave())
+    //  {
+    //  Time.timeScale = 1f;
+    // SceneManager.LoadScene(firstGameSceneName);
+    //  }
+    //  }
 
     public void MostrarPrincipal() => AtivarSomente(painelPrincipal);
     public void MostrarOpcoes() => AtivarSomente(painelOpcoes);
