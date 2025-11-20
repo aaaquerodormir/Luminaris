@@ -20,7 +20,7 @@ public class PlayerMovement : NetworkBehaviour
 
     [Header("Jump Physics")]
     [SerializeField] private float jumpForce = 8f;
-    [SerializeField] private float coyoteTime = 0.1f; 
+    [SerializeField] private float coyoteTime = 0.1f;
     [SerializeField] private float jumpBufferTime = 0.1f;
     [SerializeField] private float jumpCutMultiplier = 0.5f;
     [SerializeField] private float jumpHangGravityMultiplier = 0.5f;
@@ -50,6 +50,9 @@ public class PlayerMovement : NetworkBehaviour
     [SerializeField] private InputActionReference moveAction;
     [SerializeField] private InputActionReference jumpAction;
 
+    // Removi a variável isPlayer1 pois era só para a câmera
+    // [SerializeField] private bool isPlayer1 = true; 
+
     private bool isGrounded;
     private bool wasGrounded;
     private bool isMyTurn = false;
@@ -75,8 +78,14 @@ public class PlayerMovement : NetworkBehaviour
         base.OnNetworkSpawn();
         netFacingRight.OnValueChanged += (_, __) => UpdateFacingDirection();
 
+        facingRight = !netFacingRight.Value;
+        UpdateFacingDirection();
+
         if (IsOwner)
         {
+            // --- REMOVI A CHAMADA DA CÂMERA QUE DAVA ERRO ---
+            // O código da câmera continua funcionando do jeito que você já tinha antes.
+
             EnableInputs();
             if (AudioManager.Instance != null)
             {
@@ -164,7 +173,11 @@ public class PlayerMovement : NetworkBehaviour
 
     private void FixedUpdate()
     {
-        if (IsOwner && currentPlatform != null)
+        // --- CORREÇÃO DA PLATAFORMA (SEM ERROS) ---
+        // Aqui removemos o "IsOwner".
+        // Isso faz com que o Cliente mova o personagem visualmente junto com a plataforma.
+        // Isso impede que ele "entre" ou "atravesse" o chão na tela do Cliente.
+        if (currentPlatform != null)
         {
             Vector2 platformVelocity = currentPlatform.currentVelocity;
             rb.position += platformVelocity * Time.fixedDeltaTime;
@@ -386,14 +399,15 @@ public class PlayerMovement : NetworkBehaviour
         JumpBuffTurnsLeft.Value = 0;
         playerMovementUI.UpdateJumps(MaxJumpsNet.Value, CompletedJumpsNet.Value);
     }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (!IsOwner) return;
-
+        // 1. Plataforma Móvel (CORREÇÃO: Executa para TODOS para evitar o bug visual)
         if (collision.gameObject.TryGetComponent(out MovingPlatform movingPlatform))
         {
             foreach (ContactPoint2D contact in collision.contacts)
             {
+                // Verifica se está em cima
                 if (contact.normal.y > 0.5f)
                 {
                     currentPlatform = movingPlatform;
@@ -401,7 +415,9 @@ public class PlayerMovement : NetworkBehaviour
                 }
             }
         }
-        if (collision.gameObject.TryGetComponent(out PlataformaInstavel platform))
+
+        // 2. Plataforma Instável (Esta precisa do IsOwner, pois chama ServerRpc)
+        if (IsOwner && collision.gameObject.TryGetComponent(out PlataformaInstavel platform))
         {
             foreach (ContactPoint2D contact in collision.contacts)
             {
@@ -416,8 +432,7 @@ public class PlayerMovement : NetworkBehaviour
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        if (!IsOwner) return;
-
+        // CORREÇÃO: Removemos o IsOwner para que o Cliente também saiba quando saiu da plataforma
         if (collision.gameObject.TryGetComponent(out MovingPlatform movingPlatform))
         {
             if (currentPlatform == movingPlatform)
