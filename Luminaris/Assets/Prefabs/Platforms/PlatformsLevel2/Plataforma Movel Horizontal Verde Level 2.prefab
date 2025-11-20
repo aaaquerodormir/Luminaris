@@ -107,6 +107,7 @@ GameObject:
   - component: {fileID: 4432233344312784900}
   - component: {fileID: 8058540623385878593}
   - component: {fileID: 7958365649892993334}
+  - component: {fileID: 2421428763060222678}
   - component: {fileID: 8114671616256153325}
   - component: {fileID: 1593954222596614599}
   - component: {fileID: 1491460663689324617}
@@ -233,6 +234,31 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1.75, y: 0.22597885}
   m_EdgeRadius: 0
+--- !u!114 &2421428763060222678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7781296636138745844}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 0
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  DeferredDespawnTick: 0
+  Ownership: 1
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+  SyncOwnerTransformWhenParented: 1
+  AllowOwnerToParent: 0
 --- !u!114 &8114671616256153325
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -245,6 +271,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 298120faa770a674fa0c8e95e7c51309, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
   pointA: {fileID: 7988038428012807784}
   pointB: {fileID: 6895417372502937801}
   moveSpeed: 1.5
