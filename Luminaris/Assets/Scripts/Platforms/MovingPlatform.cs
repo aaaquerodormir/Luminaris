@@ -12,8 +12,11 @@ public class MovingPlatform : MonoBehaviour, IResettable
     private Vector3 targetPos;
     private Vector3 startPos;
     private Vector3 previousPos;
-    private bool isMoving = true;
-    public Vector2 currentVelocity;
+
+    private bool canMove = true;
+
+    // A velocidade que o PlayerMovement usará
+    public Vector2 currentVelocity { get; private set; }
 
     private void Start()
     {
@@ -23,36 +26,41 @@ public class MovingPlatform : MonoBehaviour, IResettable
 
         //GameManager.Instance.RegisterResettable(this);
 
-        StartCoroutine(MovePlatform());
+        StartCoroutine(ControlMovementCycle());
     }
 
     private void FixedUpdate()
     {
+        // 1. Lógica de Movimento (Usando Time.fixedDeltaTime)
+        if (canMove)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, targetPos, moveSpeed * Time.fixedDeltaTime);
+        }
+
+        // 2. Cálculo da Velocidade
         currentVelocity = (transform.position - previousPos) / Time.fixedDeltaTime;
         previousPos = transform.position;
     }
 
-    private IEnumerator MovePlatform()
+    private IEnumerator ControlMovementCycle()
     {
         while (true)
         {
-            if (isMoving)
-            {
-                transform.position = Vector3.MoveTowards(transform.position, targetPos, moveSpeed * Time.deltaTime);
+            // Espera até que a plataforma chegue ao destino
+            yield return new WaitUntil(() => Vector3.Distance(transform.position, targetPos) < 0.05f);
 
-                if (Vector2.Distance(transform.position, targetPos) < 0.05f)
-                {
-                    isMoving = false;
+            // 1. Para o movimento
+            canMove = false;
 
-                    if (targetPos == pointA.position)
-                        yield return new WaitForSeconds(pauseAtA);
-                    else
-                        yield return new WaitForSeconds(pauseAtB);
+            // 2. Pausa
+            if (targetPos == pointA.position)
+                yield return new WaitForSeconds(pauseAtA);
+            else
+                yield return new WaitForSeconds(pauseAtB);
 
-                    targetPos = targetPos == pointA.position ? pointB.position : pointA.position;
-                    isMoving = true;
-                }
-            }
+            // 3. Define o novo destino e reinicia o movimento
+            targetPos = targetPos == pointA.position ? pointB.position : pointA.position;
+            canMove = true;
 
             yield return null;
         }
@@ -64,7 +72,7 @@ public class MovingPlatform : MonoBehaviour, IResettable
         transform.position = startPos;
         targetPos = pointB.position;
         previousPos = startPos;
-        isMoving = true;
-        StartCoroutine(MovePlatform());
+        canMove = true;
+        StartCoroutine(ControlMovementCycle());
     }
 }
