@@ -39,7 +39,7 @@ public class PlayerRespawn : NetworkBehaviour
             if (pendingCheckpoint == checkpoint || committedCheckpoint == checkpoint) return;
 
             pendingCheckpoint = checkpoint;
-            checkpoint.TryActivate();
+            //checkpoint.TryActivate();
             //GameManager.Instance.ReachCheckpoint(checkpoint.transform);
         }
     }

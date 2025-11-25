@@ -8,24 +8,21 @@ public class LavaRise : NetworkBehaviour
     [SerializeField] private float growthPerTurn = 0.01f;
     [SerializeField] private float maxSpeed = 2f;
 
-    //[Header("Jogadores")]
-    //[SerializeField] private Transform player1;
-    //[SerializeField] private Transform player2;
-
     private float speedModifier = 1f;
-    private int turnsLeft = 0;
-    private int totalTurns = 0;
-    //private int savedTurns = 0;
 
-    // ⬇️ NOVO: Variável de servidor para rastrear o bônus total aplicado ⬇️
+    // Variáveis de Turno
+    private int turnsLeft = 0; // Turnos restantes do PowerUp de velocidade
+    private int totalTurns = 0; // Turnos totais da partida (para o crescimento natural)
+
     private float server_totalBonusApplied = 0f;
 
     private float safeZoneHeight = -Mathf.Infinity;
-    private float currentSpeed;
-    //private float lastSpeed;
 
+    [Header("Debug Info")]
+    [SerializeField] private float currentSpeed;
 
-    private AudioSource lavaAudio;
+    // Variável para controlar o spam do Debug.Log
+    private float debugTimer = 0f;
 
     private void Awake()
     {
@@ -36,23 +33,30 @@ public class LavaRise : NetworkBehaviour
     {
         if (!IsServer) return;
 
-        // ⬇️ MODIFICADO: Usa o 'currentSpeed' calculado ⬇️
-        // (O seu código original já fazia isso, só garantindo)
+        // Cálculo da velocidade: Base + (Crescimento por Turno) * Modificador de PowerUp
         currentSpeed = (baseSpeed + (totalTurns * growthPerTurn)) * speedModifier;
         currentSpeed = Mathf.Min(currentSpeed, maxSpeed);
 
+        // Movimento
         transform.position += Vector3.up * currentSpeed * Time.deltaTime;
 
+        // Limite de altura (opcional)
         if (transform.position.y > 50f)
             currentSpeed = 0;
+
+        // Debug Log a cada 1 segundo
+        debugTimer += Time.deltaTime;
+        if (debugTimer >= 1.0f)
+        {
+            Debug.Log($"[LavaRise] Vel: {currentSpeed:F3} | Turnos: {totalTurns} | Mod: {speedModifier}");
+            debugTimer = 0f;
+        }
     }
 
-    // ⬇️ NOVO: Função que o Power-Up chama (como da resposta anterior) ⬇️
     public void AddSpeedModifier(float newMultiplier, int duration)
     {
         if (!IsServer) return;
 
-        // 1. Calcula o "bônus" (ex: 1.5x -> bônus de 0.5f)
         float bonus = newMultiplier - 1.0f;
         if (bonus <= 0f)
         {
@@ -60,71 +64,59 @@ public class LavaRise : NetworkBehaviour
             return;
         }
 
-        // 2. SOMA o bônus ao multiplicador atual
         speedModifier += bonus;
-
-        // 3. SOMA o bônus ao rastreador de servidor
         server_totalBonusApplied += bonus;
-
-        // 4. Define a duração para o MÁXIMO
         turnsLeft = Mathf.Max(turnsLeft, duration);
 
-        Debug.Log($"[LavaRise-SERVER] Modificador de velocidade ACUMULADO. Novo mod: {speedModifier}. Duração: {turnsLeft} turnos.");
+        Debug.Log($"[LavaRise-SERVER] Modificador ACUMULADO. Novo mod: {speedModifier}. Duração: {turnsLeft} turnos.");
     }
 
-    // ⬇️ NOVO: Método chamado pelo TurnControl (sem alteração) ⬇️
+    // --- CORREÇÃO AQUI ---
+    // Este método é chamado pelo TurnControl toda vez que o turno acaba
     public void DecrementBuffTurns()
     {
-        if (!IsServer || turnsLeft == 0) return;
+        if (!IsServer) return;
 
-        turnsLeft--;
+        // 1. Aumenta o contador global de turnos (Faz a lava acelerar naturalmente)
+        totalTurns++;
 
-        if (turnsLeft <= 0)
+        // 2. Gerencia o tempo do Power-Up (se houver um ativo)
+        if (turnsLeft > 0)
         {
-            RevertSpeedModifier();
+            turnsLeft--;
+            Debug.Log($"[LavaRise] Turnos de buff restantes: {turnsLeft}");
+
+            if (turnsLeft <= 0)
+            {
+                RevertSpeedModifier();
+            }
         }
     }
 
-    // ⬇️ ALTERADO: Método privado que reverte o efeito no servidor ⬇️
     private void RevertSpeedModifier()
     {
         if (!IsServer) return;
 
-        // 1. Subtrai o bônus TOTAL que acumulamos
         speedModifier -= server_totalBonusApplied;
-
-        // 2. Reseta os rastreadores
         server_totalBonusApplied = 0f;
         turnsLeft = 0;
 
-        // 3. Garante que a velocidade não fique abaixo do normal (segurança)
         if (speedModifier < 1.0f)
             speedModifier = 1.0f;
 
-        Debug.Log($"[LavaRise-SERVER] Modificador de velocidade da lava expirou. Resetado para {speedModifier}.");
+        Debug.Log($"[LavaRise-SERVER] Modificador expirou. Resetado para {speedModifier}.");
     }
 
     public void SaveProgressAtCheckpoint() => Debug.Log("[LavaRise] Progresso salvo.");
+
     public void ResetLava(Checkpoint cp)
     {
         transform.position = new Vector3(transform.position.x, cp.LavaSafeHeight, transform.position.z);
+        // Opcional: Você pode querer resetar o totalTurns aqui também se quiser que a velocidade volte ao inicio
+        totalTurns = 0; 
         currentSpeed = baseSpeed;
         Debug.Log("[LavaRise] Resetada no checkpoint.");
     }
-    //public void AddSpeedModifier(float newMultiplier, int duration)
-    //{
-    //    // Guarda de segurança
-    //    if (!IsServer) return;
-
-    //    speedModifier = newMultiplier;
-    //    turnsLeft = duration;
-
-    //    Debug.Log($"[LavaRise-SERVER] Modificador de velocidade {newMultiplier} aplicado por {duration} turnos.");
-
-    //    // TODO: Assim como no Player, o 'TurnControl'
-    //    // precisa notificar a lava quando um turno passa
-    //    // para decrementar 'turnsLeft' e resetar 'speedModifier' para 1.0f.
-    //}
 
     public void SetSafeZone(float height)
     {
@@ -132,4 +124,3 @@ public class LavaRise : NetworkBehaviour
         Debug.Log($"[LavaRise] SafeZone = {height}");
     }
 }
-

@@ -9,7 +9,6 @@ public class Checkpoint : MonoBehaviour
 
     [Header("Visual")]
     [SerializeField] private SpriteRenderer spriteRenderer;
-    [SerializeField] private Sprite offSprite;
     [SerializeField] private Animator animator;
 
     public int Index => checkpointIndex;
@@ -17,37 +16,20 @@ public class Checkpoint : MonoBehaviour
     public Vector3 RespawnPosition => respawnPoint.position;
     public float LavaSafeHeight => respawnPoint.position.y - lavaOffset;
 
-    private bool activated = false;
-
     private void Awake()
     {
         if (spriteRenderer == null) spriteRenderer = GetComponent<SpriteRenderer>();
         if (animator == null) animator = GetComponent<Animator>();
 
-        spriteRenderer.sprite = offSprite;
-        if (animator != null) animator.enabled = false;
-    }
+        if (spriteRenderer != null)
+        {
+            spriteRenderer.sprite = null;
+        }
 
-    public bool TryActivate()
-    {
-        if (activated) return false;
-        activated = true;
-        ActivateVisuals();
-        return true;
-    }
-
-    public void PreActivate()
-    {
-        activated = true;
-        ActivateVisuals();
-    }
-
-    private void ActivateVisuals()
-    {
-        if (spriteRenderer != null) spriteRenderer.sprite = null;
-        if (animator != null) animator.enabled = true;
-
-        AudioManager.Instance.PlaySound("Checkpoint");
+        if (animator != null)
+        {
+            animator.enabled = true;
+        }
     }
 
     private void OnDrawGizmos()
