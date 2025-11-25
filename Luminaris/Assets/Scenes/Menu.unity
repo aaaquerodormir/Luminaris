@@ -1012,7 +1012,7 @@ MonoBehaviour:
     Prefabs:
       NetworkPrefabsLists:
       - {fileID: 11400000, guid: b9bc0aa9fc424c2468aaec39e7167c32, type: 2}
-    TickRate: 30
+    TickRate: 60
     ClientConnectionBufferTimeout: 10
     ConnectionApproval: 0
     ConnectionData: 
@@ -1800,10 +1800,10 @@ Camera:
   m_LensShift: {x: 0, y: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: -0.27239585
+    x: -0.33333334
     y: 0
     width: 1
-    height: 0.3074074
+    height: 0.44444445
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
@@ -2180,7 +2180,7 @@ MonoBehaviour:
     Prefabs:
       NetworkPrefabsLists:
       - {fileID: 11400000, guid: b9bc0aa9fc424c2468aaec39e7167c32, type: 2}
-    TickRate: 30
+    TickRate: 60
     ClientConnectionBufferTimeout: 10
     ConnectionApproval: 0
     ConnectionData: 
