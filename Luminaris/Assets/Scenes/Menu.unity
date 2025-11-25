@@ -248,6 +248,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0.50000036
       objectReference: {fileID: 0}
+    - target: {fileID: 1269481692861416916, guid: c5325a0392bdb0a4aab681cf8206c86c, type: 3}
+      propertyPath: clickSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 86061330351d59b42b0b919953710575, type: 3}
+    - target: {fileID: 1269481692861416916, guid: c5325a0392bdb0a4aab681cf8206c86c, type: 3}
+      propertyPath: hoverSound
+      value: 
+      objectReference: {fileID: 8300000, guid: bd2561dca6152da4ab822f30fa6157ed, type: 3}
     - target: {fileID: 1554499143982484825, guid: c5325a0392bdb0a4aab681cf8206c86c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 1
@@ -364,6 +372,14 @@ PrefabInstance:
       propertyPath: m_hasFontAssetChanged
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3808623531981822049, guid: c5325a0392bdb0a4aab681cf8206c86c, type: 3}
+      propertyPath: clickSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 86061330351d59b42b0b919953710575, type: 3}
+    - target: {fileID: 3808623531981822049, guid: c5325a0392bdb0a4aab681cf8206c86c, type: 3}
+      propertyPath: hoverSound
+      value: 
+      objectReference: {fileID: 8300000, guid: bd2561dca6152da4ab822f30fa6157ed, type: 3}
     - target: {fileID: 3903838726081608407, guid: c5325a0392bdb0a4aab681cf8206c86c, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 120
@@ -396,6 +412,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 5735847955487263847, guid: c5325a0392bdb0a4aab681cf8206c86c, type: 3}
+      propertyPath: clickSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 86061330351d59b42b0b919953710575, type: 3}
+    - target: {fileID: 5735847955487263847, guid: c5325a0392bdb0a4aab681cf8206c86c, type: 3}
+      propertyPath: hoverSound
+      value: 
+      objectReference: {fileID: 8300000, guid: bd2561dca6152da4ab822f30fa6157ed, type: 3}
     - target: {fileID: 6063475141039533148, guid: c5325a0392bdb0a4aab681cf8206c86c, type: 3}
       propertyPath: m_SizeDelta.x
       value: 136
@@ -1776,10 +1800,10 @@ Camera:
   m_LensShift: {x: 0, y: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0
+    x: -0.27239585
     y: 0
     width: 1
-    height: 1
+    height: 0.3074074
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
@@ -2381,6 +2405,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0.5000005
       objectReference: {fileID: 0}
+    - target: {fileID: 1269481692861416916, guid: c5325a0392bdb0a4aab681cf8206c86c, type: 3}
+      propertyPath: clickSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 86061330351d59b42b0b919953710575, type: 3}
+    - target: {fileID: 1269481692861416916, guid: c5325a0392bdb0a4aab681cf8206c86c, type: 3}
+      propertyPath: hoverSound
+      value: 
+      objectReference: {fileID: 8300000, guid: bd2561dca6152da4ab822f30fa6157ed, type: 3}
     - target: {fileID: 1554499143982484825, guid: c5325a0392bdb0a4aab681cf8206c86c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 1
@@ -2487,6 +2519,14 @@ PrefabInstance:
       propertyPath: m_hasFontAssetChanged
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3808623531981822049, guid: c5325a0392bdb0a4aab681cf8206c86c, type: 3}
+      propertyPath: clickSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 86061330351d59b42b0b919953710575, type: 3}
+    - target: {fileID: 3808623531981822049, guid: c5325a0392bdb0a4aab681cf8206c86c, type: 3}
+      propertyPath: hoverSound
+      value: 
+      objectReference: {fileID: 8300000, guid: bd2561dca6152da4ab822f30fa6157ed, type: 3}
     - target: {fileID: 3903838726081608407, guid: c5325a0392bdb0a4aab681cf8206c86c, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 120
@@ -2507,6 +2547,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 5735847955487263847, guid: c5325a0392bdb0a4aab681cf8206c86c, type: 3}
+      propertyPath: clickSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 86061330351d59b42b0b919953710575, type: 3}
+    - target: {fileID: 5735847955487263847, guid: c5325a0392bdb0a4aab681cf8206c86c, type: 3}
+      propertyPath: hoverSound
+      value: 
+      objectReference: {fileID: 8300000, guid: bd2561dca6152da4ab822f30fa6157ed, type: 3}
     - target: {fileID: 6063475141039533148, guid: c5325a0392bdb0a4aab681cf8206c86c, type: 3}
       propertyPath: m_SizeDelta.x
       value: 136
@@ -2841,6 +2889,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 2.7
       objectReference: {fileID: 0}
+    - target: {fileID: 1269481692861416916, guid: c5325a0392bdb0a4aab681cf8206c86c, type: 3}
+      propertyPath: clickSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 86061330351d59b42b0b919953710575, type: 3}
+    - target: {fileID: 1269481692861416916, guid: c5325a0392bdb0a4aab681cf8206c86c, type: 3}
+      propertyPath: hoverSound
+      value: 
+      objectReference: {fileID: 8300000, guid: bd2561dca6152da4ab822f30fa6157ed, type: 3}
     - target: {fileID: 1554499143982484825, guid: c5325a0392bdb0a4aab681cf8206c86c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -2913,6 +2969,14 @@ PrefabInstance:
       propertyPath: m_hasFontAssetChanged
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3808623531981822049, guid: c5325a0392bdb0a4aab681cf8206c86c, type: 3}
+      propertyPath: clickSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 86061330351d59b42b0b919953710575, type: 3}
+    - target: {fileID: 3808623531981822049, guid: c5325a0392bdb0a4aab681cf8206c86c, type: 3}
+      propertyPath: hoverSound
+      value: 
+      objectReference: {fileID: 8300000, guid: bd2561dca6152da4ab822f30fa6157ed, type: 3}
     - target: {fileID: 3810920563804532815, guid: c5325a0392bdb0a4aab681cf8206c86c, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -2953,6 +3017,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 1.3000002
       objectReference: {fileID: 0}
+    - target: {fileID: 5735847955487263847, guid: c5325a0392bdb0a4aab681cf8206c86c, type: 3}
+      propertyPath: clickSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 86061330351d59b42b0b919953710575, type: 3}
+    - target: {fileID: 5735847955487263847, guid: c5325a0392bdb0a4aab681cf8206c86c, type: 3}
+      propertyPath: hoverSound
+      value: 
+      objectReference: {fileID: 8300000, guid: bd2561dca6152da4ab822f30fa6157ed, type: 3}
     - target: {fileID: 6063475141039533148, guid: c5325a0392bdb0a4aab681cf8206c86c, type: 3}
       propertyPath: m_SizeDelta.x
       value: 135
