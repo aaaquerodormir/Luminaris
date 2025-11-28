@@ -54,3 +54,5 @@ MonoBehaviour:
   lavaClip: {fileID: 8300000, guid: 8b569099aa23abf44b70cc5ef28b5f5a, type: 3}
   morteClip: {fileID: 8300000, guid: 9b517de93a45e4b4f953d06b0fd83553, type: 3}
   espinhoClip: {fileID: 8300000, guid: 8e559b319ad88284887742a912c6fad0, type: 3}
+  inimigoSpawnClip: {fileID: 8300000, guid: ee8a4e78f0e7d2b4d973cfc547029312, type: 3}
+  inimigoAtaqueClip: {fileID: 8300000, guid: 7399b685165857847824473e53ac7156, type: 3}

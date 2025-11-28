@@ -16,30 +16,25 @@ public class EnemyController : NetworkBehaviour
     }
 
     [Header("Configurações de Perseguição")]
-    [SerializeField]
-    private float moveSpeed = 2.5f;
+    [SerializeField] private float moveSpeed = 2.5f;
 
     [Header("Configurações de Animação")]
-    [Tooltip("Quanto tempo (em segundos) dura a animação de spawn.")]
-    [SerializeField]
-    private float spawnDuration = 1.5f;
+    [SerializeField] private float spawnDuration = 1.5f;
 
     [Header("Debuff Settings")]
-    [SerializeField]
-    private int debuffDurationTurns = 2;
+    [SerializeField] private int debuffDurationTurns = 2;
 
     [Header("Referências")]
-    [SerializeField]
-    private Animator animator;
-
-    [SerializeField]
-    [Tooltip("Arraste TODOS os GameObjects de partículas que devem ser desativados no ataque.")]
-    private GameObject[] particleEffects;
+    [SerializeField] private Animator animator;
+    [SerializeField] private GameObject[] particleEffects;
 
     private Rigidbody2D rb;
 
-    private NetworkVariable<EnemyState> currentState = new NetworkVariable<EnemyState>(EnemyState.Spawning);
-    private NetworkVariable<ulong> linkedPlayerId = new NetworkVariable<ulong>(99);
+    private NetworkVariable<EnemyState> currentState =
+        new NetworkVariable<EnemyState>(EnemyState.Spawning);
+
+    private NetworkVariable<ulong> linkedPlayerId =
+        new NetworkVariable<ulong>(99);
 
     private Transform targetPlayerTransform;
     private PlayerState targetPlayerState;
@@ -53,44 +48,33 @@ public class EnemyController : NetworkBehaviour
         if (IsServer)
         {
             animator.SetTrigger("Spawn");
+            PlaySoundClientRpc("InimigoSpawn");
             StartCoroutine(FinishSpawning());
             TurnControl.OnTurnStarted += HandleTurnChanged;
         }
     }
 
-    // --- MUDANÇA CRÍTICA AQUI ---
     private IEnumerator FinishSpawning()
     {
         yield return new WaitForSeconds(spawnDuration);
 
         if (IsServer)
         {
-            Debug.Log("[EnemyController] Spawn completo. Mudando para estado Idle.");
-
-            // 1. Tira o inimigo do estado 'Spawning'
-            //    Isso o "desbloqueia".
             currentState.Value = EnemyState.Idle;
 
-            // 2. AGORA, chama HandleTurnChanged para definir o alvo.
-            //    Como o estado não é mais 'Spawning', a função vai rodar.
             if (TurnControl.Instance != null)
             {
-                PlayerMovement currentPlayer = TurnControl.Instance.GetCurrentActivePlayer();
+                var currentPlayer = TurnControl.Instance.GetCurrentActivePlayer();
                 if (currentPlayer != null)
-                {
                     HandleTurnChanged(currentPlayer);
-                }
             }
         }
     }
-    // --- FIM DA MUDANÇA ---
 
     public override void OnNetworkDespawn()
     {
         if (IsServer)
-        {
             TurnControl.OnTurnStarted -= HandleTurnChanged;
-        }
     }
 
     [ServerRpc(RequireOwnership = false)]
@@ -99,33 +83,20 @@ public class EnemyController : NetworkBehaviour
         linkedPlayerId.Value = playerId;
 
         if (currentState.Value == EnemyState.Spawning)
-        {
-            Debug.Log("[EnemyController] Jogador linkado, aguardando spawn terminar.");
             return;
-        }
 
         if (TurnControl.Instance != null)
         {
-            PlayerMovement currentPlayer = TurnControl.Instance.GetCurrentActivePlayer();
+            var currentPlayer = TurnControl.Instance.GetCurrentActivePlayer();
             if (currentPlayer != null)
-            {
                 HandleTurnChanged(currentPlayer);
-            }
         }
     }
 
     private void HandleTurnChanged(PlayerMovement newActivePlayer)
     {
         if (!IsServer) return;
-
-        // Esta trava ainda é importante, caso o turno mude
-        // ANTES da corrotina FinishSpawning terminar.
-        if (currentState.Value == EnemyState.Spawning)
-        {
-            Debug.Log("[EnemyController] Troca de turno ignorada (ainda em spawn).");
-            return;
-        }
-
+        if (currentState.Value == EnemyState.Spawning) return;
         if (newActivePlayer == null) return;
         if (linkedPlayerId.Value == 99) return;
 
@@ -141,7 +112,8 @@ public class EnemyController : NetworkBehaviour
         else
         {
             canPursue = true;
-            PlayerMovement linkedPlayerMovement = TurnControl.Instance.players
+
+            var linkedPlayerMovement = TurnControl.Instance.players
                 .FirstOrDefault(p => p.OwnerClientId == linkedPlayerId.Value);
 
             if (linkedPlayerMovement != null)
@@ -171,11 +143,10 @@ public class EnemyController : NetworkBehaviour
     private void Update()
     {
         if (!IsServer)
-        {
             return;
-        }
 
-        if (!canPursue || targetPlayerTransform == null ||
+        if (!canPursue ||
+            targetPlayerTransform == null ||
             currentState.Value == EnemyState.Attacking ||
             currentState.Value == EnemyState.Spawning)
         {
@@ -197,6 +168,7 @@ public class EnemyController : NetworkBehaviour
                 case EnemyState.Pursuing:
                     MoveTowardsPlayer();
                     break;
+
                 case EnemyState.Waiting:
                 case EnemyState.Idle:
                     rb.linearVelocity = Vector2.zero;
@@ -209,11 +181,7 @@ public class EnemyController : NetworkBehaviour
 
     private bool IsPlayerOnSafePlatform()
     {
-        if (targetPlayerState != null)
-        {
-            return targetPlayerState.IsOnSafePlatform.Value;
-        }
-        return false;
+        return targetPlayerState != null && targetPlayerState.IsOnSafePlatform.Value;
     }
 
     private void MoveTowardsPlayer()
@@ -229,8 +197,7 @@ public class EnemyController : NetworkBehaviour
 
     private void UpdateAnimations()
     {
-        bool isMoving = currentState.Value == EnemyState.Pursuing;
-        animator.SetBool("IsMoving", isMoving);
+        animator.SetBool("IsMoving", currentState.Value == EnemyState.Pursuing);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -241,56 +208,52 @@ public class EnemyController : NetworkBehaviour
         if (other.transform != targetPlayerTransform) return;
 
         if (other.CompareTag("Player"))
-        {
             StartAttack();
-        }
     }
 
     private void StartAttack()
     {
         if (!IsServer) return;
+
         currentState.Value = EnemyState.Attacking;
         rb.linearVelocity = Vector2.zero;
 
         DisableParticlesClientRpc();
 
-        PlayerMovement linkedPlayerMovement = TurnControl.Instance.players
+        PlaySoundClientRpc("InimigoAtaque");
+
+        var linkedPlayerMovement = TurnControl.Instance.players
             .FirstOrDefault(p => p.OwnerClientId == linkedPlayerId.Value);
 
         if (linkedPlayerMovement != null)
         {
-            DebuffVisionControl debuffControl = linkedPlayerMovement.GetComponent<DebuffVisionControl>();
-            if (debuffControl != null)
-            {
-                debuffControl.StartDebuffServer(debuffDurationTurns, linkedPlayerId.Value);
-            }
+            var debuffControl = linkedPlayerMovement.GetComponent<DebuffVisionControl>();
+            debuffControl?.StartDebuffServer(debuffDurationTurns, linkedPlayerId.Value);
         }
 
         animator.SetTrigger("Attack");
-
         StartCoroutine(AttackCooldown());
     }
 
     [ClientRpc]
     private void DisableParticlesClientRpc()
     {
-        if (particleEffects == null || particleEffects.Length == 0) return;
+        if (particleEffects == null) return;
 
-        foreach (GameObject particle in particleEffects)
-        {
+        foreach (var particle in particleEffects)
             if (particle != null)
-            {
                 particle.SetActive(false);
-            }
-        }
     }
 
     private IEnumerator AttackCooldown()
     {
         yield return new WaitForSeconds(1.5f);
         if (IsServer)
-        {
             NetworkObject.Despawn(gameObject);
-        }
+    }
+    [ClientRpc]
+    private void PlaySoundClientRpc(string key)
+    {
+        AudioManager.Instance.PlaySound(key);
     }
 }
