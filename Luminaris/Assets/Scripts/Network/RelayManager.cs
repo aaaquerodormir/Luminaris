@@ -58,36 +58,26 @@ public class RelayManager : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Cria uma allocation (host). Retorna joinCode ou null em falha.
-    /// </summary>
     public async Task<string> CreateRelay(int maxPlayers = 2)
     {
         await EnsureInitialized();
 
         if (NetworkManager.Singleton == null)
         {
-            Debug.LogError("[RelayManager] NetworkManager.Singleton é null. Coloque um NetworkManager na cena (Menu).");
             return null;
         }
 
         try
         {
-            Debug.Log("[RelayManager] Criando allocation Relay...");
             Allocation alloc = await RelayService.Instance.CreateAllocationAsync(maxPlayers);
             string joinCode = await RelayService.Instance.GetJoinCodeAsync(alloc.AllocationId);
-            Debug.Log($"[RelayManager] Allocation criada. joinCode={joinCode}");
 
-            // Configura o UnityTransport para usar Relay.
             var ut = NetworkManager.Singleton.GetComponent<UnityTransport>();
             if (ut == null)
             {
-                Debug.LogError("[RelayManager] UnityTransport não encontrado no NetworkManager.");
                 return null;
             }
 
-            // --- USO DO OVERLOAD CLÁSSICO (mais compatível com várias versões) ---
-            // Se sua versão usa outro overload, adapte conforme a sua API.
             ut.SetRelayServerData(
                 alloc.RelayServer.IpV4,
                 (ushort)alloc.RelayServer.Port,
@@ -96,11 +86,8 @@ public class RelayManager : MonoBehaviour
                 alloc.ConnectionData
             );
 
-            Debug.Log("[RelayManager] Transport configurado para Relay. Iniciando Host...");
             NetworkManager.Singleton.StartHost();
 
-            // Opcional: LoadScene pelo NetworkManager (se quiser mudar de cena aqui)
-            // NetworkManager.Singleton.SceneManager.LoadScene("SampleScene", UnityEngine.SceneManagement.LoadSceneMode.Single);
 
             return joinCode;
         }
@@ -116,32 +103,25 @@ public class RelayManager : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Faz o client entrar na relay com joinCode.
-    /// </summary>
     public async Task<bool> JoinRelay(string joinCode)
     {
         await EnsureInitialized();
 
         if (NetworkManager.Singleton == null)
         {
-            Debug.LogError("[RelayManager] NetworkManager.Singleton é null. Coloque um NetworkManager na cena (Menu).");
             return false;
         }
 
         try
         {
-            Debug.Log($"[RelayManager] Solicitando join com código: {joinCode}");
             JoinAllocation joinAlloc = await RelayService.Instance.JoinAllocationAsync(joinCode);
 
             var ut = NetworkManager.Singleton.GetComponent<UnityTransport>();
             if (ut == null)
             {
-                Debug.LogError("[RelayManager] UnityTransport não encontrado no NetworkManager.");
                 return false;
             }
 
-            // Overload com hostConnectionData (= joinAlloc.HostConnectionData)
             ut.SetRelayServerData(
                 joinAlloc.RelayServer.IpV4,
                 (ushort)joinAlloc.RelayServer.Port,
@@ -151,7 +131,6 @@ public class RelayManager : MonoBehaviour
                 joinAlloc.HostConnectionData
             );
 
-            Debug.Log("[RelayManager] Transport configurado. Iniciando cliente...");
             NetworkManager.Singleton.StartClient();
             return true;
         }

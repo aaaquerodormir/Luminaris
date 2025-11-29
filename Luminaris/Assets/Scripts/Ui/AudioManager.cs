@@ -59,10 +59,8 @@ public class AudioManager : MonoBehaviour
         clips["Espinho"] = espinhoClip;
         clips["InimigoSpawn"] = inimigoSpawnClip;
         clips["InimigoAtaque"] = inimigoAtaqueClip;
-        // Escuta mudanças de cena
         SceneManager.sceneLoaded += OnSceneLoaded;
 
-        // Volume inicial mais baixo (exemplo: -20dB)
         if (masterGroup != null)
             masterGroup.audioMixer.SetFloat("MasterVolume", -20f);
     }
@@ -74,8 +72,6 @@ public class AudioManager : MonoBehaviour
         else if (scene.name == "SampleScene")
             PlayMusic(gameplayMusic);
     }
-
-    // ---  Música ---
     public void PlayMusic(AudioClip clip)
     {
         if (clip == null) return;
@@ -89,15 +85,12 @@ public class AudioManager : MonoBehaviour
     {
         musicSource.Stop();
     }
-
-    // ---  Sons de UI ---
     public void PlayUISound(AudioClip clip)
     {
         if (clip == null) return;
         uiSource.PlayOneShot(clip);
     }
 
-    // ---  Sons rápidos ---
     public void PlaySound(string key)
     {
         if (!clips.ContainsKey(key) || clips[key] == null) return;
@@ -107,8 +100,6 @@ public class AudioManager : MonoBehaviour
         source.PlayOneShot(clips[key]);
         Destroy(source, clips[key].length);
     }
-
-    // --- Sons em loop ---
     public AudioSource PlayLoop(string key, GameObject target)
     {
         if (!clips.ContainsKey(key) || clips[key] == null) return null;

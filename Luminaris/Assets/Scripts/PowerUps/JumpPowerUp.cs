@@ -13,12 +13,10 @@ public class JumpPowerUp : PowerUpModificador
         if (player != null)
         {
             player.ApplyJumpPowerUp(extraJumps, durationTurns);
-            Debug.Log($"PowerUp de Pulo ativado em {player.name} (+{extraJumps} pulos por {durationTurns} turnos)");
         }
     }
 
     public override void Deactivate(GameObject target)
     {
-        // Como já consumimos por turnos no Player, nada a fazer aqui
     }
 }

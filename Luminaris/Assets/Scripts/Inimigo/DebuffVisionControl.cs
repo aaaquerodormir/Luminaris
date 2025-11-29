@@ -30,14 +30,12 @@ public class DebuffVisionControl : NetworkBehaviour
     {
         turnsRemaining.OnValueChanged += OnDebuffStateChanged;
 
-        // Garante o estado visual correto se a máscara já foi atribuída
         if (visionMaskImage != null)
         {
             float targetAlpha = (turnsRemaining.Value > 0) ? 0.98f : 0f;
             visionMaskImage.color = new Color(1f, 1f, 1f, targetAlpha);
         }
 
-        // Lógica do servidor continua igual
         if (IsServer)
         {
             TurnControl.OnTurnStarted += OnTurnStartedHandler;
@@ -46,7 +44,6 @@ public class DebuffVisionControl : NetworkBehaviour
 
     public override void OnNetworkDespawn()
     {
-        // Limpa a inscrição
         turnsRemaining.OnValueChanged -= OnDebuffStateChanged;
 
         if (IsServer)
@@ -65,12 +62,10 @@ public class DebuffVisionControl : NetworkBehaviour
         bool isDebuffed = newValue > 0;
         bool wasDebuffed = previousValue > 0;
 
-        // Iniciar o fade IN (só se não estava com debuff antes)
         if (isDebuffed && !wasDebuffed)
         {
             StartCoroutine(FadeCoroutine(true));
         }
-        // Iniciar o fade OUT (só se estava com debuff e agora não está)
         else if (!isDebuffed && wasDebuffed)
         {
             StartCoroutine(FadeCoroutine(false));
@@ -81,8 +76,6 @@ public class DebuffVisionControl : NetworkBehaviour
     {
         if (!IsServer || OwnerClientId != targetClientId) return;
 
-        // Apenas atualiza a NetworkVariable. Todos os clientes
-        // reagirão a esta mudança através do 'OnValueChanged'.
         turnsRemaining.Value = durationTurns;
     }
 
@@ -90,13 +83,11 @@ public class DebuffVisionControl : NetworkBehaviour
     {
         if (!IsServer) return;
 
-        // "O ID do novo jogador é o mesmo ID do dono deste script?"
-        // Se sim, o turno é do jogador que tem este debuff.
         if (newActivePlayer.OwnerClientId == OwnerClientId)
         {
             if (turnsRemaining.Value > 0)
             {
-                turnsRemaining.Value--; // Diminui o contador
+                turnsRemaining.Value--;
             }
         }
     }
@@ -109,8 +100,6 @@ public class DebuffVisionControl : NetworkBehaviour
     private IEnumerator FadeCoroutine(bool fadeIn)
     {
         float targetAlpha = fadeIn ? 0.98f : 0f;
-
-        // Evita erro se a máscara ainda não foi definida
         if (visionMaskImage == null) yield break;
 
         float startAlpha = visionMaskImage.color.a;

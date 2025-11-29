@@ -14,7 +14,6 @@ public class PlayerMovementUI : NetworkBehaviour
 
         if (IsServer)
         {
-            // Sincroniza o valor inicial caso o jogador entre depois
             var playerMovement = GetComponent<PlayerMovement>();
             if (playerMovement != null)
             {

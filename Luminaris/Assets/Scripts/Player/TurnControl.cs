@@ -20,18 +20,15 @@ public class TurnControl : NetworkBehaviour
 
     [Header("UI de Turno")]
     [Tooltip("O GameObject do 'PainelDeTurnoLuna'")]
-    [SerializeField] private GameObject uiPlayer1Turn; // Ligado ao PainelDeTurnoLuna
+    [SerializeField] private GameObject uiPlayer1Turn;
     [Tooltip("O GameObject do 'PainelDeTurnoLuma'")]
-    [SerializeField] private GameObject uiPlayer2Turn; // Ligado ao PainelDeTurnoLuma
+    [SerializeField] private GameObject uiPlayer2Turn;
 
-    // --- 1. ADICIONADO (MOVIDO DO GAMEMANAGER) ---
     [Tooltip("Quantos segundos o painel de troca de turno fica na tela.")]
     [SerializeField] private float turnPanelDisplayDuration = 2.5f;
-    // ---------------------------------------------
 
     public static event Action<PlayerMovement> OnTurnStarted;
 
-    // Armazena a corrotina do pop-up para podermos pará-la
     private Coroutine turnPanelCoroutine;
 
     private void Awake()
@@ -42,10 +39,6 @@ public class TurnControl : NetworkBehaviour
         if (IsServer && lavaInstance == null)
         {
             lavaInstance = FindFirstObjectByType<LavaRise>();
-            if (lavaInstance != null)
-                Debug.Log("[TurnControl] Referência da Lava encontrada na cena.");
-            else
-                Debug.LogError("[TurnControl] NÃO FOI POSSÍVEL ENCONTRAR LavaRise NA CENA!");
         }
     }
 
@@ -65,8 +58,6 @@ public class TurnControl : NetworkBehaviour
         }
 
         players = players.OrderBy(p => p.OwnerClientId).ToList();
-        Debug.Log($"[TurnControl] 🟢 {players.Count} jogadores detectados. Iniciando sequência.");
-
         ResetTurns();
     }
 
@@ -86,8 +77,6 @@ public class TurnControl : NetworkBehaviour
 
         players.Add(player);
         players = players.OrderBy(p => p.OwnerClientId).ToList();
-        Debug.Log($"[TurnControl] ➕ Registrado: {player.name} (Owner={player.OwnerClientId})");
-
         if (players.Count == 2)
             ResetTurns();
     }
@@ -122,7 +111,6 @@ public class TurnControl : NetworkBehaviour
         lavaInstance?.DecrementBuffTurns();
 
         currentIndex.Value = (currentIndex.Value + 1) % players.Count;
-        Debug.Log($"[TurnControl] 🔁 Passando turno -> {players[currentIndex.Value].name}");
 
         TriggerTurnStarted(players[currentIndex.Value]);
     }
@@ -134,10 +122,7 @@ public class TurnControl : NetworkBehaviour
         if (IsServer)
         {
             player.CompletedJumpsNet.Value = 0;
-            Debug.Log($"[TurnControl] Jumps Resetados para {player.name}.");
         }
-
-        Debug.Log($"[TurnControl] ▶ Turno ativo: {player.name}");
         player.SetTurnActiveServerRpc(true);
         OnTurnStarted?.Invoke(player);
 
@@ -145,27 +130,16 @@ public class TurnControl : NetworkBehaviour
             UpdateTurnUIClientRpc(player.name);
     }
 
-
-    // ================================================================
-    // =====================  UI DE TURNO  =============================
-    // ================================================================
-
     [ClientRpc]
     private void UpdateTurnUIClientRpc(string playerName)
     {
-        // --- 2. LÓGICA DE UI E DURAÇÃO ATUALIZADA ---
-
         if (uiPlayer1Turn == null || uiPlayer2Turn == null)
         {
-            Debug.LogWarning("[TurnControl] UIs de turno (P1 ou P2) não atribuídas no Inspector!");
             return;
         }
-
-        // Para qualquer corrotina que esteja rodando para evitar que a UI fique presa
         if (turnPanelCoroutine != null)
         {
             StopCoroutine(turnPanelCoroutine);
-            // Garante que o painel anterior seja desativado
             uiPlayer1Turn.SetActive(false);
             uiPlayer2Turn.SetActive(false);
         }
@@ -180,29 +154,19 @@ public class TurnControl : NetworkBehaviour
         {
             panelToShow = uiPlayer2Turn;
         }
-
-        // Inicia a nova corrotina para mostrar o painel correto
         if (panelToShow != null)
         {
             turnPanelCoroutine = StartCoroutine(ShowTurnPanelRoutine(panelToShow));
-            Debug.Log($"[TurnControl] UI atualizada para {playerName} em todos os clientes.");
         }
     }
 
-    // --- 3. NOVA CORROTINA DE DURAÇÃO ---
     private IEnumerator ShowTurnPanelRoutine(GameObject panelToShow)
     {
         panelToShow.SetActive(true);
-        // Espera o tempo definido (usando Realtime para funcionar mesmo se o jogo pausar)
         yield return new WaitForSecondsRealtime(turnPanelDisplayDuration);
         panelToShow.SetActive(false);
-        turnPanelCoroutine = null; // Limpa a referência
+        turnPanelCoroutine = null; 
     }
-
-    // --- 4. NOVO MÉTODO PÚBLICO DE LIMPEZA ---
-    /// <summary>
-    /// Esconde toda a UI de turno. Chamado pelo GameManager em GameOver/Victory.
-    /// </summary>
     public void HideAllTurnUI()
     {
         if (turnPanelCoroutine != null)

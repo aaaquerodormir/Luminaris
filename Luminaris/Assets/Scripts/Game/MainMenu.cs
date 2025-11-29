@@ -19,10 +19,8 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private GameObject painelLan;
     [SerializeField] private GameObject painelModo;
 
-    // --- ADIÇÃO 1: A variável para o texto ---
     [Header("Status UI")]
     [SerializeField] private TMP_Text textoStatus;
-    // ----------------------------------------
 
     [Header("Configurações")]
     [SerializeField] private string firstGameSceneName = "Fase1";
@@ -58,7 +56,6 @@ public class MainMenu : MonoBehaviour
         if (hostIpDisplay != null)
             hostIpDisplay.text = $"Meu IP local {GetLocalIPAddress()}\n";
 
-        // Garante que o texto comece limpo
         if (textoStatus != null) textoStatus.text = "";
     }
 
@@ -78,7 +75,6 @@ public class MainMenu : MonoBehaviour
         painelLan.SetActive(false);
         if (painelModo != null) painelModo.SetActive(false);
 
-        // Limpa status ao trocar de tela
         if (textoStatus != null) textoStatus.text = "";
 
         alvo.SetActive(true);
@@ -93,39 +89,27 @@ public class MainMenu : MonoBehaviour
 #endif
     }
 
-    // --------------------------
-    // RELAY (com GameFlowManager)
-    // --------------------------
     public async void OnHostButtonPressed()
     {
         if (relayManager == null || gameFlowManager == null)
         {
-            Debug.LogError("[MainMenu] RelayManager ou GameFlowManager não encontrado!");
             return;
         }
-
-        Debug.Log("[MainMenu] Criando Relay...");
-
-        // --- ADIÇÃO 2: Feedback visual ---
         if (textoStatus != null) textoStatus.text = "Criando sala...";
 
         string joinCode = await relayManager.CreateRelay(2);
 
         if (!string.IsNullOrEmpty(joinCode))
         {
-            Debug.Log($"[MainMenu] Relay criado com código: {joinCode}");
-
             if (relayCodeText != null)
                 relayCodeText.text = $"Código da Sala: {joinCode}\nAguardando jogador...";
 
-            // Atualiza status
             if (textoStatus != null) textoStatus.text = "Você está hosteando!";
 
             StartCoroutine(WaitForPlayersAndLoadScene());
         }
         else
         {
-            Debug.LogError("[MainMenu] Falha ao criar Relay!");
             if (textoStatus != null) textoStatus.text = "Erro ao criar.";
         }
     }
@@ -134,7 +118,6 @@ public class MainMenu : MonoBehaviour
     {
         if (relayManager == null || gameFlowManager == null)
         {
-            Debug.LogError("[MainMenu] RelayManager ou GameFlowManager não encontrado!");
             return;
         }
 
@@ -142,7 +125,6 @@ public class MainMenu : MonoBehaviour
 
         if (string.IsNullOrEmpty(joinCode))
         {
-            Debug.LogWarning("[MainMenu] Nenhum código foi inserido!");
             return;
         }
 
@@ -152,12 +134,10 @@ public class MainMenu : MonoBehaviour
 
         if (success)
         {
-            Debug.Log($"[MainMenu] Entrando na sala com código {joinCode}");
             gameFlowManager.TransitionToScene(firstGameSceneName);
         }
         else
         {
-            Debug.LogError("[MainMenu] Falha ao entrar na sala!");
             if (textoStatus != null) textoStatus.text = "Falha ao entrar.";
         }
     }
@@ -173,37 +153,25 @@ public class MainMenu : MonoBehaviour
         gameFlowManager.TransitionToScene(firstGameSceneName);
     }
 
-    // --------------------------
-    // LAN HOST (com GameFlowManager)
-    // --------------------------
     public void OnHostLanButton()
     {
         if (netManager == null || transport == null || gameFlowManager == null)
         {
-            Debug.LogError("[MainMenu][LAN] ❌ NetworkManager, UnityTransport ou GameFlowManager ausente!");
             return;
         }
-
-        Debug.Log($"[MainMenu][LAN] Iniciando HOST...");
-        Debug.Log($"[MainMenu][LAN] Endereço de escuta: 0.0.0.0:{lanPort}");
 
         transport.SetConnectionData("0.0.0.0", (ushort)lanPort);
 
         bool success = netManager.StartHost();
-        Debug.Log(success
-            ? $"[MainMenu][LAN] ✅ Host iniciado com sucesso! Escutando em 0.0.0.0:{lanPort}"
-            : "[MainMenu][LAN] ❌ Falha ao iniciar Host.");
 
         if (!success)
             return;
 
-        // --- ADIÇÃO 3: Mensagem de sucesso LAN ---
         if (textoStatus != null)
         {
             textoStatus.gameObject.SetActive(true);
             textoStatus.text = "Você está hosteando!";
         }
-        // -----------------------------------------
 
         netManager.OnClientConnectedCallback += OnClientConnectedToHost;
     }
@@ -214,39 +182,29 @@ public class MainMenu : MonoBehaviour
             return;
 
         int connectedCount = NetworkManager.Singleton.ConnectedClients.Count;
-        Debug.Log($"[MainMenu][LAN] Cliente conectado! Total: {connectedCount}");
-
         if (textoStatus != null) textoStatus.text = $"Jogador conectado ({connectedCount}/2)";
 
         if (connectedCount >= 2)
         {
             _lanSceneLoaded = true;
-            Debug.Log("[MainMenu][LAN] 🟢 Carregando cena LAN sincronizada...");
             gameFlowManager.TransitionToScene(firstGameSceneName);
         }
     }
-
-    // --------------------------
-    // LAN CLIENT (com GameFlowManager)
-    // --------------------------
     public void OnJoinLanButton()
     {
         if (netManager == null || transport == null || gameFlowManager == null)
         {
-            Debug.LogError("[MainMenu][LAN] ❌ NetworkManager, UnityTransport ou GameFlowManager ausente!");
             return;
         }
 
         if (_isConnecting)
         {
-            Debug.LogWarning("[MainMenu][LAN] ⚠️ Conexão já em progresso.");
             return;
         }
 
         string ip = ipInputLan.text.Trim();
         if (string.IsNullOrEmpty(ip))
         {
-            Debug.LogWarning("[MainMenu][LAN] ⚠️ Nenhum IP foi inserido!");
             return;
         }
 
@@ -254,7 +212,6 @@ public class MainMenu : MonoBehaviour
 
         if (NetworkManager.Singleton.IsListening)
         {
-            Debug.LogWarning("[MainMenu][LAN] ⚠️ Já existe uma sessão ativa de rede. Parando antes de conectar...");
             _isConnecting = true;
             NetworkManager.Singleton.Shutdown();
             StartCoroutine(StartClientWhenShutdown(ip));
@@ -275,11 +232,9 @@ public class MainMenu : MonoBehaviour
 
         if (success)
         {
-            Debug.Log($"[MainMenu][LAN] ✅ Conexão iniciada com sucesso! Tentando se conectar a {ip}:{lanPort}");
         }
         else
         {
-            Debug.LogError("[MainMenu][LAN] ❌ Falha ao iniciar Cliente.");
             if (textoStatus != null) textoStatus.text = "Falha ao conectar.";
         }
         _isConnecting = false;

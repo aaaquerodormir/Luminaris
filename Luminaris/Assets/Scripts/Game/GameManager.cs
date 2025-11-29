@@ -45,7 +45,6 @@ public class GameManager : NetworkBehaviour
     private Checkpoint lastCheckpoint;
     private System.Action confirmedAction;
 
-    // Referência ao componente Image do faderPanel
     private Image faderImage;
 
     private void Awake()
@@ -59,8 +58,6 @@ public class GameManager : NetworkBehaviour
         {
             Destroy(gameObject);
         }
-
-        // Inicializa o faderPanel
         InitializeFader();
     }
 
@@ -83,23 +80,17 @@ public class GameManager : NetworkBehaviour
     {
         if (faderPanel == null)
         {
-            Debug.LogWarning("[GameManager] faderPanel não está atribuído no Inspector!");
             return;
         }
 
-        // Pega o componente Image do faderPanel
         faderImage = faderPanel.GetComponent<Image>();
 
         if (faderImage == null)
         {
-            Debug.LogError("[GameManager] faderPanel não tem um componente Image! Adicione um componente Image ao GameObject.");
             return;
         }
-
-        // Garante que o faderPanel está ativo
         faderPanel.SetActive(true);
 
-        // Garante que o Canvas está na frente de tudo
         Canvas canvas = faderPanel.GetComponentInParent<Canvas>();
         if (canvas != null)
         {
@@ -135,8 +126,6 @@ public class GameManager : NetworkBehaviour
     private IEnumerator FadeOut()
     {
         if (faderImage == null) yield break;
-
-        // Garante que o faderPanel está ativo
         if (!faderPanel.activeSelf)
         {
             faderPanel.SetActive(true);
@@ -162,8 +151,6 @@ public class GameManager : NetworkBehaviour
         color.a = 1f;
         faderImage.color = color;
     }
-
-    // --- MORTE GLOBAL ---
     private void OnAnyPlayerDeath()
     {
         if (!IsServer || isGameOver) return;
@@ -173,13 +160,10 @@ public class GameManager : NetworkBehaviour
 
         StartCoroutine(DelayedSceneTransition());
     }
-
     private IEnumerator DelayedSceneTransition()
     {
-        // Aguarda o fade out completar antes de trocar de cena
         yield return StartCoroutine(FadeOut());
 
-        // Pequeno delay adicional para garantir que o RPC foi processado
         yield return new WaitForSeconds(0.1f);
 
         if (GameFlowManager.Instance != null)
@@ -188,10 +172,8 @@ public class GameManager : NetworkBehaviour
         }
         else
         {
-            Debug.LogError("[GameManager] GameFlowManager.Instance é nulo!");
         }
     }
-
 
     [ClientRpc]
     private void PauseGameAndEnableTransitionSafeguardsClientRpc()
@@ -203,7 +185,6 @@ public class GameManager : NetworkBehaviour
         if (TurnControl.Instance != null)
             TurnControl.Instance.HideAllTurnUI();
 
-        // Inicia o fade out no cliente
         StartCoroutine(FadeOut());
 
         OnGameOver?.Invoke();
@@ -225,7 +206,6 @@ public class GameManager : NetworkBehaviour
     {
         StartCoroutine(FadeIn());
     }
-
     public void StartFadeOut()
     {
         StartCoroutine(FadeOut());

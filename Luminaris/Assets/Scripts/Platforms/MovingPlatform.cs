@@ -13,14 +13,12 @@ public class MovingPlatform : NetworkBehaviour, IResettable
     private Vector3 targetPos;
     private Vector3 startPos;
 
-    // Variável para calcular a velocidade baseada no movimento REAL do objeto nesta máquina
     private Vector3 previousPos;
     private Vector2 _calculatedVelocity;
 
     private bool isMoving = true;
     private float waitTimer = 0f;
 
-    // Propriedade pública acessada pelo PlayerMovement
     public Vector2 currentVelocity => _calculatedVelocity;
 
     private void Start()
@@ -39,14 +37,10 @@ public class MovingPlatform : NetworkBehaviour, IResettable
     public override void OnNetworkSpawn()
     {
         base.OnNetworkSpawn();
-        // IMPORTANTE: Não desabilitamos o script no cliente!
-        // Precisamos dele rodando para calcular a velocidade, 
-        // mas bloquearemos a lógica de "Mover" dentro do FixedUpdate.
     }
 
     private void FixedUpdate()
     {
-        // 1. Lógica de Movimento (APENAS SERVIDOR)
         if (IsServer)
         {
             if (isMoving)
@@ -58,10 +52,6 @@ public class MovingPlatform : NetworkBehaviour, IResettable
                 HandleWaitLogic();
             }
         }
-
-        // 2. Cálculo de Velocidade (SERVIDOR E CLIENTE)
-        // Todos calculam a velocidade baseada em onde a plataforma estava e onde ela está agora.
-        // No Cliente, isso vai pegar o movimento suave do NetworkTransform.
         CalculateVelocity();
     }
 
@@ -97,28 +87,22 @@ public class MovingPlatform : NetworkBehaviour, IResettable
 
     private void CalculateVelocity()
     {
-        // A mágica acontece aqui:
-        // Calculamos a velocidade baseada na diferença de posição deste frame para o anterior.
-        // Se o NetworkTransform interpolar o movimento, essa velocidade vai refletir isso perfeitamente.
         _calculatedVelocity = (transform.position - previousPos) / Time.fixedDeltaTime;
         previousPos = transform.position;
     }
 
     public void ResetState()
     {
-        // Reset visual e lógico
         isMoving = true;
         waitTimer = 0f;
 
-        // Se for Servidor, força a posição. 
-        // O NetworkTransform vai propagar isso para os clientes.
         if (IsServer)
         {
             transform.position = startPos;
         }
 
         targetPos = pointB.position;
-        previousPos = transform.position; // Reseta previousPos para não gerar velocidade gigante
+        previousPos = transform.position;
         _calculatedVelocity = Vector2.zero;
     }
 

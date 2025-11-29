@@ -32,10 +32,8 @@ public class StarIndicatorController : MonoBehaviour
             return;
         }
 
-        // Define o pai da estrela como o pai do botão para garantir o mesmo espaço de coordenadas
         starRect.SetParent(targetButton.parent);
 
-        // Calcula a posição
         starRect.anchoredPosition = targetButton.anchoredPosition + offset;
 
         gameObject.SetActive(true);
