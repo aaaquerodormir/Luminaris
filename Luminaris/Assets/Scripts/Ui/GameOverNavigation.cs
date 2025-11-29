@@ -9,7 +9,7 @@ public class GameOverNavigation : MonoBehaviour
 
     void Start()
     {
-        HighlightButton(-1); // desliga todas as estrelas no início
+        HighlightButton(-1);
     }
 
     void Update()
@@ -30,10 +30,9 @@ public class GameOverNavigation : MonoBehaviour
     {
         for (int i = 0; i < buttons.Length; i++)
         {
-            // pega as estrelas como filhos do botão (independente do nome exato)
-            Transform leftStar = buttons[i].transform.GetChild(0); // primeiro filho = estrela esquerda
-            Transform textObj = buttons[i].transform.GetChild(1); // segundo filho = texto
-            Transform rightStar = buttons[i].transform.GetChild(2); // terceiro filho = estrela direita
+            Transform leftStar = buttons[i].transform.GetChild(0);
+            Transform textObj = buttons[i].transform.GetChild(1);
+            Transform rightStar = buttons[i].transform.GetChild(2); 
 
             bool active = (i == index);
 

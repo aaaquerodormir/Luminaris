@@ -16,7 +16,6 @@ public class LavaSpeedPowerUp : PowerUpModificador
 
     public override void Deactivate(GameObject target)
     {
-        // Lava já reseta sozinha quando turnsLeft <= 0
     }
 }
 

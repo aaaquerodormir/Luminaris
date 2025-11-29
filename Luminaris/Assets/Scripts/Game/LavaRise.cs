@@ -19,8 +19,6 @@ public class LavaRise : NetworkBehaviour
     [Header("Debug Info")]
     [SerializeField] private float currentSpeed;
 
-    private float debugTimer = 0f;
-
     private void Awake()
     {
         currentSpeed = baseSpeed;

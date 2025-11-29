@@ -185,7 +185,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   moveSpeed: 0.5
-  debuffDurationTurns: 2
+  spawnDuration: 1.5
+  debuffDurationTurns: 4
   animator: {fileID: 8922176778643998828}
   particleEffects:
   - {fileID: 962701875390007215}
