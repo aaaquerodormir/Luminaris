@@ -17,7 +17,7 @@ public class OpcoesMenu : MonoBehaviour
     [Header("Cursor")]
     [SerializeField] private Texture2D cursorPadrao;
     [SerializeField] private Texture2D cursorClick;
-    [SerializeField] private Vector2 hotspot = Vector2.zero; // ponto ativo do cursor
+    [SerializeField] private Vector2 hotspot = Vector2.zero;
 
     private Resolution[] todasResolucoes;
     private List<Resolution> resolucoesFiltradas = new();
@@ -76,12 +76,11 @@ public class OpcoesMenu : MonoBehaviour
 
     private void Update()
     {
-        // Troca o cursor ao clicar
-        if (Input.GetMouseButtonDown(0)) // botão esquerdo pressionado
+        if (Input.GetMouseButtonDown(0))
         {
             Cursor.SetCursor(cursorClick, hotspot, CursorMode.Auto);
         }
-        else if (Input.GetMouseButtonUp(0)) // botão esquerdo solto
+        else if (Input.GetMouseButtonUp(0))
         {
             Cursor.SetCursor(cursorPadrao, hotspot, CursorMode.Auto);
         }

@@ -7,8 +7,8 @@ public class TextHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
 {
     [Header("Referências")]
     [SerializeField] private TextMeshProUGUI buttonText;
-    [SerializeField] private GameObject normalBackgroundGO;   // GameObject da imagem de fundo padrão
-    [SerializeField] private GameObject hoverBackgroundGO;    // GameObject da imagem de fundo em hover
+    [SerializeField] private GameObject normalBackgroundGO; 
+    [SerializeField] private GameObject hoverBackgroundGO;   
 
     [Header("Cores do Texto")]
     [SerializeField] private Color normalColor = Color.black;

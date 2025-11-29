@@ -5,7 +5,6 @@ using System.Collections;
 
 public class DebuffVisionControl : NetworkBehaviour
 {
-    // A máscara de UI local (atribuída pelo VisionFollower)
     private Image visionMaskImage;
 
     [Header("Debuff Settings")]

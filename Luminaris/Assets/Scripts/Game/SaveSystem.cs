@@ -4,13 +4,9 @@ using System.IO;
 [System.Serializable]
 public class SaveData
 {
-    // Último grupo sincronizado (GroupId). -1 = nenhum.
     public int checkpointGroup = -1;
 
-    // Progresso da lava (somente salvo se checkpointGroup > 0)
     public int lavaSavedTurns = 0;
-
-    // Configurações
     public int resolucaoIndex = -1;
     public bool fullscreen = true;
     public float volume = 0.5f;
@@ -24,7 +20,6 @@ public static class SaveSystem
     {
         string json = JsonUtility.ToJson(data, true);
         File.WriteAllText(savePath, json);
-        Debug.Log("Jogo salvo em: " + savePath);
     }
 
     public static SaveData LoadGame()
@@ -33,12 +28,10 @@ public static class SaveSystem
         {
             string json = File.ReadAllText(savePath);
             SaveData data = JsonUtility.FromJson<SaveData>(json);
-            Debug.Log("Jogo carregado!");
             return data;
         }
         else
         {
-            Debug.LogWarning("Nenhum save encontrado!");
             return null;
         }
     }

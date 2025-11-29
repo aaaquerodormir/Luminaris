@@ -22,7 +22,6 @@ public class VisionFollower : NetworkBehaviour
 
         if (UIManager.Instance == null)
         {
-            Debug.LogError("[VisionFollower] UIManager Singleton não encontrado!");
             enabled = false;
             return;
         }
@@ -46,12 +45,10 @@ public class VisionFollower : NetworkBehaviour
         }
         else
         {
-            Debug.LogError($"[VisionFollower] DebuffVisionControl não encontrado no player {OwnerClientId}!");
         }
 
         if (localPlayerCamera == null)
         {
-            Debug.LogError($"[VisionFollower] Câmera Local (Filha) não encontrada para o player {OwnerClientId}.");
             enabled = false;
         }
     }

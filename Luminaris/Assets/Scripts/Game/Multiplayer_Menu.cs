@@ -9,8 +9,8 @@ public class MultiplayerMenu : MonoBehaviour
 {
     [Header("UI")]
     [SerializeField] private GameObject painelMultiplayer;
-    [SerializeField] private TMP_Text codigoSalaText;   // Mostra o código gerado pelo Host
-    [SerializeField] private TMP_InputField inputCodigo; // Jogador digita aqui o código
+    [SerializeField] private TMP_Text codigoSalaText;
+    [SerializeField] private TMP_InputField inputCodigo; 
     [SerializeField] private string gameSceneName = "SampleScene";
     [SerializeField] private ushort port = 7777;
 
@@ -32,29 +32,25 @@ public class MultiplayerMenu : MonoBehaviour
 
     public void HostGame()
     {
-        // Gera "código" = IP do host
         string codigo = GetLocalIPAddress();
         codigoSalaText.text = $"Código: {codigo}";
 
         var ut = NetworkManager.Singleton.GetComponent<UnityTransport>();
-        ut.SetConnectionData("0.0.0.0", port); // aceita conexões de fora
+        ut.SetConnectionData("0.0.0.0", port);
         NetworkManager.Singleton.StartHost();
 
-        // Troca de cena sincronizada
         NetworkManager.Singleton.SceneManager.LoadScene(gameSceneName, LoadSceneMode.Single);
     }
 
     public void JoinGame()
     {
-        string codigo = inputCodigo.text; // jogador digita o código do host (IP)
+        string codigo = inputCodigo.text;
         if (string.IsNullOrEmpty(codigo)) return;
 
         var ut = NetworkManager.Singleton.GetComponent<UnityTransport>();
         ut.SetConnectionData(codigo, port);
         NetworkManager.Singleton.StartClient();
     }
-
-    // Pega IP da máquina do Host
     private string GetLocalIPAddress()
     {
         try

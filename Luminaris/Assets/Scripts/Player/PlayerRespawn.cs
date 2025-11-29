@@ -17,16 +17,14 @@ public class PlayerRespawn : NetworkBehaviour
     private void Start()
     {
         respawnPoint = transform.position;
-        Debug.Log($"[PlayerRespawn] Iniciado no jogador {OwnerClientId}, posição inicial: {respawnPoint}");
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!IsServer) return; // Apenas o servidor processa mortes e checkpoints
+        if (!IsServer) return;
 
         if (collision.CompareTag("Lava") && !isDead)
         {
-            Debug.Log($"[PlayerRespawn] Jogador {OwnerClientId} caiu na lava!");
             DieServerRpc();
             return;
         }
@@ -39,8 +37,6 @@ public class PlayerRespawn : NetworkBehaviour
             if (pendingCheckpoint == checkpoint || committedCheckpoint == checkpoint) return;
 
             pendingCheckpoint = checkpoint;
-            //checkpoint.TryActivate();
-            //GameManager.Instance.ReachCheckpoint(checkpoint.transform);
         }
     }
 
@@ -49,11 +45,9 @@ public class PlayerRespawn : NetworkBehaviour
     {
         if (isDead) return;
         isDead = true;
-
-        Debug.Log($"[PlayerRespawn] Jogador {OwnerClientId} morreu. Notificando clientes...");
         DieClientRpc();
 
-        OnPlayerDied?.Invoke(); // Notifica GameManager no servidor
+        OnPlayerDied?.Invoke();
     }
 
     [ClientRpc]
@@ -65,8 +59,6 @@ public class PlayerRespawn : NetworkBehaviour
     public void Respawn()
     {
         if (!IsServer) return;
-
-        Debug.Log($"[PlayerRespawn] Respawn do jogador {OwnerClientId} em {respawnPoint}");
         transform.position = respawnPoint;
         isDead = false;
 
@@ -80,7 +72,6 @@ public class PlayerRespawn : NetworkBehaviour
         isDead = false;
 
         if (movementScript != null)
-            //movementScript.StartTurn();
 
         Debug.Log($"[PlayerRespawn] Cliente reposicionado para {pos}");
     }

@@ -20,7 +20,6 @@ public class ScreenFade : NetworkBehaviour
         }
     }
 
-    // Este método é chamado localmente pelo AttackClientRpc do Inimigo
     public void StartFade()
     {
         if (screenFadeAnimator != null)
