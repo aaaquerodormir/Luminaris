@@ -7,6 +7,7 @@ using System.Collections;
 using System.Threading.Tasks;
 using TMPro;
 using System.Net;
+using System.Net.Sockets;
 using System.Linq;
 
 public class MainMenu : MonoBehaviour
@@ -54,7 +55,7 @@ public class MainMenu : MonoBehaviour
         gameFlowManager = GameFlowManager.Instance;
 
         if (hostIpDisplay != null)
-            hostIpDisplay.text = $"Meu IP local {GetLocalIPAddress()}\n";
+            hostIpDisplay.text = $"Meu IP LAN: {GetBestLanIP(lanPort)}";
 
         if (textoStatus != null) textoStatus.text = "";
     }
@@ -246,16 +247,38 @@ public class MainMenu : MonoBehaviour
         StartCoroutine(StartClientRoutine(ip));
     }
 
-    private string GetLocalIPAddress()
+    private string GetBestLanIP(int port)
     {
         var host = Dns.GetHostEntry(Dns.GetHostName());
-        foreach (var ip in host.AddressList)
+        var ipv4s = host.AddressList
+            .Where(ip => ip.AddressFamily == AddressFamily.InterNetwork)
+            .ToList();
+
+        foreach (var ip in ipv4s)
         {
-            if (ip.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
+            try
             {
-                return ip.ToString();
+                using (UdpClient client = new UdpClient(new IPEndPoint(ip, port)))
+                {
+                    client.EnableBroadcast = true;
+
+                    // Pacote de teste LAN
+                    byte[] testMsg = System.Text.Encoding.ASCII.GetBytes("PING");
+                    IPEndPoint broadcastEP = new IPEndPoint(IPAddress.Broadcast, port);
+
+                    // Envia uma vez — se não der exception, IP é válido
+                    client.Send(testMsg, testMsg.Length, broadcastEP);
+
+                    return ip.ToString(); // IP válido
+                }
+            }
+            catch
+            {
+                // Ignora IPs inválidos, VPNs, virtuais, etc.
             }
         }
-        return "N/A";
+
+        // fallback
+        return ipv4s.Count > 0 ? ipv4s[0].ToString() : "127.0.0.1";
     }
 }
