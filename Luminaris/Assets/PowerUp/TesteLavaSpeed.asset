@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: TesteLavaSpeed
   m_EditorClassIdentifier: 
   durationTurns: 4
-  newMultiplier: 3
+  newMultiplier: 2
